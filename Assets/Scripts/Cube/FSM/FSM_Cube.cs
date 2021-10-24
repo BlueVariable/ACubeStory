@@ -19,7 +19,8 @@ namespace BLUE.ACubeStory.Cube
                 
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Dash_Roll),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Idle),
-                
+                new FSMTransition_Cube(ECubeState.Roll, ECubeState.Fall),
+                    
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Dash_Jump),
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Fall),
                 
