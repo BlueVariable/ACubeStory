@@ -2,7 +2,7 @@
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class FSMTransitionMessage_Cube : FSMTransitionMessage
+    public class FSMTransitionMessage_Cube : FSMTransitionMessageBase
     {
     }
 }

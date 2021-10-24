@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class State_Cube_Fall : StateBase<ECubeState, FSMTransitionMessage_Cube_Roll>
+    public class State_Cube_Fall : StateBase<ECubeState, FSMTransitionMessage_Cube_Roll, FSMTransition_Cube>
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
         
