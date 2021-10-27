@@ -1,7 +1,7 @@
 using BLUE.AttachableSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Behaviours
+namespace BLUE.ACubeStory.Common
 {
     public abstract class SpeedProviderBase : MonoBehaviour, IAttachable, ISpeedProvider
     {

@@ -1,4 +1,4 @@
-namespace BLUE.ACubeStory.Behaviours
+namespace BLUE.ACubeStory.Common
 {
     public interface ISpeedProvider
     {

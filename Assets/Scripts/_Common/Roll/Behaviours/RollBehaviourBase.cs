@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Behaviours
+namespace BLUE.ACubeStory.Common
 {
     public abstract class RollBehaviourBase : MonoBehaviour
     {
@@ -18,9 +18,17 @@ namespace BLUE.ACubeStory.Behaviours
         [SerializeField] private RollConditionBase[] _rollConditions = null;
 
         public bool IsRolling { get; private set; }
-        
+
+        #region Events
+
         public Action OnRollStarted { get; set; }
         public Action OnRollEnded { get; set; }
+
+        #endregion
+
+        public abstract void StopRoll();
+
+        protected abstract void StartRoll(ERollDirection direction, Action onRolledCallback = null);
         
         public bool TryRollTo(ERollDirection direction, Action onRolledCallback = null)
         {
@@ -33,7 +41,7 @@ namespace BLUE.ACubeStory.Behaviours
             
             OnRollStarted?.Invoke();
 
-            Roll(direction, onRollEnded);
+            StartRoll(direction, onRollEnded);
 
             void onRollEnded()
             {
@@ -46,10 +54,6 @@ namespace BLUE.ACubeStory.Behaviours
 
             return true;
         }
-
-        public abstract void StopRoll();
-
-        protected abstract void Roll(ERollDirection direction, Action onRolledCallback = null);
 
         protected Vector3 GetRollAxis(ERollDirection direction)
         {

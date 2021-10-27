@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Behaviours
+namespace BLUE.ACubeStory.Common
 {
     public class RollBehaviour_RollPointBased : RollBehaviourBase
     {
@@ -15,7 +15,6 @@ namespace BLUE.ACubeStory.Behaviours
         [SerializeField] private Transform _speedProviderCarrier = null;
         
         private ISpeedProvider _speedProvider = null;
-
         private ISpeedProvider _SpeedProvider
         {
             get
@@ -30,7 +29,6 @@ namespace BLUE.ACubeStory.Behaviours
         }
         
         private IRollPointProvider _rollPointProvider = null;
-
         private IRollPointProvider _RollPointProvider
         {
             get
@@ -50,7 +48,7 @@ namespace BLUE.ACubeStory.Behaviours
 
         private Action _onRolledCallback;
 
-        protected override void Roll(ERollDirection direction, Action onRolledCallback = null)
+        protected override void StartRoll(ERollDirection direction, Action onRolledCallback = null)
         {
             _onRolledCallback = onRolledCallback;
             

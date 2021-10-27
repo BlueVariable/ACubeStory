@@ -1,4 +1,4 @@
-﻿using BLUE.ACubeStory.Behaviours;
+﻿using BLUE.ACubeStory.Common;
 
 namespace BLUE.ACubeStory.Cube
 {

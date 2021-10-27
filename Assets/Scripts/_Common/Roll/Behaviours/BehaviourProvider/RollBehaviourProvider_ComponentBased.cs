@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.Behaviours
+namespace BLUE.ACubeStory.Common
 {
     public class RollBehaviourProvider_ComponentBased : RollBehaviourProviderBase
     {

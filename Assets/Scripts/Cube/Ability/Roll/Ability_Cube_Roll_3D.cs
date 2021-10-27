@@ -1,5 +1,5 @@
 using BLUE.ACubeStory.Ability;
-using BLUE.ACubeStory.Behaviours;
+using BLUE.ACubeStory.Common;
 using BLUE.InputSystem;
 using UnityEngine;
 
@@ -21,8 +21,11 @@ namespace BLUE.ACubeStory.Cube
         
         private void RegisterToInputManager()
         {
-            InputManager.Instance.TryRegisterToInputListener<InputData_HorizontalAxis>(EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
-            InputManager.Instance.TryRegisterToInputListener<InputData_VerticalAxis>(EInputEvent.VerticalAxis, OnVerticalInputPerformed);
+            InputManager.Instance.TryRegisterToInputListener<InputData_HorizontalAxis>
+                (EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
+            
+            InputManager.Instance.TryRegisterToInputListener<InputData_VerticalAxis>
+                (EInputEvent.VerticalAxis, OnVerticalInputPerformed);
         }
 
         private void UnregisterFromInputManager()
@@ -32,8 +35,11 @@ namespace BLUE.ACubeStory.Cube
                 return;
             }
             
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_HorizontalAxis>(EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_VerticalAxis>(EInputEvent.VerticalAxis, OnVerticalInputPerformed);
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_HorizontalAxis>
+                (EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
+            
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_VerticalAxis>
+                (EInputEvent.VerticalAxis, OnVerticalInputPerformed);
         }
 
         private void OnHorizontalInputPerformed(InputData_HorizontalAxis horizontalAxisInputData)

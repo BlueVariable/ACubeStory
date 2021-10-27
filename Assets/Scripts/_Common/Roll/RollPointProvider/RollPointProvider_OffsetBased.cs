@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Behaviours
+namespace BLUE.ACubeStory.Common
 {
     public class RollPointProvider_OffsetBased : RollPointProviderBase
     {
@@ -11,7 +11,7 @@ namespace BLUE.ACubeStory.Behaviours
         [SerializeField] private Transform _baseTransform = null;
         
         [Serializable]
-        public class Settings
+        private class Settings
         {
             [SerializeField] private RollBehaviourBase.ERollDirection _direction = RollBehaviourBase.ERollDirection.None;
             public RollBehaviourBase.ERollDirection Direction => _direction;
@@ -22,7 +22,7 @@ namespace BLUE.ACubeStory.Behaviours
         
         public override Vector3 GetRollPoint(RollBehaviourBase.ERollDirection direction)
         {
-            return _baseTransform.position + _settings.FirstOrDefault(i => i.Direction == direction).Offset;
+            return _baseTransform.position + _settings.FirstOrDefault(i => i.Direction.Equals(direction)).Offset;
         }
     }
 }

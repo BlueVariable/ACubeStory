@@ -1,10 +1,10 @@
-using BLUE.ACubeStory.Behaviours;
+using BLUE.ACubeStory.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class State_Cube_Roll : StateBase<ECubeState, FSMTransitionMessage_Cube_Roll, FSMTransition_Cube>
+    public class State_Cube_Roll : StateBase<ECubeState, FSMTransitionMessage_Cube_Roll>
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
         
