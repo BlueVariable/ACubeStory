@@ -46,8 +46,8 @@ namespace BLUE.ACubeStory.Cube
         {
             RollBehaviourBase.ERollDirection direction = 
                 horizontalAxisInputData.Amount < 0
-                ? RollBehaviourBase.ERollDirection.Left
-                : RollBehaviourBase.ERollDirection.Right;
+                ? RollBehaviourBase.ERollDirection.Forward
+                : RollBehaviourBase.ERollDirection.Backward;
 
             _cubeFSM.TryChangeState(ECubeState.Roll, new FSMTransitionMessage_Cube_Roll(direction));
         }
@@ -56,8 +56,8 @@ namespace BLUE.ACubeStory.Cube
         {
             RollBehaviourBase.ERollDirection direction = 
                 verticalAxisInputData.Amount < 0
-                    ? RollBehaviourBase.ERollDirection.Backward
-                    : RollBehaviourBase.ERollDirection.Forward;
+                    ? RollBehaviourBase.ERollDirection.Left
+                    : RollBehaviourBase.ERollDirection.Right;
 
             _cubeFSM.TryChangeState(ECubeState.Roll, new FSMTransitionMessage_Cube_Roll(direction));
         }
