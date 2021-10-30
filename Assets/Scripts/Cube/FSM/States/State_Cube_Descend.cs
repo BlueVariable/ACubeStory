@@ -42,7 +42,7 @@ namespace BLUE.ACubeStory.Cube
             }
         }
 
-        protected override bool CanEnterCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
+        protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
         {
             return CanRoll(transitionMessage.Direction) && CanDescend(transitionMessage.Direction);
         }

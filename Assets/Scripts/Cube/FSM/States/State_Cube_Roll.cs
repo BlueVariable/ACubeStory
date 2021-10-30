@@ -32,7 +32,7 @@ namespace BLUE.ACubeStory.Cube
             }
         }
 
-        protected override bool CanEnterCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
+        protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
         {
             return !Physics.Raycast(_objectToRoll.position, transitionMessage.Direction,
                 out RaycastHit hit, _rollRayDistance, _layerMask);
