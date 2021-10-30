@@ -38,6 +38,11 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnHorizontalInputPerformed(InputData_HorizontalAxis horizontalAxisInputData)
         {
+            if (horizontalAxisInputData.InputState == EHorizontalAxisInputState.Finished)
+            {
+                return;
+            }
+
             Vector3 direction = 
                 horizontalAxisInputData.Amount < 0
                     ? Vector3.back
