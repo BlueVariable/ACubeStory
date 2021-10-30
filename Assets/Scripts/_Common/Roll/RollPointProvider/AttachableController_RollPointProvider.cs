@@ -9,7 +9,7 @@ namespace BLUE.ACubeStory.Common
     {
         [SerializeField] private Vector3 _fallbackRollPoint = Vector3.zero;
         
-        public Vector3 GetRollPoint(RollBehaviourBase.ERollDirection direction)
+        public Vector3 GetRollPoint(Vector3 direction)
         {
             if (TryGetSingleAttachable(out RollPointProviderBase rollPointProvider))
             {

@@ -9,7 +9,7 @@ namespace BLUE.ACubeStory.Common
 
         public bool IsAttachedInitially => _isInitiallyAttached;
         
-        public abstract Vector3 GetRollPoint(RollBehaviourBase.ERollDirection direction);
+        public abstract Vector3 GetRollPoint(Vector3 direction);
 
         public void Attached(){}
 

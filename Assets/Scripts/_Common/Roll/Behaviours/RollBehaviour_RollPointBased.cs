@@ -8,26 +8,11 @@ namespace BLUE.ACubeStory.Common
     {
         [Header("Roll Settings")]
         [SerializeField] private Transform _rollableTransform = null;
-        [SerializeField] private AnimationCurve _rollCurve = null;
+        [SerializeField] private AnimationCurve _defaultRollCurve = null;
 
         [Header("Providers")]
         [SerializeField] private Transform _rollPointProviderCarrier = null;
-        [SerializeField] private Transform _speedProviderCarrier = null;
-        
-        private ISpeedProvider _speedProvider = null;
-        private ISpeedProvider _SpeedProvider
-        {
-            get
-            {
-                if (_speedProvider == null)
-                {
-                    _speedProvider = _speedProviderCarrier.GetComponent<ISpeedProvider>();
-                }
 
-                return _speedProvider;
-            }
-        }
-        
         private IRollPointProvider _rollPointProvider = null;
         private IRollPointProvider _RollPointProvider
         {
@@ -44,15 +29,32 @@ namespace BLUE.ACubeStory.Common
         
         private IEnumerator _rollRoutine;
 
-        private ERollDirection _direction;
+        private Vector3 _direction;
+
+        private float _angle;
+
+        private float _rollSpeed;
+        
+        private Vector3 _rollPointOffset;
+
+        private AnimationCurve _rollCurve;
 
         private Action _onRolledCallback;
 
-        protected override void StartRoll(ERollDirection direction, Action onRolledCallback = null)
+        protected override void StartRoll(
+            Vector3 direction, 
+            float angle = 90f,
+            float rollSpeed = 5f,
+            Vector3 rollPointOffset = default,
+            AnimationCurve rollCurve = default,
+            Action onRolledCallback = null)
         {
-            _onRolledCallback = onRolledCallback;
-            
             _direction = direction;
+            _angle = angle;
+            _rollPointOffset = rollPointOffset;
+            _rollSpeed = rollSpeed;
+            _rollCurve = rollCurve ?? _defaultRollCurve;
+            _onRolledCallback = onRolledCallback;
             
             StartRollRoutine();
         }
@@ -85,15 +87,15 @@ namespace BLUE.ACubeStory.Common
 
             float targetNormValue = 1f;
 
-            float targetAngle = 90f;
+            float targetAngle = _angle;
 
-            Vector3 rollPoint = _RollPointProvider.GetRollPoint(_direction);
+            Vector3 rollPoint = _RollPointProvider.GetRollPoint(_direction) + _rollPointOffset;
 
             while (true)
             {
                 float prevAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
 
-                float step = Time.deltaTime * _SpeedProvider.GetSpeed();
+                float step = Time.deltaTime * _rollSpeed;
    
                 curNormValue += step;
 

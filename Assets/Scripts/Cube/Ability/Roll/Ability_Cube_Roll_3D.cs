@@ -8,6 +8,8 @@ namespace BLUE.ACubeStory.Cube
     public class Ability_Cube_Roll_3D : AbilityBase
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
+
+        [SerializeField] private ECubeState[] _states = new ECubeState[0];
         
         public override void Attached()
         {
@@ -44,22 +46,34 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnHorizontalInputPerformed(InputData_HorizontalAxis horizontalAxisInputData)
         {
-            RollBehaviourBase.ERollDirection direction = 
+            Vector3 direction = 
                 horizontalAxisInputData.Amount < 0
-                ? RollBehaviourBase.ERollDirection.Forward
-                : RollBehaviourBase.ERollDirection.Backward;
+                ? Vector3.back
+                : Vector3.forward;
 
-            _cubeFSM.TryChangeState(ECubeState.Roll, new FSMTransitionMessage_Cube_Roll(direction));
+            foreach (ECubeState state in _states)
+            {
+                if(_cubeFSM.TryChangeState(state, new FSMTransitionMessage_Cube_Roll(direction)))
+                {
+                    return;
+                }
+            }
         }
         
         private void OnVerticalInputPerformed(InputData_VerticalAxis verticalAxisInputData)
         {
-            RollBehaviourBase.ERollDirection direction = 
+            Vector3 direction = 
                 verticalAxisInputData.Amount < 0
-                    ? RollBehaviourBase.ERollDirection.Left
-                    : RollBehaviourBase.ERollDirection.Right;
+                    ? Vector3.right
+                    : Vector3.left;
 
-            _cubeFSM.TryChangeState(ECubeState.Roll, new FSMTransitionMessage_Cube_Roll(direction));
+            foreach (ECubeState state in _states)
+            {
+                if(_cubeFSM.TryChangeState(state, new FSMTransitionMessage_Cube_Roll(direction)))
+                {
+                    return;
+                }
+            }
         }
     }
 }

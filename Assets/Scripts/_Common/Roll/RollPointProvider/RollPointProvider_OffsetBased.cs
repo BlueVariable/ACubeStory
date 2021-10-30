@@ -13,14 +13,14 @@ namespace BLUE.ACubeStory.Common
         [Serializable]
         private class Settings
         {
-            [SerializeField] private RollBehaviourBase.ERollDirection _direction = RollBehaviourBase.ERollDirection.None;
-            public RollBehaviourBase.ERollDirection Direction => _direction;
+            [SerializeField] private Vector3 _direction = Vector3.zero;
+            public Vector3 Direction => _direction;
 
             [SerializeField] private Vector3 _offset = default;
             public Vector3 Offset => _offset;
         }
         
-        public override Vector3 GetRollPoint(RollBehaviourBase.ERollDirection direction)
+        public override Vector3 GetRollPoint(Vector3 direction)
         {
             return _baseTransform.position + _settings.FirstOrDefault(i => i.Direction.Equals(direction)).Offset;
         }

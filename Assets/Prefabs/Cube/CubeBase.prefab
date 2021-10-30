@@ -1,66 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &474821274799459162
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1538803398809521582}
-  - component: {fileID: 7371921679664137956}
-  - component: {fileID: 4426211383197605408}
-  m_Layer: 0
-  m_Name: RollSpeedProvider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1538803398809521582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474821274799459162}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 138558201689830910}
-  m_Father: {fileID: 308926777214599256}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7371921679664137956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474821274799459162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e771fdd99e73480fb5f5ec2e5e76f427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attachableProvider: {fileID: 4426211383197605408}
-  _constrainToSingleAttachable: 0
-  _fallbackSpeed: 0
---- !u!114 &4426211383197605408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474821274799459162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d9ec6b632fc46bfa2585f4f96d8027c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attachablesParent: {fileID: 1538803398809521582}
 --- !u!1 &1203829040848185296
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInitiallyAttached: 0
   _cubeFSM: {fileID: 5253448575363346710}
+  _states: 080000000200000007000000
 --- !u!1 &2187933531156395788
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +303,82 @@ MonoBehaviour:
     _moveSpeed: 3
     _moveEase: 30
     _doLocalMove: 0
+--- !u!1 &3540440007858417543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2474406625303258872}
+  - component: {fileID: 2002936027992234013}
+  m_Layer: 0
+  m_Name: ClimbState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2474406625303258872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540440007858417543}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 433208529457987252}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002936027992234013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540440007858417543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed93f998e774256a7058b86921d74b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeFSM: {fileID: 5253448575363346710}
+  _objectToClimb: {fileID: 7075618033240990871}
+  _rollRayDistance: 1
+  _climbRayDistance: 1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _rollSpeed: 3
+  _rollCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rollBehaviourProvider: {fileID: 3867403072291783834}
 --- !u!1 &4646373223804922831
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +410,8 @@ Transform:
   - {fileID: 7074784438819274613}
   - {fileID: 8683628446593387492}
   - {fileID: 7929871657999613716}
+  - {fileID: 3903967038583964204}
+  - {fileID: 2474406625303258872}
   m_Father: {fileID: 8722502163189288662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -421,12 +439,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4673216640514713105}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.09437938, y: 0.78301233, z: -0.12266777, w: 0.6024425}
+  m_LocalPosition: {x: -18.405704, y: 6.116342, z: 4.8806396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8391566477043728285}
-  - {fileID: 1538803398809521582}
   m_Father: {fileID: 2100997337078130773}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -444,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rollConditions: []
   _rollableTransform: {fileID: 7075618033240990871}
-  _rollCurve:
+  _defaultRollCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -469,7 +486,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _rollPointProviderCarrier: {fileID: 8391566477043728285}
-  _speedProviderCarrier: {fileID: 1538803398809521582}
 --- !u!1 &4712417647470563592
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +646,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubeFSM: {fileID: 5253448575363346710}
+  _objectToRoll: {fileID: 7075618033240990871}
+  _rollRayDistance: 1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _rollBehaviourProvider: {fileID: 3867403072291783834}
+--- !u!1 &7331309771532701547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3903967038583964204}
+  - component: {fileID: 8093321301453597793}
+  m_Layer: 0
+  m_Name: DescendState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3903967038583964204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7331309771532701547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 433208529457987252}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8093321301453597793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7331309771532701547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c26283ea1764685add77e5c253b23db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeFSM: {fileID: 5253448575363346710}
+  _objectToDescend: {fileID: 7075618033240990871}
+  _rollRayDistance: 1
+  _descendRayDistance: 2
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _rollSpeed: 3
+  _rollCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _rollBehaviourProvider: {fileID: 3867403072291783834}
 --- !u!1 &8010327804896191993
 GameObject:
@@ -729,60 +826,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInitiallyAttached: 1
   _settings:
-  - _direction: 1
+  - _direction: {x: -1, y: 0, z: 0}
     _offset: {x: -0.5, y: -0.5, z: 0}
-  - _direction: 2
+  - _direction: {x: 1, y: 0, z: 0}
     _offset: {x: 0.5, y: -0.5, z: 0}
-  - _direction: 3
+  - _direction: {x: 0, y: 0, z: 1}
     _offset: {x: 0, y: -0.5, z: 0.5}
-  - _direction: 4
+  - _direction: {x: 0, y: 0, z: -1}
     _offset: {x: 0, y: -0.5, z: -0.5}
   _baseTransform: {fileID: 7075618033240990871}
---- !u!1 &8672596604300174364
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 138558201689830910}
-  - component: {fileID: 7616023269359444938}
-  m_Layer: 0
-  m_Name: RollSpeedProvider_Serialized
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &138558201689830910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8672596604300174364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1538803398809521582}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7616023269359444938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8672596604300174364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isInitiallyAttached: 1
-  _speed: 5
 --- !u!1 &8946584246915453116
 GameObject:
   m_ObjectHideFlags: 0

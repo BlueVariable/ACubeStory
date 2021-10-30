@@ -6,15 +6,6 @@ namespace BLUE.ACubeStory.Common
 {
     public abstract class RollBehaviourBase : MonoBehaviour
     {
-        public enum ERollDirection
-        {
-            None = 0,
-            Left = 1,
-            Right = 2,
-            Forward = 3,
-            Backward = 4
-        }
-        
         [SerializeField] private RollConditionBase[] _rollConditions = null;
 
         public bool IsRolling { get; private set; }
@@ -28,9 +19,21 @@ namespace BLUE.ACubeStory.Common
 
         public abstract void StopRoll();
 
-        protected abstract void StartRoll(ERollDirection direction, Action onRolledCallback = null);
+        protected abstract void StartRoll(
+            Vector3 direction, 
+            float angle = 90f,
+            float speed = 5f,
+            Vector3 rollPointOffset = default,
+            AnimationCurve rollCurve = default,
+            Action onRolledCallback = null);
         
-        public bool TryRollTo(ERollDirection direction, Action onRolledCallback = null)
+        public bool TryRollTo(
+            Vector3 direction,
+            float angle = 90f,
+            float speed = 5f,
+            Vector3 rollPointOffset = default,
+            AnimationCurve rollCurve = default,
+            Action onRolledCallback = null)
         {
             if (!CanRoll(direction))
             {
@@ -41,7 +44,7 @@ namespace BLUE.ACubeStory.Common
             
             OnRollStarted?.Invoke();
 
-            StartRoll(direction, onRollEnded);
+            StartRoll(direction, angle, speed, rollPointOffset, rollCurve, onRollEnded);
 
             void onRollEnded()
             {
@@ -55,20 +58,29 @@ namespace BLUE.ACubeStory.Common
             return true;
         }
 
-        protected Vector3 GetRollAxis(ERollDirection direction)
+        protected Vector3 GetRollAxis(Vector3 direction)
         {
-            switch (direction)
+            if (direction == Vector3.left)
             {
-                case ERollDirection.Left: return Vector3.forward;
-                case ERollDirection.Right: return Vector3.back;
-                case ERollDirection.Forward: return Vector3.right;
-                case ERollDirection.Backward: return Vector3.left;
+                return Vector3.forward;
             }
-
+            else if (direction == Vector3.right)
+            {
+                return Vector3.back;
+            }
+            else if (direction == Vector3.forward)
+            {
+                return Vector3.right;
+            }
+            else if (direction == Vector3.back)
+            {
+                return Vector3.left;
+            }
+            
             return default;
         }
 
-        private bool CanRoll(ERollDirection direction)
+        private bool CanRoll(Vector3 direction)
         {
             return !IsRolling && _rollConditions.All(i => i.CanRoll(direction));
         }

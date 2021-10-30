@@ -1,12 +1,12 @@
-﻿using BLUE.ACubeStory.Common;
+﻿using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
     public class FSMTransitionMessage_Cube_Roll : FSMTransitionMessage_Cube
     {
-        public RollBehaviourBase.ERollDirection Direction { get; }
+        public Vector3 Direction { get; }
 
-        public FSMTransitionMessage_Cube_Roll(RollBehaviourBase.ERollDirection direction)
+        public FSMTransitionMessage_Cube_Roll(Vector3 direction)
         {
             Direction = direction;
         }
