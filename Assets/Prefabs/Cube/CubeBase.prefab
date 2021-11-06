@@ -135,7 +135,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubeFSM: {fileID: 5253448575363346710}
-  _dashBehaviour: {fileID: 6176850136138970380}
+  _dashMoveBehaviour: {fileID: 7379208232775704734}
+  _settings:
+    _movableObject: {fileID: 7075618033240990871}
+    _useSpeedAsDuration: 0
+    _moveSpeed: 12
+    _moveEase: 9
+    _doLocalMove: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _dashDistance: 2
 --- !u!1 &2182307329341622739
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e0d11c7e364f93b358f79564c42f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isInitiallyAttached: 0
+  _isInitiallyAttached: 1
   _cubeFSM: {fileID: 5253448575363346710}
   _dashTriggerKey: 304
 --- !u!1 &3540440007858417543
@@ -471,49 +481,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _rollBehaviourProvider: {fileID: 3867403072291783834}
---- !u!1 &4205627393844881220
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 647564816426867939}
-  - component: {fileID: 6176850136138970380}
-  m_Layer: 0
-  m_Name: DashBehaviour
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &647564816426867939
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4205627393844881220}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2100997337078130773}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6176850136138970380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4205627393844881220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee648e317e748019e52692bd5ee2bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4646373223804922831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1029,6 @@ Transform:
   m_Children:
   - {fileID: 308926777214599256}
   - {fileID: 6982576867984636868}
-  - {fileID: 647564816426867939}
   m_Father: {fileID: 7075618033240990871}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

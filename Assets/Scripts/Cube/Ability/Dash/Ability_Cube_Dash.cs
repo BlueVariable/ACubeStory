@@ -91,15 +91,14 @@ namespace BLUE.ACubeStory.Cube.Ability
         }
 
         #endregion
-
-
+        
         private void MakeDash(Vector2 dashDirection)
         {
             _cubeFSM.TryGetCurStateType(out ECubeState state);
 
             if (state == ECubeState.Jump)
             {
-                _cubeFSM.TryChangeState(ECubeState.Dash_Jump, new FSMTransitionMessage_Cube_Dash(dashDirection));
+                _cubeFSM.TryChangeState(ECubeState.Dash_Jump, new FSMTransitionMessage_Cube_Dash(new Vector3(dashDirection.y, 0, dashDirection.x)));
             }
             else if (state == ECubeState.Roll)
             {

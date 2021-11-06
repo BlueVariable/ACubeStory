@@ -4,9 +4,9 @@ namespace BLUE.ACubeStory.Cube
 {
     public class FSMTransitionMessage_Cube_Dash : FSMTransitionMessage_Cube
     {
-        public Vector2 DashDirection { get; }
+        public Vector3 DashDirection { get; }
 
-        public FSMTransitionMessage_Cube_Dash(Vector2 dashDirection)
+        public FSMTransitionMessage_Cube_Dash(Vector3 dashDirection)
         {
             DashDirection = dashDirection;
         }
