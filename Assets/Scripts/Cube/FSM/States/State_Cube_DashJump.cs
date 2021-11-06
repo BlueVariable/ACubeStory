@@ -20,7 +20,6 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private int _dashDistance = 2;
         
-        
         public override ECubeState GetStateType()
         {
             return ECubeState.Dash_Jump;

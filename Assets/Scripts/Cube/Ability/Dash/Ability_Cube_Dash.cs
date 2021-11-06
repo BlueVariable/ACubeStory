@@ -7,7 +7,7 @@ namespace BLUE.ACubeStory.Cube.Ability
     public class Ability_Cube_Dash : AbilityBase
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
-        
+
         [SerializeField] private KeyCode _dashTriggerKey = KeyCode.LeftShift;
         
         public override void Attached()
@@ -100,9 +100,10 @@ namespace BLUE.ACubeStory.Cube.Ability
             {
                 _cubeFSM.TryChangeState(ECubeState.Dash_Jump, new FSMTransitionMessage_Cube_Dash(new Vector3(dashDirection.y, 0, dashDirection.x)));
             }
+            
             else if (state == ECubeState.Roll)
             {
-                // _cubeFSM.TryChangeState(ECubeState.Dash_Roll, new FSMTransitionMessage_Cube_Dash(dashDirection));
+                _cubeFSM.TryChangeState(ECubeState.Dash_Roll, new FSMTransitionMessage_Cube_Dash(new Vector3(dashDirection.y, 0, dashDirection.x)));
             }
         }
     }

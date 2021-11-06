@@ -15,6 +15,20 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private LayerMask _layerMask = default;
         
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
+
+        private double _lastStateEnterTime = 0;
+        
+        public double GetTimePassedInState()
+        {
+            _cubeFSM.TryGetCurStateType(out ECubeState curState);
+
+            if (curState != GetStateType())
+            {
+                return 0;
+            }
+            
+            return Time.time - _lastStateEnterTime;
+        }
         
         public override ECubeState GetStateType()
         {
