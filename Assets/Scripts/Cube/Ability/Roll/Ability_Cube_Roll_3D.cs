@@ -23,10 +23,10 @@ namespace BLUE.ACubeStory.Cube
         
         private void RegisterToInputManager()
         {
-            InputManager.Instance.TryRegisterToInputListener<InputData_HorizontalAxis>
+            InputManager.Instance.TryRegisterToInputListener<InputData_Axis>
                 (EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
             
-            InputManager.Instance.TryRegisterToInputListener<InputData_VerticalAxis>
+            InputManager.Instance.TryRegisterToInputListener<InputData_Axis>
                 (EInputEvent.VerticalAxis, OnVerticalInputPerformed);
         }
 
@@ -37,22 +37,22 @@ namespace BLUE.ACubeStory.Cube
                 return;
             }
             
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_HorizontalAxis>
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Axis>
                 (EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
             
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_VerticalAxis>
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Axis>
                 (EInputEvent.VerticalAxis, OnVerticalInputPerformed);
         }
 
-        private void OnHorizontalInputPerformed(InputData_HorizontalAxis horizontalAxisInputData)
+        private void OnHorizontalInputPerformed(InputData_Axis axisInputData)
         {
-            if (horizontalAxisInputData.InputState == EHorizontalAxisInputState.Finished)
+            if (axisInputData.InputState == EAxisInputState.Finished)
             {
                 return;
             }
             
             Vector3 direction = 
-                horizontalAxisInputData.Amount < 0
+                axisInputData.Amount < 0
                 ? Vector3.back
                 : Vector3.forward;
 
@@ -65,9 +65,9 @@ namespace BLUE.ACubeStory.Cube
             }
         }
         
-        private void OnVerticalInputPerformed(InputData_VerticalAxis verticalAxisInputData)
+        private void OnVerticalInputPerformed(InputData_Axis verticalAxisInputData)
         {
-            if (verticalAxisInputData.InputState == EVerticalAxisInputState.Finished)
+            if (verticalAxisInputData.InputState == EAxisInputState.Finished)
             {
                 return;
             }

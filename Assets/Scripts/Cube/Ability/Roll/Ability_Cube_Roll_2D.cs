@@ -21,7 +21,7 @@ namespace BLUE.ACubeStory.Cube
         
         private void RegisterToInputManager()
         {
-            InputManager.Instance.TryRegisterToInputListener<InputData_HorizontalAxis>
+            InputManager.Instance.TryRegisterToInputListener<InputData_Axis>
                 (EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
         }
 
@@ -32,19 +32,19 @@ namespace BLUE.ACubeStory.Cube
                 return;
             }
             
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_HorizontalAxis>
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Axis>
                 (EInputEvent.HorizontalAxis, OnHorizontalInputPerformed);
         }
 
-        private void OnHorizontalInputPerformed(InputData_HorizontalAxis horizontalAxisInputData)
+        private void OnHorizontalInputPerformed(InputData_Axis axisInputData)
         {
-            if (horizontalAxisInputData.InputState == EHorizontalAxisInputState.Finished)
+            if (axisInputData.InputState == EAxisInputState.Finished)
             {
                 return;
             }
 
             Vector3 direction = 
-                horizontalAxisInputData.Amount < 0
+                axisInputData.Amount < 0
                     ? Vector3.back
                     : Vector3.forward;
 
