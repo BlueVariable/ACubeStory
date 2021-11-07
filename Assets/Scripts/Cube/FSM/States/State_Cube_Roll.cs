@@ -38,12 +38,21 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube_Roll transitionMessage)
         {
+            _lastStateEnterTime = Time.time;
+            
             _rollBehaviourProvider.GetRollBehaviour().TryRollTo(transitionMessage.Direction, onRolledCallback: onCompleted);
 
             void onCompleted()
             {
                 _cubeFSM.TryChangeState(ECubeState.Fall);
             }
+        }
+
+        protected override void ExitStateCustomActions()
+        {
+            _rollBehaviourProvider.GetRollBehaviour().StopRoll();
+            
+            base.ExitStateCustomActions();
         }
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)

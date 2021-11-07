@@ -1,6 +1,6 @@
-﻿using BLUE.Common;
+﻿using UnityEngine;
+using BLUE.Common;
 using BLUE.FSMSystem;
-using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -29,6 +29,8 @@ namespace BLUE.ACubeStory.Cube
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
+            Debug.Log(_rollState.GetTimePassedInState());
+            
             return _rollState.GetTimePassedInState() <= _rollStateTimeThreshold;
         }
 
@@ -36,7 +38,10 @@ namespace BLUE.ACubeStory.Cube
         {
             // undo roll 
             
-            _dashMoveBehaviour.StartMovementTowards(_settings, TryGetDestination(transitionMessage.DashDirection, _dashDistance));
+            Debug.Log(transitionMessage.DashDirection);
+            
+            _dashMoveBehaviour.StartMovementTowards(
+                _settings, TryGetDestination(transitionMessage.DashDirection, _dashDistance));
             
             base.EnterStateCustomActions(transitionMessage);
         }
@@ -64,6 +69,11 @@ namespace BLUE.ACubeStory.Cube
             destination -= offset;
 
             return destination;
+        }
+
+        private void OnDashCompleted()
+        {
+            // what should be next state??
         }
     }
 }

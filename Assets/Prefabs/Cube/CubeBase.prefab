@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &824589053605917631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807484255560645339}
+  - component: {fileID: 8188786509246294705}
+  m_Layer: 0
+  m_Name: RollDashState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &807484255560645339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824589053605917631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 433208529457987252}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8188786509246294705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824589053605917631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32642716f4684630a1f45e4430e51e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rollState: {fileID: 8132517245878650085}
+  _rollStateTimeThreshold: 0.25
+  _dashMoveBehaviour: {fileID: 7379208232775704734}
+  _settings:
+    _movableObject: {fileID: 7075618033240990871}
+    _useSpeedAsDuration: 0
+    _moveSpeed: 12
+    _moveEase: 9
+    _doLocalMove: 0
+  _raycastOffset: {x: 0, y: 0.5, z: 0}
+  _objectPivotOffset: {x: 0.5, y: 0.5, z: 0.5}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _dashDistance: 2
 --- !u!1 &1203829040848185296
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +200,8 @@ MonoBehaviour:
     _moveSpeed: 12
     _moveEase: 9
     _doLocalMove: 0
+  _raycastOffset: {x: 0, y: 0.5, z: 0}
+  _objectPivotOffset: {x: 0.5, y: 0.5, z: 0.5}
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -515,6 +575,7 @@ Transform:
   - {fileID: 3903967038583964204}
   - {fileID: 2474406625303258872}
   - {fileID: 1253602340464699819}
+  - {fileID: 807484255560645339}
   m_Father: {fileID: 8722502163189288662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
