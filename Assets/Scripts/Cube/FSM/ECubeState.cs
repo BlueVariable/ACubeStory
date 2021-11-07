@@ -9,8 +9,7 @@
         Jump = 3,
         Fall = 4,
         
-        Dash_Roll = 5,
-        Dash_Jump = 6,
+        Dash = 5,
         
         Climb = 7,
         Descend = 8

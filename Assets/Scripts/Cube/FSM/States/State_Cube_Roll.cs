@@ -16,20 +16,6 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
 
-        private double _lastStateEnterTime = 0;
-        
-        public double GetTimePassedInState()
-        {
-            _cubeFSM.TryGetCurStateType(out ECubeState curState);
-
-            if (curState != GetStateType())
-            {
-                return 0;
-            }
-            
-            return Time.time - _lastStateEnterTime;
-        }
-        
         public override ECubeState GetStateType()
         {
             return ECubeState.Roll;
@@ -38,8 +24,6 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube_Roll transitionMessage)
         {
-            _lastStateEnterTime = Time.time;
-            
             _rollBehaviourProvider.GetRollBehaviour().TryRollTo(transitionMessage.Direction, onRolledCallback: onCompleted);
 
             void onCompleted()
@@ -50,7 +34,7 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void ExitStateCustomActions()
         {
-            _rollBehaviourProvider.GetRollBehaviour().StopRoll();
+            _rollBehaviourProvider.GetRollBehaviour().TryPauseRoll();
             
             base.ExitStateCustomActions();
         }

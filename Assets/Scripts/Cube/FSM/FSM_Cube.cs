@@ -17,18 +17,16 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Climb),
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Descend),
                 
-                new FSMTransition_Cube(ECubeState.Roll, ECubeState.Dash_Roll),
+                new FSMTransition_Cube(ECubeState.Roll, ECubeState.Dash),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Idle),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Fall),
                     
-                new FSMTransition_Cube(ECubeState.Jump, ECubeState.Dash_Jump),
+                new FSMTransition_Cube(ECubeState.Jump, ECubeState.Dash),
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Fall),
                 
                 new FSMTransition_Cube(ECubeState.Fall, ECubeState.Idle),
                 
-                new FSMTransition_Cube(ECubeState.Dash_Roll, ECubeState.Idle),
-                
-                new FSMTransition_Cube(ECubeState.Dash_Jump, ECubeState.Fall),
+                new FSMTransition_Cube(ECubeState.Dash, ECubeState.Fall),
                 
                 new FSMTransition_Cube(ECubeState.Climb, ECubeState.Idle),
                 

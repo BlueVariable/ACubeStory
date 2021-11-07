@@ -9,15 +9,19 @@ namespace BLUE.ACubeStory.Common
         [SerializeField] private RollConditionBase[] _rollConditions = null;
 
         public bool IsRolling { get; private set; }
+        public bool IsRollPaused { get; private set; }
+        
+        public float CurRollAngle { get; protected set; }
 
         #region Events
 
         public Action OnRollStarted { get; set; }
         public Action OnRollEnded { get; set; }
+        public Action OnRollPaused { get; set; }
 
         #endregion
 
-        public abstract void StopRoll();
+        protected abstract void PauseRoll();
 
         protected abstract void StartRoll(
             Vector3 direction, 
@@ -26,6 +30,24 @@ namespace BLUE.ACubeStory.Common
             Vector3 rollPointOffset = default,
             AnimationCurve rollCurve = default,
             Action onRolledCallback = null);
+
+        public bool TryPauseRoll()
+        {
+            if (!IsRolling)
+            {
+                return false;
+            }
+
+            IsRolling = false;
+            
+            OnRollPaused?.Invoke();
+            
+            PauseRoll();
+
+            IsRollPaused = true;
+            
+            return true;
+        }
         
         public bool TryRollTo(
             Vector3 direction,
@@ -49,6 +71,8 @@ namespace BLUE.ACubeStory.Common
             void onRollEnded()
             {
                 IsRolling = false;
+
+                IsRollPaused = false;
                 
                 OnRollEnded?.Invoke();
 

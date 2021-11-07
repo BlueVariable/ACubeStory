@@ -59,7 +59,7 @@ namespace BLUE.ACubeStory.Common
             StartRollRoutine();
         }
 
-        public override void StopRoll()
+        protected override void PauseRoll()
         {
             StopRollRoutine();
         }
@@ -101,9 +101,9 @@ namespace BLUE.ACubeStory.Common
 
                 curNormValue = Mathf.Min(curNormValue, targetNormValue);
             
-                float curAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
+                CurRollAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
                 
-                _rollableTransform.RotateAround(rollPoint, GetRollAxis(_direction), curAngle - prevAngle);
+                _rollableTransform.RotateAround(rollPoint, GetRollAxis(_direction), CurRollAngle - prevAngle);
             
                 if (curNormValue >= targetNormValue)
                 {
