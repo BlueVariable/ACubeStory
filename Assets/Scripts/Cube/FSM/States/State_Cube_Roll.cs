@@ -1,4 +1,5 @@
 using BLUE.ACubeStory.Common;
+using BLUE.ACubeStory.Cube.Ability;
 using BLUE.FSMSystem;
 using UnityEngine;
 
@@ -16,11 +17,13 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
 
+        [SerializeField] private Ability_Cube_Dash _dashAbility = null;
+        
         public override ECubeState GetStateType()
         {
             return ECubeState.Roll;
         }
-
+        
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube_Roll transitionMessage)
         {
@@ -41,6 +44,11 @@ namespace BLUE.ACubeStory.Cube
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
         {
+            if (_dashAbility.ListeningInputForDash)
+            {
+                return false;
+            } 
+            
             return !Physics.Raycast(_objectToRoll.position, transitionMessage.Direction,
                 out RaycastHit hit, _rollRayDistance, _layerMask);
         }

@@ -10,6 +10,8 @@ namespace BLUE.ACubeStory.Cube.Ability
 
         [SerializeField] private KeyCode _dashTriggerKey = KeyCode.LeftShift;
         
+        public bool ListeningInputForDash { get; private set; }
+        
         public override void Attached()
         {
             RegisterToKeyInputEvents();
@@ -41,6 +43,8 @@ namespace BLUE.ACubeStory.Cube.Ability
                 return;
             }
 
+            ListeningInputForDash = true;
+            
             RegisterToMovementInputEvents();
         }
 
@@ -51,6 +55,8 @@ namespace BLUE.ACubeStory.Cube.Ability
                 return;
             }
 
+            ListeningInputForDash = false;
+            
             UnregisterFromMovementInputEvents();
         }
 

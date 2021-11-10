@@ -45,22 +45,14 @@ namespace BLUE.ACubeStory.Cube
                     transitionMessage.DashDirection,
                     _dashDistance,
                     Vector3.zero, 
-                    onRollCompleted);
-            } 
+                    onDashCompleted);
+            }
             
             void onDashCompleted()
             {
-                rollBehaviour.TryRollTo(
-                    transitionMessage.DashDirection, 
-                    90 - rollBehaviour.CurRollAngle,
-                    onRolledCallback: onRollCompleted);
-            }
-            
-            void onRollCompleted()
-            {
                 _cubeFSM.TryChangeState(ECubeState.Fall);
             }
-            
+
             base.EnterStateCustomActions(transitionMessage);
         }
 

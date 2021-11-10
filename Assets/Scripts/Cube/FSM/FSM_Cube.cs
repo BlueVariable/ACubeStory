@@ -12,12 +12,12 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.None, ECubeState.Idle),
                 
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Roll),
+                new FSMTransition_Cube(ECubeState.Idle, ECubeState.Dash),
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Jump),
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Fall),
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Climb),
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Descend),
                 
-                new FSMTransition_Cube(ECubeState.Roll, ECubeState.Dash),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Idle),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Fall),
                     
