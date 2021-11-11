@@ -21,8 +21,6 @@ namespace BLUE.ACubeStory.Common
 
         #endregion
 
-        protected abstract void PauseRoll();
-
         protected abstract void StartRoll(
             Vector3 direction, 
             float angle = 90f,
@@ -30,25 +28,9 @@ namespace BLUE.ACubeStory.Common
             Vector3 rollPointOffset = default,
             AnimationCurve rollCurve = default,
             Action onRolledCallback = null);
-
-        public bool TryPauseRoll()
-        {
-            if (!IsRolling)
-            {
-                return false;
-            }
-
-            IsRolling = false;
-            
-            OnRollPaused?.Invoke();
-            
-            PauseRoll();
-
-            IsRollPaused = true;
-            
-            return true;
-        }
         
+        protected abstract void PauseRoll();
+
         public bool TryRollTo(
             Vector3 direction,
             float angle = 90f,
@@ -79,6 +61,24 @@ namespace BLUE.ACubeStory.Common
                 onRolledCallback?.Invoke();
             }
 
+            return true;
+        }
+        
+        public bool TryPauseRoll()
+        {
+            if (!IsRolling)
+            {
+                return false;
+            }
+
+            IsRolling = false;
+            
+            OnRollPaused?.Invoke();
+            
+            PauseRoll();
+
+            IsRollPaused = true;
+            
             return true;
         }
 

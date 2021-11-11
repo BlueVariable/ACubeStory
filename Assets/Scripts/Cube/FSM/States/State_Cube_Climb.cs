@@ -1,5 +1,4 @@
 using BLUE.ACubeStory.Common;
-using BLUE.ACubeStory.Cube.Ability;
 using BLUE.FSMSystem;
 using UnityEngine;
 
@@ -21,8 +20,6 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private AnimationCurve _rollCurve = null;
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
 
-        [SerializeField] private Ability_Cube_Dash _cubeDashAbility = null;
-        
         public override ECubeState GetStateType()
         {
             return ECubeState.Climb;
@@ -47,11 +44,6 @@ namespace BLUE.ACubeStory.Cube
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
         {
-            if (_cubeDashAbility.ListeningInputForDash)
-            {
-                return false;
-            }
-            
             return !CanRoll(transitionMessage.Direction) && CanClimb(transitionMessage.Direction);
         }
         

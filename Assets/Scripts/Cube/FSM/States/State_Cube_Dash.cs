@@ -1,8 +1,7 @@
 ﻿using System;
-using BLUE.ACubeStory.Common;
-using UnityEngine;
 using BLUE.Common;
 using BLUE.FSMSystem;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -19,8 +18,6 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private LayerMask _layerMask = default;
         
         [SerializeField] private int _dashDistance = 2;
-        
-        [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
 
         public override ECubeState GetStateType()
         {
@@ -29,24 +26,11 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
-            RollBehaviourBase rollBehaviour = _rollBehaviourProvider.GetRollBehaviour();
-
-            if (rollBehaviour.IsRollPaused)
-            {
-                Dash(
-                    transitionMessage.DashDirection, 
-                    _dashDistance,
-                    -transitionMessage.DashDirection,
-                    onDashCompleted);
-            }
-            else
-            {
-                Dash(
-                    transitionMessage.DashDirection,
-                    _dashDistance,
-                    Vector3.zero, 
-                    onDashCompleted);
-            }
+            Dash(
+                transitionMessage.DashDirection,
+                _dashDistance,
+                Vector3.zero, 
+                onDashCompleted);
             
             void onDashCompleted()
             {

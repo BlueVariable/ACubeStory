@@ -2,7 +2,7 @@
 using BLUE.InputSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Cube.Ability
+namespace BLUE.ACubeStory.Cube
 {
     public class Ability_Cube_Dash : AbilityBase
     {
@@ -10,7 +10,7 @@ namespace BLUE.ACubeStory.Cube.Ability
 
         [SerializeField] private KeyCode _dashTriggerKey = KeyCode.LeftShift;
         
-        public bool ListeningInputForDash { get; private set; }
+        public bool IsPreDashKeyActive { get; private set; }
         
         public override void Attached()
         {
@@ -20,6 +20,8 @@ namespace BLUE.ACubeStory.Cube.Ability
         public override void Detached()
         {
             UnregisterFromKeyInputEvents();
+            
+            UnregisterFromMovementInputEvents();
         }
 
         #region Input Related
@@ -43,7 +45,7 @@ namespace BLUE.ACubeStory.Cube.Ability
                 return;
             }
 
-            ListeningInputForDash = true;
+            IsPreDashKeyActive = true;
             
             RegisterToMovementInputEvents();
         }
@@ -55,7 +57,7 @@ namespace BLUE.ACubeStory.Cube.Ability
                 return;
             }
 
-            ListeningInputForDash = false;
+            IsPreDashKeyActive = false;
             
             UnregisterFromMovementInputEvents();
         }
@@ -83,7 +85,7 @@ namespace BLUE.ACubeStory.Cube.Ability
                 return;
             }
             
-            MakeDash(new Vector2(Mathf.Sign(inputData.Amount), 0));
+            TryPerformDash(new Vector2(Mathf.Sign(inputData.Amount), 0));
         }
 
         private void OnVerticalAxisInputPerformed(InputData_Axis inputData)
@@ -93,14 +95,15 @@ namespace BLUE.ACubeStory.Cube.Ability
                 return;
             }
             
-            MakeDash(new Vector2(0, Mathf.Sign(inputData.Amount)));
+            TryPerformDash(new Vector2(0, Mathf.Sign(inputData.Amount)));
         }
 
         #endregion
         
-        private void MakeDash(Vector2 dashDirection)
+        private bool TryPerformDash(Vector2 dashDirection)
         {
-            _cubeFSM.TryChangeState(ECubeState.Dash, new FSMTransitionMessage_Cube_Dash(new Vector3(-dashDirection.y, 0, dashDirection.x)));
+            return _cubeFSM.TryChangeState(ECubeState.Dash, 
+                new FSMTransitionMessage_Cube_Dash(new Vector3(-dashDirection.y, 0, dashDirection.x)));
         }
     }
 }
