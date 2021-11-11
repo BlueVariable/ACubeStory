@@ -1,7 +1,7 @@
 ﻿using BLUE.FSMSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Cube.Conditions
+namespace BLUE.ACubeStory.Cube
 {
     public class StateEnterCondition_IsPreDashKeyActive : StateEnterConditionBase
     {
