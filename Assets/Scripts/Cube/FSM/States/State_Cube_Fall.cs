@@ -19,7 +19,8 @@ namespace BLUE.ACubeStory.Cube
         [Header("Move Settings")]
         [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _moveSettings = null;
-        
+        [SerializeField] private float _fallbackFallAmount = 100f;
+
         public override ECubeState GetStateType()
         {
             return ECubeState.Fall;
@@ -48,7 +49,14 @@ namespace BLUE.ACubeStory.Cube
             }
             else
             {
-                _cubeFSM.TryChangeState(ECubeState.Idle);
+                void onFallCompleted()
+                {
+                    _cubeFSM.TryChangeState(ECubeState.Idle);
+                }
+
+                _moveBehaviour.StartMovementTowards(_moveSettings, 
+            _objectToFall.position + new Vector3(0, -_fallbackFallAmount, 0), 
+                    onFallCompleted);
             }
         }
     }
