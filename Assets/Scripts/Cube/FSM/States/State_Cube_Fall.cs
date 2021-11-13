@@ -1,3 +1,4 @@
+using System;
 using BLUE.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
@@ -21,6 +22,15 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _moveSettings = null;
         [SerializeField] private float _fallbackFallAmount = 100f;
 
+        #region Events
+
+        public Action<RaycastHit> OnFallStartedTowardsHitObject { get; set; }
+        public Action OnFallStartedTowardsVoid { get; set; }
+        
+        public Action OnFallFinished { get; set; }
+
+        #endregion
+        
         public override ECubeState GetStateType()
         {
             return ECubeState.Fall;
@@ -39,24 +49,32 @@ namespace BLUE.ACubeStory.Cube
                     return;
                 }
                 
-                void onFallCompleted()
+                void onFallFinished()
                 {
+                    OnFallFinished?.Invoke();
+                    
                     _cubeFSM.TryChangeState(ECubeState.Idle);
                 }
-                    
+
+                OnFallStartedTowardsHitObject?.Invoke(hit);
+                
                 _moveBehaviour.StartMovementTowards(_moveSettings, hit.point + _objectPivotOffset, 
-                    onFallCompleted);
+                    onFallFinished);
             }
             else
             {
-                void onFallCompleted()
+                void onFallFinished()
                 {
+                    OnFallFinished?.Invoke();
+                    
                     _cubeFSM.TryChangeState(ECubeState.Idle);
                 }
 
                 _moveBehaviour.StartMovementTowards(_moveSettings, 
             _objectToFall.position + new Vector3(0, -_fallbackFallAmount, 0), 
-                    onFallCompleted);
+                    onFallFinished);
+
+                OnFallStartedTowardsVoid?.Invoke();
             }
         }
     }

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3935871948099875438}
+  - component: {fileID: 7804081126355725484}
   m_Layer: 8
   m_Name: FailTriggeredActionExecutor
   m_TagString: Untagged
@@ -30,6 +31,18 @@ Transform:
   m_Father: {fileID: 658493567379591202}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7804081126355725484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749631548656739269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c0ba8705352194baa33e76051bea41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &772238585599847829
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +52,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7076386389426300353}
+  - component: {fileID: 6292666353403957168}
   m_Layer: 8
   m_Name: Fall_Void
   m_TagString: Untagged
@@ -60,6 +74,22 @@ Transform:
   m_Father: {fileID: 7462084036431926008}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6292666353403957168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772238585599847829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8b4c175b6dcf840b0397fbecee3a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _cubeFallState: {fileID: 7001314770246708851}
 --- !u!1 &824589053605917631
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +496,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7aa6eff708861143b7816d7b8de8843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubeFailTriggerMapping: []
+  _cubeFailTriggerMapping:
+  - _cubeFailType: 1
+    _failTriggers:
+    - {fileID: 6292666353403957168}
   _failTriggeredActionExecutor:
     _actionCarrier: {fileID: 3935871948099875438}
 --- !u!1 &3439525637733461568
