@@ -22,6 +22,21 @@ namespace BLUE.ACubeStory.Cube
 
         #endregion
 
+        private FSM_Cube _cubeFSM;
+
+        public FSM_Cube CubeFSM
+        {
+            get
+            {
+                if (_cubeFSM == null)
+                {
+                    _cubeFSM = GetComponentInChildren<FSM_Cube>();
+                }
+
+                return _cubeFSM;
+            }
+        }
+
         public Vector3 GetPosition()
         {
             return transform.position;
