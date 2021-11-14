@@ -17,7 +17,7 @@ namespace BLUE.ACubeStory.Merge
 
             foreach (Vector3 rayDirection in _rayDirections)
             {
-                bool rayHit = Physics.Raycast(formerMergeable.transform.position, rayDirection, 
+                bool rayHit = Physics.Raycast(formerMergeable.GetMergeablePos(), rayDirection, 
                     out RaycastHit hit, _rayLength, _rayHitMask);
 
                 if (!rayHit)

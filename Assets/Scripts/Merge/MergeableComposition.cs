@@ -7,11 +7,11 @@ namespace BLUE.ACubeStory.Merge
 {
     public class MergeableComposition : MonoBehaviour
     {
-        [SerializeField] private TriggerBase[] _mergeRequestors = null;
-
         [SerializeField] private MergerBase _merger = null;
 
         [SerializeField] private Mergeable[] _initialMergeables = new Mergeable[0];
+        
+        [SerializeField] private TriggerBase[] _mergeRequestors = null;
 
         private bool _isInitialized = false;
 
@@ -40,15 +40,11 @@ namespace BLUE.ACubeStory.Merge
             TryInitInitialMergeables();
             
             RegisterToMergeRequestors();
-
-            RegisterToMerger();
         }
 
         private void OnDestroy()
         {
             UnregisterFromMergeRequestors();
-
-            UnregisterFromMerger();
         }
 
         private bool TryInitInitialMergeables()
@@ -98,25 +94,15 @@ namespace BLUE.ACubeStory.Merge
             do
             {
                 merged = _merger.TryMerge(_Mergeables, out HashSet<Mergeable> mergedMergeables);
+
+                foreach (Mergeable mergeable in mergedMergeables)
+                {
+                    _mergeables.Add(mergeable);
+                    
+                    OnMerged?.Invoke(mergeable);
+                }
             }
             while(merged);
-        }
-
-        private void RegisterToMerger()
-        {
-            _merger.OnMerged += OnMergeableMerged;
-        }
-
-        private void UnregisterFromMerger()
-        {
-            _merger.OnMerged -= OnMergeableMerged;
-        }
-
-        private void OnMergeableMerged(Mergeable formerMergeable, Mergeable mergedMergeable)
-        {
-            _Mergeables.Add(mergedMergeable);
-            
-            OnMerged?.Invoke(mergedMergeable);
         }
     }
 }
