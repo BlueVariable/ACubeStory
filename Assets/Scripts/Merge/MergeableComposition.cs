@@ -97,7 +97,7 @@ namespace BLUE.ACubeStory.Merge
             
             do
             {
-                merged = _merger.TryMerge(_Mergeables, out HashSet<Mergeable> newMergeables);
+                merged = _merger.TryMerge(_Mergeables, out HashSet<Mergeable> mergedMergeables);
             }
             while(merged);
         }
@@ -109,14 +109,14 @@ namespace BLUE.ACubeStory.Merge
 
         private void UnregisterFromMerger()
         {
-            _merger.OnMerged += OnMergeableMerged;
+            _merger.OnMerged -= OnMergeableMerged;
         }
 
-        private void OnMergeableMerged(Mergeable oldMergeable, Mergeable newMergeable)
+        private void OnMergeableMerged(Mergeable formerMergeable, Mergeable mergedMergeable)
         {
-            _Mergeables.Add(newMergeable);
+            _Mergeables.Add(mergedMergeable);
             
-            OnMerged?.Invoke(newMergeable);
+            OnMerged?.Invoke(mergedMergeable);
         }
     }
 }

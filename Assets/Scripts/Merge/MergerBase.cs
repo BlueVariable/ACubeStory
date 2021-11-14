@@ -9,6 +9,8 @@ namespace BLUE.ACubeStory.Merge
     // TODO: Unmerge
     public abstract class MergerBase : MonoBehaviour
     {
+        [SerializeField] private Transform _mergerRoot = null;
+        
         [SerializeField] private ActionExecutor _mergedActionExecutor = null;
 
         [SerializeField] private MergeConditionBase[] _mergeConditions = new MergeConditionBase[0];
@@ -19,30 +21,30 @@ namespace BLUE.ACubeStory.Merge
 
         #endregion
         
-        protected abstract HashSet<Mergeable> GetCandidateMergeables(Mergeable oldMergeable);
+        protected abstract HashSet<Mergeable> GetCandidateMergeables(Mergeable formerMergeable);
 
-        protected virtual void MergeCustomActions(Mergeable oldMergeable, Mergeable newMergeable) { }
+        protected virtual void MergeCustomActions(Mergeable formerMergeable, Mergeable mergedMergeable) { }
 
-        public bool TryMerge(HashSet<Mergeable> oldMergeables, out HashSet<Mergeable> newMergeables)
+        public bool TryMerge(HashSet<Mergeable> formerMergeables, out HashSet<Mergeable> mergedMergeables)
         {
-            newMergeables = new HashSet<Mergeable>();
+            mergedMergeables = new HashSet<Mergeable>();
 
             bool merged = false;
             
-            foreach (Mergeable mergedMergeable in oldMergeables)
+            foreach (Mergeable formerMergeable in formerMergeables)
             {
-                HashSet<Mergeable> candidateMergeables = GetCandidateMergeables(mergedMergeable);
+                HashSet<Mergeable> candidateMergeables = GetCandidateMergeables(formerMergeable);
 
-                candidateMergeables.RemoveWhere(oldMergeables.Contains);
+                candidateMergeables.RemoveWhere(formerMergeables.Contains);
 
                 foreach (Mergeable candidateMergeable in candidateMergeables)
                 {
                     if (_mergeConditions.All(val 
-                        => val.CanMerge(mergedMergeable, candidateMergeable)))
+                        => val.CanMerge(formerMergeable, candidateMergeable)))
                     {
-                        Merge(mergedMergeable, candidateMergeable);
+                        Merge(formerMergeable, candidateMergeable);
 
-                        newMergeables.Add(candidateMergeable);
+                        mergedMergeables.Add(candidateMergeable);
 
                         merged = true;
                     }
@@ -52,11 +54,13 @@ namespace BLUE.ACubeStory.Merge
             return merged;
         }
 
-        private void Merge(Mergeable oldMergeable, Mergeable newMergeable)
+        private void Merge(Mergeable formerMergeable, Mergeable mergedMergeable)
         {
-            MergeCustomActions(oldMergeable, newMergeable);
+            mergedMergeable.transform.parent = _mergerRoot;
             
-            OnMerged?.Invoke(oldMergeable, newMergeable);
+            MergeCustomActions(formerMergeable, mergedMergeable);
+            
+            OnMerged?.Invoke(formerMergeable, mergedMergeable);
             
             _mergedActionExecutor.Execute();
         }
