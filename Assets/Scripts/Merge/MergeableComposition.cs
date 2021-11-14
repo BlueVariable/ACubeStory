@@ -13,10 +13,8 @@ namespace BLUE.ACubeStory.Merge
         
         [SerializeField] private TriggerBase[] _mergeRequestors = null;
 
-        private bool _isInitialized = false;
-
         private HashSet<Mergeable> _mergeables;
-        private HashSet<Mergeable> _Mergeables
+        public HashSet<Mergeable> Mergeables
         {
             get
             {
@@ -28,6 +26,8 @@ namespace BLUE.ACubeStory.Merge
                 return _mergeables;
             }
         }
+        
+        private bool _isInitialized = false;
 
         #region Events
         
@@ -93,7 +93,7 @@ namespace BLUE.ACubeStory.Merge
             
             do
             {
-                merged = _merger.TryMerge(_Mergeables, out HashSet<Mergeable> mergedMergeables);
+                merged = _merger.TryMerge(Mergeables, out HashSet<Mergeable> mergedMergeables);
 
                 foreach (Mergeable mergeable in mergedMergeables)
                 {

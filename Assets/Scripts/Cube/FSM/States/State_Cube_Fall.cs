@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BLUE.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
@@ -22,6 +23,9 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _moveSettings = null;
         [SerializeField] private float _fallbackFallAmount = 100f;
 
+        [Header("Misc")] 
+        [SerializeField] private SimpleConditionBase[] _fallSkipConditions = null;
+
         #region Events
 
         public Action<RaycastHit> OnFallStartedTowardsHitObject { get; set; }
@@ -39,6 +43,13 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube transitionMessage)
         {
+            if (_fallSkipConditions.Any(val => !val.IsConditionSatisfied()))
+            {
+                _cubeFSM.TryChangeState(ECubeState.Idle);
+
+                return;
+            }
+            
             if (Physics.Raycast(_objectToFall.position, Vector3.down, 
                 out RaycastHit hit, _maxRayDistance, _layerMask))
             {

@@ -6,10 +6,6 @@ namespace BLUE.ACubeStory.Common
 {
     public class RollPointProvider_OffsetBased : RollPointProviderBase
     {
-        [SerializeField] private Settings[] _settings = new Settings[0];
-
-        [SerializeField] private Transform _baseTransform = null;
-        
         [Serializable]
         private class Settings
         {
@@ -20,6 +16,10 @@ namespace BLUE.ACubeStory.Common
             public Vector3 Offset => _offset;
         }
         
+        [SerializeField] private Settings[] _settings = new Settings[0];
+
+        [SerializeField] private Transform _baseTransform = null;
+
         public override Vector3 GetRollPoint(Vector3 direction)
         {
             return _baseTransform.position + _settings.FirstOrDefault(i => i.Direction.Equals(direction)).Offset;

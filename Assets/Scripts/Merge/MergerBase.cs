@@ -61,8 +61,10 @@ namespace BLUE.ACubeStory.Merge
             MergeCustomActions(formerMergeable, mergedMergeable);
             
             OnMerged?.Invoke(formerMergeable, mergedMergeable);
-            
+
             _mergedActionExecutor.Execute();
+            
+            mergedMergeable.Merged();
         }
     }
 }
