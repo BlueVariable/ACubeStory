@@ -89,8 +89,13 @@ namespace BLUE.ACubeStory.Common
 
             float targetAngle = _angle;
 
-            Vector3 rollPoint = _RollPointProvider.GetRollPoint(_direction) + _rollPointOffset;
-
+            Vector3 rollPoint = _RollPointProvider.GetRollPoint(_direction, onRollPointUpdated) + _rollPointOffset;
+            
+            void onRollPointUpdated(Vector3 newPoint)
+            {
+                rollPoint = newPoint;
+            }
+            
             while (true)
             {
                 float prevAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
