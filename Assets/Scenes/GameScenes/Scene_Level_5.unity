@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 519520082}
   - component: {fileID: 519520086}
   m_Layer: 5
-  m_Name: MainMenuUI
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -953,7 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571a42bac16441418883f9519478626c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeOnAwake: 1
+  _activeOnAwake: 0
   _debugEnabled: 0
   _activatingActionExecutor:
     _actionCarrier: {fileID: 0}
@@ -974,6 +974,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 542666543}
+  - component: {fileID: 542666545}
   m_Layer: 5
   m_Name: PlayButtonContainer
   m_TagString: Untagged
@@ -1001,6 +1002,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &542666545
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542666542}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!1001 &582636393
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374141, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281995481684374143, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
+      propertyPath: m_Name
+      value: LevelBase
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2b1050b2b7c56ef4f9148b629f760626, type: 3}
 --- !u!1001 &589417669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1445,6 +1515,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1101919575}
   - component: {fileID: 1101919576}
+  - component: {fileID: 1101919578}
+  - component: {fileID: 1101919577}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -1499,6 +1571,116 @@ MonoBehaviour:
   _textMeshPro: {fileID: 2087141611}
   _defaultMaterial: {fileID: 2100000, guid: a0b0f943c88e7b946863fc0657912d53, type: 2}
   _selectedMaterial: {fileID: 2100000, guid: 5e3676b27dd8c5a48a469e4d0938e7c7, type: 2}
+  _glowBehaviour: {fileID: 1101919577}
+--- !u!114 &1101919577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101919574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dbf95bef574dd287e5ca8171181486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeOnAwake: 0
+  _glowCurves:
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0042006373
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1390521
+      value: 1.0161706
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15591595
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.857264
+      value: 1.0067441
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8715325
+      value: 0.0038529038
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.91490555
+      value: 1.0137899
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.94579935
+      value: 0.006233275
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99579936
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  _glowDuration: 1
+  _minDelayBtwGlows: 2
+  _maxDelayBtwGlows: 5
+  _hasInitialDelay: 1
+  _initialAlpha: 1
+  _targetAlpha: 0
+--- !u!225 &1101919578
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101919574}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1149681905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1880,6 +2062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307637048}
+  - component: {fileID: 1307637050}
   m_Layer: 5
   m_Name: NewGameButtonContainer
   m_TagString: Untagged
@@ -1907,6 +2090,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &1307637050
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307637047}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1369897825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2374,6 +2569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1473409762}
+  - component: {fileID: 1473409764}
   m_Layer: 5
   m_Name: CreditsButtonContainer
   m_TagString: Untagged
@@ -2401,6 +2597,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &1473409764
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473409761}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1528595723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2597,6 +2805,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1645365837}
   - component: {fileID: 1645365838}
+  - component: {fileID: 1645365840}
+  - component: {fileID: 1645365839}
   m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
@@ -2651,6 +2861,116 @@ MonoBehaviour:
   _textMeshPro: {fileID: 1724235855}
   _defaultMaterial: {fileID: 2100000, guid: a0b0f943c88e7b946863fc0657912d53, type: 2}
   _selectedMaterial: {fileID: 2100000, guid: 5e3676b27dd8c5a48a469e4d0938e7c7, type: 2}
+  _glowBehaviour: {fileID: 1645365839}
+--- !u!114 &1645365839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645365836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dbf95bef574dd287e5ca8171181486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeOnAwake: 0
+  _glowCurves:
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0042006373
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1390521
+      value: 1.0161706
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15591595
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.857264
+      value: 1.0067441
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8715325
+      value: 0.0038529038
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.91490555
+      value: 1.0137899
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.94579935
+      value: 0.006233275
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99579936
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  _glowDuration: 1
+  _minDelayBtwGlows: 2
+  _maxDelayBtwGlows: 5
+  _hasInitialDelay: 1
+  _initialAlpha: 1
+  _targetAlpha: 0
+--- !u!225 &1645365840
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645365836}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1724235853
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,6 +3310,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1815080743}
   - component: {fileID: 1815080744}
+  - component: {fileID: 1815080746}
+  - component: {fileID: 1815080745}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -3044,6 +3366,116 @@ MonoBehaviour:
   _textMeshPro: {fileID: 1374010621}
   _defaultMaterial: {fileID: 2100000, guid: a0b0f943c88e7b946863fc0657912d53, type: 2}
   _selectedMaterial: {fileID: 2100000, guid: 5e3676b27dd8c5a48a469e4d0938e7c7, type: 2}
+  _glowBehaviour: {fileID: 1815080745}
+--- !u!114 &1815080745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815080742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dbf95bef574dd287e5ca8171181486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeOnAwake: 0
+  _glowCurves:
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0042006373
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1390521
+      value: 1.0161706
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15591595
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.857264
+      value: 1.0067441
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8715325
+      value: 0.0038529038
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.91490555
+      value: 1.0137899
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.94579935
+      value: 0.006233275
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99579936
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  _glowDuration: 1
+  _minDelayBtwGlows: 2
+  _maxDelayBtwGlows: 5
+  _hasInitialDelay: 1
+  _initialAlpha: 1
+  _targetAlpha: 0
+--- !u!225 &1815080746
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815080742}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1815547822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,6 +3485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1815547823}
+  - component: {fileID: 1815547825}
   m_Layer: 5
   m_Name: SettingsButtonContainer
   m_TagString: Untagged
@@ -3080,6 +3513,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &1815547825
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815547822}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1835422923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3214,6 +3659,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1875603427}
   - component: {fileID: 1875603431}
+  - component: {fileID: 1875603429}
+  - component: {fileID: 1875603428}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -3241,6 +3688,115 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1875603428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875603426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dbf95bef574dd287e5ca8171181486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeOnAwake: 0
+  _glowCurves:
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0042006373
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1390521
+      value: 1.0161706
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15591595
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.857264
+      value: 1.0067441
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8715325
+      value: 0.0038529038
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.91490555
+      value: 1.0137899
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.94579935
+      value: 0.006233275
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99579936
+      value: 0.008614004
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  _glowDuration: 1
+  _minDelayBtwGlows: 2
+  _maxDelayBtwGlows: 5
+  _hasInitialDelay: 1
+  _initialAlpha: 1
+  _targetAlpha: 0
+--- !u!225 &1875603429
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875603426}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1875603431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3268,6 +3824,7 @@ MonoBehaviour:
   _textMeshPro: {fileID: 1390159470}
   _defaultMaterial: {fileID: 2100000, guid: a0b0f943c88e7b946863fc0657912d53, type: 2}
   _selectedMaterial: {fileID: 2100000, guid: 5e3676b27dd8c5a48a469e4d0938e7c7, type: 2}
+  _glowBehaviour: {fileID: 1875603428}
 --- !u!1001 &1916615703
 PrefabInstance:
   m_ObjectHideFlags: 0
