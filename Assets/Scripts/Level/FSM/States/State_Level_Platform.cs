@@ -1,4 +1,3 @@
-using System;
 using BLUE.ACubeStory.UI;
 using BLUE.FSMSystem;
 
@@ -13,16 +12,16 @@ namespace BLUE.ACubeStory.Level
 
         private void Awake()
         {
-            EventRaiser_OnMainMenuButtonEntered.OnRaisedStatic += onMainMenuButtonEntered;
+            EventRaiser_OnMainMenuButtonTriggered.OnRaisedStatic += onMainMenuButtonEntered;
 
-            void onMainMenuButtonEntered(object sender, EventArgs_OnMainMenuButtonEntered args)
+            void onMainMenuButtonEntered(object sender, EventArgs_OnMainMenuButtonTriggered args)
             {
                 if (!args.Button.Equals(EMainMenuButton.Play))
                 {
                     return;
                 }
                 
-                EventRaiser_OnMainMenuButtonEntered.OnRaisedStatic -= onMainMenuButtonEntered;
+                EventRaiser_OnMainMenuButtonTriggered.OnRaisedStatic -= onMainMenuButtonEntered;
 
                 Level.Instance.LevelFSM.TryChangeState(ELevelState.Platform);
             }

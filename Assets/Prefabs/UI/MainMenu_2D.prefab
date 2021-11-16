@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7378184186929370954}
   - component: {fileID: 6484899185123766659}
   m_Layer: 5
-  m_Name: ButtonEnterTrigger
+  m_Name: ButtonTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4785438579106808831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 4785438579488696966}
   - component: {fileID: 4785438579488696961}
   m_Layer: 5
-  m_Name: DeselectedActions
+  m_Name: UnselectedActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 4785438579653208092}
   - component: {fileID: 4785438579653208095}
   m_Layer: 5
-  m_Name: DeselectedActions
+  m_Name: UnselectedActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 4785438579880583205}
   - component: {fileID: 4785438579880583204}
   m_Layer: 5
-  m_Name: DeselectedActions
+  m_Name: UnselectedActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1111,10 +1111,10 @@ MonoBehaviour:
   _deactivationConditionCarrier: {fileID: 0}
   _selectedActions:
     _actionCarrier: {fileID: 4785438579800997311}
-  _deselectedActions:
+  _unselectedActions:
     _actionCarrier: {fileID: 4785438579880583210}
   _mainMenuButtonType: 30
-  _buttonEnterTrigger: {fileID: 6484899185123766659}
+  _buttonTrigger: {fileID: 6484899185123766659}
 --- !u!225 &4785438580367837687
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1338,14 +1338,14 @@ MonoBehaviour:
     _actionCarrier: {fileID: 0}
   _activationConditionCarrier: {fileID: 0}
   _deactivationConditionCarrier: {fileID: 0}
-  _maxSelectedButtonCount: 1
-  _replaceSelectedButton: 1
+  _maxSelectedSelectableCount: 1
+  _replaceSelectedSelectable: 1
   _mainMenuButtons:
   - {fileID: 161786246369984614}
   - {fileID: 6931333098217942930}
   - {fileID: 1510950545096672068}
   - {fileID: 7182900793334250113}
-  _initialMainMenuButton: {fileID: 161786246369984614}
+  _initialSelectableMainMenuButton: {fileID: 161786246369984614}
 --- !u!114 &4785438580601801416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1771,10 +1771,10 @@ MonoBehaviour:
   _deactivationConditionCarrier: {fileID: 0}
   _selectedActions:
     _actionCarrier: {fileID: 4785438580767170686}
-  _deselectedActions:
+  _unselectedActions:
     _actionCarrier: {fileID: 4785438579488696967}
   _mainMenuButtonType: 10
-  _buttonEnterTrigger: {fileID: 6484899185123766659}
+  _buttonTrigger: {fileID: 6484899185123766659}
 --- !u!225 &4785438580933261053
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1950,10 +1950,10 @@ MonoBehaviour:
   _deactivationConditionCarrier: {fileID: 0}
   _selectedActions:
     _actionCarrier: {fileID: 4785438579599154934}
-  _deselectedActions:
+  _unselectedActions:
     _actionCarrier: {fileID: 4785438581016179531}
   _mainMenuButtonType: 20
-  _buttonEnterTrigger: {fileID: 6484899185123766659}
+  _buttonTrigger: {fileID: 6484899185123766659}
 --- !u!225 &4785438580963300231
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2178,10 +2178,10 @@ MonoBehaviour:
   _deactivationConditionCarrier: {fileID: 0}
   _selectedActions:
     _actionCarrier: {fileID: 4785438579144891913}
-  _deselectedActions:
+  _unselectedActions:
     _actionCarrier: {fileID: 4785438579653208093}
   _mainMenuButtonType: 10
-  _buttonEnterTrigger: {fileID: 6484899185123766659}
+  _buttonTrigger: {fileID: 6484899185123766659}
 --- !u!225 &4785438581002916680
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2303,7 +2303,7 @@ GameObject:
   - component: {fileID: 4785438581016179530}
   - component: {fileID: 4785438581016179525}
   m_Layer: 5
-  m_Name: DeselectedActions
+  m_Name: UnselectedActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
