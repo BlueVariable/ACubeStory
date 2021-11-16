@@ -22,18 +22,18 @@ namespace BLUE.ACubeStory.Level
 
         #endregion
 
-        private FSM_Level _LevelFSM;
+        private FSM_Level _levelFSM;
 
         public FSM_Level LevelFSM
         {
             get
             {
-                if (_LevelFSM == null)
+                if (_levelFSM == null)
                 {
-                    _LevelFSM = GetComponentInChildren<FSM_Level>();
+                    _levelFSM = GetComponentInChildren<FSM_Level>();
                 }
 
-                return _LevelFSM;
+                return _levelFSM;
             }
         }
     }

@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.UI
 {
-    public class UI_MainMenuButtonSelector_CubeRollBased : UI_ButtonSelectorBase<UI_SelectorButtonBase>
+    public class UI_MainMenuButtonSelector_CubeRollBased : UI_ButtonSelectorBase<UI_MainMenuButton>
     {
-        [SerializeField] private UI_SelectorButtonBase[] _mainMenuButtons = new UI_SelectorButtonBase[0]; 
+        [SerializeField] private UI_MainMenuButton[] _mainMenuButtons = new UI_MainMenuButton[0]; 
         
-        [SerializeField] private UI_SelectorButtonBase _initialMainMenuButton = null;
+        [SerializeField] private UI_MainMenuButton _initialMainMenuButton = null;
         
         private float _lastZPoint;
         
@@ -18,14 +18,14 @@ namespace BLUE.ACubeStory.UI
             TrySelectButton(_initialMainMenuButton);
             
             RegisterToCubeFSM();
-            
+
             base.ActivatedCustomActions();
         }
 
         protected override void DeactivatedCustomActions()
         {
             UnregisterFromCubeFSM();
-            
+
             base.DeactivatedCustomActions();
         }
 
@@ -58,16 +58,16 @@ namespace BLUE.ACubeStory.UI
                 return;
             }
 
-            UI_SelectorButtonBase potentialButton = GetPotentialMainMenuButton();
+            UI_MainMenuButton potentialButton = GetPotentialMainMenuButton();
 
             TrySelectButton(potentialButton);
         }
 
-        private UI_SelectorButtonBase GetPotentialMainMenuButton()
+        private UI_MainMenuButton GetPotentialMainMenuButton()
         {
             float curZPoint = Cube.Cube.Instance.GetPosition().z;
 
-            TryGetSingleSelectedButton(out UI_SelectorButtonBase curButton);
+            TryGetSingleSelectedButton(out UI_MainMenuButton curButton);
             
             if (curZPoint == _lastZPoint)
             {
