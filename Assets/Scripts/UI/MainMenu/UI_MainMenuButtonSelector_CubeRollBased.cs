@@ -5,22 +5,18 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.UI
 {
-    public class UI_MainMenuButtonSelector : UIBase
+    public class UI_MainMenuButtonSelector_CubeRollBased : UI_ButtonSelectorBase<UI_SelectorButtonBase>
     {
-        [SerializeField] private UI_MainMenuButton[] _mainMenuButtons = new UI_MainMenuButton[0];
-
-        [SerializeField] private UI_MainMenuButton _initialMainMenuButton = null;
-
-        private UI_MainMenuButton _curSelectedMainMenuButton;
-
+        [SerializeField] private UI_SelectorButtonBase[] _mainMenuButtons = new UI_SelectorButtonBase[0]; 
+        
+        [SerializeField] private UI_SelectorButtonBase _initialMainMenuButton = null;
+        
         private float _lastZPoint;
         
         protected override void ActivatedCustomActions()
         {
-            _curSelectedMainMenuButton = _initialMainMenuButton;
+            TrySelectButton(_initialMainMenuButton);
             
-            _curSelectedMainMenuButton.ButtonSelected();
-
             RegisterToCubeFSM();
             
             base.ActivatedCustomActions();
@@ -62,26 +58,26 @@ namespace BLUE.ACubeStory.UI
                 return;
             }
 
-            UI_MainMenuButton potentialButton = GetPotentialMainMenuButton();
+            UI_SelectorButtonBase potentialButton = GetPotentialMainMenuButton();
 
-            if (potentialButton == _curSelectedMainMenuButton)
-            {
-                return;
-            }
-            
-            _curSelectedMainMenuButton.ButtonDeselected();
-
-            _curSelectedMainMenuButton = potentialButton;
-            
-            potentialButton.ButtonSelected();
+            TrySelectButton(potentialButton);
         }
 
-        private UI_MainMenuButton GetPotentialMainMenuButton()
+        private UI_SelectorButtonBase GetPotentialMainMenuButton()
         {
-            int rollDirection = (int) Mathf.Sign(Cube.Cube.Instance.GetPosition().z - _lastZPoint);
+            float curZPoint = Cube.Cube.Instance.GetPosition().z;
+
+            TryGetSingleSelectedButton(out UI_SelectorButtonBase curButton);
+            
+            if (curZPoint == _lastZPoint)
+            {
+                return curButton;
+            }
+                
+            int rollDirection = (int) Mathf.Sign(curZPoint - _lastZPoint);
 
             int buttonIndex = Mathf.Clamp(
-                Array.IndexOf(_mainMenuButtons, _curSelectedMainMenuButton) + rollDirection, 
+                Array.IndexOf(_mainMenuButtons, curButton) + rollDirection, 
                 0, 
                 _mainMenuButtons.Length - 1);
 
