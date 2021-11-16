@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
+using BLUE.ACubeStory.Merge;
+using DG.Tweening;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Common
@@ -89,13 +92,8 @@ namespace BLUE.ACubeStory.Common
 
             float targetAngle = _angle;
 
-            Vector3 rollPoint = _RollPointProvider.GetRollPoint(_direction, onRollPointUpdated) + _rollPointOffset;
-            
-            void onRollPointUpdated(Vector3 newPoint)
-            {
-                rollPoint = newPoint;
-            }
-            
+            Vector3 rollPoint = _RollPointProvider.GetRollPoint(_direction) + _rollPointOffset;
+
             while (true)
             {
                 float prevAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
@@ -109,12 +107,12 @@ namespace BLUE.ACubeStory.Common
                 CurRollAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
                 
                 _rollableTransform.RotateAround(rollPoint, GetRollAxis(_direction), CurRollAngle - prevAngle);
-            
+
                 if (curNormValue >= targetNormValue)
                 {
                     break;
                 }
-            
+
                 yield return new WaitForSeconds(Time.deltaTime);
             }
             

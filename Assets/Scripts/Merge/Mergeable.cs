@@ -8,12 +8,6 @@ namespace BLUE.ACubeStory.Merge
     {
         [SerializeField] private ActionExecutor _mergedActionExecutor = null;
 
-        [SerializeField] private Transform _mergeableObject = null;
-        public Transform MergeableObject => _mergeableObject;
-        
-        [SerializeField] private Collider _collider = null;
-        public Collider Collider => _collider;
-
         public void Merged()
         {
             _mergedActionExecutor.Execute();
@@ -21,7 +15,7 @@ namespace BLUE.ACubeStory.Merge
         
         public Vector3 GetMergeablePos()
         {
-            return _mergeableObject.position;
+            return transform.position;
         }
     }
 }

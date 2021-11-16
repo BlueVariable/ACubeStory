@@ -1,4 +1,3 @@
-using System;
 using BLUE.AttachableSystem;
 using UnityEngine;
 
@@ -10,11 +9,11 @@ namespace BLUE.ACubeStory.Common
     {
         [SerializeField] private Vector3 _fallbackRollPoint = Vector3.zero;
         
-        public Vector3 GetRollPoint(Vector3 direction, Action<Vector3> onRollPointUpdatedCallback = null)
+        public Vector3 GetRollPoint(Vector3 direction)
         {
             if (TryGetSingleAttachable(out RollPointProviderBase rollPointProvider))
             {
-                return rollPointProvider.GetRollPoint(direction, onRollPointUpdatedCallback);
+                return rollPointProvider.GetRollPoint(direction);
             }
 
             return _fallbackRollPoint;

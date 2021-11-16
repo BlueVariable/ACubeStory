@@ -56,7 +56,7 @@ namespace BLUE.ACubeStory.Merge
 
         private void Merge(Mergeable formerMergeable, Mergeable mergedMergeable)
         {
-            mergedMergeable.MergeableObject.parent = _mergerRoot;
+            mergedMergeable.transform.parent = _mergerRoot;
             
             MergeCustomActions(formerMergeable, mergedMergeable);
             

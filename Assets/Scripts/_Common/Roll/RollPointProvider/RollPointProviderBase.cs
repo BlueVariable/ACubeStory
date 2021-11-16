@@ -1,4 +1,3 @@
-using System;
 using BLUE.AttachableSystem;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace BLUE.ACubeStory.Common
 
         public bool IsAttachedInitially => _isInitiallyAttached;
         
-        public abstract Vector3 GetRollPoint(Vector3 direction, Action<Vector3> onRollPointUpdatedCallback = null);
+        public abstract Vector3 GetRollPoint(Vector3 direction);
 
         protected virtual void AttachedCustomActions()
         {
