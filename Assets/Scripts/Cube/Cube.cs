@@ -23,7 +23,6 @@ namespace BLUE.ACubeStory.Cube
         #endregion
 
         private FSM_Cube _cubeFSM;
-
         public FSM_Cube CubeFSM
         {
             get

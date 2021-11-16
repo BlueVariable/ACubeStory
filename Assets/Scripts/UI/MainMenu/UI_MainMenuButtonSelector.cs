@@ -52,7 +52,7 @@ namespace BLUE.ACubeStory.UI
                 return;
             }
 
-            _lastZPoint = Cube.Cube.Instance.gameObject.transform.position.z;
+            _lastZPoint = Cube.Cube.Instance.GetPosition().z;
         }
 
         private void OnStateExited(ECubeState state)
@@ -62,7 +62,7 @@ namespace BLUE.ACubeStory.UI
                 return;
             }
 
-            UI_MainMenuButton potentialButton = GetCorrectMainMenuButton();
+            UI_MainMenuButton potentialButton = GetPotentialMainMenuButton();
 
             if (potentialButton == _curSelectedMainMenuButton)
             {
@@ -76,9 +76,9 @@ namespace BLUE.ACubeStory.UI
             potentialButton.ButtonSelected();
         }
 
-        private UI_MainMenuButton GetCorrectMainMenuButton()
+        private UI_MainMenuButton GetPotentialMainMenuButton()
         {
-            int rollDirection = (int) Mathf.Sign(Cube.Cube.Instance.gameObject.transform.position.z - _lastZPoint);
+            int rollDirection = (int) Mathf.Sign(Cube.Cube.Instance.GetPosition().z - _lastZPoint);
 
             int buttonIndex = Mathf.Clamp(
                 Array.IndexOf(_mainMenuButtons, _curSelectedMainMenuButton) + rollDirection, 
