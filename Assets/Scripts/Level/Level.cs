@@ -23,7 +23,6 @@ namespace BLUE.ACubeStory.Level
         #endregion
 
         private FSM_Level _levelFSM;
-
         public FSM_Level LevelFSM
         {
             get

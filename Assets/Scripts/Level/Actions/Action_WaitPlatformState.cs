@@ -5,8 +5,12 @@ namespace BLUE.ACubeStory.Level
 {
     public class Action_WaitPlatformState : InterruptableActionBase
     {
+        #region Events
+
         public override Action<InterruptableActionBase> OnCompleted { get; set; }
-    
+
+        #endregion
+        
         public override void Execute()
         {
             RegisterToLevelFSM();
@@ -24,6 +28,11 @@ namespace BLUE.ACubeStory.Level
 
         private void UnregisterFromLevelFSM()
         {
+            if (Level.Instance == null)
+            {
+                return;
+            }
+            
             Level.Instance.LevelFSM.OnStateEntered -= OnStateEntered;
         }
         
