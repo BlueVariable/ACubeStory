@@ -23,6 +23,13 @@ namespace BLUE.ACubeStory.Cube
             
             UnregisterFromMovementInputEvents();
         }
+        
+        private void OnDestroy()
+        {
+            UnregisterFromKeyInputEvents();
+            
+            UnregisterFromMovementInputEvents();
+        }
 
         #region Input Related
 
@@ -34,6 +41,11 @@ namespace BLUE.ACubeStory.Cube
 
         private void UnregisterFromKeyInputEvents()
         {
+            if (InputManager.Instance == null)
+            {
+                return;
+            }
+            
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
         }
@@ -72,6 +84,11 @@ namespace BLUE.ACubeStory.Cube
 
         private void UnregisterFromMovementInputEvents()
         {
+            if (InputManager.Instance == null)
+            {
+                return;
+            }
+            
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Axis>(EInputEvent.HorizontalAxis,
                 OnHorizontalAxisInputPerformed);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Axis>(EInputEvent.VerticalAxis,

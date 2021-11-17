@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using BLUE.ACubeStory.Ability;
 using BLUE.InputSystem;
@@ -20,7 +21,12 @@ namespace BLUE.ACubeStory.Cube
         {
             UnregisterFromInputManager();
         }
-        
+
+        private void OnDestroy()
+        {
+            UnregisterFromInputManager();
+        }
+
         private void RegisterToInputManager()
         {
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>

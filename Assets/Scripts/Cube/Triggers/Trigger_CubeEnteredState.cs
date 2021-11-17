@@ -6,8 +6,6 @@ namespace BLUE.ACubeStory.Cube
 {
     public class Trigger_CubeEnteredState : TriggerBase
     {
-        [SerializeField] private FSM_Cube _cubeFSM = null;
-
         [SerializeField] private ECubeState _cubeState = ECubeState.Idle;
 
         #region Events
@@ -18,15 +16,18 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void ActivateCustomActions()
         {
-            _cubeFSM.OnStateEntered += OnStateEntered;
+            Cube.Instance.CubeFSM.OnStateEntered += OnStateEntered;
             
             base.ActivateCustomActions();
         }
 
         protected override void DeactivateCustomActions()
         {
-            _cubeFSM.OnStateEntered -= OnStateEntered;
-            
+            if (Cube.Instance != null)
+            {
+                Cube.Instance.CubeFSM.OnStateEntered -= OnStateEntered;
+            }
+
             base.DeactivateCustomActions();
         }
 
