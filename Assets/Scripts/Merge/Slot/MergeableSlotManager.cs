@@ -8,24 +8,6 @@ namespace BLUE.ACubeStory.Merge
 {
     public class MergeableSlotManager : MonoBehaviour
     {
-        #region Singleton
-
-        private static MergeableSlotManager _instance;
-        public static MergeableSlotManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<MergeableSlotManager>();
-                }
-
-                return _instance;
-            }
-        }
-
-        #endregion
-
         [SerializeField] private TriggerBase[] _tryAssignRequestors = null;
         [SerializeField] private TriggerBase[] _tryUnassignRequestors = null;
         [SerializeField] private TriggerBase[] _unassignAllRequestors = null;

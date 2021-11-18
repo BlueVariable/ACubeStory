@@ -45,6 +45,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mergeableComposition: {fileID: 216091954713794861}
   _maxMergeableCount: 1
+--- !u!1 &682995821722401175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8230603844482657796}
+  m_Layer: 8
+  m_Name: RollCompletedActionExecutor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8230603844482657796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682995821722401175}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7074784438819274613}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &749631548656739269
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +865,6 @@ MonoBehaviour:
   - _direction: {x: 0, y: 0, z: -1}
     _offset: {x: 0, y: -0.5, z: -0.5}
   _mergeableComposition: {fileID: 216091954713794861}
-  _cubeFSM: {fileID: 5253448575363346710}
 --- !u!1 &4646373223804922831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,7 +1092,6 @@ MonoBehaviour:
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
-  _cubeFSM: {fileID: 5253448575363346710}
   _cubeState: 1
 --- !u!1 &5782554140175497370
 GameObject:
@@ -1136,7 +1164,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8230603844482657796}
   m_Father: {fileID: 433208529457987252}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1159,6 +1188,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _rollBehaviourProvider: {fileID: 3867403072291783834}
+  _rollCompletedActionExecutor:
+    _actionCarrier: {fileID: 8230603844482657796}
 --- !u!114 &1615147408662205967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1612,6 +1643,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
+--- !u!4 &2278788579180269005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6572789999254590275, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
+  m_PrefabInstance: {fileID: 4947449989573811854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &915684824503583812 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5196579967308012234, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
@@ -1623,8 +1659,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4758834764f84a444b9f8c9e191b7dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2278788579180269005 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6572789999254590275, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
-  m_PrefabInstance: {fileID: 4947449989573811854}
-  m_PrefabAsset: {fileID: 0}

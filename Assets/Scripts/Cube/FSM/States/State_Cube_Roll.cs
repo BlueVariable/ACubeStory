@@ -1,4 +1,6 @@
+using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
+using BLUE.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
 
@@ -13,12 +15,22 @@ namespace BLUE.ACubeStory.Cube
         [Header("Raycast Settings")]
         [SerializeField] private float _rollRayDistance = 1;
         [SerializeField] private LayerMask _layerMask = default;
-        
+
+        [Header("Roll Settings")] 
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
+
+        [Header("Action Executors")] 
+        [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
 
         public override ECubeState GetStateType()
         {
             return ECubeState.Roll;
+        }
+        
+        protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
+        {
+            return !Physics.Raycast(_objectToRoll.position, transitionMessage.Direction,
+                out RaycastHit hit, _rollRayDistance, _layerMask);
         }
         
         protected override void EnterStateCustomActions(
@@ -28,6 +40,8 @@ namespace BLUE.ACubeStory.Cube
 
             void onCompleted()
             {
+                _rollCompletedActionExecutor.Execute();
+                
                 _cubeFSM.TryChangeState(ECubeState.Fall);
             }
         }
@@ -37,12 +51,6 @@ namespace BLUE.ACubeStory.Cube
             _rollBehaviourProvider.GetRollBehaviour().TryPauseRoll();
             
             base.ExitStateCustomActions();
-        }
-
-        protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
-        {
-            return !Physics.Raycast(_objectToRoll.position, transitionMessage.Direction,
-                out RaycastHit hit, _rollRayDistance, _layerMask);
         }
     }
 }
