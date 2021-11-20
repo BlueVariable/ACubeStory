@@ -76,7 +76,10 @@ namespace BLUE.ACubeStory.Merge
 
             foreach (Mergeable mergedMergeable in _mergeableComposition.Mergeables)
             {
-                ProcessGroundOverlap(mergedMergeable, transitionMessage.Direction.normalized);
+                if (mergedMergeable.WillOverlapGround(_mergeableComposition, transitionMessage.Direction.normalized))
+                {
+                    _bottleneckMergeables.Add(mergedMergeable);
+                }
             }
         }
 
@@ -117,30 +120,6 @@ namespace BLUE.ACubeStory.Merge
                 OnTriggerAttempt?.Invoke();
                 
                 _triggerAttemptedActionExecutor.Execute();
-            }
-        }
-
-        private void ProcessGroundOverlap(Mergeable mergeable, Vector3 normalizedDirection)
-        {
-            Vector3 mergedPos = mergeable.GetMergeablePos();
-            mergedPos.Scale(normalizedDirection);
-            
-            Vector3 anchorPos = _mergeableComposition.GetAnchorMergeable(normalizedDirection).GetMergeablePos();
-            anchorPos.Scale(normalizedDirection);
-
-            Vector3 dir = mergedPos - anchorPos;
-
-            float normalizedDirSum = normalizedDirection.x + normalizedDirection.y + normalizedDirection.z;
-
-            float sum = (dir.x + dir.y + dir.z) * Mathf.Sign(normalizedDirSum);
-
-            if (Mathf.RoundToInt(sum) > 0 && Mathf.Sign(normalizedDirSum) > 0)
-            {
-                _bottleneckMergeables.Add(mergeable);
-            }
-            else if (Mathf.RoundToInt(sum) < 0 && Mathf.Sign(normalizedDirSum) < 0)
-            {
-                _bottleneckMergeables.Add(mergeable);
             }
         }
     }

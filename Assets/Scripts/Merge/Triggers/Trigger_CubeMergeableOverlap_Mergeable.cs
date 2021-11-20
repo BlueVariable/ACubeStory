@@ -89,7 +89,8 @@ namespace BLUE.ACubeStory.Merge
                     continue;
                 }
 
-                ProcessMergeableOverlap(mergeable, transitionMessage.Direction.normalized);
+                ProcessPreciseOverlap(mergeable, transitionMessage.Direction.normalized);
+                ProcessVagueOverlap(mergeable, transitionMessage.Direction.normalized);
             }
         }
         
@@ -162,7 +163,7 @@ namespace BLUE.ACubeStory.Merge
             }
         }
 
-        private void ProcessMergeableOverlap(Mergeable mergeable, Vector3 normalizedDirection)
+        private void ProcessPreciseOverlap(Mergeable mergeable, Vector3 normalizedDirection)
         {
             Vector3 normalizedDirectionAbs = new Vector3(Mathf.Abs(normalizedDirection.x),
                 Mathf.Abs(normalizedDirection.y), Mathf.Abs(normalizedDirection.z));
@@ -211,6 +212,36 @@ namespace BLUE.ACubeStory.Merge
                 if (horDistance - 1 == vertDistance)
                 {
                     _bottleneckMergeables.Add(mergeable);
+                    _bottleneckMergeables.Add(mergedMergeable);
+                }
+            }
+        }
+
+        private void ProcessVagueOverlap(Mergeable mergeable, Vector3 normalizedDirection)
+        {
+            Vector3 normalizedDirectionAbs = new Vector3(Mathf.Abs(normalizedDirection.x),
+                Mathf.Abs(normalizedDirection.y), Mathf.Abs(normalizedDirection.z));
+            
+            Vector3 inversedDirection = new Vector3(normalizedDirectionAbs.z, 
+                normalizedDirectionAbs.y, normalizedDirectionAbs.x);
+            
+            Vector3 overlapCandidateInversedPos = mergeable.GetMergeablePos();
+            overlapCandidateInversedPos.Scale(inversedDirection);
+            
+            foreach (Mergeable mergedMergeable in _mergeableComposition.Mergeables)
+            {
+                if (mergedMergeable.WillOverlapGround(_mergeableComposition, normalizedDirection))
+                {
+                    Vector3 mergedInversedPos = mergedMergeable.GetMergeablePos();
+                    mergedInversedPos.Scale(inversedDirection);
+                    
+                    float directionDistance = Vector3.Distance(overlapCandidateInversedPos, mergedInversedPos);
+
+                    if (directionDistance > DISTANCE_TOLERANCE)
+                    {
+                        continue;
+                    }
+                    
                     _bottleneckMergeables.Add(mergedMergeable);
                 }
             }
