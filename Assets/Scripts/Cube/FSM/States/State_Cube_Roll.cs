@@ -23,6 +23,7 @@ namespace BLUE.ACubeStory.Cube
         [Header("Action Executors")] 
         [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
 
+        [Header("Triggers")]
         [SerializeField] private TriggerBase[] _undoRequestors = new TriggerBase[0];
         
         public FSMTransitionMessage_Cube_Roll LastCandidateTransitionMessage { get; private set; }
@@ -43,11 +44,11 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube_Roll transitionMessage)
         {
+            RegisterToUndoRequestors();
+            
             _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
                 transitionMessage.Direction, 
                 onRolledCallback: OnRollCompleted);
-
-            RegisterToUndoRequestors();
         }
 
         protected override void ExitStateCustomActions()
@@ -79,7 +80,7 @@ namespace BLUE.ACubeStory.Cube
         private void OnUndoRequested(TriggerBase triggerBase)
         {
             UnregisterFromUndoRequestors();
-            
+
             _rollBehaviourProvider.GetRollBehaviour().TryUndoRoll(
                 onRolledCallback: OnRollCompleted);
         }

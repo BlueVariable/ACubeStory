@@ -76,9 +76,9 @@ namespace BLUE.ACubeStory.Merge
         {
             foreach (Mergeable mergedMergeable in _mergeableComposition.Mergeables)
             {
-                Trigger_OnTriggerEnter trigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
+                Trigger_OnTriggerEnter enterTrigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
 
-                trigger.OnTriggered += OnMergeableEnteredTrigger;
+                enterTrigger.OnTriggered += OnMergeableEnteredTrigger;
             }
         }
         
@@ -86,17 +86,20 @@ namespace BLUE.ACubeStory.Merge
         {
             foreach (Mergeable mergedMergeable in _mergeableComposition.Mergeables)
             {
-                Trigger_OnTriggerEnter trigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
+                Trigger_OnTriggerEnter enterTrigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
 
-                trigger.OnTriggered -= OnMergeableEnteredTrigger;
+                enterTrigger.OnTriggered -= OnMergeableEnteredTrigger;
             }
         }
 
         private void OnMergeableEnteredTrigger(TriggerBase trigger)
         {
-            Mergeable mergeable = ((Trigger_OnTriggerEnter) trigger).GetComponentInParent<Mergeable>();
+            Trigger_OnTriggerEnter triggerEnter = ((Trigger_OnTriggerEnter) trigger);
             
-            if (mergeable == null)
+            Mergeable mergeable = triggerEnter.GetComponentInParent<Mergeable>();
+            Ground.Ground ground = triggerEnter.LastValidCollider.GetComponentInParent<Ground.Ground>();
+            
+            if (mergeable == null || ground == null)
             {
                 return;
             }
