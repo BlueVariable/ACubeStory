@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3971848806123259881}
   - component: {fileID: 7090162378673887620}
   - component: {fileID: 9067712147163470459}
+  - component: {fileID: 8447885295283977181}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
@@ -82,6 +83,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8447885295283977181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044094834431825179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1406370901696102875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,6 +108,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 536146330531551407, guid: 5e184f009e9d2b34cb51fc2e13c9521c, type: 3}
+      propertyPath: _quickOutline
+      value: 
+      objectReference: {fileID: 8447885295283977181}
     - target: {fileID: 6645436626145602288, guid: 5e184f009e9d2b34cb51fc2e13c9521c, type: 3}
       propertyPath: m_Name
       value: Mergeable_Cube_Simple

@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using BLUE.ActionSystem;
 using BLUE.ACubeStory.Cube;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Merge
 {
-    public class Trigger_RollingCubeMergeable_MergeableOverlap : TriggerBase
+    public class Trigger_CubeMergeableOverlap_Mergeable : Trigger_CubeMergeableOverlapBase
     {
         #region Constants
 
@@ -18,6 +19,8 @@ namespace BLUE.ACubeStory.Merge
 
         [SerializeField] private State_Cube_Roll _cubeRollState = null;
 
+        [SerializeField] private ActionExecutor _triggerAttemptedActionExecutor = null;
+
         private HashSet<Mergeable> _bottleneckMergeables = new HashSet<Mergeable>();
         
         #region Events
@@ -25,6 +28,11 @@ namespace BLUE.ACubeStory.Merge
         protected override Action OnTriggerAttempt { get; set; }
 
         #endregion
+        
+        public override HashSet<Mergeable> GetLastBottleneckMergeables()
+        {
+            return _bottleneckMergeables;
+        }
 
         protected override void ActivateCustomActions()
         {
@@ -129,6 +137,8 @@ namespace BLUE.ACubeStory.Merge
             if (_bottleneckMergeables.Contains(selfMergeable) && _bottleneckMergeables.Contains(mergeable))
             {
                 OnTriggerAttempt?.Invoke();
+                
+                _triggerAttemptedActionExecutor.Execute();
             }
         }
         
@@ -147,6 +157,8 @@ namespace BLUE.ACubeStory.Merge
             if (_bottleneckMergeables.Contains(selfMergeable) && _bottleneckMergeables.Contains(mergeable))
             {
                 OnTriggerAttempt?.Invoke();
+                
+                _triggerAttemptedActionExecutor.Execute();
             }
         }
 
@@ -193,7 +205,7 @@ namespace BLUE.ACubeStory.Merge
 
                 int vertDistance = Mathf.RoundToInt(mergedMergeable.GetMergeablePos().y 
                                                     - mergeable.GetMergeablePos().y);
-
+                
                 vertDistance = Mathf.Abs(vertDistance);
 
                 if (horDistance - 1 == vertDistance)

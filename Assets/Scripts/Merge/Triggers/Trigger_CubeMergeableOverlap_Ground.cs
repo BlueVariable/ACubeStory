@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
+using BLUE.ActionSystem;
 using BLUE.ACubeStory.Cube;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Merge
 {
-    public class Trigger_RollingCubeMergeable_GroundOverlap : TriggerBase
+    public class Trigger_CubeMergeableOverlap_Ground : Trigger_CubeMergeableOverlapBase
     {
         [SerializeField] private MergeableComposition _mergeableComposition = null;
 
         [SerializeField] private State_Cube_Roll _cubeRollState = null;
+        
+        [SerializeField] private ActionExecutor _triggerAttemptedActionExecutor = null;
 
         private HashSet<Mergeable> _bottleneckMergeables = new HashSet<Mergeable>();
         
@@ -19,6 +22,11 @@ namespace BLUE.ACubeStory.Merge
         protected override Action OnTriggerAttempt { get; set; }
 
         #endregion
+        
+        public override HashSet<Mergeable> GetLastBottleneckMergeables()
+        {
+            return _bottleneckMergeables;
+        }
 
         protected override void ActivateCustomActions()
         {
@@ -107,6 +115,8 @@ namespace BLUE.ACubeStory.Merge
             if (_bottleneckMergeables.Contains(mergeable))
             {
                 OnTriggerAttempt?.Invoke();
+                
+                _triggerAttemptedActionExecutor.Execute();
             }
         }
 
