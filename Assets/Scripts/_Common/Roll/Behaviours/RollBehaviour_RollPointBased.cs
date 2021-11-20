@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
-using BLUE.ACubeStory.Merge;
-using DG.Tweening;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Common
@@ -30,6 +27,8 @@ namespace BLUE.ACubeStory.Common
             }
         }
         
+        public Vector3 LastRollPoint { get; private set; }
+        
         private IEnumerator _rollRoutine;
 
         private Vector3 _direction;
@@ -38,8 +37,6 @@ namespace BLUE.ACubeStory.Common
 
         private float _rollSpeed;
         
-        private Vector3 _rollPointOffset;
-
         private AnimationCurve _rollCurve;
 
         private Action _onRolledCallback;
@@ -54,17 +51,29 @@ namespace BLUE.ACubeStory.Common
         {
             _direction = direction;
             _angle = angle;
-            _rollPointOffset = rollPointOffset;
             _rollSpeed = rollSpeed;
             _rollCurve = rollCurve ?? _defaultRollCurve;
             _onRolledCallback = onRolledCallback;
             
+            LastRollPoint = _RollPointProvider.GetRollPoint(_direction) + rollPointOffset;
+
             StartRollRoutine();
         }
 
         protected override void PauseRoll()
         {
             StopRollRoutine();
+        }
+
+        protected override void UndoRoll(Action onRolledCallback = null)
+        {
+            StopRollRoutine();
+            
+            _direction *= -1;
+            _angle = CurRollAngle;
+            _onRolledCallback = onRolledCallback;
+            
+            StartRollRoutine();
         }
 
         private void StartRollRoutine()
@@ -91,9 +100,7 @@ namespace BLUE.ACubeStory.Common
             float targetNormValue = 1f;
 
             float targetAngle = _angle;
-
-            Vector3 rollPoint = _RollPointProvider.GetRollPoint(_direction) + _rollPointOffset;
-
+            
             while (true)
             {
                 float prevAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
@@ -106,7 +113,7 @@ namespace BLUE.ACubeStory.Common
             
                 CurRollAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
                 
-                _rollableTransform.RotateAround(rollPoint, GetRollAxis(_direction), CurRollAngle - prevAngle);
+                _rollableTransform.RotateAround(LastRollPoint, GetRollAxis(_direction), CurRollAngle - prevAngle);
 
                 if (curNormValue >= targetNormValue)
                 {
