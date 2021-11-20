@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using BLUE.ActionSystem;
 using BLUE.ACubeStory.Cube;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Merge
 {
-    public class Trigger_RollingCubeMergeable_MergeableOverlap : TriggerBase
+    public class Trigger_CubeMergeableOverlap_Mergeable : Trigger_CubeMergeableOverlapBase
     {
         #region Constants
 
@@ -18,6 +19,8 @@ namespace BLUE.ACubeStory.Merge
 
         [SerializeField] private State_Cube_Roll _cubeRollState = null;
 
+        [SerializeField] private ActionExecutor _triggerAttemptedActionExecutor = null;
+
         private HashSet<Mergeable> _bottleneckMergeables = new HashSet<Mergeable>();
         
         #region Events
@@ -25,6 +28,11 @@ namespace BLUE.ACubeStory.Merge
         protected override Action OnTriggerAttempt { get; set; }
 
         #endregion
+        
+        public override HashSet<Mergeable> GetLastBottleneckMergeables()
+        {
+            return _bottleneckMergeables;
+        }
 
         protected override void ActivateCustomActions()
         {
@@ -35,24 +43,11 @@ namespace BLUE.ACubeStory.Merge
 
         protected override void DeactivateCustomActions()
         {
+            UnregisterFromMergeableTriggers();
+            
             UnregisterFromCubeFSM();
             
             base.DeactivateCustomActions();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Mergeable mergeable = other.GetComponentInParent<Mergeable>();
-
-            if (mergeable == null)
-            {
-                return;
-            }
-
-            if (_bottleneckMergeables.Contains(mergeable))
-            {
-                OnTriggerAttempt?.Invoke();
-            }
         }
 
         private void RegisterToCubeFSM()
@@ -82,6 +77,9 @@ namespace BLUE.ACubeStory.Merge
                 return;
             }
 
+            UnregisterFromMergeableTriggers();
+            RegisterToMergeableTriggers();
+
             Mergeable[] allMergeables = MergePuzzle.Instance.MergeableProvider.AllMergeables;
 
             foreach (Mergeable mergeable in allMergeables)
@@ -92,6 +90,75 @@ namespace BLUE.ACubeStory.Merge
                 }
 
                 ProcessMergeableOverlap(mergeable, transitionMessage.Direction.normalized);
+            }
+        }
+        
+        private void RegisterToMergeableTriggers()
+        {
+            foreach (Mergeable mergedMergeable in MergePuzzle.Instance.MergeableProvider.AllMergeables)
+            {
+                Trigger_OnTriggerEnter enterTrigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
+                Trigger_OnTriggerStay stayTrigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerStay>();
+
+                enterTrigger.OnTriggered += OnMergeableEnteredTrigger;
+                stayTrigger.OnTriggered += OnMergeableStayTrigger;
+            }
+        }
+        
+        private void UnregisterFromMergeableTriggers()
+        {
+            if (MergePuzzle.Instance == null)
+            {
+                return;
+            }
+            
+            foreach (Mergeable mergedMergeable in MergePuzzle.Instance.MergeableProvider.AllMergeables)
+            {
+                Trigger_OnTriggerEnter enterTrigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
+                Trigger_OnTriggerStay stayTrigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerStay>();
+
+                enterTrigger.OnTriggered -= OnMergeableEnteredTrigger;
+                stayTrigger.OnTriggered -= OnMergeableStayTrigger;
+            }
+        }
+
+        private void OnMergeableEnteredTrigger(TriggerBase trigger)
+        {
+            Trigger_OnTriggerEnter triggerEnter = ((Trigger_OnTriggerEnter) trigger);
+            
+            Mergeable mergeable = triggerEnter.LastValidCollider.GetComponentInParent<Mergeable>();
+            Mergeable selfMergeable = triggerEnter.GetComponentInParent<Mergeable>();
+            
+            if (selfMergeable == null || mergeable == null)
+            {
+                return;
+            }
+
+            if (_bottleneckMergeables.Contains(selfMergeable) && _bottleneckMergeables.Contains(mergeable))
+            {
+                OnTriggerAttempt?.Invoke();
+                
+                _triggerAttemptedActionExecutor.Execute();
+            }
+        }
+        
+        private void OnMergeableStayTrigger(TriggerBase trigger)
+        {
+            Trigger_OnTriggerStay triggerStay = ((Trigger_OnTriggerStay) trigger);
+            
+            Mergeable mergeable = triggerStay.LastValidCollider.GetComponentInParent<Mergeable>();
+            Mergeable selfMergeable = triggerStay.GetComponentInParent<Mergeable>();
+            
+            if (selfMergeable == null || mergeable == null)
+            {
+                return;
+            }
+
+            if (_bottleneckMergeables.Contains(selfMergeable) && _bottleneckMergeables.Contains(mergeable))
+            {
+                OnTriggerAttempt?.Invoke();
+                
+                _triggerAttemptedActionExecutor.Execute();
             }
         }
 
@@ -138,7 +205,7 @@ namespace BLUE.ACubeStory.Merge
 
                 int vertDistance = Mathf.RoundToInt(mergedMergeable.GetMergeablePos().y 
                                                     - mergeable.GetMergeablePos().y);
-
+                
                 vertDistance = Mathf.Abs(vertDistance);
 
                 if (horDistance - 1 == vertDistance)
