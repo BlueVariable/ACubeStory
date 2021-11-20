@@ -32,33 +32,7 @@ namespace BLUE.ACubeStory.Common
         
         public override Vector3 GetRollPoint(Vector3 direction)
         {
-            Mergeable targetMergeable = _mergeableComposition.Mergeables.ElementAt(0);
-
-            foreach (Mergeable mergeable in _mergeableComposition.Mergeables)
-            {
-                if (mergeable.GetMergeablePos().y < targetMergeable.GetMergeablePos().y - HEIGHT_TOLERANCE)
-                {
-                    targetMergeable = mergeable;
-
-                    continue;
-                }
-
-                if (mergeable.GetMergeablePos().y > targetMergeable.GetMergeablePos().y + HEIGHT_TOLERANCE)
-                {
-                    continue;
-                }
-                
-                Vector3 prev = targetMergeable.GetMergeablePos();
-                Vector3 cur = mergeable.GetMergeablePos();
-                
-                prev.Scale(direction);
-                cur.Scale(direction);
-
-                if (cur.x + cur.y + cur.z > prev.x + prev.y + prev.z)
-                {
-                    targetMergeable = mergeable;
-                }
-            }
+            Mergeable targetMergeable = _mergeableComposition.GetAnchorMergeable(direction.normalized);
 
             Vector3 rollPoint = targetMergeable.GetMergeablePos() 
                                 + _settings.FirstOrDefault(i => i.Direction.Equals(direction)).Offset;

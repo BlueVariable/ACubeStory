@@ -1,6 +1,5 @@
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
-using BLUE.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
 
@@ -21,6 +20,8 @@ namespace BLUE.ACubeStory.Cube
 
         [Header("Action Executors")] 
         [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
+        
+        public FSMTransitionMessage_Cube_Roll LastCandidateTransitionMessage { get; private set; }
 
         public override ECubeState GetStateType()
         {
@@ -29,6 +30,8 @@ namespace BLUE.ACubeStory.Cube
         
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
         {
+            LastCandidateTransitionMessage = transitionMessage;
+            
             return !Physics.Raycast(_objectToRoll.position, transitionMessage.Direction,
                 out RaycastHit hit, _rollRayDistance, _layerMask);
         }
