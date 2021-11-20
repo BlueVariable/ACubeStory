@@ -1,6 +1,8 @@
+using System;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
 using BLUE.FSMSystem;
+using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
@@ -20,6 +22,8 @@ namespace BLUE.ACubeStory.Cube
 
         [Header("Action Executors")] 
         [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
+
+        [SerializeField] private TriggerBase[] _undoRequestors = new TriggerBase[0];
         
         public FSMTransitionMessage_Cube_Roll LastCandidateTransitionMessage { get; private set; }
 
@@ -39,14 +43,11 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube_Roll transitionMessage)
         {
-            _rollBehaviourProvider.GetRollBehaviour().TryRollTo(transitionMessage.Direction, onRolledCallback: onCompleted);
+            _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
+                transitionMessage.Direction, 
+                onRolledCallback: OnRollCompleted);
 
-            void onCompleted()
-            {
-                _rollCompletedActionExecutor.Execute();
-                
-                _cubeFSM.TryChangeState(ECubeState.Fall);
-            }
+            RegisterToUndoRequestors();
         }
 
         protected override void ExitStateCustomActions()
@@ -54,6 +55,33 @@ namespace BLUE.ACubeStory.Cube
             _rollBehaviourProvider.GetRollBehaviour().TryPauseRoll();
             
             base.ExitStateCustomActions();
+        }
+
+        private void RegisterToUndoRequestors()
+        {
+            Array.ForEach(_undoRequestors, i => i.OnTriggered += OnUndoRequested);
+        }
+
+        private void UnregisterFromUndoRequestors()
+        {
+            Array.ForEach(_undoRequestors, i => i.OnTriggered -= OnUndoRequested);
+        }
+
+        private void OnRollCompleted()
+        {
+            UnregisterFromUndoRequestors();
+                
+            _rollCompletedActionExecutor.Execute();
+                
+            _cubeFSM.TryChangeState(ECubeState.Fall);
+        }
+
+        private void OnUndoRequested(TriggerBase triggerBase)
+        {
+            UnregisterFromUndoRequestors();
+            
+            _rollBehaviourProvider.GetRollBehaviour().TryUndoRoll(
+                onRolledCallback: OnRollCompleted);
         }
     }
 }

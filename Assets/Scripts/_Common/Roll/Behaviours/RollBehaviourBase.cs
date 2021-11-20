@@ -6,12 +6,20 @@ namespace BLUE.ACubeStory.Common
 {
     public abstract class RollBehaviourBase : MonoBehaviour
     {
+        #region Constants
+
+        private const float DEFAULT_ANGLE = 90f;
+        private const float DEFAULT_SPEED = 5f;
+
+        #endregion
+        
         [SerializeField] private RollConditionBase[] _rollConditions = null;
 
         public bool IsRolling { get; private set; }
-        public bool IsRollPaused { get; private set; }
         
         public float CurRollAngle { get; protected set; }
+        
+        public Vector3 LastRollDirection { get; private set; }
 
         #region Events
 
@@ -23,18 +31,20 @@ namespace BLUE.ACubeStory.Common
 
         protected abstract void StartRoll(
             Vector3 direction, 
-            float angle = 90f,
-            float speed = 5f,
+            float angle = DEFAULT_ANGLE,
+            float speed = DEFAULT_SPEED,
             Vector3 rollPointOffset = default,
             AnimationCurve rollCurve = default,
             Action onRolledCallback = null);
         
         protected abstract void PauseRoll();
 
+        protected abstract void UndoRoll(Action onRolledCallback = null);
+
         public bool TryRollTo(
             Vector3 direction,
-            float angle = 90f,
-            float speed = 5f,
+            float angle = DEFAULT_ANGLE,
+            float speed = DEFAULT_SPEED,
             Vector3 rollPointOffset = default,
             AnimationCurve rollCurve = default,
             Action onRolledCallback = null)
@@ -44,6 +54,8 @@ namespace BLUE.ACubeStory.Common
                 return false;
             }
 
+            LastRollDirection = direction;
+                
             IsRolling = true;
             
             OnRollStarted?.Invoke();
@@ -53,8 +65,6 @@ namespace BLUE.ACubeStory.Common
             void onRollEnded()
             {
                 IsRolling = false;
-
-                IsRollPaused = false;
                 
                 OnRollEnded?.Invoke();
 
@@ -76,9 +86,28 @@ namespace BLUE.ACubeStory.Common
             OnRollPaused?.Invoke();
             
             PauseRoll();
-
-            IsRollPaused = true;
             
+            return true;
+        }
+
+        public bool TryUndoRoll(Action onRolledCallback = null)
+        {
+            if (!IsRolling)
+            {
+                return false;
+            }
+            
+            UndoRoll(onRollEnded);
+
+            void onRollEnded()
+            {
+                IsRolling = false;
+                
+                OnRollEnded?.Invoke();
+
+                onRolledCallback?.Invoke();
+            }
+
             return true;
         }
 
