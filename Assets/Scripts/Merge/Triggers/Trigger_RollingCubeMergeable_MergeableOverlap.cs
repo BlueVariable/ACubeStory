@@ -35,24 +35,11 @@ namespace BLUE.ACubeStory.Merge
 
         protected override void DeactivateCustomActions()
         {
+            UnregisterFromMergeableTriggers();
+            
             UnregisterFromCubeFSM();
             
             base.DeactivateCustomActions();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Mergeable mergeable = other.GetComponentInParent<Mergeable>();
-
-            if (mergeable == null)
-            {
-                return;
-            }
-
-            if (_bottleneckMergeables.Contains(mergeable))
-            {
-                OnTriggerAttempt?.Invoke();
-            }
         }
 
         private void RegisterToCubeFSM()
@@ -82,6 +69,9 @@ namespace BLUE.ACubeStory.Merge
                 return;
             }
 
+            UnregisterFromMergeableTriggers();
+            RegisterToMergeableTriggers();
+
             Mergeable[] allMergeables = MergePuzzle.Instance.MergeableProvider.AllMergeables;
 
             foreach (Mergeable mergeable in allMergeables)
@@ -92,6 +82,41 @@ namespace BLUE.ACubeStory.Merge
                 }
 
                 ProcessMergeableOverlap(mergeable, transitionMessage.Direction.normalized);
+            }
+        }
+        
+        private void RegisterToMergeableTriggers()
+        {
+            foreach (Mergeable mergedMergeable in _mergeableComposition.Mergeables)
+            {
+                Trigger_OnTriggerEnter trigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
+
+                trigger.OnTriggered += OnMergeableEnteredTrigger;
+            }
+        }
+        
+        private void UnregisterFromMergeableTriggers()
+        {
+            foreach (Mergeable mergedMergeable in _mergeableComposition.Mergeables)
+            {
+                Trigger_OnTriggerEnter trigger = mergedMergeable.GetComponentInChildren<Trigger_OnTriggerEnter>();
+
+                trigger.OnTriggered -= OnMergeableEnteredTrigger;
+            }
+        }
+
+        private void OnMergeableEnteredTrigger(TriggerBase trigger)
+        {
+            Mergeable mergeable = ((Trigger_OnTriggerEnter) trigger).LastValidCollider.GetComponentInParent<Mergeable>();
+            
+            if (mergeable == null)
+            {
+                return;
+            }
+
+            if (_bottleneckMergeables.Contains(mergeable))
+            {
+                OnTriggerAttempt?.Invoke();
             }
         }
 
