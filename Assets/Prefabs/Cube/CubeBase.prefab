@@ -164,6 +164,8 @@ MonoBehaviour:
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
   _cubeFallState: {fileID: 7001314770246708851}
   _triggerDelay: 2
 --- !u!1 &824589053605917631
@@ -1173,6 +1175,8 @@ MonoBehaviour:
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
   _cubeState: 1
 --- !u!1 &5782554140175497370
 GameObject:
@@ -1389,6 +1393,8 @@ MonoBehaviour:
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
   _mergeableComposition: {fileID: 216091954713794861}
   _cubeRollState: {fileID: 8132517245878650085}
   _triggerAttemptedActionExecutor:
@@ -1408,6 +1414,8 @@ MonoBehaviour:
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
   _mergeableComposition: {fileID: 216091954713794861}
   _cubeRollState: {fileID: 8132517245878650085}
   _triggerAttemptedActionExecutor:
@@ -1764,6 +1772,7 @@ GameObject:
   - component: {fileID: 7075618033240990871}
   - component: {fileID: 3848131849835413238}
   - component: {fileID: 216091954713794861}
+  - component: {fileID: 6649162472357359457}
   m_Layer: 8
   m_Name: CubeBase
   m_TagString: Untagged
@@ -1820,6 +1829,19 @@ MonoBehaviour:
   - {fileID: 915684824503583812}
   _mergeRequestors:
   - {fileID: 6575932780051369580}
+--- !u!65 &6649162472357359457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104757875893166562}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4947449989573811854
 PrefabInstance:
   m_ObjectHideFlags: 0
