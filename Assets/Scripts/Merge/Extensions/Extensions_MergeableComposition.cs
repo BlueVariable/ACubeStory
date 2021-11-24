@@ -9,6 +9,8 @@ namespace BLUE.ACubeStory.Merge
 
         private const float DISTANCE_TOLERANCE = 0.1f;
 
+        private const float MERGEABLE_SIZE = 1f;
+
         #endregion
         
         public static Mergeable GetAnchorMergeable(this MergeableComposition mergeableComposition, Vector3 normalizedDir)
@@ -42,6 +44,20 @@ namespace BLUE.ACubeStory.Merge
             }
 
             return anchorMergeable;
+        }
+        
+        public static Bounds GetBounds(this MergeableComposition mergeableComposition)
+        {
+            Bounds bounds = new Bounds(
+                mergeableComposition.Mergeables.ElementAt(0).GetMergeablePos(), 
+                new Vector3(MERGEABLE_SIZE, MERGEABLE_SIZE, MERGEABLE_SIZE));
+
+            for(int i=0; i<mergeableComposition.Mergeables.Count; i++)
+            {
+                bounds.Encapsulate(mergeableComposition.Mergeables.ElementAt(i).GetMergeablePos());
+            }
+
+            return bounds;
         }
     }
 }

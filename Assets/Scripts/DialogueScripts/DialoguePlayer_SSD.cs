@@ -52,5 +52,18 @@ namespace BLUE.ACubeStory.Dialogue
         Cube_Level01_04 = 2004,
         Cube_Level01_05 = 2005,
         Cube_Level01_06 = 2006,
+        
+        Cube_Line_Fall_01 = 3001,
+        Cube_Line_Fall_02 = 3002,
+        Cube_Line_Fall_03 = 3003,
+        Cube_Line_Fall_04 = 3004,
+        
+        Cube_Line_MergePuzzle_Undo_01 = 4001,
+        Cube_Line_MergePuzzle_Undo_02 = 4002,
+        Cube_Line_MergePuzzle_Undo_03 = 4003,
+        Cube_Line_MergePuzzle_Undo_04 = 4004,
+        
+        Cube_Line_MergePuzzle_TryLeave_01 = 5001,
+        Cube_Line_MergePuzzle_TryLeave_02 = 5002,
     }
 }

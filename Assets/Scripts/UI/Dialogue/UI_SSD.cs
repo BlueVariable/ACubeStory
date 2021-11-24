@@ -31,16 +31,16 @@ namespace BLUE.ACubeStory.UI
 
         protected override void AwakeCustomActions()
         {
-            EventRaiser_OnDialogueActivationRequested<DialogueData_SSD>.OnRaisedStatic += OnNarrativeActivationRequested;
-            EventRaiser_OnDialogueDeactivationRequested.OnRaisedStatic += OnNarrativeDeactivationRequested;
+            EventRaiser_OnDialogueActivationRequested<DialogueData_SimpleSpeakerDialogue<ESpeaker_SSD>>.OnRaisedStatic += OnDialogueActivationRequested;
+            EventRaiser_OnDialogueDeactivationRequested.OnRaisedStatic += OnDialogueDeactivationRequested;
             
             base.AwakeCustomActions();
         }
 
         protected override void DestroyCustomActions()
         {
-            EventRaiser_OnDialogueActivationRequested<DialogueData_SSD>.OnRaisedStatic -= OnNarrativeActivationRequested;
-            EventRaiser_OnDialogueDeactivationRequested.OnRaisedStatic -= OnNarrativeDeactivationRequested;
+            EventRaiser_OnDialogueActivationRequested<DialogueData_SimpleSpeakerDialogue<ESpeaker_SSD>>.OnRaisedStatic -= OnDialogueActivationRequested;
+            EventRaiser_OnDialogueDeactivationRequested.OnRaisedStatic -= OnDialogueDeactivationRequested;
 
             base.DestroyCustomActions();
         }
@@ -52,9 +52,9 @@ namespace BLUE.ACubeStory.UI
             base.ActivatedCustomActions();
         }
 
-        private void OnNarrativeActivationRequested(
+        private void OnDialogueActivationRequested(
             object sender, 
-            EventArgs_OnDialogueActivationRequested<DialogueData_SSD> e)
+            EventArgs_OnDialogueActivationRequested<DialogueData_SimpleSpeakerDialogue<ESpeaker_SSD>> e)
         {
             if (_isCustomSpeakerUI && _speaker != e.DialogueData.Speaker)
             {
@@ -77,7 +77,7 @@ namespace BLUE.ACubeStory.UI
             }
         }
 
-        private void OnNarrativeDeactivationRequested(object sender, EventArgs_OnDialogueDeactivationRequested e)
+        private void OnDialogueDeactivationRequested(object sender, EventArgs_OnDialogueDeactivationRequested e)
         {
             TryDeactivate();
         }

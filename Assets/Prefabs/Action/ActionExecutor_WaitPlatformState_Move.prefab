@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7073713397091806371}
   - component: {fileID: 71208971626339446}
+  - component: {fileID: 4478585563750591871}
   - component: {fileID: 1169881257963405441}
   m_Layer: 0
   m_Name: Action_MoveTween_Instant
@@ -45,6 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetGameObject: {fileID: 0}
+  _value: 0
+--- !u!114 &4478585563750591871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026313842324051943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a630029423aa4bcfa231c56a9842abf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetCollider: {fileID: 0}
   _value: 0
 --- !u!114 &1169881257963405441
 MonoBehaviour:
@@ -172,6 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9207032916211584923}
   - component: {fileID: 342068591929294751}
+  - component: {fileID: 6624554771174319934}
   - component: {fileID: 9207032916211584922}
   m_Layer: 0
   m_Name: Action_MoveTween
@@ -207,6 +223,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetGameObject: {fileID: 0}
+  _value: 1
+--- !u!114 &6624554771174319934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9207032916211584924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a630029423aa4bcfa231c56a9842abf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetCollider: {fileID: 0}
   _value: 1
 --- !u!114 &9207032916211584922
 MonoBehaviour:
