@@ -1303,6 +1303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6790602213527190583}
   - component: {fileID: 19635375702134791}
+  - component: {fileID: 6536991851636944925}
   m_Layer: 8
   m_Name: UndoRequestedActionExecutor_Mergeable
   m_TagString: Untagged
@@ -1344,6 +1345,22 @@ MonoBehaviour:
     _duration: 0.4
     _unhighlightAfterCompletion: 1
   _onlyHighlightOverlapped: 0
+--- !u!114 &6536991851636944925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6565956250890536805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482865c4cf974431afd9e73200ac1d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stallExecution: 0
+  _dialogueOptions: a10f0000a20f0000a30f0000a40f0000
+  _dialoguePlayProbability: 1
+  _autoStopOnComplete: 1
 --- !u!1 &6736891764558199860
 GameObject:
   m_ObjectHideFlags: 0
