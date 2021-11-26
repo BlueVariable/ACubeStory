@@ -1,8 +1,7 @@
-﻿using BLUE.ACubeStory.Merge;
-using BLUE.Common;
+﻿using BLUE.Common;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Dialogue
+namespace BLUE.ACubeStory.Merge
 {
     public class Vector3Provider_MergeableCompositionBased_Highest : Vector3ProviderBase
     {

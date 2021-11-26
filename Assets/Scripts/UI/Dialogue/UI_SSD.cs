@@ -18,7 +18,7 @@ namespace BLUE.ACubeStory.UI
 
         [Header("Speaker Settings")]
         [SerializeField] private bool _isCustomSpeakerUI = false;
-        [SerializeField] private ESpeaker_SSD _speaker = ESpeaker_SSD.None;
+        [SerializeField] private ESimpleSpeaker _speaker = ESimpleSpeaker.None;
 
         [SerializeField] private ActionExecutor _dialogueDisplayingActions = null;
         [SerializeField] private ActionExecutor _dialogueDisplayedActions = null;
@@ -27,11 +27,11 @@ namespace BLUE.ACubeStory.UI
 
         private Action _onCompletedCallback;
 
-        public ESpeaker_SSD LastSpeakingSpeaker { get; private set; }
+        public ESimpleSpeaker LastSpeakingSpeaker { get; private set; }
 
         protected override void AwakeCustomActions()
         {
-            EventRaiser_OnDialogueActivationRequested<DialogueData_SimpleSpeakerDialogue<ESpeaker_SSD>>.OnRaisedStatic += OnDialogueActivationRequested;
+            EventRaiser_OnDialogueActivationRequested<DialogueData_SimpleSpeaker<ESimpleSpeaker>>.OnRaisedStatic += OnDialogueActivationRequested;
             EventRaiser_OnDialogueDeactivationRequested.OnRaisedStatic += OnDialogueDeactivationRequested;
             
             base.AwakeCustomActions();
@@ -39,7 +39,7 @@ namespace BLUE.ACubeStory.UI
 
         protected override void DestroyCustomActions()
         {
-            EventRaiser_OnDialogueActivationRequested<DialogueData_SimpleSpeakerDialogue<ESpeaker_SSD>>.OnRaisedStatic -= OnDialogueActivationRequested;
+            EventRaiser_OnDialogueActivationRequested<DialogueData_SimpleSpeaker<ESimpleSpeaker>>.OnRaisedStatic -= OnDialogueActivationRequested;
             EventRaiser_OnDialogueDeactivationRequested.OnRaisedStatic -= OnDialogueDeactivationRequested;
 
             base.DestroyCustomActions();
@@ -54,7 +54,7 @@ namespace BLUE.ACubeStory.UI
 
         private void OnDialogueActivationRequested(
             object sender, 
-            EventArgs_OnDialogueActivationRequested<DialogueData_SimpleSpeakerDialogue<ESpeaker_SSD>> e)
+            EventArgs_OnDialogueActivationRequested<DialogueData_SimpleSpeaker<ESimpleSpeaker>> e)
         {
             if (_isCustomSpeakerUI && _speaker != e.DialogueData.Speaker)
             {

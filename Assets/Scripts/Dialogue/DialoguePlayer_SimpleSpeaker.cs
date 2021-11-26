@@ -3,17 +3,16 @@ using BLUE.DialogueSystem;
 
 namespace BLUE.ACubeStory.Dialogue
 {
-    public class DialoguePlayer_SSD : DialoguePlayer_SimpleSpeakerDialogueBase<ESpeakerDialogue_SSD, ESpeaker_SSD>
+    public class DialoguePlayer_SimpleSpeaker : DialoguePlayer_SimpleSpeakerBase<ESimpleSpeakerDialogue, ESimpleSpeaker>
     {
-        private static DialoguePlayer_SSD _instance;
-
-        public static DialoguePlayer_SSD Instance
+        private static DialoguePlayer_SimpleSpeaker _instance;
+        public static DialoguePlayer_SimpleSpeaker Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType<DialoguePlayer_SSD>();
+                    _instance = FindObjectOfType<DialoguePlayer_SimpleSpeaker>();
                 }
 
                 return _instance;
@@ -22,11 +21,11 @@ namespace BLUE.ACubeStory.Dialogue
     }
     
     [Serializable]
-    public class DialogueData_SSD : DialogueData_SimpleSpeakerDialogue<ESpeaker_SSD>
+    public class DialogueData_SimpleSpeaker : DialogueData_SimpleSpeaker<ESimpleSpeaker>
     {
     }
     
-    public enum ESpeaker_SSD
+    public enum ESimpleSpeaker
     {
         None = 0,
         
@@ -35,7 +34,7 @@ namespace BLUE.ACubeStory.Dialogue
         Cube = 2,
     }
     
-    public enum ESpeakerDialogue_SSD
+    public enum ESimpleSpeakerDialogue
     {
         None = 0,
         

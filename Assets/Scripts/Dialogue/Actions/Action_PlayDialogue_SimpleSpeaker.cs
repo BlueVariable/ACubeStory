@@ -2,18 +2,22 @@
 using BLUE.ActionSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Dialogue.Actions
+namespace BLUE.ACubeStory.Dialogue
 {
-    public class Action_PlayDialogue_SSD : InterruptableActionBase
+    public class Action_PlayDialogue_SimpleSpeaker : InterruptableActionBase
     {
-        [SerializeField] private ESpeakerDialogue_SSD[] _dialogueOptions = new ESpeakerDialogue_SSD[0];
+        [SerializeField] private ESimpleSpeakerDialogue[] _dialogueOptions = new ESimpleSpeakerDialogue[0];
 
         [SerializeField] [Range(0, 1)] private float _dialoguePlayProbability = 1f;
         
         [SerializeField] private bool _autoStopOnComplete = true;
-        
+
+        #region Events
+
         public override Action<InterruptableActionBase> OnCompleted { get; set; }
 
+        #endregion
+        
         public override void Execute()
         {
             if (!CanPlay())
@@ -23,17 +27,17 @@ namespace BLUE.ACubeStory.Dialogue.Actions
                 return;
             }
             
-            ESpeakerDialogue_SSD dialogue = _dialogueOptions[UnityEngine.Random.Range(0, _dialogueOptions.Length)];
+            ESimpleSpeakerDialogue dialogueType = _dialogueOptions[UnityEngine.Random.Range(0, _dialogueOptions.Length)];
             
-            DialoguePlayer_SSD.Instance.Play(
-                dialogue,
+            DialoguePlayer_SimpleSpeaker.Instance.Play(
+                dialogueType,
                 () => OnCompleted?.Invoke(this),
                 _autoStopOnComplete);
         }
 
         public override void Interrupt()
         {
-            DialoguePlayer_SSD.Instance.Stop();
+            DialoguePlayer_SimpleSpeaker.Instance.Stop();
         }
 
         private bool CanPlay()
