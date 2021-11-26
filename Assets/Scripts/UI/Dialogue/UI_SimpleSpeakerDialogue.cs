@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.UI
 {
-    public class UI_SSD : UIBase
+    public class UI_SimpleSpeakerDialogue : UIBase
     {
         [Header("Dialogue Settings")]
         [SerializeField] private UI_Text _dialogueTextUI = null;
@@ -27,7 +27,7 @@ namespace BLUE.ACubeStory.UI
 
         private Action _onCompletedCallback;
 
-        public ESimpleSpeaker LastSpeakingSpeaker { get; private set; }
+        public ESimpleSpeaker LastSpokenSpeaker { get; private set; }
 
         protected override void AwakeCustomActions()
         {
@@ -61,7 +61,7 @@ namespace BLUE.ACubeStory.UI
                 return;
             }
             
-            LastSpeakingSpeaker = e.DialogueData.Speaker;
+            LastSpokenSpeaker = e.DialogueData.Speaker;
 
             _dialogueQueue = new Queue<string>(e.DialogueData.SpeakerText);
 
