@@ -9,7 +9,7 @@ namespace BLUE.ACubeStory.Level
         {
             return new List<FSMTransition_Level>
             {
-                new FSMTransition_Level(ELevelState.None, ELevelState.MainMenu),
+                new FSMTransition_Level(ELevelState.PreMainMenu, ELevelState.MainMenu),
                 
                 new FSMTransition_Level(ELevelState.MainMenu, ELevelState.Platform),
                 

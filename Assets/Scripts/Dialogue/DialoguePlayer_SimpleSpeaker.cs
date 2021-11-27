@@ -32,11 +32,15 @@ namespace BLUE.ACubeStory.Dialogue
         Narrative = 1,
         
         Cube = 2,
+        
+        Tutorial = 3,
     }
     
     public enum ESimpleSpeakerDialogue
     {
         None = 0,
+        
+        ACubeStory = 1,
         
         Narrative_Level01_01 = 1001,
         Narrative_Level01_02 = 1002,
@@ -64,5 +68,10 @@ namespace BLUE.ACubeStory.Dialogue
         
         Cube_Line_MergePuzzle_TryLeave_01 = 5001,
         Cube_Line_MergePuzzle_TryLeave_02 = 5002,
+        
+        Tutorial_Roll_01 = 60001,
+        Tutorial_AvoidFallingToVoid_01 = 60002,
+        Tutorial_FallToVoid_01 = 60003,
+        
     }
 }

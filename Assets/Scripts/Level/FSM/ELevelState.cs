@@ -4,6 +4,8 @@
     {
         None = 0,
         
+        PreMainMenu = 9,
+        
         MainMenu = 10,
         
         Platform = 20,
