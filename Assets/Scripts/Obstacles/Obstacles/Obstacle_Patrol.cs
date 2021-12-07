@@ -9,6 +9,10 @@ namespace BLUE.ACubeStory.Obstacles
         [SerializeField] private Transform[] _patrolPoints = null;
 
         [SerializeField] private MoveBehaviour_Tween _movementBehaviour = null;
+
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _movementSettings = default;
+        
+        private IEnumerator _patrolRoutine;
         
         private void Start()
         {
@@ -32,17 +36,44 @@ namespace BLUE.ACubeStory.Obstacles
 
         private void StartPatrolRoutine()
         {
+            StopPatrolRoutine();
             
+            _patrolRoutine = PatrolProgress();
+
+            StartCoroutine(_patrolRoutine);
         }
 
         private void StopPatrolRoutine()
         {
-            
+            if (_patrolRoutine != null)
+            {
+                StopCoroutine(_patrolRoutine);
+            }
         }
 
         private IEnumerator PatrolProgress()
         {
-            yield break;
+            int patrolIndex = 0;
+            while (true)
+            {
+                patrolIndex++;
+
+                bool completed = false;
+                
+                _movementBehaviour
+                .StartMovementTowards(
+                    _movementSettings,
+                    _patrolPoints[patrolIndex%_patrolPoints.Length - 1].position,
+            () =>
+                       {
+                          completed = true;
+                       });
+
+                while (!completed)
+                {
+                    yield return null;
+                }
+            }
         }
     }
 }
