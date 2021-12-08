@@ -11,6 +11,8 @@ namespace BLUE.ACubeStory.Obstacles
         [SerializeField] private MoveBehaviour_Tween _movementBehaviour = null;
 
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _movementSettings = default;
+
+        [SerializeField] private float _idleDurationOnReachPatrolPoint = 0.5f;
         
         private IEnumerator _patrolRoutine;
         
@@ -56,14 +58,12 @@ namespace BLUE.ACubeStory.Obstacles
             int patrolIndex = 0;
             while (true)
             {
-                patrolIndex++;
-
                 bool completed = false;
                 
                 _movementBehaviour
                 .StartMovementTowards(
                     _movementSettings,
-                    _patrolPoints[patrolIndex%_patrolPoints.Length - 1].position,
+                    _patrolPoints[patrolIndex % _patrolPoints.Length].position,
             () =>
                        {
                           completed = true;
@@ -73,6 +73,10 @@ namespace BLUE.ACubeStory.Obstacles
                 {
                     yield return null;
                 }
+
+                patrolIndex++;
+                
+                yield return new WaitForSeconds(_idleDurationOnReachPatrolPoint);
             }
         }
     }
