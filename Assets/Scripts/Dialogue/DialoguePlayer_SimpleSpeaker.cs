@@ -74,5 +74,6 @@ namespace BLUE.ACubeStory.Dialogue
         Tutorial_FallToVoid_01 = 60003,
         Tutorial_MainMenu_Select_01 = 60004,
         
+        Tutorial_Jump_01 = 70001,
     }
 }
