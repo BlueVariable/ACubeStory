@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.RewindSystem
+namespace BLUE.ACubeStory.Rewind
 {
     public class Rewindable_Position : RewindableBase<RewindSnapShot_Position>
     {

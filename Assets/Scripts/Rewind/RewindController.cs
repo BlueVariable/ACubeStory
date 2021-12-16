@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.RewindSystem
+namespace BLUE.ACubeStory.Rewind
 {
     public class RewindController : MonoBehaviour
     {
@@ -11,6 +12,12 @@ namespace BLUE.ACubeStory.RewindSystem
         private IEnumerator _saveSnapshotRoutine;
 
         private IEnumerator _rewindRoutine;
+
+        #region Events
+
+        public Action<IRewindable> OnRewindableRewound { get; set; }
+
+        #endregion
         
         public void RegisterRewindable(IRewindable rewindable)
         {
@@ -19,13 +26,10 @@ namespace BLUE.ACubeStory.RewindSystem
 
         public void UnregisterRewindable(IRewindable rewindable)
         {
-            if (_rewindables.Contains(rewindable))
-            {
-                _rewindables.Remove(rewindable);
-            }
+            _rewindables.Remove(rewindable);
         }
 
-        public void ResetSnapShots()
+        public void ResetSnapshots()
         {
             foreach (IRewindable rewindable in _rewindables)
             {
@@ -54,6 +58,8 @@ namespace BLUE.ACubeStory.RewindSystem
         {
             foreach (IRewindable rewindable in _rewindables)
             {
+                rewindable.OnRewound += OnRewound;
+                
                 rewindable.StartRewind();
             }
         }
@@ -62,8 +68,15 @@ namespace BLUE.ACubeStory.RewindSystem
         {
             foreach (IRewindable rewindable in _rewindables)
             {
+                rewindable.OnRewound -= OnRewound;
+                
                 rewindable.StopRewind();
             }
+        }
+
+        private void OnRewound(IRewindable rewindable)
+        {
+            OnRewindableRewound?.Invoke(rewindable);
         }
 
         private IEnumerator SaveSnapshotProgress()
