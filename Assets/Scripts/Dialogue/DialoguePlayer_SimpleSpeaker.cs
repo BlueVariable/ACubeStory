@@ -75,5 +75,7 @@ namespace BLUE.ACubeStory.Dialogue
         Tutorial_MainMenu_Select_01 = 60004,
         
         Tutorial_Jump_01 = 70001,
+        
+        Tutorial_Dash_01 = 80001,
     }
 }
