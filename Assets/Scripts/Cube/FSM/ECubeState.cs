@@ -12,6 +12,8 @@
         Dash = 5,
         
         Climb = 7,
-        Descend = 8
+        Descend = 8,
+        
+        Rewind = 9
     }
 }

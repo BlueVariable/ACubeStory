@@ -30,7 +30,6 @@ namespace BLUE.ACubeStory.Cube
 
         public Action<RaycastHit> OnFallStartedTowardsHitObject { get; set; }
         public Action OnFallStartedTowardsVoid { get; set; }
-        
         public Action OnFallFinished { get; set; }
 
         #endregion
@@ -87,6 +86,13 @@ namespace BLUE.ACubeStory.Cube
 
                 OnFallStartedTowardsVoid?.Invoke();
             }
+        }
+
+        protected override void ExitStateCustomActions()
+        {
+            _moveBehaviour.StopMovement();
+            
+            base.ExitStateCustomActions();
         }
     }
 }

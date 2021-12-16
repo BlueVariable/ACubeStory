@@ -25,12 +25,15 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Fall),
                 
                 new FSMTransition_Cube(ECubeState.Fall, ECubeState.Idle),
+                new FSMTransition_Cube(ECubeState.Fall, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Dash, ECubeState.Fall),
                 
                 new FSMTransition_Cube(ECubeState.Climb, ECubeState.Idle),
                 
                 new FSMTransition_Cube(ECubeState.Descend, ECubeState.Idle),
+                
+                new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Idle),
             };
         }
     }
