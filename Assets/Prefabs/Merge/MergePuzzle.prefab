@@ -159,6 +159,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4203124666421154374}
+  - component: {fileID: 8309012959807616289}
+  - component: {fileID: 1882271678127336543}
+  - component: {fileID: 1616503615889256218}
   m_Layer: 0
   m_Name: AllSlotsAssignedActionExecutor
   m_TagString: Untagged
@@ -180,6 +183,48 @@ Transform:
   m_Father: {fileID: 1853416336380005963}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8309012959807616289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148625035964243247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f011fec368e4208aec8cc72c6d72ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 20
+--- !u!114 &1882271678127336543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148625035964243247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b735f667a2c41119aedd4a530c793eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetGameObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  _value: 0
+--- !u!114 &1616503615889256218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148625035964243247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3821a1fe4392424bab1ac2d17d5d0db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeState: 4
 --- !u!1 &8515898666682674163
 GameObject:
   m_ObjectHideFlags: 0

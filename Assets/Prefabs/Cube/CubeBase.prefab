@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 356766445767341804}
-  - component: {fileID: 388130193317936374}
+  - component: {fileID: 7802463699472862335}
   m_Layer: 8
   m_Name: FallSkipConditions
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 8683628446593387492}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &388130193317936374
+--- !u!114 &7802463699472862335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,11 +40,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 249567091401102155}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d9806c719776f04599f147d64f59239, type: 3}
+  m_Script: {fileID: 11500000, guid: c1681836d04f4477acba14212c7ad1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _states: 1e000000
 --- !u!1 &426567234717950855
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +706,7 @@ MonoBehaviour:
     _doLocalMove: 0
   _fallbackFallAmount: 30
   _fallSkipConditions:
-  - {fileID: 388130193317936374}
+  - {fileID: 7802463699472862335}
 --- !u!1 &3287526933068655041
 GameObject:
   m_ObjectHideFlags: 0

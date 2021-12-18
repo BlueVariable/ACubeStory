@@ -14,6 +14,8 @@ namespace BLUE.ACubeStory.Level
                 new FSMTransition_Level(ELevelState.MainMenu, ELevelState.Platform),
                 
                 new FSMTransition_Level(ELevelState.Platform, ELevelState.Merge),
+                
+                new FSMTransition_Level(ELevelState.Merge, ELevelState.Platform),
             };
         }
     }
