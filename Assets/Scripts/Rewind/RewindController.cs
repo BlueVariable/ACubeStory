@@ -7,6 +7,8 @@ namespace BLUE.ACubeStory.Rewind
 {
     public class RewindController : MonoBehaviour
     {
+        [SerializeField] [Min(1)] private int _frameSaveInterval = 5;
+        
         private List<IRewindable> _rewindables = new List<IRewindable>();
 
         private IEnumerator _saveSnapshotRoutine;
@@ -88,7 +90,14 @@ namespace BLUE.ACubeStory.Rewind
                     rewindable.SaveSnapshot();
                 }
                 
-                yield return null;
+                int frameCount = 0;
+
+                while (frameCount < _frameSaveInterval)
+                {
+                    frameCount++;
+                    
+                    yield return null;
+                }
             }
         }
     }

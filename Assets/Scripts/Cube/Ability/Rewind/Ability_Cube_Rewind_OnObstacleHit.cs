@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using BLUE.ACubeStory.Ability;
 using BLUE.ACubeStory.Level;
@@ -22,10 +23,14 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private CubeFailController.ECubeFail[] _cubeFailTypes = default;
 
+        [SerializeField] private TriggerBase[] _checkpointTriggers = default;
+
         public override void Attached()
         {
             RegisterToLevelFSM();
 
+            RegisterToCheckpointTriggers();
+            
             RegisterToCubeFailController();
 
             ActivateRewindables();
@@ -38,6 +43,8 @@ namespace BLUE.ACubeStory.Cube
             UnregisterFromCubeFSM();
 
             UnregisterFromCubeFailController();
+
+            UnregisterFromCheckpointTriggers();
             
             UnregisterFromInputManager();
 
@@ -88,6 +95,16 @@ namespace BLUE.ACubeStory.Cube
             _cubeFSM.OnStateEntered -= OnCubeStateEntered;
         }
 
+        private void RegisterToCheckpointTriggers()
+        {
+            Array.ForEach(_checkpointTriggers, val => val.OnTriggered += OnCheckpointTriggered);
+        }
+
+        private void UnregisterFromCheckpointTriggers()
+        {
+            Array.ForEach(_checkpointTriggers, val => val.OnTriggered -= OnCheckpointTriggered);
+        }
+
         private void RegisterToCubeFailController()
         {
             _cubeFailController.OnFailTriggered += OnFailTriggered;
@@ -122,6 +139,8 @@ namespace BLUE.ACubeStory.Cube
         {
             if (levelState.Equals(ELevelState.Platform))
             {
+                UnregisterFromCubeFSM();
+                
                 RegisterToCubeFSM();
             }
         }
@@ -134,6 +153,13 @@ namespace BLUE.ACubeStory.Cube
                 
                 _rewindController.ResetSnapshots();
             }
+        }
+        
+        private void OnCheckpointTriggered(TriggerBase trigger)
+        {
+            UnregisterFromCubeFSM();
+            
+            RegisterToCubeFSM();
         }
         
         private void OnCubeStateEntered(ECubeState cubeState)
