@@ -10,8 +10,6 @@ namespace BLUE.ACubeStory.Cube
 {
     public class Ability_Cube_Rewind_OnFall : AbilityBase
     {
-        [SerializeField] private Transform _cubeRootTransform = null;
-        
         [SerializeField] private FSM_Cube _cubeFSM = null;
 
         [SerializeField] private CubeFailController _cubeFailController = null;
@@ -91,7 +89,7 @@ namespace BLUE.ACubeStory.Cube
 
         private void ActivateRewindables()
         {
-            IRewindable[] rewindables = _cubeRootTransform.GetComponentsInChildren<IRewindable>();
+            IRewindable[] rewindables = _rewindController.GetComponentsInChildren<IRewindable>();
 
             foreach (IRewindable rewindable in rewindables)
             {
@@ -101,7 +99,7 @@ namespace BLUE.ACubeStory.Cube
 
         private void DeactivateRewindables()
         {
-            IRewindable[] rewindables = _cubeRootTransform.GetComponentsInChildren<IRewindable>();
+            IRewindable[] rewindables = _rewindController.GetComponentsInChildren<IRewindable>();
 
             foreach (IRewindable rewindable in rewindables)
             {
@@ -120,11 +118,6 @@ namespace BLUE.ACubeStory.Cube
                 _rewindController.StartSaveSnapshotRoutine();
                 
                 StartSnapshotToleranceRoutine();
-            }
-            
-            if (cubeState == ECubeState.Rewind)
-            {
-                _rewindController.StopSaveSnapshotRoutine();
             }
         }
         
@@ -177,6 +170,8 @@ namespace BLUE.ACubeStory.Cube
             {
                 _cubeFSM.TryChangeState(ECubeState.Rewind);
 
+                _rewindController.StopSaveSnapshotRoutine();
+                
                 RegisterToInputManager();
             }
         }

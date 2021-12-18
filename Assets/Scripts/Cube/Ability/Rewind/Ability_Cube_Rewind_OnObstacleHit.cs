@@ -10,8 +10,6 @@ namespace BLUE.ACubeStory.Cube
 {
     public class Ability_Cube_Rewind_OnObstacleHit : AbilityBase
     {
-        [SerializeField] private Transform _cubeRootTransform = null;
-        
         [SerializeField] private FSM_Cube _cubeFSM = null;
 
         [SerializeField] private ECubeState _postRewindState = ECubeState.Idle;
@@ -26,8 +24,6 @@ namespace BLUE.ACubeStory.Cube
 
         public override void Attached()
         {
-            RegisterToCubeFSM();
-
             RegisterToLevelFSM();
 
             RegisterToCubeFailController();
@@ -37,9 +33,9 @@ namespace BLUE.ACubeStory.Cube
 
         public override void Detached()
         {
-            UnregisterFromCubeFSM();
-
             UnregisterFromLevelFSM();
+
+            UnregisterFromCubeFSM();
 
             UnregisterFromCubeFailController();
             
@@ -52,9 +48,9 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnDestroy()
         {
-            UnregisterFromCubeFSM();
-            
             UnregisterFromLevelFSM();
+            
+            UnregisterFromCubeFSM();
 
             UnregisterFromCubeFailController();
             
@@ -63,16 +59,6 @@ namespace BLUE.ACubeStory.Cube
             UnregisterFromRewindController();
             
             DeactivateRewindables();
-        }
-
-        private void RegisterToCubeFSM()
-        {
-            _cubeFSM.OnStateEntered += OnCubeStateEntered;
-        }
-
-        private void UnregisterFromCubeFSM()
-        {
-            _cubeFSM.OnStateEntered -= OnCubeStateEntered;
         }
 
         private void RegisterToLevelFSM()
@@ -85,6 +71,16 @@ namespace BLUE.ACubeStory.Cube
         {
             Level.Level.Instance.LevelFSM.OnStateEntered -= OnLevelStateEntered;
             Level.Level.Instance.LevelFSM.OnStateExited -= OnLevelStateExited;
+        }
+        
+        private void RegisterToCubeFSM()
+        {
+            _cubeFSM.OnStateEntered += OnCubeStateEntered;
+        }
+
+        private void UnregisterFromCubeFSM()
+        {
+            _cubeFSM.OnStateEntered -= OnCubeStateEntered;
         }
 
         private void RegisterToCubeFailController()
@@ -99,7 +95,7 @@ namespace BLUE.ACubeStory.Cube
 
         private void ActivateRewindables()
         {
-            IRewindable[] rewindables = _cubeRootTransform.GetComponentsInChildren<IRewindable>();
+            IRewindable[] rewindables = _rewindController.GetComponentsInChildren<IRewindable>();
 
             foreach (IRewindable rewindable in rewindables)
             {
@@ -109,7 +105,7 @@ namespace BLUE.ACubeStory.Cube
 
         private void DeactivateRewindables()
         {
-            IRewindable[] rewindables = _cubeRootTransform.GetComponentsInChildren<IRewindable>();
+            IRewindable[] rewindables = _rewindController.GetComponentsInChildren<IRewindable>();
 
             foreach (IRewindable rewindable in rewindables)
             {
@@ -121,11 +117,7 @@ namespace BLUE.ACubeStory.Cube
         {
             if (levelState.Equals(ELevelState.Platform))
             {
-                _rewindController.StopSaveSnapshotRoutine();
-                
-                _rewindController.ResetSnapshots();
-                
-                _rewindController.StartSaveSnapshotRoutine();
+                RegisterToCubeFSM();
             }
         }
         
@@ -141,9 +133,15 @@ namespace BLUE.ACubeStory.Cube
         
         private void OnCubeStateEntered(ECubeState cubeState)
         {
-            if (cubeState == ECubeState.Rewind)
+            if (cubeState == ECubeState.Idle)
             {
                 _rewindController.StopSaveSnapshotRoutine();
+                
+                _rewindController.ResetSnapshots();
+                
+                _rewindController.StartSaveSnapshotRoutine();
+                
+                UnregisterFromCubeFSM();
             }
         }
 
@@ -159,6 +157,8 @@ namespace BLUE.ACubeStory.Cube
             if (_cubeFailTypes.Contains(cubeFailType))
             {
                 _cubeFSM.TryChangeState(ECubeState.Rewind);
+                
+                _rewindController.StopSaveSnapshotRoutine();
 
                 RegisterToInputManager();
             }
