@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Ability_Cube_Rewind_OnFail : AbilityBase
+    public class Ability_Cube_Rewind_OnFall : AbilityBase
     {
         [SerializeField] private Transform _cubeRootTransform = null;
         
