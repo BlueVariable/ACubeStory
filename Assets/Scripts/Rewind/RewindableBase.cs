@@ -14,6 +14,8 @@ namespace BLUE.ACubeStory.Rewind
 
         private int _curSnapshotIndex = 0;
 
+        private bool _isRewindStarted = false;
+        
         #region Events
 
         public Action<IRewindable> OnRewound { get; set; }
@@ -53,6 +55,8 @@ namespace BLUE.ACubeStory.Rewind
             _rewindRoutine = RewindProgress();
 
             StartCoroutine(_rewindRoutine);
+
+            _isRewindStarted = true;
         }
         
         public void StopRewind()
@@ -62,12 +66,19 @@ namespace BLUE.ACubeStory.Rewind
                 StopCoroutine(_rewindRoutine);
             }
 
+            if (!_isRewindStarted)
+            {
+                return;
+            }
+
             int count = _snapshots.Count;
             
             for (int i = count - 1; i >= _curSnapshotIndex; i--)
             {
                 _snapshots.RemoveAt(i);
             }
+
+            _isRewindStarted = false;
         }
 
         private IEnumerator RewindProgress()
@@ -76,13 +87,15 @@ namespace BLUE.ACubeStory.Rewind
             {
                 _curSnapshotIndex = i;
 
-                Debug.Log(_curSnapshotIndex);
-                
                 RestoreSnapshot(_snapshots[i]);            
                     
                 yield return null;
             }
 
+            _isRewindStarted = false;
+
+            ResetSavedSnapshots();
+            
             OnRewound?.Invoke(this);
         }
     }
