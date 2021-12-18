@@ -184,6 +184,11 @@ namespace BLUE.ACubeStory.Cube
 
         private void UnregisterFromInputManager()
         {
+            if (InputManager.Instance == null)
+            {
+                return;
+            }
+            
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
         }
