@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.Obstacles
+namespace BLUE.ACubeStory.Obstacle
 {
     public abstract class ObstacleBase : MonoBehaviour
     {
-        
     }
 }

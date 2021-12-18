@@ -2,7 +2,7 @@
 using BLUE.Common;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Obstacles
+namespace BLUE.ACubeStory.Obstacle
 {
     public class Obstacle_Patrol : ObstacleBase
     {
@@ -12,7 +12,7 @@ namespace BLUE.ACubeStory.Obstacles
 
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _movementSettings = default;
 
-        [SerializeField] private float _idleDurationOnReachPatrolPoint = 0.5f;
+        [SerializeField] private float _idleDurationOnPatrolPointReached = 0.5f;
         
         private IEnumerator _patrolRoutine;
         
@@ -56,6 +56,7 @@ namespace BLUE.ACubeStory.Obstacles
         private IEnumerator PatrolProgress()
         {
             int patrolIndex = 0;
+            
             while (true)
             {
                 bool completed = false;
@@ -76,7 +77,7 @@ namespace BLUE.ACubeStory.Obstacles
 
                 patrolIndex++;
                 
-                yield return new WaitForSeconds(_idleDurationOnReachPatrolPoint);
+                yield return new WaitForSeconds(_idleDurationOnPatrolPointReached);
             }
         }
     }
