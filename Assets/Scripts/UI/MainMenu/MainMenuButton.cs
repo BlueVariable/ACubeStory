@@ -1,5 +1,4 @@
-﻿using System;
-using BLUE.ActionSystem;
+﻿using BLUE.ActionSystem;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
