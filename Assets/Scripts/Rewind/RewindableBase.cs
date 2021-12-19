@@ -1,13 +1,16 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BLUE.ACubeStory.Rewind
 {
     public abstract class RewindableBase<T> : MonoBehaviour, IRewindable
         where T : RewindSnapshotBase
     {
+        [Tooltip("Represents maximum consecutive identical snapshot count. If value is less than zero, option will be ignored.")]
+        [SerializeField] private int _maxIdenticalSnapshot = -1;
+        
         private List<T> _snapshots = new List<T>();
 
         private IEnumerator _rewindRoutine;
@@ -15,6 +18,8 @@ namespace BLUE.ACubeStory.Rewind
         private int _curSnapshotIndex = 0;
 
         private bool _isRewindStarted = false;
+
+        private int _curIdenticalSnapshotCount = 0;
         
         #region Events
 
@@ -35,10 +40,31 @@ namespace BLUE.ACubeStory.Rewind
         {
             rewindController.UnregisterRewindable(this);
         }
-        
-        public void SaveSnapshot()
+
+        public bool TrySaveSnapshot()
         {
-            _snapshots.Add(GetSnapshot());
+            T snapshot = GetSnapshot();
+
+            bool canSave = CanSaveSnapshot(snapshot);
+
+            if (!canSave)
+            {
+                return false;
+            }
+
+            if (_snapshots.Count > 0 && snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
+            {
+                _curIdenticalSnapshotCount++;
+            }
+
+            if (_snapshots.Count > 0 && !snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
+            {
+                _curIdenticalSnapshotCount = 0;
+            }
+
+            _snapshots.Add(snapshot);
+
+            return true;
         }
 
         public void ResetSavedSnapshots()
@@ -49,6 +75,8 @@ namespace BLUE.ACubeStory.Rewind
         public void StartRewind()
         {
             _curSnapshotIndex = _snapshots.Count - 1;
+
+            _curSnapshotIndex = Mathf.Clamp(_curSnapshotIndex, 0, _snapshots.Count);
             
             StopRewind();
             
@@ -83,7 +111,7 @@ namespace BLUE.ACubeStory.Rewind
 
         private IEnumerator RewindProgress()
         {
-            for (int i = _snapshots.Count - 1; i > 0; i--)
+            for (int i = _snapshots.Count - 1; i >= 0; i--)
             {
                 _curSnapshotIndex = i;
 
@@ -97,6 +125,28 @@ namespace BLUE.ACubeStory.Rewind
             ResetSavedSnapshots();
             
             OnRewound?.Invoke(this);
+        }
+
+        private bool CanSaveSnapshot(T snapshot)
+        {
+            if (_maxIdenticalSnapshot < 0)
+            {
+                return true;
+            }
+
+            bool isIdentical = snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]); 
+            
+            if (!isIdentical)
+            {
+                return true;
+            }
+
+            if (_curIdenticalSnapshotCount <= _maxIdenticalSnapshot)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

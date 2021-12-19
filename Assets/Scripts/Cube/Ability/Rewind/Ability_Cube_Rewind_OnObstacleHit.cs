@@ -61,6 +61,8 @@ namespace BLUE.ACubeStory.Cube
 
             UnregisterFromCubeFailController();
             
+            UnregisterFromCheckpointTriggers();
+            
             UnregisterFromInputManager();
 
             UnregisterFromRewindController();
@@ -161,6 +163,20 @@ namespace BLUE.ACubeStory.Cube
                 _rewindController.StopSaveSnapshotRoutine();
                 
                 _rewindController.ResetSnapshots();
+                
+                UnregisterFromLevelFSM();
+            
+                UnregisterFromCubeFSM();
+
+                UnregisterFromCubeFailController();
+                
+                UnregisterFromCheckpointTriggers();
+            
+                UnregisterFromInputManager();
+
+                UnregisterFromRewindController();
+            
+                DeactivateRewindables();
             }
         }
         
