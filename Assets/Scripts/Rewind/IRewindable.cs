@@ -14,14 +14,12 @@ namespace BLUE.ACubeStory.Rewind
         
         public void DeactivateRewindable(RewindController rewindController);
         
-        public bool TrySaveSnapshot(SnapshotSaveBalancer saveBalancer);
+        public bool TrySaveSnapshot();
 
         public void ResetSavedSnapshots();
 
         public void StartRewind();
         
         public void StopRewind();
-
-        public bool CanSaveNextSnapshot();
     }
 }
