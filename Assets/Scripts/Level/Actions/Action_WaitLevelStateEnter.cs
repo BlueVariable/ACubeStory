@@ -1,10 +1,15 @@
 ﻿using System;
 using BLUE.ActionSystem;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Level
 {
-    public class Action_WaitPlatformState : InterruptableActionBase
+    public class Action_WaitLevelStateEnter : InterruptableActionBase
     {
+        [SerializeField] private ELevelState _levelState = ELevelState.None;
+
+        [SerializeField] private bool _completeIfStateEnteredAlready = false;
+        
         #region Events
 
         public override Action<InterruptableActionBase> OnCompleted { get; set; }
@@ -13,6 +18,15 @@ namespace BLUE.ACubeStory.Level
         
         public override void Execute()
         {
+            Level.Instance.LevelFSM.TryGetCurStateType(out ELevelState curState);
+
+            if (_completeIfStateEnteredAlready && curState == _levelState)
+            {
+                OnCompleted?.Invoke(this);
+
+                return;
+            }
+            
             RegisterToLevelFSM();
         }
 
@@ -38,7 +52,7 @@ namespace BLUE.ACubeStory.Level
         
         private void OnStateEntered(ELevelState state)
         {
-            if (state != ELevelState.Platform)
+            if (state != _levelState)
             {
                 return;
             }

@@ -70,6 +70,15 @@ namespace BLUE.ACubeStory.Cube
 
         private void RegisterToLevelFSM()
         {
+            Level.Level.Instance.LevelFSM.TryGetCurStateType(out ELevelState curState);
+
+            if (curState == ELevelState.Platform)
+            {
+                OnLevelStateEntered(ELevelState.Platform);
+
+                return;
+            }
+            
             Level.Level.Instance.LevelFSM.OnStateEntered += OnLevelStateEntered;
             Level.Level.Instance.LevelFSM.OnStateExited += OnLevelStateExited;
         }
