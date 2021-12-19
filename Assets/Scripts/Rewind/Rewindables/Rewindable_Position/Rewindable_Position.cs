@@ -2,16 +2,16 @@
 
 namespace BLUE.ACubeStory.Rewind
 {
-    public class Rewindable_Position : RewindableBase<RewindSnapShot_Position>
+    public class Rewindable_Position : RewindableBase<RewindSnapshot_Position>
     {
         [SerializeField] private Transform _rootTransform = null;
         
-        protected override RewindSnapShot_Position GetSnapshot()
+        protected override RewindSnapshot_Position GetSnapshot()
         {
-            return new RewindSnapShot_Position(_rootTransform.position);
+            return new RewindSnapshot_Position(_rootTransform.position);
         }
 
-        protected override void RestoreSnapshot(RewindSnapShot_Position snapshot)
+        protected override void RestoreSnapshot(RewindSnapshot_Position snapshot)
         {
             _rootTransform.position = snapshot.Position;
         }
