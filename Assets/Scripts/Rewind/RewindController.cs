@@ -7,21 +7,20 @@ namespace BLUE.ACubeStory.Rewind
 {
     public class RewindController : MonoBehaviour
     {
-        [SerializeField] [Min(1)] private int _frameSaveInterval = 5;
+        [SerializeField] [Min(1)] private int _initialSaveBalanceFactor = 2;
         
         private List<IRewindable> _rewindables = new List<IRewindable>();
 
         private IEnumerator _saveSnapshotRoutine;
 
         private SnapshotSaveBalancer _saveBalancer;
-        
-        private SnapshotSaveBalancer SaveBalancer 
+        private SnapshotSaveBalancer _SaveBalancer 
         {
             get
             {
                 if (_saveBalancer == null)
                 {
-                    _saveBalancer = new SnapshotSaveBalancer();
+                    _saveBalancer = new SnapshotSaveBalancer(_initialSaveBalanceFactor);
                 }
 
                 return _saveBalancer;
@@ -105,12 +104,12 @@ namespace BLUE.ACubeStory.Rewind
             {
                 foreach (IRewindable rewindable in _rewindables)
                 {
-                    rewindable.TrySaveSnapshot();
+                    rewindable.TrySaveSnapshot(_SaveBalancer);
                 }
                 
                 int frameCount = 0;
 
-                while (frameCount < SaveBalancer.SaveSnapshotFactor)
+                while (frameCount < _SaveBalancer.SaveSnapshotFactor)
                 {
                     frameCount++;
                     

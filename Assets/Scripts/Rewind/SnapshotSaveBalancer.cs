@@ -7,7 +7,12 @@ namespace BLUE.ACubeStory.Rewind
         public int SaveSnapshotFactor { get; private set; } = 1;
 
         private int _snapshotFactorMultiplier = 2;
-        
+
+        public SnapshotSaveBalancer(int saveSnapshotFactor)
+        {
+            SaveSnapshotFactor = saveSnapshotFactor;
+        }
+
         public List<T> BalanceSnapshots<T>(List<T> savedSnapshots, int maxSnapshotCount)
         where T : RewindSnapshotBase
         {

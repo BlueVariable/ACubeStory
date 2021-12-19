@@ -12,8 +12,6 @@ namespace BLUE.ACubeStory.Rewind
 
         [SerializeField] private bool _balanceSnapshotCounts = false;
         
-        [SerializeField] private bool _discardIdenticalSnapshots = false;
-
         [Tooltip("Maximum consecutive identical snapshot count. If value less than zero it should be discarded.")]
         [SerializeField] private int _maxIdenticalSnapshot = -1;
         
@@ -47,7 +45,7 @@ namespace BLUE.ACubeStory.Rewind
             rewindController.UnregisterRewindable(this);
         }
 
-        public bool TrySaveSnapshot()
+        public bool TrySaveSnapshot(SnapshotSaveBalancer saveBalancer)
         {
             T snapshot = GetSnapshot();
 
@@ -74,6 +72,8 @@ namespace BLUE.ACubeStory.Rewind
             {
                 _snapshots = saveBalancer.BalanceSnapshots(_snapshots, _maxSnapshotCount);
             }
+
+            return true;
         }
 
         public void ResetSavedSnapshots()
