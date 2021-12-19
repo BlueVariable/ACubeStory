@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8b4c175b6dcf840b0397fbecee3a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
@@ -738,6 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3b728bf3bf403fb0e9ec8d8daefc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
@@ -1210,6 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3b728bf3bf403fb0e9ec8d8daefc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
@@ -1568,7 +1571,7 @@ GameObject:
   - component: {fileID: 4927567559608620265}
   - component: {fileID: 6575932780051369580}
   m_Layer: 8
-  m_Name: MergeRequestors
+  m_Name: CollectiveMergeRequestors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1600,6 +1603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa45c633f8901d4b93fac1e41afcdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
@@ -1912,6 +1916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd83b2b1226f6140a5d29389675c136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
@@ -1933,6 +1938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58889ca3e13234946b511eb3767229ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
@@ -2229,6 +2235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3b728bf3bf403fb0e9ec8d8daefc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
@@ -2412,7 +2419,10 @@ MonoBehaviour:
   _mergerRoot: {fileID: 1770422728805005045}
   _mergedActionExecutor:
     _actionCarrier: {fileID: 7290806740829734429}
+  _unmergedActionExecutor:
+    _actionCarrier: {fileID: 0}
   _mergeConditions: []
+  _unmergeConditions: []
   _rayDirections:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
@@ -2600,7 +2610,7 @@ MonoBehaviour:
   _merger: {fileID: 842975415367295186}
   _initialMergeables:
   - {fileID: 915684824503583812}
-  _mergeRequestors:
+  _collectiveMergeRequestors:
   - {fileID: 6575932780051369580}
 --- !u!65 &6649162472357359457
 BoxCollider:

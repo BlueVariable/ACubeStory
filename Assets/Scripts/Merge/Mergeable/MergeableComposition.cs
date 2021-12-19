@@ -11,7 +11,7 @@ namespace BLUE.ACubeStory.Merge
 
         [SerializeField] private Mergeable[] _initialMergeables = new Mergeable[0];
         
-        [SerializeField] private TriggerBase[] _mergeRequestors = null;
+        [SerializeField] private TriggerBase[] _collectiveMergeRequestors = null;
 
         private HashSet<Mergeable> _mergeables;
         public HashSet<Mergeable> Mergeables
@@ -32,6 +32,7 @@ namespace BLUE.ACubeStory.Merge
         #region Events
         
         public Action<Mergeable> OnMerged { get; set; }
+        public Action<Mergeable> OnUnmerged { get; set; }
 
         #endregion
 
@@ -59,6 +60,8 @@ namespace BLUE.ACubeStory.Merge
             foreach (Mergeable initialMergeable in _initialMergeables)
             {
                 _mergeables.Add(initialMergeable);
+                
+                initialMergeable.Merged();
 
                 OnMerged?.Invoke(initialMergeable);
             }
@@ -68,32 +71,32 @@ namespace BLUE.ACubeStory.Merge
 
         private void RegisterToMergeRequestors()
         {
-            foreach (TriggerBase mergeRequestor in _mergeRequestors)
+            foreach (TriggerBase mergeRequestor in _collectiveMergeRequestors)
             {
-                mergeRequestor.OnTriggered += OnMergeRequested;
+                mergeRequestor.OnTriggered += OnCollectiveMergeRequested;
             }
         }
 
         private void UnregisterFromMergeRequestors()
         {
-            foreach (TriggerBase mergeRequestor in _mergeRequestors)
+            foreach (TriggerBase mergeRequestor in _collectiveMergeRequestors)
             {
-                mergeRequestor.OnTriggered -= OnMergeRequested;
+                mergeRequestor.OnTriggered -= OnCollectiveMergeRequested;
             }
         }
 
-        private void OnMergeRequested(TriggerBase trigger)
+        private void OnCollectiveMergeRequested(TriggerBase trigger)
         {
-            TryMerge();
+            PerformCollectiveMerge();
         }
 
-        private void TryMerge()
+        private void PerformCollectiveMerge()
         {
             bool merged;
             
             do
             {
-                merged = _merger.TryMerge(Mergeables, out HashSet<Mergeable> mergedMergeables);
+                merged = _merger.TryCollectiveMerge(Mergeables, out HashSet<Mergeable> mergedMergeables);
 
                 foreach (Mergeable mergeable in mergedMergeables)
                 {
@@ -103,6 +106,38 @@ namespace BLUE.ACubeStory.Merge
                 }
             }
             while(merged);
+        }
+        
+        private bool TryMerge(Mergeable targetMergeable)
+        {
+            bool merged = _merger.TryMerge(Mergeables, targetMergeable);
+
+            if (merged)
+            {
+                _mergeables.Add(targetMergeable);
+
+                OnMerged?.Invoke(targetMergeable);
+
+                return true;
+            }
+
+            return false;
+        }
+        
+        private bool TryUnmerge(Mergeable targetMergeable)
+        {
+            bool unmerged = _merger.TryUnmerge(Mergeables, targetMergeable);
+
+            if (unmerged)
+            {
+                _mergeables.Remove(targetMergeable);
+
+                OnUnmerged?.Invoke(targetMergeable);
+
+                return true;
+            }
+
+            return false;
         }
     }
 }
