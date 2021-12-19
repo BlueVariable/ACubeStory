@@ -127,7 +127,7 @@ namespace BLUE.ACubeStory.Merge
 
         private void Unmerge(Mergeable mergeable)
         {
-            mergeable.transform.parent = null;
+            mergeable.transform.parent = MergePuzzle.Instance.MergeableProvider.transform;
 
             UnmergeCustomActions(mergeable);
 

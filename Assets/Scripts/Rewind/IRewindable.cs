@@ -9,6 +9,8 @@ namespace BLUE.ACubeStory.Rewind
         public Action<IRewindable> OnRewound { get; set; }
 
         #endregion
+
+        public bool IsIdenticalSnapshotLimitReached(int limit);
         
         public void ActivateRewindable(RewindController rewindController);
         

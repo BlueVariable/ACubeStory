@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Rewind
@@ -9,6 +10,9 @@ namespace BLUE.ACubeStory.Rewind
     {
         [SerializeField] [Min(1)] private int _frameSaveInterval = 5;
         
+        [Tooltip("Represents maximum consecutive identical snapshot count. If value is less than zero, option will be ignored.")]
+        [SerializeField] private int _maxIdenticalSnapshotCount = -1;
+
         private List<IRewindable> _rewindables = new List<IRewindable>();
 
         private IEnumerator _saveSnapshotRoutine;
@@ -88,11 +92,19 @@ namespace BLUE.ACubeStory.Rewind
         {
             while (true)
             {
-                foreach (IRewindable rewindable in _rewindables)
-                {
-                    rewindable.TrySaveSnapshot();
-                }
+                bool canSave = true;
                 
+                if (_maxIdenticalSnapshotCount > 0)
+                {
+                    canSave = _rewindables.Any(val
+                        => !val.IsIdenticalSnapshotLimitReached(_maxIdenticalSnapshotCount));
+                }
+
+                if (canSave)
+                {
+                    _rewindables.ForEach(val => val.TrySaveSnapshot());
+                }
+
                 int frameCount = 0;
 
                 while (frameCount < _frameSaveInterval)
