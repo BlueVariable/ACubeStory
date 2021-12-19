@@ -21,5 +21,7 @@ namespace BLUE.ACubeStory.Rewind
         public void StartRewind();
         
         public void StopRewind();
+
+        public bool CanSaveNextSnapshot();
     }
 }
