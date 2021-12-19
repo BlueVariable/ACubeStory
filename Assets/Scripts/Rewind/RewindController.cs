@@ -13,8 +13,6 @@ namespace BLUE.ACubeStory.Rewind
 
         private IEnumerator _saveSnapshotRoutine;
 
-        private IEnumerator _rewindRoutine;
-
         #region Events
 
         public Action<IRewindable> OnRewindableRewound { get; set; }
@@ -23,6 +21,11 @@ namespace BLUE.ACubeStory.Rewind
         
         public void RegisterRewindable(IRewindable rewindable)
         {
+            if (_rewindables.Contains(rewindable))
+            {
+                return;
+            }
+            
             _rewindables.Add(rewindable);
         }
 

@@ -49,6 +49,8 @@ namespace BLUE.ACubeStory.Rewind
         public void StartRewind()
         {
             _curSnapshotIndex = _snapshots.Count - 1;
+
+            _curSnapshotIndex = Mathf.Clamp(_curSnapshotIndex, 0, _snapshots.Count);
             
             StopRewind();
             
@@ -83,7 +85,7 @@ namespace BLUE.ACubeStory.Rewind
 
         private IEnumerator RewindProgress()
         {
-            for (int i = _snapshots.Count - 1; i > 0; i--)
+            for (int i = _snapshots.Count - 1; i >= 0; i--)
             {
                 _curSnapshotIndex = i;
 
