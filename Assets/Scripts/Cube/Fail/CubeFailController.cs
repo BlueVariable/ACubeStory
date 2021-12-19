@@ -15,8 +15,7 @@ namespace BLUE.ACubeStory.Cube
             Fall_Void = 1,
             Fall_Water = 2,
             
-            Trap_Spikes = 10,
-            Trap_Flame = 11,
+            Trap_Obstacle = 10,
         }
 
         [Serializable]

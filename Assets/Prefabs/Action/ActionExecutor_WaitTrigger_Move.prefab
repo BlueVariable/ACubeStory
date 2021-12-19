@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 6911571924042971548}
   - component: {fileID: 6911571924042971547}
   m_Layer: 0
-  m_Name: ActionExecutor_WaitPlatformState_Move
+  m_Name: ActionExecutor_WaitTrigger_Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -364,9 +364,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9207032917820150199}
-  - component: {fileID: 6107627063784635685}
+  - component: {fileID: 246466380660799879}
   m_Layer: 0
-  m_Name: Action_WaitPlatformState
+  m_Name: Action_WaitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +386,7 @@ Transform:
   m_Father: {fileID: 9207032917756750421}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6107627063784635685
+--- !u!114 &246466380660799879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,7 +395,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9207032917820150200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40cdc8f4896f49de96a3ae5152548664, type: 3}
+  m_Script: {fileID: 11500000, guid: 017297856edd41f1937c3d15ce8cee91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _stallExecution: 1
+  _triggers:
+  - {fileID: 0}
+  _waitAllTriggers: 0
