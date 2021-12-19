@@ -1,13 +1,15 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BLUE.ACubeStory.Rewind
 {
     public class RewindController : MonoBehaviour
     {
         [SerializeField] [Min(1)] private int _initialSaveBalanceFactor = 2;
+
+        [SerializeField] private float _initialSaveBalanceMultiplier = 1;
         
         private List<IRewindable> _rewindables = new List<IRewindable>();
 
@@ -20,7 +22,9 @@ namespace BLUE.ACubeStory.Rewind
             {
                 if (_saveBalancer == null)
                 {
-                    _saveBalancer = new SnapshotSaveBalancer(_initialSaveBalanceFactor);
+                    _saveBalancer = new SnapshotSaveBalancer(
+                        _initialSaveBalanceMultiplier,
+                        _initialSaveBalanceFactor);
                 }
 
                 return _saveBalancer;

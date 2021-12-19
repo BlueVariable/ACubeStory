@@ -4,12 +4,13 @@ namespace BLUE.ACubeStory.Rewind
 {
     public class SnapshotSaveBalancer
     {
-        public int SaveSnapshotFactor { get; private set; } = 1;
+        private float _snapshotFactorMultiplier;
+        
+        public int SaveSnapshotFactor { get; private set; }
 
-        private int _snapshotFactorMultiplier = 2;
-
-        public SnapshotSaveBalancer(int saveSnapshotFactor)
+        public SnapshotSaveBalancer(float snapshotFactorMultiplier, int saveSnapshotFactor)
         {
+            _snapshotFactorMultiplier = snapshotFactorMultiplier;
             SaveSnapshotFactor = saveSnapshotFactor;
         }
 
@@ -23,7 +24,7 @@ namespace BLUE.ACubeStory.Rewind
 
             List<T> balancedList = new List<T>();
 
-            SaveSnapshotFactor *= _snapshotFactorMultiplier;
+            SaveSnapshotFactor = (int)(SaveSnapshotFactor * _snapshotFactorMultiplier);
 
             for (int i = 0; i < savedSnapshots.Count; i += SaveSnapshotFactor)
             {
