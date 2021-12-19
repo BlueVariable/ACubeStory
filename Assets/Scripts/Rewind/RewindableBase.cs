@@ -8,11 +8,7 @@ namespace BLUE.ACubeStory.Rewind
     public abstract class RewindableBase<T> : MonoBehaviour, IRewindable
         where T : RewindSnapshotBase
     {
-        [SerializeField] private int _maxSnapshotCount = 10000;
-
-        [SerializeField] private bool _balanceSnapshotCounts = false;
-        
-        [Tooltip("Maximum consecutive identical snapshot count. If value less than zero it should be discarded.")]
+        [Tooltip("Represents maximum consecutive identical snapshot count. If value is less than zero, option will be ignored.")]
         [SerializeField] private int _maxIdenticalSnapshot = -1;
         
         private List<T> _snapshots = new List<T>();
@@ -45,9 +41,16 @@ namespace BLUE.ACubeStory.Rewind
             rewindController.UnregisterRewindable(this);
         }
 
-        public bool TrySaveSnapshot(SnapshotSaveBalancer saveBalancer)
+        public bool TrySaveSnapshot()
         {
             T snapshot = GetSnapshot();
+
+            bool canSave = CanSaveSnapshot(snapshot);
+
+            if (!canSave)
+            {
+                return false;
+            }
 
             if (_snapshots.Count > 0 && snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
             {
@@ -60,11 +63,6 @@ namespace BLUE.ACubeStory.Rewind
             }
 
             _snapshots.Add(snapshot);
-            
-            if (_balanceSnapshotCounts)
-            {
-                _snapshots = saveBalancer.BalanceSnapshots(_snapshots, _maxSnapshotCount);
-            }
 
             return true;
         }
@@ -109,13 +107,6 @@ namespace BLUE.ACubeStory.Rewind
             }
 
             _isRewindStarted = false;
-        }
-
-        public bool CanSaveNextSnapshot()
-        {
-            T snapshot = GetSnapshot();
-
-            return CanSaveSnapshot(snapshot);
         }
 
         private IEnumerator RewindProgress()
