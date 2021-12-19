@@ -13,12 +13,12 @@ namespace BLUE.ACubeStory.Rewind
         
         public override bool IsIdentical(RewindSnapshotBase otherSnapshot)
         {
-            if (otherSnapshot == null || !(otherSnapshot is RewindSnapShot_Rotation))
+            if (!(otherSnapshot is RewindSnapShot_Rotation snapshot))
             {
                 return false;
             }
 
-            return Rotation == ((RewindSnapShot_Rotation) otherSnapshot).Rotation;
+            return Rotation == snapshot.Rotation;
         }
     }
 }

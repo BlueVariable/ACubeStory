@@ -90,7 +90,7 @@ namespace BLUE.ACubeStory.Rewind
             {
                 foreach (IRewindable rewindable in _rewindables)
                 {
-                    rewindable.SaveSnapshot();
+                    rewindable.TrySaveSnapshot();
                 }
                 
                 int frameCount = 0;
