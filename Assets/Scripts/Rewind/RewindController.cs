@@ -10,9 +10,7 @@ namespace BLUE.ACubeStory.Rewind
         private List<IRewindable> _rewindables = new List<IRewindable>();
 
         private IEnumerator _saveSnapshotRoutine;
-
-        private IEnumerator _rewindRoutine;
-
+        
         #region Events
 
         public Action<IRewindable> OnRewindableRewound { get; set; }

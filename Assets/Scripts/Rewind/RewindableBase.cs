@@ -1,13 +1,18 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BLUE.ACubeStory.Rewind
 {
     public abstract class RewindableBase<T> : MonoBehaviour, IRewindable
         where T : RewindSnapshotBase
     {
+        [SerializeField] private bool _discardIdenticalSnapshots = false;
+
+        [Tooltip("Maximum consecutive identical snapshot count. If value less than zero it should be discarded.")]
+        [SerializeField] private int _maxIdenticalSnapshot = -1;
+        
         private List<T> _snapshots = new List<T>();
 
         private IEnumerator _rewindRoutine;
@@ -15,6 +20,8 @@ namespace BLUE.ACubeStory.Rewind
         private int _curSnapshotIndex = 0;
 
         private bool _isRewindStarted = false;
+
+        private int _curIdenticalSnapshotCount = 0;
         
         #region Events
 
@@ -35,10 +42,29 @@ namespace BLUE.ACubeStory.Rewind
         {
             rewindController.UnregisterRewindable(this);
         }
-        
+
         public void SaveSnapshot()
         {
-            _snapshots.Add(GetSnapshot());
+            T snapshot = GetSnapshot();
+
+            bool canSave = CanSaveSnapshot(snapshot);
+
+            if (!canSave)
+            {
+                return;
+            }
+
+            if (_snapshots.Count > 0 && snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
+            {
+                _curIdenticalSnapshotCount++;
+            }
+
+            if (!snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
+            {
+                _curIdenticalSnapshotCount = 0;
+            }
+
+            _snapshots.Add(snapshot);
         }
 
         public void ResetSavedSnapshots()
@@ -97,6 +123,28 @@ namespace BLUE.ACubeStory.Rewind
             ResetSavedSnapshots();
             
             OnRewound?.Invoke(this);
+        }
+
+        private bool CanSaveSnapshot(T snapshot)
+        {
+            if (!_discardIdenticalSnapshots && _maxIdenticalSnapshot < 0 || _snapshots.Count == 0)
+            {
+                return true;
+            }
+
+            bool isIdentical = snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]); 
+            
+            if (!isIdentical)
+            {
+                return true;
+            }
+
+            if (_curIdenticalSnapshotCount <= _maxIdenticalSnapshot)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

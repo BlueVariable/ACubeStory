@@ -10,5 +10,15 @@ namespace BLUE.ACubeStory.Rewind
         {
             Position = position;
         }
+
+        public override bool IsIdentical(RewindSnapshotBase otherSnapshot)
+        {
+            if (otherSnapshot == null || !(otherSnapshot is RewindSnapShot_Position))
+            {
+                return false;
+            }
+            
+            return Position == ((RewindSnapShot_Position) otherSnapshot).Position;
+        }
     }
 }
