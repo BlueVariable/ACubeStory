@@ -14,7 +14,7 @@ namespace BLUE.ACubeStory.Rewind
         
         public void DeactivateRewindable(RewindController rewindController);
         
-        public bool TrySaveSnapshot();
+        public bool TrySaveSnapshot(SnapshotSaveBalancer saveBalancer);
 
         public void ResetSavedSnapshots();
 
