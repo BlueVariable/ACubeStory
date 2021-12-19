@@ -6,6 +6,8 @@ namespace BLUE.ACubeStory.Scene
         
         Base = 1,
 
+        Intro = 4,
+        
         MainMenu = 5,
         
         Level_1 = 10,
