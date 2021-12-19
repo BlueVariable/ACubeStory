@@ -12,6 +12,21 @@ namespace BLUE.ACubeStory.Rewind
         private List<IRewindable> _rewindables = new List<IRewindable>();
 
         private IEnumerator _saveSnapshotRoutine;
+
+        private SnapshotSaveBalancer _saveBalancer;
+        
+        private SnapshotSaveBalancer SaveBalancer 
+        {
+            get
+            {
+                if (_saveBalancer == null)
+                {
+                    _saveBalancer = new SnapshotSaveBalancer();
+                }
+
+                return _saveBalancer;
+            }
+        }
         
         #region Events
 
@@ -85,12 +100,12 @@ namespace BLUE.ACubeStory.Rewind
             {
                 foreach (IRewindable rewindable in _rewindables)
                 {
-                    rewindable.SaveSnapshot();
+                    rewindable.SaveSnapshot(SaveBalancer);
                 }
                 
                 int frameCount = 0;
 
-                while (frameCount < _frameSaveInterval)
+                while (frameCount < SaveBalancer.SaveSnapshotFactor)
                 {
                     frameCount++;
                     
