@@ -49,13 +49,6 @@ namespace BLUE.ACubeStory.Rewind
         {
             T snapshot = GetSnapshot();
 
-            bool canSave = CanSaveSnapshot(snapshot);
-
-            if (!canSave)
-            {
-                return false;
-            }
-
             if (_snapshots.Count > 0 && snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
             {
                 _curIdenticalSnapshotCount++;
@@ -116,6 +109,13 @@ namespace BLUE.ACubeStory.Rewind
             }
 
             _isRewindStarted = false;
+        }
+
+        public bool CanSaveNextSnapshot()
+        {
+            T snapshot = GetSnapshot();
+
+            return CanSaveSnapshot(snapshot);
         }
 
         private IEnumerator RewindProgress()

@@ -106,9 +106,19 @@ namespace BLUE.ACubeStory.Rewind
         {
             while (true)
             {
+                bool canSaveAllSnapshots = false;
+                
                 foreach (IRewindable rewindable in _rewindables)
                 {
-                    rewindable.TrySaveSnapshot(_SaveBalancer);
+                    canSaveAllSnapshots = canSaveAllSnapshots || rewindable.CanSaveNextSnapshot();
+                }
+
+                if (canSaveAllSnapshots)
+                {
+                    foreach (IRewindable rewindable in _rewindables)
+                    {
+                        rewindable.TrySaveSnapshot(_SaveBalancer);
+                    }
                 }
                 
                 int frameCount = 0;
