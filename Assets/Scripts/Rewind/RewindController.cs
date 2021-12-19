@@ -36,6 +36,11 @@ namespace BLUE.ACubeStory.Rewind
         
         public void RegisterRewindable(IRewindable rewindable)
         {
+            if (_rewindables.Contains(rewindable))
+            {
+                return;
+            }
+            
             _rewindables.Add(rewindable);
         }
 
@@ -100,7 +105,7 @@ namespace BLUE.ACubeStory.Rewind
             {
                 foreach (IRewindable rewindable in _rewindables)
                 {
-                    rewindable.SaveSnapshot(SaveBalancer);
+                    rewindable.TrySaveSnapshot();
                 }
                 
                 int frameCount = 0;

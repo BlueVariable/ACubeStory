@@ -47,7 +47,7 @@ namespace BLUE.ACubeStory.Rewind
             rewindController.UnregisterRewindable(this);
         }
 
-        public void SaveSnapshot(SnapshotSaveBalancer saveBalancer)
+        public bool TrySaveSnapshot()
         {
             T snapshot = GetSnapshot();
 
@@ -55,7 +55,7 @@ namespace BLUE.ACubeStory.Rewind
 
             if (!canSave)
             {
-                return;
+                return false;
             }
 
             if (_snapshots.Count > 0 && snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
@@ -63,7 +63,7 @@ namespace BLUE.ACubeStory.Rewind
                 _curIdenticalSnapshotCount++;
             }
 
-            if (!snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
+            if (_snapshots.Count > 0 && !snapshot.IsIdentical(_snapshots[_snapshots.Count - 1]))
             {
                 _curIdenticalSnapshotCount = 0;
             }
@@ -84,6 +84,8 @@ namespace BLUE.ACubeStory.Rewind
         public void StartRewind()
         {
             _curSnapshotIndex = _snapshots.Count - 1;
+
+            _curSnapshotIndex = Mathf.Clamp(_curSnapshotIndex, 0, _snapshots.Count);
             
             StopRewind();
             
@@ -118,7 +120,7 @@ namespace BLUE.ACubeStory.Rewind
 
         private IEnumerator RewindProgress()
         {
-            for (int i = _snapshots.Count - 1; i > 0; i--)
+            for (int i = _snapshots.Count - 1; i >= 0; i--)
             {
                 _curSnapshotIndex = i;
 
@@ -136,7 +138,7 @@ namespace BLUE.ACubeStory.Rewind
 
         private bool CanSaveSnapshot(T snapshot)
         {
-            if (!_discardIdenticalSnapshots && _maxIdenticalSnapshot < 0 || _snapshots.Count == 0)
+            if (_maxIdenticalSnapshot < 0)
             {
                 return true;
             }

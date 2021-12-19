@@ -2,23 +2,23 @@
 
 namespace BLUE.ACubeStory.Rewind
 {
-    public class RewindSnapShot_Rotation : RewindSnapshotBase
+    public class RewindSnapshot_Rotation : RewindSnapshotBase
     {
         public Quaternion Rotation { get; }
 
-        public RewindSnapShot_Rotation(Quaternion rotation)
+        public RewindSnapshot_Rotation(Quaternion rotation)
         {
             Rotation = rotation;
         }
         
         public override bool IsIdentical(RewindSnapshotBase otherSnapshot)
         {
-            if (otherSnapshot == null || !(otherSnapshot is RewindSnapShot_Rotation))
+            if (!(otherSnapshot is RewindSnapshot_Rotation snapshot))
             {
                 return false;
             }
 
-            return Rotation == ((RewindSnapShot_Rotation) otherSnapshot).Rotation;
+            return Rotation == snapshot.Rotation;
         }
     }
 }

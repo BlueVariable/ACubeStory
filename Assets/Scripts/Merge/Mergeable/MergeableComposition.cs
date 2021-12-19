@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
@@ -36,16 +37,43 @@ namespace BLUE.ACubeStory.Merge
 
         #endregion
 
+        public bool TryUnmergeMergeablesExceptInitial()
+        {
+            bool unmerged = false;
+
+            List<Mergeable> targetMergeables = new List<Mergeable>();
+            
+            foreach (Mergeable mergeable in Mergeables)
+            {
+                if (_initialMergeables.Contains(mergeable))
+                {
+                    continue;
+                }
+
+                targetMergeables.Add(mergeable);
+            }
+            
+            foreach (Mergeable mergeable in targetMergeables)
+            {
+                if (TryUnmerge(mergeable))
+                {
+                    unmerged = true;
+                }
+            }
+
+            return unmerged;
+        }
+
         private void Awake()
         {
             TryInitInitialMergeables();
             
-            RegisterToMergeRequestors();
+            RegisterToCollectiveMergeRequestors();
         }
 
         private void OnDestroy()
         {
-            UnregisterFromMergeRequestors();
+            UnregisterFromCollectiveMergeRequestors();
         }
 
         private bool TryInitInitialMergeables()
@@ -69,7 +97,7 @@ namespace BLUE.ACubeStory.Merge
             return true;
         }
 
-        private void RegisterToMergeRequestors()
+        private void RegisterToCollectiveMergeRequestors()
         {
             foreach (TriggerBase mergeRequestor in _collectiveMergeRequestors)
             {
@@ -77,7 +105,7 @@ namespace BLUE.ACubeStory.Merge
             }
         }
 
-        private void UnregisterFromMergeRequestors()
+        private void UnregisterFromCollectiveMergeRequestors()
         {
             foreach (TriggerBase mergeRequestor in _collectiveMergeRequestors)
             {
@@ -100,7 +128,7 @@ namespace BLUE.ACubeStory.Merge
 
                 foreach (Mergeable mergeable in mergedMergeables)
                 {
-                    _mergeables.Add(mergeable);
+                    Mergeables.Add(mergeable);
                     
                     OnMerged?.Invoke(mergeable);
                 }
@@ -114,7 +142,7 @@ namespace BLUE.ACubeStory.Merge
 
             if (merged)
             {
-                _mergeables.Add(targetMergeable);
+                Mergeables.Add(targetMergeable);
 
                 OnMerged?.Invoke(targetMergeable);
 
@@ -130,7 +158,7 @@ namespace BLUE.ACubeStory.Merge
 
             if (unmerged)
             {
-                _mergeables.Remove(targetMergeable);
+                Mergeables.Remove(targetMergeable);
 
                 OnUnmerged?.Invoke(targetMergeable);
 
