@@ -1979,6 +1979,7 @@ MonoBehaviour:
   _undoRequestors:
   - {fileID: 145977267681140389}
   - {fileID: 6992611269288237745}
+  - {fileID: 805281267369754191}
 --- !u!114 &1615147408662205967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2149,6 +2150,7 @@ GameObject:
   - component: {fileID: 7584444734034070482}
   - component: {fileID: 145977267681140389}
   - component: {fileID: 6992611269288237745}
+  - component: {fileID: 805281267369754191}
   m_Layer: 8
   m_Name: UndoRequestors
   m_TagString: Untagged
@@ -2169,6 +2171,7 @@ Transform:
   m_Children:
   - {fileID: 6790602213527190583}
   - {fileID: 4186307898818592374}
+  - {fileID: 1355978395367414009}
   m_Father: {fileID: 7074784438819274613}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2216,6 +2219,79 @@ MonoBehaviour:
   _cubeRollState: {fileID: 8132517245878650085}
   _triggerAttemptedActionExecutor:
     _actionCarrier: {fileID: 4186307898818592374}
+--- !u!114 &805281267369754191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736891764558199860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b195328b1318f5f49990f9774cafb187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 1355978395367414009}
+--- !u!1 &7060011666408835931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1355978395367414009}
+  - component: {fileID: 2461632816319307340}
+  m_Layer: 8
+  m_Name: UndoRequestedActionExecutor_Wall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1355978395367414009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060011666408835931}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584444734034070482}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2461632816319307340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060011666408835931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mergeableComposition: {fileID: 216091954713794861}
+  _mergeableOverlapTrigger: {fileID: 805281267369754191}
+  _highlighterData:
+    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
+    _targetWidth: 5
+    _duration: 0.4
+    _unhighlightAfterCompletion: 1
+  _onlyHighlightOverlapped: 0
 --- !u!1 &7084103632719398119
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,6 +3229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
+--- !u!4 &2278788579180269005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6572789999254590275, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
+  m_PrefabInstance: {fileID: 4947449989573811854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &915684824503583812 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5196579967308012234, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
@@ -3164,8 +3245,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4758834764f84a444b9f8c9e191b7dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2278788579180269005 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6572789999254590275, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
-  m_PrefabInstance: {fileID: 4947449989573811854}
-  m_PrefabAsset: {fileID: 0}

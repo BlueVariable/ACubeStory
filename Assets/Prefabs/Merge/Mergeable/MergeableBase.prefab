@@ -81,6 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mergedActionExecutor:
     _actionCarrier: {fileID: 0}
+  _unmergedActionExecutor:
+    _actionCarrier: {fileID: 0}
 --- !u!114 &536146330531551407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,12 +137,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3b728bf3bf403fb0e9ec8d8daefc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 16576
 --- !u!114 &2227401397244740040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,9 +158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43ce63c11ea2574d985ece90f2bd1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
   _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
   _layerMask:
     serializedVersion: 2
     m_Bits: 128
