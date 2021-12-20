@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using BLUE.ACubeStory.Ability;
 using BLUE.ACubeStory.Level;
-using BLUE.ACubeStory.Rewind;
 using BLUE.InputSystem;
+using BLUE.RewindSystem;
 using BLUE.TriggerSystem;
 using UnityEngine;
 

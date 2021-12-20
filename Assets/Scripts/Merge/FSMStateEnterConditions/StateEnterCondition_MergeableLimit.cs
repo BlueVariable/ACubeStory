@@ -1,8 +1,7 @@
-using BLUE.ACubeStory.Merge;
 using BLUE.FSMSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Cube
+namespace BLUE.ACubeStory.Merge
 {
     public class StateEnterCondition_MergeableLimit : StateEnterConditionBase
     {

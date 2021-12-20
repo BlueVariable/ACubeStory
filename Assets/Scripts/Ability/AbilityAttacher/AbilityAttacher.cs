@@ -15,10 +15,14 @@ namespace BLUE.ACubeStory.Ability
             Dash = 2,
             Roll_2D = 3,
             Roll_3D = 4,
+            
+            Rewind_OnFall = 5,
+            Rewind_OnObstacleHit = 6,
+            Rewind_MergePuzzle = 7
         }
 
         [Serializable]
-        public class AbilityMap
+        public class AbilityInfo
         {
             [SerializeField] private EAbility _abilityType = EAbility.None;
             public EAbility AbilityType => _abilityType;
@@ -31,7 +35,7 @@ namespace BLUE.ACubeStory.Ability
         
         [SerializeField] private Trigger_LayerBase _abilityAttachRequesterTrigger = null;
         
-        [SerializeField] private AbilityMap[] _abilityMap = null;
+        [SerializeField] private AbilityInfo[] _abilityMap = null;
 
         [SerializeField] private ActionExecutor _abilityAttachedActions = null;
 
@@ -61,22 +65,22 @@ namespace BLUE.ACubeStory.Ability
         {
             GameObject triggeredObject = ((Trigger_LayerBase) trigger).LastValidObject;
 
-            AbilityAttachRequesterBase abilityAttachRequester =
-                triggeredObject.GetComponent<AbilityAttachRequesterBase>();
+            AbilityAttachRequestorBase abilityAttachRequestor =
+                triggeredObject.GetComponent<AbilityAttachRequestorBase>();
 
-            if (abilityAttachRequester == null)
+            if (abilityAttachRequestor == null)
             {
                 return;
             }
 
-            AbilityBase ability = _abilityMap.FirstOrDefault(i => i.AbilityType == abilityAttachRequester.Ability).Ability;
+            AbilityBase ability = _abilityMap.FirstOrDefault(i => i.AbilityType == abilityAttachRequestor.Ability).Ability;
 
             if (!_abilityAttachableController.TryAttach(ability))
             {
                 return;
             }
 
-            LastAttachedAbility = abilityAttachRequester.Ability;
+            LastAttachedAbility = abilityAttachRequestor.Ability;
             
             _abilityAttachedActions.Execute();
         }

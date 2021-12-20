@@ -2,7 +2,7 @@
 
 namespace BLUE.ACubeStory.Ability
 {
-    public abstract class AbilityAttachRequesterBase : MonoBehaviour
+    public abstract class AbilityAttachRequestorBase : MonoBehaviour
     {
         public abstract AbilityAttacher.EAbility Ability { get; }
     }

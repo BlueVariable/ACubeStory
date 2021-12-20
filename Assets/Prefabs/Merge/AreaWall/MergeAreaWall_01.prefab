@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025315809646940291}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.1, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 0.1, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 6401054596361064949}
   m_RootOrder: 1
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025315809646940291}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -94,7 +94,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 0.99}
   m_Center: {x: -1, y: 0, z: 0}
 --- !u!54 &1086736705638881084
 Rigidbody:
@@ -206,7 +206,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 0.99}
   m_Center: {x: -1, y: 0, z: 0}
 --- !u!54 &3063434047495295248
 Rigidbody:
@@ -233,7 +233,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6662873308470379865, guid: 80d9865980f88414da7a95c610bb4dfc, type: 3}
       propertyPath: m_Name
-      value: Wall_02
+      value: MergeAreaWall_01
       objectReference: {fileID: 0}
     - target: {fileID: 7381730252366948809, guid: 80d9865980f88414da7a95c610bb4dfc, type: 3}
       propertyPath: m_RootOrder
