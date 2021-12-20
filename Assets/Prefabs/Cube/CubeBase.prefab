@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 807484255560645339}
   - component: {fileID: 8188786509246294705}
-  - component: {fileID: 5935218185818052430}
+  - component: {fileID: 686686930956628140}
   m_Layer: 8
   m_Name: DashState
   m_TagString: Untagged
@@ -313,7 +313,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _dashDistance: 3
---- !u!114 &5935218185818052430
+--- !u!114 &686686930956628140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -322,11 +322,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 824589053605917631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &1021785784128315921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1279,7 @@ GameObject:
   - component: {fileID: 2474406625303258872}
   - component: {fileID: 2002936027992234013}
   - component: {fileID: 4469351800279121513}
-  - component: {fileID: 3006958720660535529}
+  - component: {fileID: 2419078193007538339}
   m_Layer: 8
   m_Name: ClimbState
   m_TagString: Untagged
@@ -1361,7 +1360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeDashAbility: {fileID: 4096651698303276022}
   _negateResult: 1
---- !u!114 &3006958720660535529
+--- !u!114 &2419078193007538339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1370,11 +1369,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3540440007858417543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &3845191092780923674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,7 +2328,7 @@ GameObject:
   - component: {fileID: 3903967038583964204}
   - component: {fileID: 8093321301453597793}
   - component: {fileID: 1465185744550846159}
-  - component: {fileID: 6825885051779285290}
+  - component: {fileID: 6610442381580015620}
   m_Layer: 8
   m_Name: DescendState
   m_TagString: Untagged
@@ -2411,7 +2409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeDashAbility: {fileID: 4096651698303276022}
   _negateResult: 1
---- !u!114 &6825885051779285290
+--- !u!114 &6610442381580015620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2420,11 +2418,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7331309771532701547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &7556074109369702819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,7 +2582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7929871657999613716}
   - component: {fileID: 370088330078242384}
-  - component: {fileID: 7915942854949580559}
+  - component: {fileID: 3527287423328806065}
   m_Layer: 8
   m_Name: JumpState
   m_TagString: Untagged
@@ -2629,7 +2626,7 @@ MonoBehaviour:
     _moveEase: 9
     _doLocalMove: 0
   _jumpPower: 2
---- !u!114 &7915942854949580559
+--- !u!114 &3527287423328806065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2638,11 +2635,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8010327804896191993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &8142753151836913864
 GameObject:
   m_ObjectHideFlags: 0
