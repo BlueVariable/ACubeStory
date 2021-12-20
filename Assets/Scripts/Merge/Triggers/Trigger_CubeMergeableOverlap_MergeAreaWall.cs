@@ -8,7 +8,7 @@ using UnityEngine;
 namespace BLUE.ACubeStory.Merge
 {
     // TODO: Gokay Update Bottleneck mergeables
-    public class Trigger_CubeMergeableOverlap_Wall : Trigger_CubeMergeableOverlapBase
+    public class Trigger_CubeMergeableOverlap_MergeAreaWall : Trigger_CubeMergeableOverlapBase
     {
         [SerializeField] private MergeableComposition _mergeableComposition = null;
 
@@ -111,7 +111,7 @@ namespace BLUE.ACubeStory.Merge
             Trigger_OnTriggerEnter triggerEnter = ((Trigger_OnTriggerEnter) trigger);
             
             Mergeable mergeable = triggerEnter.GetComponentInParent<Mergeable>();
-            Wall.Wall wall = triggerEnter.LastValidCollider.GetComponentInParent<Wall.Wall>();
+            MergeAreaWall wall = triggerEnter.LastValidCollider.GetComponentInParent<MergeAreaWall>();
             
             if (mergeable == null || wall == null)
             {
