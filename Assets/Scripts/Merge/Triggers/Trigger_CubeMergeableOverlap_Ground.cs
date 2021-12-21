@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using BLUE.ActionSystem;
+using BLUE.ACubeStory.Common;
 using BLUE.ACubeStory.Cube;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Merge
 {
-    public class Trigger_CubeMergeableOverlap_Ground : Trigger_CubeMergeableOverlapBase
+    public class Trigger_CubeMergeableOverlap_Ground : Trigger_CubeMergeableOverlapBase, IUndoRollReasonProvider
     {
         [SerializeField] private MergeableComposition _mergeableComposition = null;
 
@@ -15,6 +16,8 @@ namespace BLUE.ACubeStory.Merge
         
         [SerializeField] private ActionExecutor _triggerAttemptedActionExecutor = null;
 
+        public EUndoRollReason GetUndoRollReason => EUndoRollReason.CubeMergeableOverlap_Ground;
+        
         private HashSet<Mergeable> _bottleneckMergeables = new HashSet<Mergeable>();
         
         #region Events

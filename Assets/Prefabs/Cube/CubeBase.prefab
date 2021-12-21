@@ -93,6 +93,74 @@ MonoBehaviour:
     _actionCarrier: {fileID: 8576745381569738223}
   _stateExitedActionExecutor:
     _actionCarrier: {fileID: 7409694716241082338}
+--- !u!1 &592921618253821186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2980561204227139207}
+  - component: {fileID: 8826487192041083454}
+  - component: {fileID: 7033711440228409635}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutor_Mergeable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2980561204227139207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592921618253821186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1762585354338178456}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8826487192041083454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592921618253821186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mergeableComposition: {fileID: 216091954713794861}
+  _mergeableOverlapTrigger: {fileID: 2847620910634200013}
+  _highlighterData:
+    _color: {r: 1, g: 0.11461386, b: 0, a: 1}
+    _targetWidth: 5
+    _duration: 0.4
+    _unhighlightAfterCompletion: 1
+  _onlyHighlightOverlapped: 0
+--- !u!114 &7033711440228409635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592921618253821186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482865c4cf974431afd9e73200ac1d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stallExecution: 0
+  _dialogueOptions: a10f0000a20f0000a30f0000a40f0000
+  _dialoguePlayProbability: 1
+  _autoStopOnComplete: 1
 --- !u!1 &682995821722401175
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 807484255560645339}
   - component: {fileID: 8188786509246294705}
-  - component: {fileID: 5935218185818052430}
+  - component: {fileID: 686686930956628140}
   m_Layer: 8
   m_Name: DashState
   m_TagString: Untagged
@@ -313,7 +381,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _dashDistance: 3
---- !u!114 &5935218185818052430
+--- !u!114 &686686930956628140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -322,11 +390,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 824589053605917631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &1021785784128315921
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012e87488841424898b3af5fe0eb8783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxIdenticalSnapshot: -1
   _rootTransform: {fileID: 7075618033240990871}
 --- !u!1 &1099766640777308964
 GameObject:
@@ -667,7 +733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012e87488841424898b3af5fe0eb8783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxIdenticalSnapshot: -1
   _rootTransform: {fileID: 7075618033240990871}
 --- !u!1 &2138478477988130566
 GameObject:
@@ -815,7 +880,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4186307898818592374}
-  - component: {fileID: 9131554775248730790}
   m_Layer: 8
   m_Name: UndoRequestedActionExecutor_Ground
   m_TagString: Untagged
@@ -837,26 +901,6 @@ Transform:
   m_Father: {fileID: 7584444734034070482}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9131554775248730790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2256195055933030377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _mergeableOverlapTrigger: {fileID: 6992611269288237745}
-  _highlighterData:
-    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
-    _targetWidth: 5
-    _duration: 0.4
-    _unhighlightAfterCompletion: 1
-  _onlyHighlightOverlapped: 0
 --- !u!1 &2330482651709709152
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +1013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameSaveInterval: 3
+  _maxIdenticalSnapshotCount: 5
 --- !u!1 &2375102574333989115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1326,7 @@ GameObject:
   - component: {fileID: 2474406625303258872}
   - component: {fileID: 2002936027992234013}
   - component: {fileID: 4469351800279121513}
-  - component: {fileID: 3006958720660535529}
+  - component: {fileID: 2419078193007538339}
   m_Layer: 8
   m_Name: ClimbState
   m_TagString: Untagged
@@ -1362,7 +1407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeDashAbility: {fileID: 4096651698303276022}
   _negateResult: 1
---- !u!114 &3006958720660535529
+--- !u!114 &2419078193007538339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1371,11 +1416,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3540440007858417543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &3845191092780923674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1591,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1864585b3ce4129b149f9a9a3b80383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxIdenticalSnapshot: -1
   _rootTransform: {fileID: 7075618033240990871}
 --- !u!1 &4428741736119544247
 GameObject:
@@ -1649,6 +1692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameSaveInterval: 3
+  _maxIdenticalSnapshotCount: 5
 --- !u!1 &4646373223804922831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,6 +1998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8230603844482657796}
+  - {fileID: 1762585354338178456}
   - {fileID: 7584444734034070482}
   m_Father: {fileID: 433208529457987252}
   m_RootOrder: 1
@@ -1979,9 +2024,20 @@ MonoBehaviour:
   _rollBehaviourProvider: {fileID: 3867403072291783834}
   _rollCompletedActionExecutor:
     _actionCarrier: {fileID: 8230603844482657796}
+  _undoReasonActionExecutorMap:
+  - _undoRollReasonType: 1
+    _undoRollStartedActionExecutor:
+      _actionCarrier: {fileID: 2980561204227139207}
+  - _undoRollReasonType: 2
+    _undoRollStartedActionExecutor:
+      _actionCarrier: {fileID: 8352501495332933628}
+  - _undoRollReasonType: 3
+    _undoRollStartedActionExecutor:
+      _actionCarrier: {fileID: 5665754877357945577}
   _undoRequestors:
   - {fileID: 145977267681140389}
   - {fileID: 6992611269288237745}
+  - {fileID: 805281267369754191}
 --- !u!114 &1615147408662205967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2039,7 +2095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012e87488841424898b3af5fe0eb8783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxIdenticalSnapshot: -1
   _rootTransform: {fileID: 7075618033240990871}
 --- !u!1 &6465153098811955559
 GameObject:
@@ -2083,8 +2138,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6790602213527190583}
-  - component: {fileID: 19635375702134791}
-  - component: {fileID: 6536991851636944925}
   m_Layer: 8
   m_Name: UndoRequestedActionExecutor_Mergeable
   m_TagString: Untagged
@@ -2106,42 +2159,6 @@ Transform:
   m_Father: {fileID: 7584444734034070482}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &19635375702134791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6565956250890536805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _mergeableOverlapTrigger: {fileID: 145977267681140389}
-  _highlighterData:
-    _color: {r: 1, g: 0.11461386, b: 0, a: 1}
-    _targetWidth: 5
-    _duration: 0.4
-    _unhighlightAfterCompletion: 1
-  _onlyHighlightOverlapped: 0
---- !u!114 &6536991851636944925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6565956250890536805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 482865c4cf974431afd9e73200ac1d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stallExecution: 0
-  _dialogueOptions: a10f0000a20f0000a30f0000a40f0000
-  _dialoguePlayProbability: 1
-  _autoStopOnComplete: 1
 --- !u!1 &6736891764558199860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,6 +2170,7 @@ GameObject:
   - component: {fileID: 7584444734034070482}
   - component: {fileID: 145977267681140389}
   - component: {fileID: 6992611269288237745}
+  - component: {fileID: 805281267369754191}
   m_Layer: 8
   m_Name: UndoRequestors
   m_TagString: Untagged
@@ -2173,8 +2191,9 @@ Transform:
   m_Children:
   - {fileID: 6790602213527190583}
   - {fileID: 4186307898818592374}
+  - {fileID: 1355978395367414009}
   m_Father: {fileID: 7074784438819274613}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &145977267681140389
 MonoBehaviour:
@@ -2220,6 +2239,58 @@ MonoBehaviour:
   _cubeRollState: {fileID: 8132517245878650085}
   _triggerAttemptedActionExecutor:
     _actionCarrier: {fileID: 4186307898818592374}
+--- !u!114 &805281267369754191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736891764558199860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b195328b1318f5f49990f9774cafb187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 1355978395367414009}
+--- !u!1 &7060011666408835931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1355978395367414009}
+  m_Layer: 8
+  m_Name: UndoRequestedActionExecutor_MergeAreaWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1355978395367414009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060011666408835931}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584444734034070482}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7084103632719398119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,7 +2334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1864585b3ce4129b149f9a9a3b80383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxIdenticalSnapshot: -1
   _rootTransform: {fileID: 7075618033240990871}
 --- !u!1 &7223119999523451128
 GameObject:
@@ -2320,6 +2390,12 @@ MonoBehaviour:
     _ability: {fileID: 107322596056555021}
   - _abilityType: 4
     _ability: {fileID: 1155004893680139138}
+  - _abilityType: 5
+    _ability: {fileID: 6893446985184658380}
+  - _abilityType: 6
+    _ability: {fileID: 6249220561166666387}
+  - _abilityType: 7
+    _ability: {fileID: 2278422210449065834}
   _abilityAttachedActions:
     _actionCarrier: {fileID: 3102037536888011951}
 --- !u!1 &7331309771532701547
@@ -2333,7 +2409,7 @@ GameObject:
   - component: {fileID: 3903967038583964204}
   - component: {fileID: 8093321301453597793}
   - component: {fileID: 1465185744550846159}
-  - component: {fileID: 6825885051779285290}
+  - component: {fileID: 6610442381580015620}
   m_Layer: 8
   m_Name: DescendState
   m_TagString: Untagged
@@ -2414,7 +2490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeDashAbility: {fileID: 4096651698303276022}
   _negateResult: 1
---- !u!114 &6825885051779285290
+--- !u!114 &6610442381580015620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2423,11 +2499,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7331309771532701547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &7556074109369702819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,6 +2652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameSaveInterval: 3
+  _maxIdenticalSnapshotCount: 5
 --- !u!1 &8010327804896191993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7929871657999613716}
   - component: {fileID: 370088330078242384}
-  - component: {fileID: 7915942854949580559}
+  - component: {fileID: 3527287423328806065}
   m_Layer: 8
   m_Name: JumpState
   m_TagString: Untagged
@@ -2631,7 +2707,7 @@ MonoBehaviour:
     _moveEase: 9
     _doLocalMove: 0
   _jumpPower: 2
---- !u!114 &7915942854949580559
+--- !u!114 &3527287423328806065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2640,11 +2716,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8010327804896191993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c0ee06249845a42b10d55c24d57b43, type: 3}
+  m_Script: {fileID: 11500000, guid: db75d3295d614042bf29db5e9ab68b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _maxMergeableCount: 1
+  _levelStates: 14000000
 --- !u!1 &8142753151836913864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,8 +2826,160 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1864585b3ce4129b149f9a9a3b80383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxIdenticalSnapshot: -1
   _rootTransform: {fileID: 7075618033240990871}
+--- !u!1 &8239495855660009604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8352501495332933628}
+  - component: {fileID: 8168923626282565958}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutor_Ground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8352501495332933628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239495855660009604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1762585354338178456}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8168923626282565958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239495855660009604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mergeableComposition: {fileID: 216091954713794861}
+  _mergeableOverlapTrigger: {fileID: 3900425465595479490}
+  _highlighterData:
+    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
+    _targetWidth: 5
+    _duration: 0.4
+    _unhighlightAfterCompletion: 1
+  _onlyHighlightOverlapped: 0
+--- !u!1 &8717453799788353114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1762585354338178456}
+  - component: {fileID: 2847620910634200013}
+  - component: {fileID: 3900425465595479490}
+  - component: {fileID: 3238322968927395525}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1762585354338178456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2980561204227139207}
+  - {fileID: 8352501495332933628}
+  - {fileID: 5665754877357945577}
+  m_Father: {fileID: 7074784438819274613}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2847620910634200013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd83b2b1226f6140a5d29389675c136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 6790602213527190583}
+--- !u!114 &3900425465595479490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58889ca3e13234946b511eb3767229ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 4186307898818592374}
+--- !u!114 &3238322968927395525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b195328b1318f5f49990f9774cafb187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 1355978395367414009}
 --- !u!1 &8946584246915453116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,6 +3171,57 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &9135901445082881855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5665754877357945577}
+  - component: {fileID: 6218025923986488627}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutor_MergeAreaWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5665754877357945577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9135901445082881855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1762585354338178456}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6218025923986488627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9135901445082881855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mergeableComposition: {fileID: 216091954713794861}
+  _mergeableOverlapTrigger: {fileID: 3238322968927395525}
+  _highlighterData:
+    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
+    _targetWidth: 5
+    _duration: 0.4
+    _unhighlightAfterCompletion: 1
+  _onlyHighlightOverlapped: 0
 --- !u!1 &9175275667832380225
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
 using BLUE.FSMSystem;
@@ -9,6 +10,16 @@ namespace BLUE.ACubeStory.Cube
 {
     public class State_Cube_Roll : StateBase<ECubeState, FSMTransitionMessage_Cube_Roll>
     {
+        [Serializable]
+        private class UndoReasonActionExecutorInfo
+        {
+            [SerializeField] private EUndoRollReason _undoRollReasonType = EUndoRollReason.None;
+            public EUndoRollReason UndoRollReasonType => _undoRollReasonType;
+
+            [SerializeField] private ActionExecutor _undoRollStartedActionExecutor = null;
+            public ActionExecutor UndoRollStartedActionExecutor => _undoRollStartedActionExecutor;
+        }
+        
         [Header("Object Settings")]
         [SerializeField] private FSM_Cube _cubeFSM = null;
         [SerializeField] private Transform _objectToRoll = null;
@@ -22,6 +33,7 @@ namespace BLUE.ACubeStory.Cube
 
         [Header("Action Executors")] 
         [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
+        [SerializeField] private UndoReasonActionExecutorInfo[] _undoReasonActionExecutorMap = default;
 
         [Header("Triggers")]
         [SerializeField] private TriggerBase[] _undoRequestors = new TriggerBase[0];
@@ -81,8 +93,20 @@ namespace BLUE.ACubeStory.Cube
         {
             UnregisterFromUndoRequestors();
 
-            _rollBehaviourProvider.GetRollBehaviour().TryUndoRoll(
-                onRolledCallback: OnRollCompleted);
+            if (_rollBehaviourProvider.GetRollBehaviour().TryUndoRoll(
+                    onRolledCallback: OnRollCompleted))
+            {
+                if (triggerBase is IUndoRollReasonProvider reasonProvider)
+                {
+                    UndoReasonActionExecutorInfo info = _undoReasonActionExecutorMap.FirstOrDefault(val =>
+                        val.UndoRollReasonType == reasonProvider.GetUndoRollReason);
+
+                    if (info != null)
+                    {
+                        info.UndoRollStartedActionExecutor.Execute();
+                    }
+                }
+            }
         }
     }
 }

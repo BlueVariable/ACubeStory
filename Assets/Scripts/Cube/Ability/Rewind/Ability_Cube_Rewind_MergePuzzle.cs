@@ -2,8 +2,8 @@
 using BLUE.ACubeStory.Ability;
 using BLUE.ACubeStory.Level;
 using BLUE.ACubeStory.Merge;
-using BLUE.ACubeStory.Rewind;
 using BLUE.InputSystem;
+using BLUE.RewindSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
