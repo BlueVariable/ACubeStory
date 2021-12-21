@@ -93,6 +93,74 @@ MonoBehaviour:
     _actionCarrier: {fileID: 8576745381569738223}
   _stateExitedActionExecutor:
     _actionCarrier: {fileID: 7409694716241082338}
+--- !u!1 &592921618253821186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2980561204227139207}
+  - component: {fileID: 8826487192041083454}
+  - component: {fileID: 7033711440228409635}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutor_Mergeable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2980561204227139207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592921618253821186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1762585354338178456}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8826487192041083454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592921618253821186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mergeableComposition: {fileID: 216091954713794861}
+  _mergeableOverlapTrigger: {fileID: 2847620910634200013}
+  _highlighterData:
+    _color: {r: 1, g: 0.11461386, b: 0, a: 1}
+    _targetWidth: 5
+    _duration: 0.4
+    _unhighlightAfterCompletion: 1
+  _onlyHighlightOverlapped: 0
+--- !u!114 &7033711440228409635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592921618253821186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482865c4cf974431afd9e73200ac1d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stallExecution: 0
+  _dialogueOptions: a10f0000a20f0000a30f0000a40f0000
+  _dialoguePlayProbability: 1
+  _autoStopOnComplete: 1
 --- !u!1 &682995821722401175
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +880,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4186307898818592374}
-  - component: {fileID: 9131554775248730790}
   m_Layer: 8
   m_Name: UndoRequestedActionExecutor_Ground
   m_TagString: Untagged
@@ -834,26 +901,6 @@ Transform:
   m_Father: {fileID: 7584444734034070482}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9131554775248730790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2256195055933030377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _mergeableOverlapTrigger: {fileID: 6992611269288237745}
-  _highlighterData:
-    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
-    _targetWidth: 5
-    _duration: 0.4
-    _unhighlightAfterCompletion: 1
-  _onlyHighlightOverlapped: 0
 --- !u!1 &2330482651709709152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1951,6 +1998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8230603844482657796}
+  - {fileID: 1762585354338178456}
   - {fileID: 7584444734034070482}
   m_Father: {fileID: 433208529457987252}
   m_RootOrder: 1
@@ -1976,6 +2024,16 @@ MonoBehaviour:
   _rollBehaviourProvider: {fileID: 3867403072291783834}
   _rollCompletedActionExecutor:
     _actionCarrier: {fileID: 8230603844482657796}
+  _undoReasonActionExecutorMap:
+  - _undoRollReasonType: 1
+    _undoRollStartedActionExecutor:
+      _actionCarrier: {fileID: 2980561204227139207}
+  - _undoRollReasonType: 2
+    _undoRollStartedActionExecutor:
+      _actionCarrier: {fileID: 8352501495332933628}
+  - _undoRollReasonType: 3
+    _undoRollStartedActionExecutor:
+      _actionCarrier: {fileID: 5665754877357945577}
   _undoRequestors:
   - {fileID: 145977267681140389}
   - {fileID: 6992611269288237745}
@@ -2080,8 +2138,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6790602213527190583}
-  - component: {fileID: 19635375702134791}
-  - component: {fileID: 6536991851636944925}
   m_Layer: 8
   m_Name: UndoRequestedActionExecutor_Mergeable
   m_TagString: Untagged
@@ -2103,42 +2159,6 @@ Transform:
   m_Father: {fileID: 7584444734034070482}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &19635375702134791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6565956250890536805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _mergeableOverlapTrigger: {fileID: 145977267681140389}
-  _highlighterData:
-    _color: {r: 1, g: 0.11461386, b: 0, a: 1}
-    _targetWidth: 5
-    _duration: 0.4
-    _unhighlightAfterCompletion: 1
-  _onlyHighlightOverlapped: 0
---- !u!114 &6536991851636944925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6565956250890536805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 482865c4cf974431afd9e73200ac1d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stallExecution: 0
-  _dialogueOptions: a10f0000a20f0000a30f0000a40f0000
-  _dialoguePlayProbability: 1
-  _autoStopOnComplete: 1
 --- !u!1 &6736891764558199860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,7 +2193,7 @@ Transform:
   - {fileID: 4186307898818592374}
   - {fileID: 1355978395367414009}
   m_Father: {fileID: 7074784438819274613}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &145977267681140389
 MonoBehaviour:
@@ -2250,7 +2270,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1355978395367414009}
-  - component: {fileID: 2461632816319307340}
   m_Layer: 8
   m_Name: UndoRequestedActionExecutor_MergeAreaWall
   m_TagString: Untagged
@@ -2272,26 +2291,6 @@ Transform:
   m_Father: {fileID: 7584444734034070482}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2461632816319307340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7060011666408835931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mergeableComposition: {fileID: 216091954713794861}
-  _mergeableOverlapTrigger: {fileID: 805281267369754191}
-  _highlighterData:
-    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
-    _targetWidth: 5
-    _duration: 0.4
-    _unhighlightAfterCompletion: 1
-  _onlyHighlightOverlapped: 0
 --- !u!1 &7084103632719398119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,6 +2827,159 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rootTransform: {fileID: 7075618033240990871}
+--- !u!1 &8239495855660009604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8352501495332933628}
+  - component: {fileID: 8168923626282565958}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutor_Ground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8352501495332933628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239495855660009604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1762585354338178456}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8168923626282565958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239495855660009604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mergeableComposition: {fileID: 216091954713794861}
+  _mergeableOverlapTrigger: {fileID: 3900425465595479490}
+  _highlighterData:
+    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
+    _targetWidth: 5
+    _duration: 0.4
+    _unhighlightAfterCompletion: 1
+  _onlyHighlightOverlapped: 0
+--- !u!1 &8717453799788353114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1762585354338178456}
+  - component: {fileID: 2847620910634200013}
+  - component: {fileID: 3900425465595479490}
+  - component: {fileID: 3238322968927395525}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1762585354338178456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2980561204227139207}
+  - {fileID: 8352501495332933628}
+  - {fileID: 5665754877357945577}
+  m_Father: {fileID: 7074784438819274613}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2847620910634200013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd83b2b1226f6140a5d29389675c136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 6790602213527190583}
+--- !u!114 &3900425465595479490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58889ca3e13234946b511eb3767229ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 4186307898818592374}
+--- !u!114 &3238322968927395525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717453799788353114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b195328b1318f5f49990f9774cafb187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  _mergeableComposition: {fileID: 216091954713794861}
+  _cubeRollState: {fileID: 8132517245878650085}
+  _triggerAttemptedActionExecutor:
+    _actionCarrier: {fileID: 1355978395367414009}
 --- !u!1 &8946584246915453116
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,6 +3171,57 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &9135901445082881855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5665754877357945577}
+  - component: {fileID: 6218025923986488627}
+  m_Layer: 8
+  m_Name: UndoStartedActionExecutor_MergeAreaWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5665754877357945577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9135901445082881855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1762585354338178456}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6218025923986488627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9135901445082881855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874db03b57bb4fa4c9f1840cb8cd5988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mergeableComposition: {fileID: 216091954713794861}
+  _mergeableOverlapTrigger: {fileID: 3238322968927395525}
+  _highlighterData:
+    _color: {r: 1, g: 0.11372549, b: 0, a: 1}
+    _targetWidth: 5
+    _duration: 0.4
+    _unhighlightAfterCompletion: 1
+  _onlyHighlightOverlapped: 0
 --- !u!1 &9175275667832380225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,11 +3438,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
---- !u!4 &2278788579180269005 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6572789999254590275, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
-  m_PrefabInstance: {fileID: 4947449989573811854}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &915684824503583812 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5196579967308012234, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
@@ -3251,3 +3449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4758834764f84a444b9f8c9e191b7dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2278788579180269005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6572789999254590275, guid: a03fc45f8b5d594419d93e572790239e, type: 3}
+  m_PrefabInstance: {fileID: 4947449989573811854}
+  m_PrefabAsset: {fileID: 0}

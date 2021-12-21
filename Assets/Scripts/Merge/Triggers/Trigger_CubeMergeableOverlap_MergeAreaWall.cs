@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BLUE.ActionSystem;
+using BLUE.ACubeStory.Common;
 using BLUE.ACubeStory.Cube;
 using BLUE.TriggerSystem;
 using UnityEngine;
@@ -8,13 +9,15 @@ using UnityEngine;
 namespace BLUE.ACubeStory.Merge
 {
     // TODO: Gokay Update Bottleneck mergeables
-    public class Trigger_CubeMergeableOverlap_MergeAreaWall : Trigger_CubeMergeableOverlapBase
+    public class Trigger_CubeMergeableOverlap_MergeAreaWall : Trigger_CubeMergeableOverlapBase, IUndoRollReasonProvider
     {
         [SerializeField] private MergeableComposition _mergeableComposition = null;
 
         [SerializeField] private State_Cube_Roll _cubeRollState = null;
         
         [SerializeField] private ActionExecutor _triggerAttemptedActionExecutor = null;
+
+        public EUndoRollReason GetUndoRollReason => EUndoRollReason.CubeMergeableOverlap_MergeAreaWall;
 
         private HashSet<Mergeable> _bottleneckMergeables = new HashSet<Mergeable>();
         
