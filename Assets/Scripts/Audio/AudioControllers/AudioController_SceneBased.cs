@@ -6,18 +6,18 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Audio
 {
-    [Serializable]
-    public class SceneAudioMapData
+    public class AudioController_SceneBased : AudioControllerBase
     {
-        [SerializeField] private EScene _scene = EScene.Base;
-        public EScene Scene => _scene;
+        [Serializable]
+        private class SceneAudioMapData
+        {
+            [SerializeField] private EScene _scene = EScene.Base;
+            public EScene Scene => _scene;
 
-        [SerializeField] private AudioSource _audioClip = null;
-        public AudioSource AudioClip => _audioClip;
-    }
-    
-    public class AudioController_SceneTheme : AudioControllerBase
-    {
+            [SerializeField] private AudioSource _audioClip = null;
+            public AudioSource AudioClip => _audioClip;
+        }
+        
         [SerializeField] private SceneAudioMapData[] _sceneAudioMappings = null;
 
         [SerializeField] private float _volumeUpdateDuration = 0.5f;
@@ -30,7 +30,7 @@ namespace BLUE.ACubeStory.Audio
         
         public override EAudioController GetAudioControllerType()
         {
-            return EAudioController.SceneTheme;
+            return EAudioController.SceneBased;
         }
 
         private void Awake()

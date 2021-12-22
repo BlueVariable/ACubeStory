@@ -2,8 +2,7 @@
 {
     public enum EAudioController
     {
-        None = 00,
-        SceneTheme = 10,
-        SoundEffects = 20,
+        None = 0,
+        SceneBased = 10,
     }
 }
