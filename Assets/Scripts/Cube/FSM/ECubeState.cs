@@ -14,6 +14,8 @@
         Climb = 7,
         Descend = 8,
         
-        Rewind = 9
+        Rewind = 9,
+        
+        Float = 10,
     }
 }

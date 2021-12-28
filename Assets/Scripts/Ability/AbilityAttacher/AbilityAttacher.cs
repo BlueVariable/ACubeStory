@@ -18,7 +18,9 @@ namespace BLUE.ACubeStory.Ability
             
             Rewind_OnFall = 5,
             Rewind_OnObstacleHit = 6,
-            Rewind_MergePuzzle = 7
+            Rewind_MergePuzzle = 7,
+            
+            Float = 8,
         }
 
         [Serializable]
