@@ -6,18 +6,18 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Audio
 {
-    [Serializable]
-    public class SceneAudioMapData
+    public class AudioController_SceneBased : AudioControllerBase
     {
-        [SerializeField] private EScene _scene = EScene.Base;
-        public EScene Scene => _scene;
+        [Serializable]
+        private class SceneAudioMapData
+        {
+            [SerializeField] private EScene _scene = EScene.Base;
+            public EScene Scene => _scene;
 
-        [SerializeField] private AudioSource _audioClip = null;
-        public AudioSource AudioClip => _audioClip;
-    }
-    
-    public class AudioController_SceneTheme : AudioControllerBase
-    {
+            [SerializeField] private AudioSource _audioSource = null;
+            public AudioSource AudioSource => _audioSource;
+        }
+        
         [SerializeField] private SceneAudioMapData[] _sceneAudioMappings = null;
 
         [SerializeField] private float _volumeUpdateDuration = 0.5f;
@@ -30,7 +30,7 @@ namespace BLUE.ACubeStory.Audio
         
         public override EAudioController GetAudioControllerType()
         {
-            return EAudioController.SceneTheme;
+            return EAudioController.SceneBased;
         }
 
         private void Awake()
@@ -65,7 +65,7 @@ namespace BLUE.ACubeStory.Audio
                 return;
             }
 
-            if (_nowPlaying != null && _nowPlaying.AudioClip == candidateMapping.AudioClip)
+            if (_nowPlaying != null && _nowPlaying.AudioSource == candidateMapping.AudioSource)
             {
                 return;
             }
@@ -94,23 +94,23 @@ namespace BLUE.ACubeStory.Audio
         {
             if (_nowPlaying != null)
             {
-                yield return UpdateAudioVolume(_nowPlaying.AudioClip, 0);
+                yield return AudioVolumeUpdateProgress(_nowPlaying.AudioSource, 0);
                 
-                _nowPlaying.AudioClip.Stop();
+                _nowPlaying.AudioSource.Stop();
                 
                 yield return new WaitForSeconds(_delayBetweenAudios);
             }
 
             _nowPlaying = nextAudioMapping;
 
-            _nowPlaying.AudioClip.volume = 0;
+            _nowPlaying.AudioSource.volume = 0;
             
-            _nowPlaying.AudioClip.Play();
+            _nowPlaying.AudioSource.Play();
             
-            yield return UpdateAudioVolume(_nowPlaying.AudioClip, 1);
+            yield return AudioVolumeUpdateProgress(_nowPlaying.AudioSource, 1);
         }
 
-        private IEnumerator UpdateAudioVolume(AudioSource audioSource, float to)
+        private IEnumerator AudioVolumeUpdateProgress(AudioSource audioSource, float to)
         {
             float timePassed = 0;
 

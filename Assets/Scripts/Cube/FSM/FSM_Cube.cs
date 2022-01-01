@@ -18,6 +18,7 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Climb),
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Descend),
                 new FSMTransition_Cube(ECubeState.Idle, ECubeState.Rewind),
+                new FSMTransition_Cube(ECubeState.Idle, ECubeState.Float),
                 
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Idle),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Fall),
@@ -40,6 +41,8 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.Descend, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Idle),
+                
+                new FSMTransition_Cube(ECubeState.Float, ECubeState.Idle),
             };
         }
     }
