@@ -37,10 +37,14 @@ namespace BLUE.ACubeStory.Audio
         private void OnUpdateRequested(object sender, EventRaiserArgs_UpdateCanPlayAudioRequest e)
         {
             CanPlayAudio = e.CanPlayAudio;
+
+            OnCanPlayAudioSet(CanPlayAudio);
         }
 
         protected virtual void AwakeCustomActions() { }
         
         protected virtual void OnDestroyCustomActions() { }
+        
+        protected virtual void OnCanPlayAudioSet(bool canPlay) { }
     }
 }

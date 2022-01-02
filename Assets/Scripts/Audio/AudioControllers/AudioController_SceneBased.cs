@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using BLUE.ACubeStory.Scene;
+using BLUE.Helpers;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Audio
@@ -45,6 +46,39 @@ namespace BLUE.ACubeStory.Audio
             UnregisterFromSceneManager();
             
             base.OnDestroyCustomActions();
+        }
+
+        protected override void OnCanPlayAudioSet(bool canPlay)
+        {
+            if (canPlay == CanPlayAudio) 
+            {
+                return;
+            }
+            
+            if (_nowPlaying == null)
+            {
+                return;
+            }
+
+            StopAudioSwitchRoutine();
+
+            if (canPlay)
+            {
+                _nowPlaying.AudioSource.Play();
+                
+                StartCoroutine(AudioVolumeUpdateProgress(_nowPlaying.AudioSource, 1));
+            }
+            else
+            {
+                StartCoroutine(AudioVolumeUpdateProgress(_nowPlaying.AudioSource, 0));
+                
+                CoroutineHelper.Instance.WaitForSeconds(_volumeUpdateDuration, () =>
+                {
+                    _nowPlaying.AudioSource.Stop();
+                });
+            }
+
+            base.OnCanPlayAudioSet(canPlay);
         }
 
         private void RegisterToSceneManager()
@@ -110,6 +144,11 @@ namespace BLUE.ACubeStory.Audio
                 yield return new WaitForSeconds(_delayBetweenAudios);
             }
 
+            if (nextAudioMapping == null)
+            {
+                yield break;
+            }
+
             _nowPlaying = nextAudioMapping;
 
             _nowPlaying.AudioSource.volume = 0;
@@ -118,7 +157,7 @@ namespace BLUE.ACubeStory.Audio
             
             yield return AudioVolumeUpdateProgress(_nowPlaying.AudioSource, 1);
         }
-
+        
         private IEnumerator AudioVolumeUpdateProgress(AudioSource audioSource, float to)
         {
             float timePassed = 0;
