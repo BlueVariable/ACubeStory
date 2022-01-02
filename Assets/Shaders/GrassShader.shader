@@ -6,7 +6,7 @@ Shader "BLUE/GrassShader"
         _GrassColor ("Grass Color", color) = (0, 1, 0, 1)
         _WindDirection("Wind Direction", Vector) = (0, 0, 0)
     	_WindSpeed("Wind speed", Range(0, 0.1)) = 0.05
-    	_StepMultiplier ("Step Multiplier", Range(0, 1)) = 0
+    	_StepMultiplier ("Step Multiplier", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -50,15 +50,27 @@ Shader "BLUE/GrassShader"
 				o.position = UnityObjectToClipPos(v.vertex);
 				o.normal = v.normal;
 				o.uv = v.uv;
-            	
-				if (v.uv.y >= 0.5)
+
+            	float grassHeight = (_StepMultiplier * 0.25) + 0.5;
+
+            	float3 animatedVertex = v.vertex;
+
+            	if (v.uv.y >= 0.5)
 				{
-					float3 v0 = v.vertex;
+					float3 v0 = animatedVertex;
 					
-					v0 += cos(_Time.y) * _WindDirection.xyz * _WindSpeed;
+					v0 += cos(_Time.y) * _WindDirection.xyz * (_WindSpeed * (step(0.01, _StepMultiplier)));
 					
-					o.position = UnityObjectToClipPos(v0);
+					animatedVertex = v0;
 				}
+
+            	if (v.uv.y >= 0.5)
+            	{
+            		// 0.5 -> 0 -- 0.75 -> 1
+					animatedVertex.z = grassHeight;
+            	}
+
+            	o.position = UnityObjectToClipPos(animatedVertex);
             	
 				return o;
             }
@@ -67,7 +79,9 @@ Shader "BLUE/GrassShader"
             fixed4 frag (VertexOutput i) : SV_Target
             {
                 float4 c = tex2D(_MainTex, i.uv);
-				clip(c.a - 0.1);
+				
+				clip(c.a - 0.05);
+            	
 				return _GrassColor;
             }
             
