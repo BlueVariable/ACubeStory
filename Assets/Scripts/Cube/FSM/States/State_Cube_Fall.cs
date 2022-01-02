@@ -42,7 +42,7 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube transitionMessage)
         {
-            if (_fallSkipConditions.Any(val => !val.IsConditionSatisfied()))
+            if (_fallSkipConditions.Any(val => val.IsConditionSatisfied()))
             {
                 _cubeFSM.TryChangeState(ECubeState.Idle);
 
