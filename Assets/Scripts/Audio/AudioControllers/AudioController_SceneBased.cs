@@ -23,7 +23,7 @@ namespace BLUE.ACubeStory.Audio
         [SerializeField] private float _volumeUpdateDuration = 0.5f;
 
         [SerializeField] private float _delayBetweenAudios = 1f;
-        
+
         private SceneAudioMapData _nowPlaying = null;
 
         private IEnumerator _audioSwitchRoutine;
@@ -58,6 +58,11 @@ namespace BLUE.ACubeStory.Audio
 
         private void OnSceneLoaded(EScene eScene)
         {
+            if (!CanPlayAudio)
+            {
+                return;
+            }
+            
             SceneAudioMapData candidateMapping = _sceneAudioMappings.SingleOrDefault(i => i.Scene == eScene);
 
             if (candidateMapping == null)
