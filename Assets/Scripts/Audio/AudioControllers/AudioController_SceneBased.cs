@@ -23,7 +23,7 @@ namespace BLUE.ACubeStory.Audio
         [SerializeField] private float _volumeUpdateDuration = 0.5f;
 
         [SerializeField] private float _delayBetweenAudios = 1f;
-        
+
         private SceneAudioMapData _nowPlaying = null;
 
         private IEnumerator _audioSwitchRoutine;
@@ -33,14 +33,18 @@ namespace BLUE.ACubeStory.Audio
             return EAudioController.SceneBased;
         }
 
-        private void Awake()
+        protected override void AwakeCustomActions()
         {
             RegisterToSceneManager();
+            
+            base.AwakeCustomActions();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroyCustomActions()
         {
             UnregisterFromSceneManager();
+            
+            base.OnDestroyCustomActions();
         }
 
         private void RegisterToSceneManager()
@@ -58,6 +62,11 @@ namespace BLUE.ACubeStory.Audio
 
         private void OnSceneLoaded(EScene eScene)
         {
+            if (!CanPlayAudio)
+            {
+                return;
+            }
+            
             SceneAudioMapData candidateMapping = _sceneAudioMappings.SingleOrDefault(i => i.Scene == eScene);
 
             if (candidateMapping == null)
