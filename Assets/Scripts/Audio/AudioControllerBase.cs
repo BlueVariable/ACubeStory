@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using BLUE.ACubeStory.Audio.EventRaisers;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Audio
 {
@@ -8,9 +10,37 @@ namespace BLUE.ACubeStory.Audio
         
         public abstract EAudioController GetAudioControllerType();
 
-        public void SetCanPlayAudio(bool canPlayAudio)
+        private void Awake()
         {
-            CanPlayAudio = canPlayAudio;
+            RegisterToEventRaiser();
+            
+            AwakeCustomActions();
         }
+
+        private void OnDestroy()
+        {
+            UnregisterFromEventRaiser();
+
+            OnDestroyCustomActions();
+        }
+
+        private void RegisterToEventRaiser()
+        {
+            EventRaiser_UpdateCanPlayAudioRequest.OnRaisedStatic += OnUpdateRequested;
+        }
+
+        private void UnregisterFromEventRaiser()
+        {
+            EventRaiser_UpdateCanPlayAudioRequest.OnRaisedStatic -= OnUpdateRequested;
+        }
+
+        private void OnUpdateRequested(object sender, EventRaiserArgs_UpdateCanPlayAudioRequest e)
+        {
+            CanPlayAudio = e.CanPlayAudio;
+        }
+
+        protected virtual void AwakeCustomActions() { }
+        
+        protected virtual void OnDestroyCustomActions() { }
     }
 }

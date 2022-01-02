@@ -33,14 +33,18 @@ namespace BLUE.ACubeStory.Audio
             return EAudioController.SceneBased;
         }
 
-        private void Awake()
+        protected override void AwakeCustomActions()
         {
             RegisterToSceneManager();
+            
+            base.AwakeCustomActions();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroyCustomActions()
         {
             UnregisterFromSceneManager();
+            
+            base.OnDestroyCustomActions();
         }
 
         private void RegisterToSceneManager()
