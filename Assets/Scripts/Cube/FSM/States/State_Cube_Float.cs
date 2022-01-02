@@ -1,10 +1,5 @@
-using System;
-using System.Linq;
-using BLUE.ActionSystem;
-using BLUE.ACubeStory.Common;
 using BLUE.FSMSystem;
 using BLUE.InputSystem;
-using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
@@ -44,7 +39,12 @@ namespace BLUE.ACubeStory.Cube
             
             base.ExitStateCustomActions();
         }
-        
+
+        private void OnDestroy()
+        {
+            UnregisterFromInputManager();
+        }
+
         private void Move(Vector3 direction)
         {
             if (!CanMove(direction))

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using BLUE.Common;
-using BLUE.Extensions;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Common
@@ -11,7 +9,8 @@ namespace BLUE.ACubeStory.Common
         [SerializeField] private Transform _floatedTransform = null;
         [SerializeField] private float _speed = 1f;
         [SerializeField] private float _lowestOffset = 0.2f;
-        [SerializeField] private float _highestOffset = 0.5f; 
+        [SerializeField] private float _highestOffset = 0.5f;
+        [SerializeField] private float _distanceReachThreshold = 0.1f;
 
         private IEnumerator _floatRoutine;
         
@@ -21,6 +20,11 @@ namespace BLUE.ACubeStory.Common
         }
 
         public override void Deactivate()
+        {
+            StopFloatRoutine();
+        }
+
+        private void OnDestroy()
         {
             StopFloatRoutine();
         }
@@ -60,10 +64,11 @@ namespace BLUE.ACubeStory.Common
             {
                 targetPosition = offset * _floatedTransform.InverseTransformDirection(Vector3.up);
 
-                _floatedTransform.localPosition = Vector3.Lerp(_floatedTransform.localPosition,targetPosition, Time.deltaTime * _speed);
+                _floatedTransform.localPosition = Vector3.Lerp(_floatedTransform.localPosition,
+                    targetPosition, Time.deltaTime * _speed);
                 
                 yield return null;
-            } while (Vector3.Distance(_floatedTransform.localPosition, targetPosition) > 0.1f);
+            } while (Vector3.Distance(_floatedTransform.localPosition, targetPosition) > _distanceReachThreshold);
         }
     }
 }

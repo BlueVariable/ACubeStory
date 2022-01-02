@@ -48,7 +48,7 @@ namespace BLUE.ACubeStory.Audio
             base.OnDestroyCustomActions();
         }
 
-        protected override void OnCanPlayAudioSet(bool canPlay)
+        protected override void OnAudioToggleSet(bool canPlay)
         {
             if (_nowPlaying == null)
             {
@@ -73,7 +73,7 @@ namespace BLUE.ACubeStory.Audio
                 });
             }
 
-            base.OnCanPlayAudioSet(canPlay);
+            base.OnAudioToggleSet(canPlay);
         }
 
         private void RegisterToSceneManager()

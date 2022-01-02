@@ -1,6 +1,4 @@
-﻿using System;
-using BLUE.ACubeStory.Audio.EventRaisers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BLUE.ACubeStory.Audio
 {
@@ -10,6 +8,12 @@ namespace BLUE.ACubeStory.Audio
         
         public abstract EAudioController GetAudioControllerType();
 
+        protected virtual void AwakeCustomActions() { }
+        
+        protected virtual void OnDestroyCustomActions() { }
+        
+        protected virtual void OnAudioToggleSet(bool canPlay) { }
+        
         private void Awake()
         {
             RegisterToEventRaiser();
@@ -26,30 +30,24 @@ namespace BLUE.ACubeStory.Audio
 
         private void RegisterToEventRaiser()
         {
-            EventRaiser_UpdateCanPlayAudioRequest.OnRaisedStatic += OnUpdateRequested;
+            EventRaiser_OnAudioToggleRequested.OnRaisedStatic += OnToggleRequested;
         }
 
         private void UnregisterFromEventRaiser()
         {
-            EventRaiser_UpdateCanPlayAudioRequest.OnRaisedStatic -= OnUpdateRequested;
+            EventRaiser_OnAudioToggleRequested.OnRaisedStatic -= OnToggleRequested;
         }
 
-        private void OnUpdateRequested(object sender, EventRaiserArgs_UpdateCanPlayAudioRequest e)
+        private void OnToggleRequested(object sender, EventRaiserArgs_OnAudioToggleRequested args)
         {
-            if (CanPlayAudio == e.CanPlayAudio)
+            if (CanPlayAudio == args.Toggle)
             {
                 return;
             }
             
-            CanPlayAudio = e.CanPlayAudio;
+            CanPlayAudio = args.Toggle;
 
-            OnCanPlayAudioSet(CanPlayAudio);
+            OnAudioToggleSet(CanPlayAudio);
         }
-
-        protected virtual void AwakeCustomActions() { }
-        
-        protected virtual void OnDestroyCustomActions() { }
-        
-        protected virtual void OnCanPlayAudioSet(bool canPlay) { }
     }
 }
