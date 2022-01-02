@@ -36,6 +36,11 @@ namespace BLUE.ACubeStory.Audio
 
         private void OnUpdateRequested(object sender, EventRaiserArgs_UpdateCanPlayAudioRequest e)
         {
+            if (CanPlayAudio == e.CanPlayAudio)
+            {
+                return;
+            }
+            
             CanPlayAudio = e.CanPlayAudio;
 
             OnCanPlayAudioSet(CanPlayAudio);
