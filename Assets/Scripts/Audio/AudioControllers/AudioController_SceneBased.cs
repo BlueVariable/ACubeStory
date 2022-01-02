@@ -50,6 +50,11 @@ namespace BLUE.ACubeStory.Audio
 
         protected override void OnCanPlayAudioSet(bool canPlay)
         {
+            if (canPlay == CanPlayAudio) 
+            {
+                return;
+            }
+            
             if (_nowPlaying == null)
             {
                 return;
