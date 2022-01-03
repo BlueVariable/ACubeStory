@@ -20,5 +20,6 @@ namespace BLUE.ACubeStory.Scene
         Level_8 = 17,
         Level_9 = 18,
         Level_10 = 19,
+        Level_11 = 20,
     }
 }
