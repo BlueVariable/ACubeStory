@@ -82,6 +82,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a5434c2ef94e56d4e87d3307dda81e28, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29b8a1742a6a6ea47895ee0c7ae6ebe3, type: 3}
+--- !u!198 &1375419758962596111 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3919944634205778618, guid: 29b8a1742a6a6ea47895ee0c7ae6ebe3, type: 3}
+  m_PrefabInstance: {fileID: 2697665091050695605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3167486987958209515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,6 +154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8188786509246294705, guid: ce48f6b5bbf8e2d488ada1b6243f1767, type: 3}
+      propertyPath: _dashParticle
+      value: 
+      objectReference: {fileID: 1375419758962596111}
     - target: {fileID: 9104757875893166562, guid: ce48f6b5bbf8e2d488ada1b6243f1767, type: 3}
       propertyPath: m_Name
       value: Cube_Level_03

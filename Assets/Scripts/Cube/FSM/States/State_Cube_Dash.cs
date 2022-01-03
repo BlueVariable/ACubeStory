@@ -13,6 +13,8 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _settings = null;
 
+        [SerializeField] private ParticleSystem _dashParticle = null;
+        
         [SerializeField] private Vector3 _raycastOffset = Vector3.zero;
 
         [SerializeField] private LayerMask _layerMask = default;
@@ -35,8 +37,12 @@ namespace BLUE.ACubeStory.Cube
             void onDashCompleted()
             {
                 _cubeFSM.TryChangeState(ECubeState.Fall);
+                
+                _dashParticle.Stop();
             }
 
+            _dashParticle.Play();
+            
             base.EnterStateCustomActions(transitionMessage);
         }
 
