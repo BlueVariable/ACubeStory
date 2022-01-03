@@ -1,3 +1,4 @@
+using BLUE.ActionSystem;
 using BLUE.ACubeStory.Ability;
 using BLUE.InputSystem;
 using UnityEngine;
@@ -7,15 +8,22 @@ namespace BLUE.ACubeStory.Cube
     public class Ability_Cube_Float : AbilityBase
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
+
+        [SerializeField] private ActionExecutor _attachedActions = null;
+        [SerializeField] private ActionExecutor _detachedActions = null;
         
         public override void Attached()
         {
             RegisterToInputManager();
+            
+            _attachedActions.Execute();
         }
 
         public override void Detached()
         {
             UnregisterFromInputManager();
+            
+            _detachedActions.Execute();
         }
 
         private void OnDestroy()
