@@ -10,6 +10,11 @@ namespace BLUE.ACubeStory.Level
 
         public override bool IsConditionSatisfied()
         {
+            if (Level.Instance == null)
+            {
+                return false;
+            }
+            
             Level.Instance.LevelFSM.TryGetCurStateType(out ELevelState curStateType);
 
             return _states.Contains(curStateType);

@@ -61,6 +61,11 @@ namespace BLUE.ACubeStory.Cube
 
         private void RegisterToLevelFSM()
         {
+            if (Level.Level.Instance == null)
+            {
+                return;
+            }
+            
             Level.Level.Instance.LevelFSM.TryGetCurStateType(out ELevelState curState);
 
             if (curState == ELevelState.Merge)
