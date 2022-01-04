@@ -6,7 +6,7 @@ Shader "BLUE/GrassShader"
         _GrassColor ("Grass Color", color) = (0, 1, 0, 1)
         _WindDirection("Wind Direction", Vector) = (0, 0, 0)
     	_WindSpeed("Wind speed", Range(0, 0.1)) = 0.05
-    	_StepMultiplier ("Step Multiplier", Range(0, 1)) = 0.5
+    	_GrassHeight ("Grass Height", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -41,7 +41,7 @@ Shader "BLUE/GrassShader"
             float4 _MainTex_ST;
             float4 _GrassColor;
             float3 _WindDirection;
-            half _StepMultiplier;
+            half _GrassHeight;
 			half _WindSpeed;
             
             VertexOutput vert (VertexInput v)
@@ -51,7 +51,7 @@ Shader "BLUE/GrassShader"
 				o.normal = v.normal;
 				o.uv = v.uv;
 
-            	float grassHeight = (_StepMultiplier * 0.25) + 0.5;
+            	float grassHeight = (_GrassHeight * 0.25) + 0.5;
 
             	float3 animatedVertex = v.vertex;
 
@@ -59,7 +59,7 @@ Shader "BLUE/GrassShader"
 				{
 					float3 v0 = animatedVertex;
 					
-					v0 += cos(_Time.y) * _WindDirection.xyz * (_WindSpeed * (step(0.01, _StepMultiplier)));
+					v0 += cos(_Time.y) * _WindDirection.xyz * (_WindSpeed * (step(0.01, _GrassHeight)));
 					
 					animatedVertex = v0;
 				}
