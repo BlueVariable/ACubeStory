@@ -47,7 +47,6 @@ Shader "BLUE/GrassShader"
             VertexOutput vert (VertexInput v)
             {
                 VertexOutput o;
-				o.position = UnityObjectToClipPos(v.vertex);
 				o.normal = v.normal;
 				o.uv = v.uv;
 
@@ -66,7 +65,6 @@ Shader "BLUE/GrassShader"
 
             	if (v.uv.y >= 0.5)
             	{
-            		// 0.5 -> 0 -- 0.75 -> 1
 					animatedVertex.z = grassHeight;
             	}
 
