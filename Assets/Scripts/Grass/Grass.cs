@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace BLUE.GrassScripts
+namespace BLUE.ACubeStory.Grass
 {
     public class Grass : MonoBehaviour
     {

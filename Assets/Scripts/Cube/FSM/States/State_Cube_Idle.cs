@@ -1,7 +1,5 @@
 using UnityEngine;
 using BLUE.FSMSystem;
-using BLUE.GrassScripts;
-using Unity.Mathematics;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -30,7 +28,7 @@ namespace BLUE.ACubeStory.Cube
 
         private void TryGrassStep()
         {
-            if (TryGetGrass(out Grass grass))
+            if (TryGetGrass(out Grass.Grass grass))
             {
                 grass.SteppedOnGrass();
             }
@@ -38,13 +36,13 @@ namespace BLUE.ACubeStory.Cube
 
         private void TryFreeGrass()
         {
-            if (TryGetGrass(out Grass grass))
+            if (TryGetGrass(out Grass.Grass grass))
             {
                 grass.GrassFreed();
             }
         }
 
-        private bool TryGetGrass(out Grass grass)
+        private bool TryGetGrass(out Grass.Grass grass)
         {
             RaycastHit hit;
 
@@ -52,7 +50,7 @@ namespace BLUE.ACubeStory.Cube
 
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 1000, _groundLayerMask))
             {
-                grass = hit.collider.GetComponent<Grass>();
+                grass = hit.collider.GetComponent<Grass.Grass>();
                 
                 return grass != null;
             }
