@@ -2285,6 +2285,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube_Level_02
       objectReference: {fileID: 0}
+    - target: {fileID: 6508059161908552026, guid: a59a35bcf5a3c1d459841cf9b3a929cb, type: 3}
+      propertyPath: _dashParticle
+      value: 
+      objectReference: {fileID: 1842270862}
     - target: {fileID: 7139000386886286077, guid: a59a35bcf5a3c1d459841cf9b3a929cb, type: 3}
       propertyPath: _initialStateType
       value: 4
@@ -6461,6 +6465,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e57eb17b74ac93438db4819aa49954f, type: 3}
+--- !u!198 &1842270862 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3631877876739349007, guid: 2e57eb17b74ac93438db4819aa49954f, type: 3}
+  m_PrefabInstance: {fileID: 1842270861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1865683535
 PrefabInstance:
   m_ObjectHideFlags: 0
