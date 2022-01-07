@@ -77,5 +77,9 @@ namespace BLUE.ACubeStory.Dialogue
         Tutorial_Jump_01 = 70001,
         
         Tutorial_Dash_01 = 80001,
+        
+        Narrative_Ending_01 = 90001,
+        Narrative_Ending_02 = 90002,
+        Narrative_Ending_03 = 90003,
     }
 }
