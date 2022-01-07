@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7478,16 +7478,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4418400424660847976, guid: f284e0e365f81634c9bce6e62858d21b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418400425003607577, guid: f284e0e365f81634c9bce6e62858d21b, type: 3}
       propertyPath: m_Name
       value: NarrativeCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4418400425003607578, guid: f284e0e365f81634c9bce6e62858d21b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 4886072442301848355}
     - target: {fileID: 4418400425003607578, guid: f284e0e365f81634c9bce6e62858d21b, type: 3}
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418400425003607578, guid: f284e0e365f81634c9bce6e62858d21b, type: 3}
       propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418400425003607578, guid: f284e0e365f81634c9bce6e62858d21b, type: 3}
+      propertyPath: m_PlaneDistance
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4418400425003607581, guid: f284e0e365f81634c9bce6e62858d21b, type: 3}

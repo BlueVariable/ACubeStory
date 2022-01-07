@@ -1,4 +1,4 @@
-Shader "BLUE/GrassShader"
+Shader "BLUE/Shader_Grass"
 {
     Properties
     {
