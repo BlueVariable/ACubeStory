@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Grass
@@ -16,7 +17,6 @@ namespace BLUE.ACubeStory.Grass
         [SerializeField] private string _heightPropertyId = "";
         
         private MaterialPropertyBlock _mpb;
-
         private MaterialPropertyBlock _Mpb
         {
             get
@@ -35,45 +35,65 @@ namespace BLUE.ACubeStory.Grass
                 return _mpb;
             }
         }
+
+        private bool _smashing = false;
         
+        private IEnumerator _grassSmashRoutine;
         private IEnumerator _grassStepRoutine;
-        private IEnumerator _grassFreeRoutine;
         
-        public void SteppedOnGrass()
+        private Action _onSmashCompleted { get; set; }
+        
+        public void SmashGrass()
         {
-            SetGrassHeight(0);
+            StopGrassFreeRoutine();
             
-            // StopGrassFreeRoutine();
+            StartGrassSmashRoutine();
             
-            // StartGrassStepRoutine();
+            _onSmashCompleted -= OnSmashCompleted;
         }
 
-        public void GrassFreed()
+        public void RecoveryGrass(bool waitForSmash = false)
         {
-            StopGrassStepRoutine();
+            if (waitForSmash && _smashing)
+            {
+                _onSmashCompleted += OnSmashCompleted;
+                    
+                return;
+            }
+
+            StopGrassSmashRoutine();
+            
+            StartGrassFreeRoutine();
+        }
+        
+        private void OnSmashCompleted()
+        {
+            _onSmashCompleted -= OnSmashCompleted;
             
             StartGrassFreeRoutine();
         }
 
-        private void StartGrassStepRoutine()
+        private void StartGrassSmashRoutine()
         {
-            StopGrassStepRoutine();
+            StopGrassSmashRoutine();
 
-            _grassStepRoutine = GrassStepProgress();
+            _grassSmashRoutine = GrassSmashProgress();
 
-            StartCoroutine(_grassStepRoutine);
+            StartCoroutine(_grassSmashRoutine);
         }
 
-        private void StopGrassStepRoutine()
+        private void StopGrassSmashRoutine()
         {
-            if (_grassStepRoutine != null)
+            if (_grassSmashRoutine != null)
             {
-                StopCoroutine(_grassStepRoutine);
+                StopCoroutine(_grassSmashRoutine);
             }
         }
 
-        private IEnumerator GrassStepProgress()
+        private IEnumerator GrassSmashProgress()
         {
+            _smashing = true;
+            
             float timePassed = 0;
 
             float startingHeight = _Mpb.GetFloat(_heightPropertyId);
@@ -88,22 +108,26 @@ namespace BLUE.ACubeStory.Grass
                 
                 yield return null;
             }
+            
+            _smashing = false;
+            
+            _onSmashCompleted?.Invoke();
         }
 
         private void StartGrassFreeRoutine()
         {
             StopGrassFreeRoutine();
 
-            _grassFreeRoutine = GrassFreeProgress();
+            _grassStepRoutine = GrassFreeProgress();
 
-            StartCoroutine(_grassFreeRoutine);
+            StartCoroutine(_grassStepRoutine);
         }
 
         private void StopGrassFreeRoutine()
         {
-            if (_grassFreeRoutine != null)
+            if (_grassStepRoutine != null)
             {
-                StopCoroutine(_grassFreeRoutine);
+                StopCoroutine(_grassStepRoutine);
             }
         }
 
