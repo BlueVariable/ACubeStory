@@ -48,23 +48,27 @@ namespace BLUE.ACubeStory.Grass
             StopGrassFreeRoutine();
             
             StartGrassSmashRoutine();
+            
+            _onSmashCompleted -= OnSmashCompleted;
         }
 
         public void RecoveryGrass(bool waitForSmash = false)
         {
             if (waitForSmash && _smashing)
             {
-                _onSmashCompleted += onSmashCompleted;
-
-                void onSmashCompleted()
-                {
-                    StartGrassFreeRoutine();
-                }
+                _onSmashCompleted += OnSmashCompleted;
                     
                 return;
             }
 
             StopGrassSmashRoutine();
+            
+            StartGrassFreeRoutine();
+        }
+        
+        private void OnSmashCompleted()
+        {
+            _onSmashCompleted -= OnSmashCompleted;
             
             StartGrassFreeRoutine();
         }
