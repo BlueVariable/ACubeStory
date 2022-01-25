@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 2980561204227139207}
   - component: {fileID: 8826487192041083454}
   - component: {fileID: 7033711440228409635}
+  - component: {fileID: 3374608542833691955}
   m_Layer: 8
   m_Name: UndoStartedActionExecutor_Mergeable
   m_TagString: Untagged
@@ -212,6 +213,20 @@ MonoBehaviour:
   _dialogueOptions: a10f0000a20f0000a30f0000a40f0000
   _dialoguePlayProbability: 1
   _autoStopOnComplete: 1
+--- !u!114 &3374608542833691955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592921618253821186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bed318a8cfd4a73b8a272225ee3f294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stallExecution: 1
+  _initialDelay: 2
 --- !u!1 &682995821722401175
 GameObject:
   m_ObjectHideFlags: 0
