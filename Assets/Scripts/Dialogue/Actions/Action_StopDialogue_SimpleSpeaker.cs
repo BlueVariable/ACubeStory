@@ -8,16 +8,20 @@ namespace BLUE.ACubeStory.Dialogue
     public class Action_StopDialogue_SimpleSpeaker : InterruptableActionBase
     {
         [SerializeField] private float _initialDelay = 0f;
-    
+
+        #region Events
+
         public override Action<InterruptableActionBase> OnCompleted { get; set; }
 
-        private IEnumerator _waitRoutine;
+        #endregion
+
+        private IEnumerator _dialogueCompleteRoutine;
         
         public override void Execute()
         {
             if (_initialDelay > 0)
             {
-                StartWaitRoutine();
+                StartDialogueCompleteRoutine();
 
                 return;
             }
@@ -29,7 +33,7 @@ namespace BLUE.ACubeStory.Dialogue
 
         public override void Interrupt()
         {
-            StopWaitRoutine();
+            StopDialogueCompleteRoutine();
         }
 
         private void StopDialogue()
@@ -37,26 +41,26 @@ namespace BLUE.ACubeStory.Dialogue
             DialoguePlayer_SimpleSpeaker.Instance.Stop();
         }
         
-        private void StartWaitRoutine()
+        private void StartDialogueCompleteRoutine()
         {
-            StopWaitRoutine();
+            StopDialogueCompleteRoutine();
 
-            _waitRoutine = WaitProgress();
+            _dialogueCompleteRoutine = DialogueCompleteProgress();
 
-            StartCoroutine(_waitRoutine);
+            StartCoroutine(_dialogueCompleteRoutine);
         }
 
-        private void StopWaitRoutine()
+        private void StopDialogueCompleteRoutine()
         {
-            if (_waitRoutine == null)
+            if (_dialogueCompleteRoutine == null)
             {
                 return;
             }
             
-            StopCoroutine(_waitRoutine);
+            StopCoroutine(_dialogueCompleteRoutine);
         }
 
-        private IEnumerator WaitProgress()
+        private IEnumerator DialogueCompleteProgress()
         {
             yield return new WaitForSeconds(_initialDelay);
             
