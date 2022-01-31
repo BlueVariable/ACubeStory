@@ -3204,6 +3204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4244071684469720024}
+  - component: {fileID: 271644362468492909}
   m_Layer: 8
   m_Name: VFX
   m_TagString: Untagged
@@ -3225,6 +3226,22 @@ Transform:
   m_Father: {fileID: 7075618033240990871}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &271644362468492909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926827265206922176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a69ddefd27c489eb6b9050fcd07c774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeVisualReference: {fileID: 5549738425815137626}
+  _cubeFSM: {fileID: 5253448575363346710}
+  _dashState: {fileID: 8188786509246294705}
+  _dashParticleDistance: 0
 --- !u!1 &8946584246915453116
 GameObject:
   m_ObjectHideFlags: 0

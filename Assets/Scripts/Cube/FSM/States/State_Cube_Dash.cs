@@ -21,6 +21,8 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private int _dashDistance = 2;
 
+        public Action<Vector3> OnEnteredDashState { get; set; }
+
         public override ECubeState GetStateType()
         {
             return ECubeState.Dash;
@@ -37,11 +39,9 @@ namespace BLUE.ACubeStory.Cube
             void onDashCompleted()
             {
                 _cubeFSM.TryChangeState(ECubeState.Fall);
-                
-                _dashParticle.Stop();
             }
-
-            _dashParticle.Play();
+            
+            OnEnteredDashState?.Invoke(transitionMessage.DashDirection);
             
             base.EnterStateCustomActions(transitionMessage);
         }
