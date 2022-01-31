@@ -19,9 +19,11 @@ namespace BLUE.ACubeStory.Cube
         {
             get
             {
-                if (_dashParticle == null)
+                DashParticle_Cube cubeDashParticle = GetComponentInChildren<DashParticle_Cube>();
+                
+                if (_dashParticle == null && cubeDashParticle != null)
                 {
-                    _dashParticle = GetComponentInChildren<DashParticle_Cube>().DashVFX;
+                    _dashParticle = cubeDashParticle.DashVFX;
                 }
 
                 return _dashParticle;
