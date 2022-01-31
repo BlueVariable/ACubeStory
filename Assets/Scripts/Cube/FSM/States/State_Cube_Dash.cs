@@ -13,15 +13,18 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _settings = null;
 
-        [SerializeField] private ParticleSystem _dashParticle = null;
-        
         [SerializeField] private Vector3 _raycastOffset = Vector3.zero;
 
         [SerializeField] private LayerMask _layerMask = default;
         
         [SerializeField] private int _dashDistance = 2;
 
-        public Action<Vector3> OnEnteredDashState { get; set; }
+        #region Events
+
+        public Action<Vector3> OnDashStarted { get; set; }
+        public Action OnDashCompleted { get; set; }
+
+        #endregion
 
         public override ECubeState GetStateType()
         {
@@ -38,10 +41,12 @@ namespace BLUE.ACubeStory.Cube
             
             void onDashCompleted()
             {
+                OnDashCompleted?.Invoke();
+                
                 _cubeFSM.TryChangeState(ECubeState.Fall);
             }
             
-            OnEnteredDashState?.Invoke(transitionMessage.DashDirection);
+            OnDashStarted?.Invoke(transitionMessage.DashDirection);
             
             base.EnterStateCustomActions(transitionMessage);
         }
