@@ -1,6 +1,4 @@
-﻿using System;
-using BLUE.Helpers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -72,15 +70,22 @@ namespace BLUE.ACubeStory.Cube
                 particleSize.z = _particleSize;
             }
 
-            _DashParticle.transform.localScale = particleSize;
+            Transform dashVFXTransform = _DashParticle.transform;
             
-            _DashParticle.transform.position =  _cubeVisualReference.position + offsetPos;
+            dashVFXTransform.localScale = particleSize;
+            
+            dashVFXTransform.position =  _cubeVisualReference.position + offsetPos;
 
             _DashParticle.Play();
         }
         
         private void OnDashCompleted()
         {
+            if (_DashParticle == null)
+            {
+                return;
+            }
+            
             _DashParticle.Stop();
         }
     }

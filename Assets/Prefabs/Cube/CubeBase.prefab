@@ -442,7 +442,6 @@ MonoBehaviour:
     _moveSpeed: 12
     _moveEase: 9
     _doLocalMove: 0
-  _dashParticle: {fileID: 0}
   _raycastOffset: {x: 0, y: 0.45, z: 0}
   _layerMask:
     serializedVersion: 2
@@ -3239,9 +3238,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubeVisualReference: {fileID: 5549738425815137626}
-  _cubeFSM: {fileID: 5253448575363346710}
   _dashState: {fileID: 8188786509246294705}
-  _dashParticleDistance: 0
+  _particleDistanceFromCube: 0.45
+  _particleSize: 0.125
 --- !u!1 &8946584246915453116
 GameObject:
   m_ObjectHideFlags: 0
