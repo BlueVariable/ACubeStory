@@ -7,8 +7,6 @@ namespace BLUE.ACubeStory.Cube
     public class DashParticleController_Cube : MonoBehaviour
     {
         [SerializeField] private Transform _cubeVisualReference = null;
-        
-        [SerializeField] private FSM_Cube _cubeFSM = null;
 
         [SerializeField] private State_Cube_Dash _dashState = null;
 
@@ -17,7 +15,6 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private float _particleSize = 0.125f;
         
         private ParticleSystem _dashParticle;
-
         private ParticleSystem _DashParticle
         {
             get
@@ -36,43 +33,26 @@ namespace BLUE.ACubeStory.Cube
         private void Awake()
         {
             RegisterToDashState();
-
-            RegisterToCubeFSM();
         }
 
         private void OnDestroy()
         {
             UnregisterFromDashState();
-            
-            UnregisterFromCubeFSM();
         }
         
         private void RegisterToDashState()
         {
-            _dashState.OnEnteredDashState += OnEnteredDashState;
+            _dashState.OnDashStarted += OnDashStarted;
+            _dashState.OnDashCompleted += OnDashCompleted;
         }
 
         private void UnregisterFromDashState()
         {
-            _dashState.OnEnteredDashState -= OnEnteredDashState;
+            _dashState.OnDashStarted -= OnDashStarted;
+            _dashState.OnDashCompleted -= OnDashCompleted;
         }
-
-        private void RegisterToCubeFSM()
-        {
-            if (_DashParticle == null)
-            {
-                return;
-            }
-            
-            _cubeFSM.OnStateExited += OnStateExited;
-        }
-
-        private void UnregisterFromCubeFSM()
-        {
-            _cubeFSM.OnStateEntered -= OnStateExited;
-        }
-
-        private void OnEnteredDashState(Vector3 direction)
+        
+        private void OnDashStarted(Vector3 direction)
         {
             if (_DashParticle == null)
             {
@@ -98,14 +78,9 @@ namespace BLUE.ACubeStory.Cube
 
             _DashParticle.Play();
         }
-
-        private void OnStateExited(ECubeState eCubeState)
+        
+        private void OnDashCompleted()
         {
-            if (eCubeState != ECubeState.Dash)
-            {
-                return;
-            }
-            
             _DashParticle.Stop();
         }
     }

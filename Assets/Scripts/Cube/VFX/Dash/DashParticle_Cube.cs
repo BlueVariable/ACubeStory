@@ -6,7 +6,6 @@ namespace BLUE.ACubeStory.Cube
     public class DashParticle_Cube : MonoBehaviour
     {
         private ParticleSystem _dashVFX;
-
         public ParticleSystem DashVFX
         {
             get
