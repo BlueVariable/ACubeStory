@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9191062108921370015}
   - component: {fileID: 5832726137589627841}
   - component: {fileID: 3081867224471321915}
+  - component: {fileID: 5839974807654201411}
   m_Layer: 0
   m_Name: VFX_Cube_Trail
   m_TagString: Untagged
@@ -131,8 +132,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
-          value: 1
+          time: 0.99227905
+          value: 0.3921566
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4819,3 +4820,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5065f031562e42ad9ec834cb4e494a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5839974807654201411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5380565156275939099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5669b1f56fc4046a3791fd1bee712fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allocatedActionExecutor:
+    _actionCarrier: {fileID: 0}
+  _deallocatedActionExecutor:
+    _actionCarrier: {fileID: 0}
