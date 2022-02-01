@@ -1,33 +1,20 @@
-﻿using UnityEngine;
+﻿using BLUE.PoolingSystem;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
     public class DashParticleController_Cube : MonoBehaviour
     {
-        [SerializeField] private Transform _cubeVisualReference = null;
-
         [SerializeField] private State_Cube_Dash _dashState = null;
 
+        [SerializeField] private Pool_MB _particlePool = null;
+        
         [SerializeField] private float _particleDistanceFromCube = 0.625f;
         
         [SerializeField] private float _particleSize = 0.125f;
+
+        private PoolObject _lastAllocatedPoolObject = null;
         
-        private ParticleSystem _dashParticle;
-        private ParticleSystem _DashParticle
-        {
-            get
-            {
-                DashParticle_Cube cubeDashParticle = GetComponentInChildren<DashParticle_Cube>();
-                
-                if (_dashParticle == null && cubeDashParticle != null)
-                {
-                    _dashParticle = cubeDashParticle.DashVFX;
-                }
-
-                return _dashParticle;
-            }
-        }
-
         private void Awake()
         {
             RegisterToDashState();
@@ -52,41 +39,50 @@ namespace BLUE.ACubeStory.Cube
         
         private void OnDashStarted(Vector3 direction)
         {
-            if (_DashParticle == null)
-            {
-                return;
-            }
+            PoolObject poolObject = _particlePool.AllocatePoolObject();
+
+            DashParticle_Cube dashParticle = poolObject.GetComponent<DashParticle_Cube>();
+
+            dashParticle.transform.position = transform.position + GetParticlePositionOffset(direction);
+
+            dashParticle.transform.localScale = GetParticleScale(direction);
             
-            Vector3 offsetPos = -_particleDistanceFromCube * new Vector3(direction.x, 0, direction.z);
+            dashParticle.DashVFX.Play();
 
-            Vector3 particleSize = Vector3.one;
-
-            if (Mathf.Abs(direction.x) > 0)
-            {
-                particleSize.x = _particleSize;
-            }
-            else if (Mathf.Abs(direction.z) > 0)
-            {
-                particleSize.z = _particleSize;
-            }
-
-            Transform dashVFXTransform = _DashParticle.transform;
-            
-            dashVFXTransform.localScale = particleSize;
-            
-            dashVFXTransform.position =  _cubeVisualReference.position + offsetPos;
-
-            _DashParticle.Play();
+            _lastAllocatedPoolObject = poolObject;
         }
         
         private void OnDashCompleted()
         {
-            if (_DashParticle == null)
+            if (_lastAllocatedPoolObject != null)
             {
-                return;
+                DashParticle_Cube dashParticle = _lastAllocatedPoolObject.GetComponent<DashParticle_Cube>();
+
+                dashParticle.DashVFX.Stop();
             }
-            
-            _DashParticle.Stop();
+        }
+
+        private Vector3 GetParticlePositionOffset(Vector3 dashDirection)
+        {
+            Vector3 offsetPos = -_particleDistanceFromCube * new Vector3(dashDirection.x, 0, dashDirection.z);
+
+            return offsetPos;
+        }
+
+        private Vector3 GetParticleScale(Vector3 dashDirection)
+        {
+            Vector3 particleSize = Vector3.one;
+
+            if (Mathf.Abs(dashDirection.x) > 0)
+            {
+                particleSize.x = _particleSize;
+            }
+            else if (Mathf.Abs(dashDirection.z) > 0)
+            {
+                particleSize.z = _particleSize;
+            }
+
+            return particleSize;
         }
     }
 }
