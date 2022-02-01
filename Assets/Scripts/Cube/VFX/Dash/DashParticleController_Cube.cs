@@ -1,4 +1,5 @@
-﻿using BLUE.Helpers;
+﻿using System;
+using BLUE.Helpers;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
@@ -10,8 +11,10 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private FSM_Cube _cubeFSM = null;
 
         [SerializeField] private State_Cube_Dash _dashState = null;
+
+        [SerializeField] private float _particleDistanceFromCube = 0.625f;
         
-        [SerializeField] private float _dashParticleDistance = 0.5f;
+        [SerializeField] private float _particleSize = 0.125f;
         
         private ParticleSystem _dashParticle;
 
@@ -76,7 +79,20 @@ namespace BLUE.ACubeStory.Cube
                 return;
             }
             
-            Vector3 offsetPos = -_dashParticleDistance * new Vector3(direction.x, 0, direction.z);
+            Vector3 offsetPos = -_particleDistanceFromCube * new Vector3(direction.x, 0, direction.z);
+
+            Vector3 particleSize = Vector3.one;
+
+            if (Mathf.Abs(direction.x) > 0)
+            {
+                particleSize.x = _particleSize;
+            }
+            else if (Mathf.Abs(direction.z) > 0)
+            {
+                particleSize.z = _particleSize;
+            }
+
+            _DashParticle.transform.localScale = particleSize;
             
             _DashParticle.transform.position =  _cubeVisualReference.position + offsetPos;
 
