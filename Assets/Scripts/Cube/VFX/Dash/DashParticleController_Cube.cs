@@ -1,5 +1,7 @@
-﻿using BLUE.PoolingSystem;
-using UnityEngine;
+﻿using UnityEngine;
+using BLUE.Helpers;
+using BLUE.PoolingSystem;
+using System.Collections;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -8,11 +10,15 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private State_Cube_Dash _dashState = null;
 
         [SerializeField] private Pool_MB _particlePool = null;
+
+        [SerializeField] private float _particleTriggerDistance = 0.5f;
         
         [SerializeField] private float _particleDistanceFromCube = 0.625f;
         
         [SerializeField] private float _particleSize = 0.125f;
 
+        private IEnumerator _particleTriggerRoutine;
+        
         private PoolObject _lastAllocatedPoolObject = null;
         
         private void Awake()
@@ -39,6 +45,28 @@ namespace BLUE.ACubeStory.Cube
         
         private void OnDashStarted(Vector3 direction)
         {
+            StartParticleTriggerRoutine(direction);
+        }
+        
+        private void OnDashCompleted()
+        {
+            if (_lastAllocatedPoolObject != null)
+            {
+                PoolObject dashParticlePoolObject = _lastAllocatedPoolObject;
+                   
+                DashParticle_Cube dashParticle = _lastAllocatedPoolObject.GetComponent<DashParticle_Cube>();
+
+                dashParticle.DashVFX.Stop();
+
+                CoroutineHelper.Instance.WaitForSeconds(dashParticle.DashVFX.main.duration, () =>
+                {
+                    _particlePool.DeallocatePoolObject(dashParticlePoolObject);
+                });
+            }
+        }
+
+        private void PlayDashParticle(Vector3 direction)
+        {
             PoolObject poolObject = _particlePool.AllocatePoolObject();
 
             DashParticle_Cube dashParticle = poolObject.GetComponent<DashParticle_Cube>();
@@ -50,16 +78,6 @@ namespace BLUE.ACubeStory.Cube
             dashParticle.DashVFX.Play();
 
             _lastAllocatedPoolObject = poolObject;
-        }
-        
-        private void OnDashCompleted()
-        {
-            if (_lastAllocatedPoolObject != null)
-            {
-                DashParticle_Cube dashParticle = _lastAllocatedPoolObject.GetComponent<DashParticle_Cube>();
-
-                dashParticle.DashVFX.Stop();
-            }
         }
 
         private Vector3 GetParticlePositionOffset(Vector3 dashDirection)
@@ -83,6 +101,35 @@ namespace BLUE.ACubeStory.Cube
             }
 
             return particleSize;
+        }
+
+        private void StartParticleTriggerRoutine(Vector3 direction)
+        {
+            StopParticleTriggerRoutine();
+
+            _particleTriggerRoutine = ParticleTriggerRoutine(direction);
+
+            StartCoroutine(_particleTriggerRoutine);
+        }
+
+        private void StopParticleTriggerRoutine()
+        {
+            if (_particleTriggerRoutine != null)
+            {
+                StopCoroutine(_particleTriggerRoutine);
+            }
+        }
+
+        private IEnumerator ParticleTriggerRoutine(Vector3 direction)
+        {
+            Vector3 initialPos = transform.position;
+
+            while (Vector3.Distance(initialPos, transform.position) < _particleTriggerDistance)
+            {
+                yield return null;
+            }
+            
+            PlayDashParticle(direction);
         }
     }
 }
