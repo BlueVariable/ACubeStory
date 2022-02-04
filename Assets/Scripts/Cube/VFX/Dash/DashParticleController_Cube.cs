@@ -65,21 +65,6 @@ namespace BLUE.ACubeStory.Cube
             }
         }
 
-        private void PlayDashParticle(Vector3 direction)
-        {
-            PoolObject poolObject = _particlePool.AllocatePoolObject();
-
-            DashParticle_Cube dashParticle = poolObject.GetComponent<DashParticle_Cube>();
-
-            dashParticle.transform.position = transform.position + GetParticlePositionOffset(direction);
-
-            dashParticle.transform.localScale = GetParticleScale(direction);
-            
-            dashParticle.DashVFX.Play();
-
-            _lastAllocatedPoolObject = poolObject;
-        }
-
         private Vector3 GetParticlePositionOffset(Vector3 dashDirection)
         {
             Vector3 offsetPos = -_particleDistanceFromCube * new Vector3(dashDirection.x, 0, dashDirection.z);
@@ -107,7 +92,7 @@ namespace BLUE.ACubeStory.Cube
         {
             StopParticleTriggerRoutine();
 
-            _particleTriggerRoutine = ParticleTriggerRoutine(direction);
+            _particleTriggerRoutine = ParticleTriggerProgress(direction);
 
             StartCoroutine(_particleTriggerRoutine);
         }
@@ -120,7 +105,7 @@ namespace BLUE.ACubeStory.Cube
             }
         }
 
-        private IEnumerator ParticleTriggerRoutine(Vector3 direction)
+        private IEnumerator ParticleTriggerProgress(Vector3 direction)
         {
             Vector3 initialPos = transform.position;
 
@@ -130,6 +115,21 @@ namespace BLUE.ACubeStory.Cube
             }
             
             PlayDashParticle(direction);
+        }
+        
+        private void PlayDashParticle(Vector3 direction)
+        {
+            PoolObject poolObject = _particlePool.AllocatePoolObject();
+
+            DashParticle_Cube dashParticle = poolObject.GetComponent<DashParticle_Cube>();
+
+            dashParticle.transform.position = transform.position + GetParticlePositionOffset(direction);
+
+            dashParticle.transform.localScale = GetParticleScale(direction);
+            
+            dashParticle.DashVFX.Play();
+
+            _lastAllocatedPoolObject = poolObject;
         }
     }
 }
