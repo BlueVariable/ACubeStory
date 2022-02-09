@@ -16,11 +16,11 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private ECubeState _postRewindState = ECubeState.Idle;
 
-        [SerializeField] private RewindController _selfRewindController = null;
+        [SerializeField] private RewindController_FrameBased _selfRewindController = null;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
 
-        private List<RewindController> _mergeableRewindControllers = new List<RewindController>();
+        private List<RewindController_FrameBased> _mergeableRewindControllers = new List<RewindController_FrameBased>();
         
         public override void Attached()
         {
@@ -148,7 +148,7 @@ namespace BLUE.ACubeStory.Cube
                 
                 _selfRewindController.ResetSnapshots();
                 
-                foreach (RewindController mergeableRewindController in _mergeableRewindControllers)
+                foreach (RewindController_FrameBased mergeableRewindController in _mergeableRewindControllers)
                 {
                     mergeableRewindController.StopSaveSnapshotRoutine();
                 
@@ -176,7 +176,7 @@ namespace BLUE.ACubeStory.Cube
         
         private void OnMerged(Mergeable mergeable)
         {
-            RewindController mergeableRewindController = mergeable.GetComponentInChildren<RewindController>();
+            RewindController_FrameBased mergeableRewindController = mergeable.GetComponentInChildren<RewindController_FrameBased>();
 
             if (mergeableRewindController == null)
             {
@@ -285,7 +285,7 @@ namespace BLUE.ACubeStory.Cube
 
             _cubeFSM.TryChangeState(_postRewindState);
 
-            foreach (RewindController mergeableRewindController in _mergeableRewindControllers)
+            foreach (RewindController_FrameBased mergeableRewindController in _mergeableRewindControllers)
             {
                 mergeableRewindController.StopRewind();
                 
