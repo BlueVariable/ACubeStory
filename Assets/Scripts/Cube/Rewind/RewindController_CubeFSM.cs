@@ -1,10 +1,9 @@
-﻿using System;
-using BLUE.RewindSystem;
+﻿using BLUE.RewindSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class RewindController_CubeFSM : RewindControllerBase
+    public class RewindController_CubeFSM : MonoBehaviour
     {
         [SerializeField] private FSM_Cube _cubeFsm = null;
         
@@ -35,6 +34,8 @@ namespace BLUE.ACubeStory.Cube
         private void OnCubeFSMEnterState(ECubeState eCubeState)
         {
             // save snapshot
+            
+            
         }
     }
 }
