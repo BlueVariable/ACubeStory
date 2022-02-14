@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BLUE.ACubeStory.Cube.src
 {
-    public class RewindControllerBase : MonoBehaviour
+    public abstract class RewindControllerBase : MonoBehaviour
     {
         protected List<IRewindable> _rewindables = new List<IRewindable>();
 

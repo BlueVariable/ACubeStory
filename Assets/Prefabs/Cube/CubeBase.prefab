@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &165379458652819465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5378503929806185223}
+  - component: {fileID: 102330711308935297}
+  m_Layer: 8
+  m_Name: RewindSnapshotFactory_Roll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5378503929806185223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165379458652819465}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3037066734761091232}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &102330711308935297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165379458652819465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11de34250977475ba13e11cbb5ca8ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeRollState: {fileID: 8132517245878650085}
+  _rollRewinder: {fileID: 5026623072844196895}
 --- !u!1 &249567091401102155
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +272,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _initialDelay: 2
+--- !u!1 &658825886839041887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1441153240119808405}
+  m_Layer: 8
+  m_Name: Rewinders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1441153240119808405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658825886839041887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 848993145379008529}
+  m_Father: {fileID: 2905430919143969508}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682995821722401175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1350,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialStateType: 1
   _debugEnabled: 0
+--- !u!1 &2941083943491524868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3037066734761091232}
+  m_Layer: 8
+  m_Name: RewindSnapshotFactories
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3037066734761091232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941083943491524868}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5378503929806185223}
+  m_Father: {fileID: 2905430919143969508}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3061743825006100608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,6 +1488,50 @@ MonoBehaviour:
   _fallbackFallAmount: 30
   _fallSkipConditions:
   - {fileID: 6163359484454282819}
+--- !u!1 &3261440194063483379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848993145379008529}
+  - component: {fileID: 5026623072844196895}
+  m_Layer: 8
+  m_Name: Rewinder_Roll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &848993145379008529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261440194063483379}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1441153240119808405}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5026623072844196895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261440194063483379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4454f791444e2baaccb71ed7ddd63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rollBehaviourProvider: {fileID: 3867403072291783834}
 --- !u!1 &3287526933068655041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2288,9 +2439,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8848964717771580502}
-  - component: {fileID: 8837452464056060908}
+  - component: {fileID: 7993311678980580115}
   m_Layer: 8
-  m_Name: RewindController_OnFall
+  m_Name: RewindController_CubeFSM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2306,11 +2457,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2905430919143969508}
   m_Father: {fileID: 7695090221467156625}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8837452464056060908
+--- !u!114 &7993311678980580115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2319,11 +2471,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6203869505261698018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218b00f587754fb99883708f52b16410, type: 3}
+  m_Script: {fileID: 11500000, guid: d05b8a8c589b44488d3321273efaae8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameSaveInterval: 5
-  _maxIdenticalSnapshotCount: -1
 --- !u!1 &6465153098811955559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,6 +3270,52 @@ MonoBehaviour:
     _duration: 0.4
     _unhighlightAfterCompletion: 1
   _onlyHighlightOverlapped: 0
+--- !u!1 &8551564935416143030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2905430919143969508}
+  - component: {fileID: 7145729672806831224}
+  m_Layer: 8
+  m_Name: Rewindable_CubeFSM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2905430919143969508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8551564935416143030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3037066734761091232}
+  - {fileID: 1441153240119808405}
+  m_Father: {fileID: 8848964717771580502}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7145729672806831224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8551564935416143030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563be75ae294a26aefad4ec25e9976f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeFsm: {fileID: 5253448575363346710}
 --- !u!1 &8617960755972355077
 GameObject:
   m_ObjectHideFlags: 0
