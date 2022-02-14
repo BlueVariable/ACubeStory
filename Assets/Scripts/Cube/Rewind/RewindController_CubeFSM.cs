@@ -1,5 +1,4 @@
 ﻿using BLUE.RewindSystem;
-using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {

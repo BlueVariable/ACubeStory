@@ -29,7 +29,7 @@ namespace BLUE.ACubeStory.Cube.src
 
             _snapshots.Remove(snapshot);
             
-            snapshot.Undo(OnSnapshotUndoCompleted);
+            snapshot.Rewind(OnSnapshotUndoCompleted);
             
             return true;
         }

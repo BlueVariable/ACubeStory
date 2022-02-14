@@ -1,30 +1,26 @@
-﻿using System;
-using BLUE.ACubeStory.Cube.src;
-using BLUE.ACubeStory.Cube.StateRewinder;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using BLUE.ACubeStory.Cube.src;
 
 namespace BLUE.ACubeStory.Cube
 {
-    [RequireComponent(typeof(IRewinderProvider))]
+    [RequireComponent(typeof(CubeSnapshotFactory))]
     public class Rewindable_CubeFSM : RewindableBase<RewindSnapshot_Cube>
     {
         [SerializeField] private FSM_Cube _cubeFsm = null;
-        
-        private IRewinderProvider _rewinderProvider;
 
-        private IRewinderProvider _RewinderProvider
+        private Dictionary<ECubeState, CubeSnapshotFactory> _snapshotFactories;
+
+        private Dictionary<ECubeState, CubeSnapshotFactory> _SnapshotFactories
         {
             get
             {
-                if (_rewinderProvider == null)
-                {
-                    _rewinderProvider = GetComponent<IRewinderProvider>();
-                }
-
-                return _rewinderProvider;
+                InitSnapshotFactories();
+                
+                return _snapshotFactories;
             }
         }
-
+        
         private void Awake()
         {
             RegisterToCubeFSM();
@@ -52,16 +48,24 @@ namespace BLUE.ACubeStory.Cube
 
         private void CreateAndSaveSnapshot(ECubeState state)
         {
-            CubeStateRewinderBase rewinder = _RewinderProvider.GetRewinderBase(state);
-
-            if (rewinder == null)
+            if (!_SnapshotFactories.ContainsKey(state))
             {
-                UnityEngine.Debug.LogError($"{state} Rewinder could not be found.");
-                
                 return;
             }
+
+            RewindSnapshot_Cube snapshot = _SnapshotFactories[state].CreateSnapshot();
             
-            SaveSnapshot(new RewindSnapshot_Cube(rewinder));
+            SaveSnapshot(snapshot);
+        }
+
+        private void InitSnapshotFactories()
+        {
+            _snapshotFactories = new Dictionary<ECubeState, CubeSnapshotFactory>();
+                
+            foreach (CubeSnapshotFactory factory in GetComponentsInChildren<CubeSnapshotFactory>())
+            {
+                _snapshotFactories.Add(factory.GetCubeState(), factory);
+            }
         }
     }
 }
