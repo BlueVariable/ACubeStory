@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -6,6 +7,6 @@ namespace BLUE.ACubeStory.Cube
     {
         public abstract ECubeState GetCubeState();
         
-        public abstract RewindSnapshot_Cube CreateSnapshot();
+        public abstract bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback);
     }
 }

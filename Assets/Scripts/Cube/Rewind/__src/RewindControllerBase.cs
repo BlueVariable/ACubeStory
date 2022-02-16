@@ -28,12 +28,12 @@ namespace BLUE.ACubeStory.Cube.src
         {
             foreach (IRewindable rewindable in _rewindables)
             {
-                void onUndoCompleted()
+                void onRewindCompleted()
                 {
                     _activeRewindables.Remove(rewindable);
                 }
                 
-                if (rewindable.TryRewind(onUndoCompleted))
+                if (rewindable.TryRewind(onRewindCompleted))
                 {
                     _activeRewindables.Add(rewindable);
                 }

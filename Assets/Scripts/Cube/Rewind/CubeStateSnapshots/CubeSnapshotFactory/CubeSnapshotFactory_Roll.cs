@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -13,9 +14,11 @@ namespace BLUE.ACubeStory.Cube
             return ECubeState.Roll;
         }
 
-        public override RewindSnapshot_Cube CreateSnapshot()
+        public override bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback)
         {
-            return new RewindSnapshot_Cube_Roll(_rollRewinder, _cubeRollState.LastCandidateTransitionMessage.Direction);
+            createdCallback?.Invoke(new RewindSnapshot_Cube_Roll(_rollRewinder, _cubeRollState.LastCandidateTransitionMessage.Direction));
+            
+            return true;
         }
     }
 }

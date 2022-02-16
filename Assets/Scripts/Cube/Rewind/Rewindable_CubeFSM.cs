@@ -52,9 +52,12 @@ namespace BLUE.ACubeStory.Cube
                 return;
             }
 
-            RewindSnapshot_Cube snapshot = _SnapshotFactories[state].CreateSnapshot();
-            
-            SaveSnapshot(snapshot);
+            _SnapshotFactories[state].CreateSnapshot(onSnapshotCreated);
+
+            void onSnapshotCreated(RewindSnapshot_Cube snapshot)
+            {
+                SaveSnapshot(snapshot);
+            }
         }
 
         private void InitSnapshotFactories()

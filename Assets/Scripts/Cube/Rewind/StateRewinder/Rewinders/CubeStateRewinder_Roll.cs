@@ -1,7 +1,7 @@
 ﻿using System;
+using UnityEngine;
 using BLUE.ACubeStory.Common;
 using BLUE.ACubeStory.Cube.StateRewinder;
-using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {

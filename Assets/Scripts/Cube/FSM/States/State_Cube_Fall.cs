@@ -12,7 +12,8 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private FSM_Cube _cubeFSM = null;
         [SerializeField] private Transform _objectToFall = null;
         [SerializeField] private Vector3 _objectPivotOffset = new Vector3(0, 0.5f, 0);
-        
+        public Vector3 ObjectPivotOffset => _objectPivotOffset;
+
         [Header("Raycast Settings")]
         [SerializeField] private float _maxRayDistance = 100f;
         [SerializeField] private LayerMask _layerMask = default;
@@ -25,12 +26,14 @@ namespace BLUE.ACubeStory.Cube
 
         [Header("Misc")] 
         [SerializeField] private SimpleConditionBase[] _fallSkipConditions = null;
-
+        
         #region Events
 
         public Action<RaycastHit> OnFallStartedTowardsHitObject { get; set; }
         public Action OnFallStartedTowardsVoid { get; set; }
         public Action OnFallFinished { get; set; }
+        
+        public Action OnFallSkipped { get; set; }
 
         #endregion
         
@@ -45,6 +48,8 @@ namespace BLUE.ACubeStory.Cube
             if (_fallSkipConditions.Any(val => val.IsConditionSatisfied()))
             {
                 _cubeFSM.TryChangeState(ECubeState.Idle);
+                
+                OnFallSkipped?.Invoke();
 
                 return;
             }
@@ -55,6 +60,8 @@ namespace BLUE.ACubeStory.Cube
                 if (hit.distance < _minValidFallDistance)
                 {
                     _cubeFSM.TryChangeState(ECubeState.Idle);
+                    
+                    OnFallSkipped?.Invoke();
 
                     return;
                 }
