@@ -348,6 +348,7 @@ Transform:
   - {fileID: 1620424058136819691}
   - {fileID: 8834298205438347646}
   - {fileID: 6274636201494747854}
+  - {fileID: 2624265819494950318}
   m_Father: {fileID: 2905430919143969508}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1277,6 +1278,7 @@ Transform:
   - {fileID: 1499242619415141288}
   - {fileID: 1196787365663981862}
   - {fileID: 8309093130238180146}
+  - {fileID: 1683530727799370724}
   m_Father: {fileID: 2905430919143969508}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1865,6 +1867,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rootTransform: {fileID: 7075618033240990871}
+--- !u!1 &4384181326806010205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2624265819494950318}
+  - component: {fileID: 6776010634962855416}
+  m_Layer: 8
+  m_Name: Rewinder_Climb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2624265819494950318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4384181326806010205}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1441153240119808405}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6776010634962855416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4384181326806010205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3eeb5b6cb742409738ce157f564791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rollSpeed: 3
+  _rollCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.4524102
+      outSlope: 0.4524102
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.057344854
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.3974087
+      outSlope: 3.3974087
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.029850721
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rollBehaviour: {fileID: 6118223996304352996}
 --- !u!1 &4428741736119544247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,6 +2220,51 @@ Transform:
   m_Father: {fileID: 7075618033240990871}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5270512271192530260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1683530727799370724}
+  - component: {fileID: 2004384113450487976}
+  m_Layer: 8
+  m_Name: RewindSnapshotFactory_Climb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1683530727799370724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270512271192530260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3037066734761091232}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2004384113450487976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270512271192530260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0971f827a404e38bbd6c3dea50475d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rollBehaviour: {fileID: 6118223996304352996}
+  _climbRewinder: {fileID: 6776010634962855416}
 --- !u!1 &5711475027277827703
 GameObject:
   m_ObjectHideFlags: 0

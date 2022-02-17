@@ -1,3 +1,4 @@
+using System;
 using BLUE.ACubeStory.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private float _rollSpeed = 2f;
         [SerializeField] private AnimationCurve _rollCurve = null;
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
-
+        
         public override ECubeState GetStateType()
         {
             return ECubeState.Climb;
