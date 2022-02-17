@@ -347,6 +347,7 @@ Transform:
   - {fileID: 848993145379008529}
   - {fileID: 1620424058136819691}
   - {fileID: 8834298205438347646}
+  - {fileID: 6274636201494747854}
   m_Father: {fileID: 2905430919143969508}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -513,7 +514,6 @@ MonoBehaviour:
     _moveSpeed: 12
     _moveEase: 9
     _doLocalMove: 0
-    _isBackwards: 0
   _raycastOffset: {x: 0, y: 0.45, z: 0}
   _layerMask:
     serializedVersion: 2
@@ -1276,6 +1276,7 @@ Transform:
   - {fileID: 5378503929806185223}
   - {fileID: 1499242619415141288}
   - {fileID: 1196787365663981862}
+  - {fileID: 8309093130238180146}
   m_Father: {fileID: 2905430919143969508}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1383,7 +1384,6 @@ MonoBehaviour:
     _moveSpeed: 3
     _moveEase: 30
     _doLocalMove: 0
-    _isBackwards: 0
   _fallbackFallAmount: 30
   _fallSkipConditions:
   - {fileID: 6163359484454282819}
@@ -2707,6 +2707,51 @@ MonoBehaviour:
   _cubeRollState: {fileID: 8132517245878650085}
   _triggerAttemptedActionExecutor:
     _actionCarrier: {fileID: 1355978395367414009}
+--- !u!1 &6771855081906479873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8309093130238180146}
+  - component: {fileID: 4556125163481549567}
+  m_Layer: 8
+  m_Name: RewindSnapshotFactory_Dash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8309093130238180146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771855081906479873}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3037066734761091232}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4556125163481549567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771855081906479873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f94c3a17bd472296dfef5e1b0e05c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubeRootTransform: {fileID: 7075618033240990871}
+  _dashRewinder: {fileID: 4616948150164509671}
 --- !u!1 &7060011666408835931
 GameObject:
   m_ObjectHideFlags: 0
@@ -3034,6 +3079,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frameSaveInterval: 3
   _maxIdenticalSnapshotCount: 5
+--- !u!1 &7812078902899054411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6274636201494747854}
+  - component: {fileID: 4616948150164509671}
+  m_Layer: 8
+  m_Name: Rewinder_Dash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6274636201494747854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812078902899054411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1441153240119808405}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4616948150164509671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812078902899054411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1743fbc7cb1449ab03f64d950a5a627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveBehaviour: {fileID: 7379208232775704734}
+  _moveSettings:
+    _movableObject: {fileID: 7075618033240990871}
+    _useSpeedAsDuration: 0
+    _moveSpeed: 12
+    _moveEase: 8
+    _doLocalMove: 0
 --- !u!1 &8010327804896191993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3087,7 +3182,6 @@ MonoBehaviour:
     _moveSpeed: 4
     _moveEase: 9
     _doLocalMove: 0
-    _isBackwards: 0
   _jumpPower: 2
 --- !u!114 &3527287423328806065
 MonoBehaviour:
@@ -3310,7 +3404,6 @@ MonoBehaviour:
     _moveSpeed: 4
     _moveEase: 9
     _doLocalMove: 0
-    _isBackwards: 0
 --- !u!1 &8551564935416143030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,7 +3650,6 @@ MonoBehaviour:
     _moveSpeed: 3
     _moveEase: 29
     _doLocalMove: 0
-    _isBackwards: 0
 --- !u!1 &8926827265206922176
 GameObject:
   m_ObjectHideFlags: 0
