@@ -30,6 +30,7 @@ namespace BLUE.ACubeStory.Cube
         {
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
+            InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyHold, OnKeyHold);
         }
 
         private void UnregisterFromInputManager()
@@ -41,8 +42,9 @@ namespace BLUE.ACubeStory.Cube
             
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyHold, OnKeyHold);
         }
-        
+
         private void ActivateRewindables()
         {
             IRewindable[] rewindables = _rewindController.GetComponentsInChildren<IRewindable>();
@@ -76,6 +78,14 @@ namespace BLUE.ACubeStory.Cube
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
                 
+            }
+        }
+        
+        private void OnKeyHold(InputData_Key inputData)
+        {
+            if (inputData.KeyCode == _rewindTriggerKeyCode)
+            {
+                _rewindController.TryRewind();
             }
         }
     }

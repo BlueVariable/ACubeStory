@@ -22,7 +22,7 @@ namespace BLUE.ACubeStory.Cube.src
 
         public bool TryRewind(Action undoCompleted)
         {
-            if (_isRewinding && _snapshots.Count == 0)
+            if (_isRewinding || _snapshots.Count == 0)
             {
                 return false;
             }

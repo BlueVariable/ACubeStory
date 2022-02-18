@@ -18,7 +18,7 @@ namespace BLUE.ACubeStory.Cube
         public override void RewindState(RewindSnapshot_Cube_Climb snapshot, Action onCompleted)
         {
             _rollBehaviour.TryRollTo(
-                snapshot.ClimbDirection,
+                -snapshot.ClimbDirection,
                 180f,
                 _rollSpeed,
                 rollCurve: _rollCurve,

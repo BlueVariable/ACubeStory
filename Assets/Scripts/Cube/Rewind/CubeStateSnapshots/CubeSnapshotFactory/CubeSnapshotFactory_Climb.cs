@@ -40,7 +40,7 @@ namespace BLUE.ACubeStory.Cube
         {
             UnregisterFromRollBehaviour();
             
-            _createdCallback?.Invoke(new RewindSnapshot_Cube_Climb(_climbRewinder, -_rollBehaviour.LastRollDirection));
+            _createdCallback?.Invoke(new RewindSnapshot_Cube_Climb(_climbRewinder, _rollBehaviour.LastRollDirection));
         }
     }
 }
