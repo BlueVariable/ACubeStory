@@ -14,7 +14,7 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private CubeFailController _cubeFailController = null;
 
-        [SerializeField] private RewindController _rewindController = null;
+        [SerializeField] private RewindController_FrameBased _rewindController = null;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
 

@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using BLUE.Helpers;
+﻿using BLUE.Helpers;
 using BLUE.PoolingSystem;
-using System.Collections;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -37,10 +36,28 @@ namespace BLUE.ACubeStory.Cube
         
         private void OnDashStarted(Vector3 direction)
         {
-            PlayDashParticle(direction);
+            PlayDashParticle();
         }
         
         private void OnDashCompleted()
+        {
+            StopDashParticle();
+        }
+
+        private void PlayDashParticle()
+        {
+            PoolObject poolObject = _particlePool.AllocatePoolObject();
+
+            DashParticle_Cube dashParticle = poolObject.GetComponent<DashParticle_Cube>();
+            
+            dashParticle.transform.localPosition = Vector3.zero;
+
+            dashParticle.DashVFX.Play();
+
+            _lastAllocatedPoolObject = poolObject;
+        }
+        
+        private void StopDashParticle()
         {
             if (_lastAllocatedPoolObject != null)
             {
@@ -55,19 +72,6 @@ namespace BLUE.ACubeStory.Cube
                     _particlePool.DeallocatePoolObject(dashParticlePoolObject);
                 });
             }
-        }
-
-        private void PlayDashParticle(Vector3 direction)
-        {
-            PoolObject poolObject = _particlePool.AllocatePoolObject();
-
-            DashParticle_Cube dashParticle = poolObject.GetComponent<DashParticle_Cube>();
-            
-            dashParticle.transform.localPosition = Vector3.zero;
-
-            dashParticle.DashVFX.Play();
-
-            _lastAllocatedPoolObject = poolObject;
         }
     }
 }
