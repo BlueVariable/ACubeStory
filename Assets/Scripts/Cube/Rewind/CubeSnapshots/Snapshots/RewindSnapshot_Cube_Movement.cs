@@ -10,9 +10,9 @@ namespace BLUE.ACubeStory.Cube
         
         public MoveBehaviour_Tween.TweenMoveSettings MoveSettings { get; }
         
-        private CubeStateRewinder_Movement _movementRewinder;
+        private CubeSnapshotRewinder_Movement _movementRewinder;
 
-        public RewindSnapshot_Cube_Movement(CubeStateRewinder_Movement movementRewiner, Vector3 targetPosition, MoveBehaviour_Tween.TweenMoveSettings moveSettings)
+        public RewindSnapshot_Cube_Movement(CubeSnapshotRewinder_Movement movementRewiner, Vector3 targetPosition, MoveBehaviour_Tween.TweenMoveSettings moveSettings)
         {
             _movementRewinder = movementRewiner;
             TargetPosition = targetPosition;

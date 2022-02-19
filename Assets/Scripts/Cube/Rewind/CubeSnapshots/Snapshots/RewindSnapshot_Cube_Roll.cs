@@ -15,10 +15,10 @@ namespace BLUE.ACubeStory.Cube
         
         public Vector3 RollPointOffset { get; }
 
-        private CubeStateRewinder_Roll _rollRewinder;
+        private CubeSnapshotRewinder_Roll _rollRewinder;
 
         public RewindSnapshot_Cube_Roll(
-            CubeStateRewinder_Roll rollRewinder,
+            CubeSnapshotRewinder_Roll rollRewinder,
             Vector3 rollDirection,
             float rollSpeed,
             float rollAngle,

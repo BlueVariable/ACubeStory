@@ -8,7 +8,7 @@ namespace BLUE.ACubeStory.Cube
     {
         [SerializeField] private Transform _cubeRootTransform = null;
         
-        [SerializeField] private CubeStateRewinder_Movement _movementRewinder = null;
+        [SerializeField] private CubeSnapshotRewinder_Movement _movementRewinder = null;
         
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _jumpRewindSettings = null;
 

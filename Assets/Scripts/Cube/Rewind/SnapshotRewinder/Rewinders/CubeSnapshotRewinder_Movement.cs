@@ -5,7 +5,7 @@ using BLUE.ACubeStory.Cube.StateRewinder;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeStateRewinder_Movement : CubeStateRewinderBase<RewindSnapshot_Cube_Movement>
+    public class CubeSnapshotRewinder_Movement : CubeSnapshotRewinder<RewindSnapshot_Cube_Movement>
     {
         [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
 

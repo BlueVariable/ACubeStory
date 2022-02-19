@@ -10,7 +10,7 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private State_Cube_Fall _fallState = null;
 
-        [SerializeField] private CubeStateRewinder_Movement _movementRewinder = null;
+        [SerializeField] private CubeSnapshotRewinder_Movement _movementRewinder = null;
         
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettings = null; 
         
