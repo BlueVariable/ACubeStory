@@ -33,6 +33,8 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
+            OnDashStarted?.Invoke(transitionMessage.DashDirection);
+            
             Dash(
                 transitionMessage.DashDirection,
                 _dashDistance,
@@ -45,9 +47,7 @@ namespace BLUE.ACubeStory.Cube
                 
                 _cubeFSM.TryChangeState(ECubeState.Fall);
             }
-            
-            OnDashStarted?.Invoke(transitionMessage.DashDirection);
-            
+
             base.EnterStateCustomActions(transitionMessage);
         }
 
