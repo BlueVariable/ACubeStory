@@ -6,11 +6,11 @@ namespace BLUE.ACubeStory.Cube.src
 {
     public interface IRewindable
     {
-        public bool TryRewind(Action undoCompleted);
+        public bool TryRewind(Action onRewindCompleted);
         
-        void ActivateRewindable(RewindController_CubeFSM rewindController);
+        void ActivateRewindable(RewindController_CubeMovement rewindController);
         
-        void DeactivateRewindable(RewindController_CubeFSM rewindController);
+        void DeactivateRewindable(RewindController_CubeMovement rewindController);
     }
     
     public abstract class RewindableBase<T> : MonoBehaviour, IRewindable
@@ -20,12 +20,16 @@ namespace BLUE.ACubeStory.Cube.src
         
         protected bool _isRewinding;
 
-        public bool TryRewind(Action undoCompleted)
+        private Action _onRewindCompleted;
+
+        public bool TryRewind(Action onRewindCompleted)
         {
             if (_isRewinding || _snapshots.Count == 0)
             {
                 return false;
             }
+
+            _onRewindCompleted = onRewindCompleted;
 
             _isRewinding = true;
 
@@ -33,24 +37,26 @@ namespace BLUE.ACubeStory.Cube.src
 
             _snapshots.Remove(snapshot);
             
-            snapshot.Rewind(OnSnapshotUndoCompleted);
+            snapshot.Rewind(OnRewindCompleted);
             
             return true;
         }
 
-        public void ActivateRewindable(RewindController_CubeFSM rewindController)
+        public void ActivateRewindable(RewindController_CubeMovement rewindController)
         {
             rewindController.RegisterRewindable(this);
         }
 
-        public void DeactivateRewindable(RewindController_CubeFSM rewindController)
+        public void DeactivateRewindable(RewindController_CubeMovement rewindController)
         {
             rewindController.UnregisterRewindable(this);
         }
 
-        private void OnSnapshotUndoCompleted()
+        private void OnRewindCompleted()
         {
             _isRewinding = false;
+            
+            _onRewindCompleted?.Invoke();
         }
         
         protected void SaveSnapshot(T snapshot)

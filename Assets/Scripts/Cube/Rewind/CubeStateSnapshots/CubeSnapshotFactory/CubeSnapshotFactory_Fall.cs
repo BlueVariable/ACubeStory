@@ -1,4 +1,5 @@
 ﻿using System;
+using BLUE.Common;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
@@ -9,7 +10,9 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private State_Cube_Fall _fallState = null;
 
-        [SerializeField] private CubeStateRewinder_Fall _fallRewinder = null;
+        [SerializeField] private CubeStateRewinder_Movement _movementRewinder = null;
+        
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettings = null; 
         
         private Action<RewindSnapshot_Cube> _createdCallback;
 
@@ -60,11 +63,12 @@ namespace BLUE.ACubeStory.Cube
             UnregisterFromFallState();
         }
 
-        private RewindSnapshot_Cube_Fall CreateSnapshot()
+        private RewindSnapshot_Cube CreateSnapshot()
         {
             Vector3 fallStartPos = _cubeRootTransform.position;
 
-            RewindSnapshot_Cube_Fall snapshot = new RewindSnapshot_Cube_Fall(_fallRewinder, fallStartPos, _cubeRootTransform);
+            RewindSnapshot_Cube_Movement snapshot =
+                new RewindSnapshot_Cube_Movement(_movementRewinder, fallStartPos, _fallRewindSettings);
 
             _createdCallback?.Invoke(snapshot);
             

@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeSnapshotFactory_Descend : CubeSnapshotFactory
+    public class CubeSnapshotFactory_Descend : CubeSnapshotFactory_RollBased
     {
         [SerializeField] private RollBehaviourBase _rollBehaviour = null;
-
-        [SerializeField] private CubeStateRewinder_Descend _descendRewinder = null;
         
         private Action<RewindSnapshot_Cube> _createdCallback;
         
@@ -40,7 +38,16 @@ namespace BLUE.ACubeStory.Cube
         {
             UnregisterFromRollBehaviour();
             
-            _createdCallback?.Invoke(new RewindSnapshot_Cube_Descend(_descendRewinder, _rollBehaviour.LastRollDirection));
+            RewindSnapshot_Cube_Roll rollSnapshot = 
+                new RewindSnapshot_Cube_Roll(
+                    _rollRewinder,
+                    -_rollBehaviour.LastRollDirection, 
+                    _rollSpeed, 
+                    _rollAngle,
+                    _rollCurve, 
+                    _rollPointOffset);
+            
+            _createdCallback?.Invoke(rollSnapshot);
         }
     }
 }

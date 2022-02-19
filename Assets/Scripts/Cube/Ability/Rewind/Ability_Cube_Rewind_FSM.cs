@@ -7,7 +7,7 @@ namespace BLUE.ACubeStory.Cube
 {
     public class Ability_Cube_Rewind_FSM : AbilityBase
     {
-        [SerializeField] private RewindController_CubeFSM _rewindController = null;
+        [SerializeField] private RewindController_CubeMovement _rewindController = null;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
         

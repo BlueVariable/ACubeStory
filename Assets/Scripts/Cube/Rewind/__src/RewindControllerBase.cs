@@ -40,7 +40,7 @@ namespace BLUE.ACubeStory.Cube.src
                 void onRewindCompleted()
                 {
                     _activeRewindables.Remove(rewindable);
-
+                    
                     if (_activeRewindables.Count == 0)
                     {
                         OnRewindCompleted?.Invoke();

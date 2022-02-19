@@ -1,4 +1,5 @@
 ﻿using System;
+using BLUE.Common;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
@@ -7,8 +8,10 @@ namespace BLUE.ACubeStory.Cube
     {
         [SerializeField] private Transform _cubeRootTransform = null;
 
-        [SerializeField] private CubeStateRewinder_Dash _dashRewinder = null;
-        
+        [SerializeField] private CubeStateRewinder_Movement _movementRewinder = null;
+
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _dashRewindSettings = null; 
+
         public override ECubeState GetCubeState()
         {
             return ECubeState.Dash;
@@ -16,7 +19,11 @@ namespace BLUE.ACubeStory.Cube
 
         public override bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback)
         {
-            createdCallback?.Invoke(new RewindSnapshot_Cube_Dash(_dashRewinder, _cubeRootTransform.position));
+            createdCallback?.Invoke(
+                new RewindSnapshot_Cube_Movement(
+                    _movementRewinder,
+                    _cubeRootTransform.position, 
+                    _dashRewindSettings));
             
             return true;
         }

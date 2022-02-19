@@ -4,7 +4,7 @@ using BLUE.ACubeStory.Cube.src;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Rewindable_CubeFSM : RewindableBase<RewindSnapshot_Cube>
+    public class Rewindable_CubeStateBased : RewindableBase<RewindSnapshot_Cube>
     {
         [SerializeField] private FSM_Cube _cubeFsm = null;
 
@@ -53,7 +53,7 @@ namespace BLUE.ACubeStory.Cube
             }
 
             _SnapshotFactories[state].CreateSnapshot(onSnapshotCreated);
-
+            
             void onSnapshotCreated(RewindSnapshot_Cube snapshot)
             {
                 SaveSnapshot(snapshot);

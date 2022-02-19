@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeSnapshotFactory_Climb : CubeSnapshotFactory
+    public class CubeSnapshotFactory_Climb : CubeSnapshotFactory_RollBased
     {
         [SerializeField] private RollBehaviourBase _rollBehaviour = null;
-
-        [SerializeField] private CubeStateRewinder_Climb _climbRewinder = null;
         
         private Action<RewindSnapshot_Cube> _createdCallback;
 
@@ -39,8 +37,17 @@ namespace BLUE.ACubeStory.Cube
         private void OnClimbStarted()
         {
             UnregisterFromRollBehaviour();
+
+            RewindSnapshot_Cube_Roll rollSnapshot = 
+                new RewindSnapshot_Cube_Roll(
+                    _rollRewinder,
+                    -_rollBehaviour.LastRollDirection, 
+                    _rollSpeed, 
+                    _rollAngle,
+                    _rollCurve, 
+                    _rollPointOffset);
             
-            _createdCallback?.Invoke(new RewindSnapshot_Cube_Climb(_climbRewinder, _rollBehaviour.LastRollDirection));
+            _createdCallback?.Invoke(rollSnapshot);
         }
     }
 }

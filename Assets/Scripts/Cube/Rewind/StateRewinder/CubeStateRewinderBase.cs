@@ -5,7 +5,6 @@ namespace BLUE.ACubeStory.Cube.StateRewinder
 {
     public abstract class CubeStateRewinderBase : MonoBehaviour
     {
-        public abstract ECubeState GetRewinderState();
     }
 
     public abstract class CubeStateRewinderBase<T> : CubeStateRewinderBase

@@ -64,7 +64,7 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnRewindCompleted()
         {
-            _cubeFSM.TryChangeState(ECubeState.Idle);
+            _cubeFSM.TryChangeState(ECubeState.Fall);
         }
     }
 }
