@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using BLUE.FSMSystem;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Cube.src;
@@ -8,7 +7,7 @@ namespace BLUE.ACubeStory.Cube
 {
     public class State_Cube_Rewind : StateBase<ECubeState, FSMTransitionMessage_Cube>
     {
-        [SerializeField] private FSM_Cube _cubeFSM = null;
+        [SerializeField] private FSM_Cube _cubeFsm = null;
         
         [SerializeField] private RewindControllerBase _rewindController = null;
         
@@ -24,7 +23,11 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube transitionMessage)
         {
             _stateEnteredActionExecutor.Execute();
+
+            _rewindController.OnRewindCompleted += OnRewindCompleted;
             
+            _rewindController.TryRewind();
+
             base.EnterStateCustomActions(transitionMessage);
         }
 
@@ -35,36 +38,11 @@ namespace BLUE.ACubeStory.Cube
             base.ExitStateCustomActions();
         }
 
-        private void Awake()
-        {
-            RegisterToRewindController();
-        }
-
-        private void OnDestroy()
-        {
-            UnregisterFromRewindController();
-        }
-
-        private void RegisterToRewindController()
-        {
-            _rewindController.OnRewindStarted += OnRewindStarted;
-            _rewindController.OnRewindCompleted += OnRewindCompleted;
-        }
-
-        private void UnregisterFromRewindController()
-        {
-            _rewindController.OnRewindStarted -= OnRewindStarted;
-            _rewindController.OnRewindCompleted -= OnRewindCompleted;
-        }
-
-        private void OnRewindStarted()
-        {
-            _cubeFSM.TryChangeState(ECubeState.Rewind);
-        }
-
         private void OnRewindCompleted()
         {
-            _cubeFSM.TryChangeState(ECubeState.Fall);
+            _rewindController.OnRewindCompleted -= OnRewindCompleted;
+
+            _cubeFsm.TryChangeState(ECubeState.Fall);
         }
     }
 }

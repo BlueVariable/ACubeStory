@@ -7,6 +7,8 @@ namespace BLUE.ACubeStory.Cube
 {
     public class Ability_Cube_Rewind_FSM : AbilityBase
     {
+        [SerializeField] private FSM_Cube _cubeFSM = null;
+        
         [SerializeField] private RewindController_CubeMovement _rewindController = null;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
@@ -69,7 +71,7 @@ namespace BLUE.ACubeStory.Cube
         {
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
-                _rewindController.TryRewind();
+                _cubeFSM.TryChangeState(ECubeState.Rewind);
             }
         }
         
@@ -85,7 +87,7 @@ namespace BLUE.ACubeStory.Cube
         {
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
-                _rewindController.TryRewind();
+                _cubeFSM.TryChangeState(ECubeState.Rewind);
             }
         }
     }

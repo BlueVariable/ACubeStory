@@ -71,6 +71,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _rollPointOffset: {x: 0, y: 0, z: 0}
   _rollRewinder: {fileID: 5026623072844196895}
+  _rollBehaviourProvider: {fileID: 3867403072291783834}
   _cubeRollState: {fileID: 8132517245878650085}
 --- !u!1 &249567091401102155
 GameObject:
@@ -263,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8569c2e4880a480d9a32d0627bfb5212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubeFSM: {fileID: 5253448575363346710}
+  _cubeFsm: {fileID: 5253448575363346710}
   _rewindController: {fileID: 7993311678980580115}
   _stateEnteredActionExecutor:
     _actionCarrier: {fileID: 8576745381569738223}
@@ -1475,7 +1476,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _rollPointOffset: {x: 0, y: 1, z: 0}
   _rollRewinder: {fileID: 5026623072844196895}
-  _rollBehaviour: {fileID: 6118223996304352996}
+  _rollBehaviourProvider: {fileID: 3867403072291783834}
 --- !u!1 &3208431494815144199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,6 +1915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInitiallyAttached: 1
+  _cubeFSM: {fileID: 5253448575363346710}
   _rewindController: {fileID: 7993311678980580115}
   _rewindTriggerKeyCode: 114
 --- !u!1 &3845191092780923674
@@ -2377,7 +2379,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _rollPointOffset: {x: 0, y: 0, z: 0}
   _rollRewinder: {fileID: 5026623072844196895}
-  _rollBehaviour: {fileID: 6118223996304352996}
+  _rollBehaviourProvider: {fileID: 3867403072291783834}
 --- !u!1 &5711475027277827703
 GameObject:
   m_ObjectHideFlags: 0

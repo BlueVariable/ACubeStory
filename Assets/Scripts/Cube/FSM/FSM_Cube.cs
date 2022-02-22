@@ -22,7 +22,7 @@ namespace BLUE.ACubeStory.Cube
                 
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Idle),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Fall),
-                new FSMTransition_Cube(ECubeState.Roll, ECubeState.Rewind),
+                // new FSMTransition_Cube(ECubeState.Roll, ECubeState.Rewind),
                     
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Dash),
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Fall),
@@ -35,12 +35,13 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.Dash, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Climb, ECubeState.Idle),
-                new FSMTransition_Cube(ECubeState.Climb, ECubeState.Rewind),
+                // new FSMTransition_Cube(ECubeState.Climb, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Descend, ECubeState.Idle),
-                new FSMTransition_Cube(ECubeState.Descend, ECubeState.Rewind),
+                // new FSMTransition_Cube(ECubeState.Descend, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Idle),
+                new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Fall),
                 
                 new FSMTransition_Cube(ECubeState.Float, ECubeState.Idle),
             };

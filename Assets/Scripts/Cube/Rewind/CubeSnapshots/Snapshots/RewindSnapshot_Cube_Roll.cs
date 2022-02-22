@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using BLUE.ACubeStory.Common;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -9,12 +10,12 @@ namespace BLUE.ACubeStory.Cube
         
         public float RollSpeed { get; }
         
-        public float RollAngle { get; }
+        public float RollAngle { get; private set; }
         
         public AnimationCurve RollCurve { get; }
         
         public Vector3 RollPointOffset { get; }
-
+        
         private CubeSnapshotRewinder_Roll _rollRewinder;
 
         public RewindSnapshot_Cube_Roll(
