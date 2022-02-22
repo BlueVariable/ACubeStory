@@ -1,7 +1,7 @@
 ﻿using System;
+using UnityEngine;
 using BLUE.Common;
 using BLUE.FSMSystem;
-using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -31,15 +31,27 @@ namespace BLUE.ACubeStory.Cube
             return ECubeState.Dash;
         }
 
+        protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
+        {
+            return CheckDashDirectionIsClear(transitionMessage.DashDirection, 1);
+        }
+
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
             OnDashStarted?.Invoke(transitionMessage.DashDirection);
             
-            Dash(
-                transitionMessage.DashDirection,
-                _dashDistance,
-                Vector3.zero, 
-                onDashCompleted);
+            bool performedDash = Dash(
+                                    transitionMessage.DashDirection,
+                                    _dashDistance,
+                                    Vector3.zero, 
+                                    onDashCompleted);
+
+            if (!performedDash)
+            {
+                _cubeFSM.TryChangeState(ECubeState.Fall);
+                
+                return;
+            }
             
             void onDashCompleted()
             {
@@ -51,36 +63,54 @@ namespace BLUE.ACubeStory.Cube
             base.EnterStateCustomActions(transitionMessage);
         }
 
-        private void Dash(
+        private bool Dash(
             Vector3 dashDirection, 
             int dashDistance, 
             Vector3 destinationOffset,
             Action onDashCompleted)
         {
+            bool targetPosCalculated = TryGetDestination(dashDirection, dashDistance, out Vector3 targetPos);
+
+            targetPos += destinationOffset;
+
+            if (!targetPosCalculated)
+            {
+                return false;
+            }
+            
             _dashMoveBehaviour.StartMovementTowards(
                 _settings, 
-                TryGetDestination(dashDirection, dashDistance) + destinationOffset,
+                targetPos,
                 onDashCompleted);
+
+            return true;
         }
 
-        private Vector3 TryGetDestination(Vector3 dashDirection, int completeDashDistance)
+        private bool TryGetDestination(Vector3 dashDirection, int completeDashDistance, out Vector3 pos)
         {
             for (int distance = completeDashDistance; distance > 0; distance--)
             {
-                bool result = Physics.Raycast(
-                    transform.position - _raycastOffset, 
-                    dashDirection, 
-                    out RaycastHit hit,
-                    distance,
-                    _layerMask);
-
-                if (!result)
+                bool result = CheckDashDirectionIsClear(dashDirection, distance);
+                
+                if (result)
                 {
-                    return transform.position + dashDirection * distance;
+                    pos = transform.position + dashDirection * distance;
+                    return true;
                 }
             }
 
-            return transform.position;
+            pos = Vector3.negativeInfinity;
+            return false;
+        }
+
+        private bool CheckDashDirectionIsClear(Vector3 dashDirection, float distance)
+        {
+            return !Physics.Raycast(
+                transform.position - _raycastOffset, 
+                dashDirection, 
+                out RaycastHit hit,
+                distance,
+                _layerMask);
         }
     }
 }
