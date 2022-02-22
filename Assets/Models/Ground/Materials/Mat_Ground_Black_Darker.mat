@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Ground_Dark
+  m_Name: Mat_Ground_Black_Darker
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _SPECULAR_SETUP
+  m_ShaderKeywords: 
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -99,20 +99,20 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.37
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _WorkflowMode: 0
+    - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_4fa630a7d17e477dbb90c15bb29054df: {r: 0, g: 0, b: 0, a: 1}
-    - Color_cdd49f9b2e594024b231ceebb72011b1: {r: 0, g: 0, b: 0, a: 1}
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - Color_4fa630a7d17e477dbb90c15bb29054df: {r: 0.27033645, g: 0.40987182, b: 0.7075472, a: 1}
+    - Color_cdd49f9b2e594024b231ceebb72011b1: {r: 0.1718138, g: 0.2656058, b: 0.3679245, a: 1}
+    - _BaseColor: {r: 0.13333334, g: 0.15260929, b: 0.2, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1563655237923620643
 MonoBehaviour:
