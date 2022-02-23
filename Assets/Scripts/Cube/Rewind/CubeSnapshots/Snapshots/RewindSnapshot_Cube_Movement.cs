@@ -9,18 +9,18 @@ namespace BLUE.ACubeStory.Cube
     {
         public Vector3 TargetPosition { get; }
         
-        public MoveBehaviour_Tween.TweenMoveSettings MoveSettings { get; }
+        public MoveBehaviour_Tween.TweenMoveSettings MoveSettings { get; protected set; }
         
         private CubeSnapshotRewinder_Movement _movementRewinder;
 
         public RewindSnapshot_Cube_Movement(
             ECubeState cubeState,
-            CubeSnapshotRewinder_Movement movementRewiner, 
+            CubeSnapshotRewinder_Movement movementRewinder, 
             Vector3 targetPosition, 
             MoveBehaviour_Tween.TweenMoveSettings moveSettings) 
         : base(cubeState)
         {
-            _movementRewinder = movementRewiner;
+            _movementRewinder = movementRewinder;
             TargetPosition = targetPosition;
             MoveSettings = moveSettings;
         }
