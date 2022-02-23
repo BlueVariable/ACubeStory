@@ -1,4 +1,5 @@
 ﻿using System;
+using BLUE.ACubeStory.Cube.src;
 using UnityEngine;
 using BLUE.Common;
 
@@ -12,18 +13,23 @@ namespace BLUE.ACubeStory.Cube
         
         private CubeSnapshotRewinder_Movement _movementRewinder;
 
-        public RewindSnapshot_Cube_Movement(CubeSnapshotRewinder_Movement movementRewiner, Vector3 targetPosition, MoveBehaviour_Tween.TweenMoveSettings moveSettings)
+        public RewindSnapshot_Cube_Movement(
+            ECubeState cubeState,
+            CubeSnapshotRewinder_Movement movementRewiner, 
+            Vector3 targetPosition, 
+            MoveBehaviour_Tween.TweenMoveSettings moveSettings) 
+        : base(cubeState)
         {
             _movementRewinder = movementRewiner;
             TargetPosition = targetPosition;
             MoveSettings = moveSettings;
         }
 
-        public override void Rewind(Action completedCallback)
+        public override void Rewind(Action<RewindSnapshotBase> completedCallback)
         {
             _movementRewinder.RewindState(this, () =>
             {
-                completedCallback?.Invoke();
+                completedCallback?.Invoke(this);
             });
         }
     }

@@ -4,6 +4,11 @@ namespace BLUE.ACubeStory.Cube
 {
     public abstract class RewindSnapshot_Cube : RewindSnapshotBase
     {
-        
+        public ECubeState CubeState { get; }
+
+        protected RewindSnapshot_Cube(ECubeState cubeState)
+        {
+            CubeState = cubeState;
+        }
     }
 }

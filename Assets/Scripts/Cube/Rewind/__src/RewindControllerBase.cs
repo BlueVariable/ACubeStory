@@ -12,7 +12,7 @@ namespace BLUE.ACubeStory.Cube.src
         
         public Action OnRewindStarted { get; set; }
         
-        public Action OnRewindCompleted { get; set; }
+        public Action<RewindSnapshotBase> OnRewindCompleted { get; set; }
             
         public void RegisterRewindable(IRewindable rewindable)
         {
@@ -37,13 +37,13 @@ namespace BLUE.ACubeStory.Cube.src
             
             foreach (IRewindable rewindable in _rewindables)
             {
-                void onRewindCompleted()
+                void onRewindCompleted(RewindSnapshotBase snapshot)
                 {
                     _activeRewindables.Remove(rewindable);
                     
                     if (_activeRewindables.Count == 0)
                     {
-                        OnRewindCompleted?.Invoke();
+                        OnRewindCompleted?.Invoke(snapshot);
                     }
                 }
                 

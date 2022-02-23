@@ -21,6 +21,7 @@ namespace BLUE.ACubeStory.Cube
         {
             createdCallback?.Invoke(
                 new RewindSnapshot_Cube_Movement(
+                    ECubeState.Dash,
                     _movementRewinder,
                     _cubeRootTransform.position, 
                     _dashRewindSettings));

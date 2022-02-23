@@ -6,7 +6,7 @@ namespace BLUE.ACubeStory.Cube.src
 {
     public interface IRewindable
     {
-        public bool TryRewind(Action onRewindCompleted);
+        public bool TryRewind(Action<RewindSnapshotBase> onRewindCompleted);
         
         void ActivateRewindable(RewindController_CubeMovement rewindController);
         
@@ -20,9 +20,9 @@ namespace BLUE.ACubeStory.Cube.src
         
         protected bool _isRewinding;
 
-        private Action _onRewindCompleted;
+        private Action<RewindSnapshotBase> _onRewindCompleted;
 
-        public bool TryRewind(Action onRewindCompleted)
+        public bool TryRewind(Action<RewindSnapshotBase> onRewindCompleted)
         {
             if (_isRewinding || _snapshots.Count == 0)
             {
@@ -52,11 +52,11 @@ namespace BLUE.ACubeStory.Cube.src
             rewindController.UnregisterRewindable(this);
         }
 
-        private void OnRewindCompleted()
+        private void OnRewindCompleted(RewindSnapshotBase snapshot)
         {
             _isRewinding = false;
             
-            _onRewindCompleted?.Invoke();
+            _onRewindCompleted?.Invoke(snapshot);
         }
         
         protected void SaveSnapshot(T snapshot)

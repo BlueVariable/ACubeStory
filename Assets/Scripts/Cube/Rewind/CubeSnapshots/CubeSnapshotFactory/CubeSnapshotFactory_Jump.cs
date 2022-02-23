@@ -21,6 +21,7 @@ namespace BLUE.ACubeStory.Cube
         {
             RewindSnapshot_Cube_Movement snapshot = 
                 new RewindSnapshot_Cube_Movement(
+                    ECubeState.Jump,
                     _movementRewinder,
                     _cubeRootTransform.position,
                     _jumpRewindSettings);

@@ -16,6 +16,7 @@ namespace BLUE.ACubeStory.Cube
         {
             RewindSnapshot_Cube_Roll rollSnapshot = 
                 new RewindSnapshot_Cube_Roll(
+                    ECubeState.Roll,
                     _rollRewinder,
                     -_cubeRollState.LastCandidateTransitionMessage.Direction,
                     _rollSpeed, 

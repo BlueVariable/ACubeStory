@@ -68,7 +68,7 @@ namespace BLUE.ACubeStory.Cube
             Vector3 fallStartPos = _cubeRootTransform.position;
 
             RewindSnapshot_Cube_Movement snapshot =
-                new RewindSnapshot_Cube_Movement(_movementRewinder, fallStartPos, _fallRewindSettings);
+                new RewindSnapshot_Cube_Movement(ECubeState.Fall, _movementRewinder, fallStartPos, _fallRewindSettings);
 
             _createdCallback?.Invoke(snapshot);
             

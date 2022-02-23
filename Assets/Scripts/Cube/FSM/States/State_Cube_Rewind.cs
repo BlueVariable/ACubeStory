@@ -2,6 +2,7 @@
 using BLUE.FSMSystem;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Cube.src;
+using BLUE.Helpers;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -38,11 +39,27 @@ namespace BLUE.ACubeStory.Cube
             base.ExitStateCustomActions();
         }
 
-        private void OnRewindCompleted()
+        private void OnRewindCompleted(RewindSnapshotBase snapshot)
         {
             _rewindController.OnRewindCompleted -= OnRewindCompleted;
 
+            if (!(snapshot is RewindSnapshot_Cube snapshotCube))
+            {
+                return;
+            }
+
             _cubeFsm.TryChangeState(ECubeState.Idle);
+            
+            if (snapshotCube.CubeState == ECubeState.Fall)
+            {
+                CoroutineHelper.Instance.WaitForFixedUpdate(() =>
+                {
+                    if (_cubeFsm.TryGetCurStateType(out ECubeState curState) && curState != ECubeState.Rewind)
+                    {
+                        _cubeFsm.TryChangeState(ECubeState.Fall);
+                    }
+                });
+            }
         }
     }
 }
