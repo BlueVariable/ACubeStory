@@ -26,12 +26,14 @@ namespace BLUE.ACubeStory.Cube
         {
             _dashState.OnDashStarted += OnDashStarted;
             _dashState.OnDashCompleted += OnDashCompleted;
+            _dashState.OnExitedDashStated += OnDashCompleted;
         }
 
         private void UnregisterFromDashState()
         {
             _dashState.OnDashStarted -= OnDashStarted;
             _dashState.OnDashCompleted -= OnDashCompleted;
+            _dashState.OnExitedDashStated -= OnDashCompleted;
         }
         
         private void OnDashStarted(Vector3 direction)

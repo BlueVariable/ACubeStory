@@ -23,6 +23,7 @@ namespace BLUE.ACubeStory.Cube
 
         public Action<Vector3> OnDashStarted { get; set; }
         public Action OnDashCompleted { get; set; }
+        public Action OnExitedDashStated { get; set; }
 
         #endregion
 
