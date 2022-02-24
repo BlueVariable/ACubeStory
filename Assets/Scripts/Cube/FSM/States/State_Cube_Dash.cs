@@ -64,6 +64,13 @@ namespace BLUE.ACubeStory.Cube
             base.EnterStateCustomActions(transitionMessage);
         }
 
+        protected override void ExitStateCustomActions()
+        {
+            OnExitedDashStated?.Invoke();
+            
+            base.ExitStateCustomActions();
+        }
+
         private bool Dash(
             Vector3 dashDirection, 
             int dashDistance, 
