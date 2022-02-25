@@ -33,23 +33,24 @@ namespace BLUE.ACubeStory.Cube
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
-            return CheckDashDirectionIsClear(transitionMessage.DashDirection, 1);
+            return CheckIfDashDirectionIsClear(transitionMessage.DashDirection, 1);
         }
 
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
             OnDashStarted?.Invoke(transitionMessage.DashDirection);
             
-            bool performedDash = Dash(
-                                    transitionMessage.DashDirection,
+            bool dashing = Dash(transitionMessage.DashDirection,
                                     _dashDistance,
                                     Vector3.zero, 
                                     onDashCompleted);
 
-            if (!performedDash)
+            if (!dashing)
             {
-                _cubeFSM.TryChangeState(ECubeState.Fall);
+                base.EnterStateCustomActions(transitionMessage);
                 
+                _cubeFSM.TryChangeState(ECubeState.Fall);
+
                 return;
             }
             
@@ -86,24 +87,26 @@ namespace BLUE.ACubeStory.Cube
             return true;
         }
 
-        private bool TryGetDestination(Vector3 dashDirection, int completeDashDistance, out Vector3 pos)
+        private bool TryGetDestination(Vector3 dashDirection, int requestedDashDistance, out Vector3 pos)
         {
-            for (int distance = completeDashDistance; distance > 0; distance--)
+            for (int distance = requestedDashDistance; distance > 0; distance--)
             {
-                bool result = CheckDashDirectionIsClear(dashDirection, distance);
+                bool result = CheckIfDashDirectionIsClear(dashDirection, distance);
                 
                 if (result)
                 {
                     pos = transform.position + dashDirection * distance;
+                    
                     return true;
                 }
             }
 
             pos = Vector3.negativeInfinity;
+            
             return false;
         }
 
-        private bool CheckDashDirectionIsClear(Vector3 dashDirection, float distance)
+        private bool CheckIfDashDirectionIsClear(Vector3 dashDirection, float distance)
         {
             return !Physics.Raycast(
                 transform.position - _raycastOffset, 
