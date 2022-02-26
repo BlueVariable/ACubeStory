@@ -5,7 +5,7 @@ using BLUE.Common;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class RewindSnapshot_Cube_Movement : RewindSnapshot_Cube
+    public class RewindSnapshot_Cube_Movement : RewindSnapshot_Cube_Platform
     {
         public Vector3 TargetPosition { get; }
         

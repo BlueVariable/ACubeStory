@@ -4,7 +4,7 @@ using BLUE.ACubeStory.Cube.src;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class RewindSnapshot_Cube_Roll : RewindSnapshot_Cube
+    public class RewindSnapshot_Cube_Roll : RewindSnapshot_Cube_Platform
     {
         public Vector3 RollDirection { get; }
         

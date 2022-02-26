@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using BLUE.ACubeStory.Cube.src;
+using System.Collections.Generic;
 
 namespace BLUE.ACubeStory.Cube
 {
