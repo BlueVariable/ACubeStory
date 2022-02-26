@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Ability;
 using BLUE.ACubeStory.Cube.src;
@@ -36,7 +37,14 @@ namespace BLUE.ACubeStory.Cube
 
             DeactivateRewindables();
         }
-        
+
+        private void OnDestroy()
+        {
+            UnregisterFromInputManager();
+
+            DeactivateRewindables();
+        }
+
         private void RegisterToInputManager()
         {
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
