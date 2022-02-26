@@ -52,7 +52,7 @@ namespace BLUE.ACubeStory.Cube
             
             if (snapshotCube.CubeState == ECubeState.Fall)
             {
-                CoroutineHelper.Instance.WaitForFixedUpdate(() =>
+                CoroutineHelper.Instance.WaitForSeconds(1f / 60f,() =>
                 {
                     if (_cubeFsm.TryGetCurStateType(out ECubeState curState) && curState != ECubeState.Rewind)
                     {
