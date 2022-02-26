@@ -4,61 +4,43 @@ using System.Collections.Generic;
 
 namespace BLUE.ACubeStory.Cube.src
 {
-    public abstract class RewindControllerBase : MonoBehaviour
+    public abstract class RewindControllerBase<T> : MonoBehaviour 
+    where T : RewindSnapshotBase
     {
-        protected List<IRewindable> _rewindables = new List<IRewindable>();
+        protected List<T> _snapshots = new List<T>();
 
-        protected List<IRewindable> _activeRewindables = new List<IRewindable>();
-        
+        protected T _curRewindSnapshot = null;
+
         public Action OnRewindStarted { get; set; }
         
         public Action<RewindSnapshotBase> OnRewindCompleted { get; set; }
-            
-        public void RegisterRewindable(IRewindable rewindable)
+        
+        public void SaveSnapshot(T snapshot)
         {
-            if (_rewindables.Contains(rewindable))
-            {
-                return;
-            }
-            
-            _rewindables.Add(rewindable);
-        }
-
-        public void UnregisterRewindable(IRewindable rewindable)
-        {
-            _rewindables.Remove(rewindable);
+            _snapshots.Add(snapshot);
         }
 
         public void TryRewind()
         {
-            bool isActiveRewindablesClearAtInit = _activeRewindables.Count == 0;
-
-            bool isThereAnyNewRewindable = false;
-            
-            foreach (IRewindable rewindable in _rewindables)
+            if (_snapshots == null || _snapshots.Count == 0 || _curRewindSnapshot != null)
             {
-                void onRewindCompleted(RewindSnapshotBase snapshot)
-                {
-                    _activeRewindables.Remove(rewindable);
-                    
-                    if (_activeRewindables.Count == 0)
-                    {
-                        OnRewindCompleted?.Invoke(snapshot);
-                    }
-                }
+                return;
+            }
+
+            _curRewindSnapshot = _snapshots[_snapshots.Count - 1];
+
+            _snapshots.RemoveAt(_snapshots.Count - 1);
+
+            void onSnapshotRewindCompleted(RewindSnapshotBase snapshot)
+            {
+                OnRewindCompleted?.Invoke(_curRewindSnapshot);
                 
-                if (rewindable.TryRewind(onRewindCompleted))
-                {
-                    _activeRewindables.Add(rewindable);
-
-                    isThereAnyNewRewindable = true;
-                }
+                _curRewindSnapshot = null;
             }
-
-            if (isActiveRewindablesClearAtInit && isThereAnyNewRewindable)
-            {
-                OnRewindStarted?.Invoke();
-            }
+            
+            _curRewindSnapshot.Rewind(onSnapshotRewindCompleted);
+            
+            OnRewindStarted?.Invoke();
         }
     }
 }

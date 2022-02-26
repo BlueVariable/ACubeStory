@@ -4,7 +4,7 @@ using BLUE.ACubeStory.Cube.src;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Rewindable_CubeStateBased : RewindableBase<RewindSnapshot_Cube>
+    public class Rewindable_CubeStateBased : RewindableBase<RewindController_Cube, RewindSnapshot_Cube>
     {
         [SerializeField] private FSM_Cube _cubeFsm = null;
 

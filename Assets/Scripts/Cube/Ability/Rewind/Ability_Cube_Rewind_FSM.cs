@@ -13,7 +13,7 @@ namespace BLUE.ACubeStory.Cube
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
         
-        [SerializeField] private RewindController_CubeMovement _rewindController = null;
+        [SerializeField] private RewindController_Cube _rewindController = null;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
 
@@ -64,22 +64,12 @@ namespace BLUE.ACubeStory.Cube
 
         private void ActivateRewindables()
         {
-            IRewindable[] rewindables = _rewindController.GetComponentsInChildren<IRewindable>();
-
-            foreach (IRewindable rewindable in rewindables)
-            {
-                rewindable.ActivateRewindable(_rewindController);
-            }
+            
         }
 
         private void DeactivateRewindables()
         {
-            IRewindable[] rewindables = _rewindController.GetComponentsInChildren<IRewindable>();
-
-            foreach (IRewindable rewindable in rewindables)
-            {
-                rewindable.DeactivateRewindable(_rewindController);
-            }
+            
         }
         
         private void OnKeyDown(InputData_Key inputData)

@@ -1,67 +1,30 @@
-﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
+﻿using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube.src
 {
-    public interface IRewindable
+    public abstract class RewindableBase<T1, T2> : MonoBehaviour
+    where T1 : RewindControllerBase<T2>
+    where T2 : RewindSnapshotBase
     {
-        public bool TryRewind(Action<RewindSnapshotBase> onRewindCompleted);
-        
-        void ActivateRewindable(RewindController_CubeMovement rewindController);
-        
-        void DeactivateRewindable(RewindController_CubeMovement rewindController);
-    }
-    
-    public abstract class RewindableBase<T> : MonoBehaviour, IRewindable
-    where T : RewindSnapshotBase
-    {
-        private List<RewindSnapshotBase> _snapshots = new List<RewindSnapshotBase>();
-        
-        protected bool _isRewinding;
 
-        private Action<RewindSnapshotBase> _onRewindCompleted;
+        private T1 _rewindController;
 
-        public bool TryRewind(Action<RewindSnapshotBase> onRewindCompleted)
+        private T1 _RewindController
         {
-            if (_isRewinding || _snapshots.Count == 0)
+            get
             {
-                return false;
+                if (_rewindController == null)
+                {
+                    _rewindController = GetComponentInParent<T1>();
+                }
+
+                return _rewindController;
             }
-
-            _onRewindCompleted = onRewindCompleted;
-
-            _isRewinding = true;
-
-            RewindSnapshotBase snapshot = _snapshots[_snapshots.Count - 1];
-
-            _snapshots.Remove(snapshot);
-            
-            snapshot.Rewind(OnRewindCompleted);
-            
-            return true;
-        }
-
-        public void ActivateRewindable(RewindController_CubeMovement rewindController)
-        {
-            rewindController.RegisterRewindable(this);
-        }
-
-        public void DeactivateRewindable(RewindController_CubeMovement rewindController)
-        {
-            rewindController.UnregisterRewindable(this);
-        }
-
-        private void OnRewindCompleted(RewindSnapshotBase snapshot)
-        {
-            _isRewinding = false;
-            
-            _onRewindCompleted?.Invoke(snapshot);
         }
         
-        protected void SaveSnapshot(T snapshot)
+        protected void SaveSnapshot(T2 snapshot)
         {
-            _snapshots.Add(snapshot);
+            _RewindController.SaveSnapshot(snapshot);
         }
     }
 }

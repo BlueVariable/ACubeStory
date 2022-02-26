@@ -2,7 +2,7 @@
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class RewindController_CubeMovement : RewindControllerBase
+    public class RewindController_Cube : RewindControllerBase<RewindSnapshot_Cube>
     {
         
     }

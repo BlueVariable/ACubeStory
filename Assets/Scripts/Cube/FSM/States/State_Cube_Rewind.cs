@@ -10,7 +10,7 @@ namespace BLUE.ACubeStory.Cube
     {
         [SerializeField] private FSM_Cube _cubeFsm = null;
         
-        [SerializeField] private RewindControllerBase _rewindController = null;
+        [SerializeField] private RewindController_Cube _rewindController = null;
         
         [SerializeField] private ActionExecutor _stateEnteredActionExecutor = null;
 
