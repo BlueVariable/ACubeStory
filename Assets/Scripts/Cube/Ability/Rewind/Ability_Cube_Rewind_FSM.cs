@@ -27,22 +27,16 @@ namespace BLUE.ACubeStory.Cube
         public override void Attached()
         {
             RegisterToInputManager();
-
-            ActivateRewindables();
         }
 
         public override void Detached()
         {
             UnregisterFromInputManager();
-
-            DeactivateRewindables();
         }
 
         private void OnDestroy()
         {
             UnregisterFromInputManager();
-
-            DeactivateRewindables();
         }
 
         private void RegisterToInputManager()
@@ -61,24 +55,14 @@ namespace BLUE.ACubeStory.Cube
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyHold, OnKeyHold);
         }
-
-        private void ActivateRewindables()
-        {
-            
-        }
-
-        private void DeactivateRewindables()
-        {
-            
-        }
         
         private void OnKeyDown(InputData_Key inputData)
         {
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
-                _cubeFSM.TryChangeState(ECubeState.Rewind);
-
                 RegisterToRewindController();
+                
+                _cubeFSM.TryChangeState(ECubeState.Rewind);
             }
         }
         

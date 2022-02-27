@@ -21,6 +21,11 @@ namespace BLUE.ACubeStory.Cube
             return ECubeState.Rewind;
         }
 
+        protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube transitionMessage)
+        {
+            return _rewindController.CanRewind();
+        }
+
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube transitionMessage)
         {
             _stateEnteredActionExecutor.Execute();
@@ -50,7 +55,7 @@ namespace BLUE.ACubeStory.Cube
 
             _cubeFsm.TryChangeState(ECubeState.Idle);
             
-            if (snapshotCube.CubeState == ECubeState.Fall)
+            if (snapshotCube.CubeState == ECubeState.Fall || snapshotCube.CubeState == ECubeState.Dash)
             {
                 CoroutineHelper.Instance.WaitForSeconds(1f / 60f,() =>
                 {

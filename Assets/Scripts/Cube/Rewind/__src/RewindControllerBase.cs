@@ -20,6 +20,11 @@ namespace BLUE.ACubeStory.Cube.src
             _snapshots.Add(snapshot);
         }
 
+        public bool CanRewind()
+        {
+            return !(_snapshots == null || _snapshots.Count == 0 || _curRewindSnapshot != null);
+        }
+
         public void TryRewind()
         {
             if (_snapshots == null || _snapshots.Count == 0 || _curRewindSnapshot != null)
