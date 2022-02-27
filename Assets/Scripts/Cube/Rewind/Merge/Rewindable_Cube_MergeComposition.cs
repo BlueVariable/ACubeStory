@@ -4,7 +4,7 @@ using BLUE.ACubeStory.Cube.src;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Rewindable_CubeMergeComposition : RewindableBase<RewindController_Cube, RewindSnapshot_Cube>
+    public class Rewindable_Cube_MergeComposition : RewindableBase<RewindController_Cube, RewindSnapshot_Cube>
     {
         [SerializeField] private MergerBase _merger = null;
 

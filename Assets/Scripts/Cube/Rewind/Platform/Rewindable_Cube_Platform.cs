@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Rewindable_CubeStateBased : RewindableBase<RewindController_Cube, RewindSnapshot_Cube>
+    public class Rewindable_Cube_Platform : RewindableBase<RewindController_Cube, RewindSnapshot_Cube>
     {
         [SerializeField] private FSM_Cube _cubeFsm = null;
 

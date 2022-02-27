@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubeFsm: {fileID: 5253448575363346710}
-  _rewindController: {fileID: 7993311678980580115}
+  _rewindController: {fileID: 1164730520007471747}
   _stateEnteredActionExecutor:
     _actionCarrier: {fileID: 0}
   _stateExitedActionExecutor:
@@ -374,13 +374,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658825886839041887}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 848993145379008529}
   - {fileID: 2613414347810498996}
-  m_Father: {fileID: 2905430919143969508}
+  m_Father: {fileID: 8848964717771580502}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682995821722401175
@@ -1345,7 +1345,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2941083943491524868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1355,7 +1355,7 @@ Transform:
   - {fileID: 8309093130238180146}
   - {fileID: 1196787365663981862}
   - {fileID: 1499242619415141288}
-  m_Father: {fileID: 2905430919143969508}
+  m_Father: {fileID: 8848964717771580502}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3061743825006100608
@@ -1922,7 +1922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInitiallyAttached: 1
   _cubeFSM: {fileID: 5253448575363346710}
-  _rewindController: {fileID: 7993311678980580115}
+  _rewindController: {fileID: 1164730520007471747}
   _rewindTriggerKeyCode: 114
   _rewindStartedActions:
     _actionCarrier: {fileID: 8576745381569738223}
@@ -1990,36 +1990,6 @@ Transform:
   m_Father: {fileID: 7947924262026148813}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4095056165108100837
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1434212355199116462}
-  m_Layer: 8
-  m_Name: Rewindable_CubeMergeComposition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1434212355199116462
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4095056165108100837}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1359025428502692676}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4186368194379135142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,8 +2043,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359025428502692676}
+  - component: {fileID: 8235817437910657395}
   m_Layer: 8
-  m_Name: RewindController_MergeComposition
+  m_Name: Rewindable_MergeComposition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2090,11 +2061,24 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1434212355199116462}
+  m_Children: []
   m_Father: {fileID: 7695090221467156625}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8235817437910657395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220129364458599660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a888a36748422fa1652a2b372c07e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _merger: {fileID: 842975415367295186}
+  _mergeableComposition: {fileID: 216091954713794861}
 --- !u!1 &4428741736119544247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,9 +2716,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8848964717771580502}
-  - component: {fileID: 7993311678980580115}
+  - component: {fileID: 7981916158076651992}
   m_Layer: 8
-  m_Name: RewindController_CubeMovement
+  m_Name: Rewindable_Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2751,11 +2735,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2905430919143969508}
+  - {fileID: 3037066734761091232}
+  - {fileID: 1441153240119808405}
   m_Father: {fileID: 7695090221467156625}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7993311678980580115
+--- !u!114 &7981916158076651992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2764,9 +2749,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6203869505261698018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d05b8a8c589b44488d3321273efaae8d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3563be75ae294a26aefad4ec25e9976f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cubeFsm: {fileID: 5253448575363346710}
 --- !u!1 &6465153098811955559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3612,52 +3598,6 @@ MonoBehaviour:
     _duration: 0.4
     _unhighlightAfterCompletion: 1
   _onlyHighlightOverlapped: 0
---- !u!1 &8551564935416143030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2905430919143969508}
-  - component: {fileID: 7145729672806831224}
-  m_Layer: 8
-  m_Name: Rewindable_CubeMovement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2905430919143969508
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8551564935416143030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3037066734761091232}
-  - {fileID: 1441153240119808405}
-  m_Father: {fileID: 8848964717771580502}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7145729672806831224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8551564935416143030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3563be75ae294a26aefad4ec25e9976f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cubeFsm: {fileID: 5253448575363346710}
 --- !u!1 &8617960755972355077
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,6 +4077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7695090221467156625}
+  - component: {fileID: 1164730520007471747}
   m_Layer: 8
   m_Name: Rewind
   m_TagString: Untagged
@@ -4163,6 +4104,18 @@ Transform:
   m_Father: {fileID: 7075618033240990871}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1164730520007471747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175275667832380225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05b8a8c589b44488d3321273efaae8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3278699616564921337
 PrefabInstance:
   m_ObjectHideFlags: 0
