@@ -22,7 +22,7 @@ namespace BLUE.ACubeStory.Cube
                 
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Idle),
                 new FSMTransition_Cube(ECubeState.Roll, ECubeState.Fall),
-                // new FSMTransition_Cube(ECubeState.Roll, ECubeState.Rewind),
+                new FSMTransition_Cube(ECubeState.Roll, ECubeState.Rewind),
                     
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Dash),
                 new FSMTransition_Cube(ECubeState.Jump, ECubeState.Fall),

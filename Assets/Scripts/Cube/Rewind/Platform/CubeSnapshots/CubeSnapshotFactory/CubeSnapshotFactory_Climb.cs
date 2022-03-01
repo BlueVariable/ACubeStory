@@ -38,6 +38,7 @@ namespace BLUE.ACubeStory.Cube
                 new RewindSnapshot_Cube_Roll(
                     ECubeState.Climb,
                     _rollRewinder,
+                    _rollBehaviourProvider.GetRollBehaviour(),
                     -_rollBehaviourProvider.GetRollBehaviour().LastRollDirection, 
                     _rollSpeed, 
                     _rollAngle,

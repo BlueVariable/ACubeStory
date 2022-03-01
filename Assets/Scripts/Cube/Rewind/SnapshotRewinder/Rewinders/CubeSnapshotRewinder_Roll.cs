@@ -23,7 +23,6 @@ namespace BLUE.ACubeStory.Cube
                     {
                         onCompleted?.Invoke();
                     });
-
         }
     }
 }
