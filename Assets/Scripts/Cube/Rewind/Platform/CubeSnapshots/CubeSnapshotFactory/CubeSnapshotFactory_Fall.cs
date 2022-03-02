@@ -16,6 +16,8 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettingsHalfway = null; 
         
+        [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
+
         private Action<RewindSnapshot_Cube> _createdCallback;
 
         public override ECubeState GetCubeState()
@@ -73,6 +75,7 @@ namespace BLUE.ACubeStory.Cube
                 ECubeState.Fall,
                 _movementRewinder,
                 fallStartPos,
+                _moveBehaviour,
                 _fallRewindSettings,
                 _fallRewindSettingsHalfway,
                 _fallState);

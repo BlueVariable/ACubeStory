@@ -10,8 +10,10 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private CubeSnapshotRewinder_Movement _movementRewinder = null;
 
-        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _dashRewindSettings = null; 
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _dashRewindSettings = null;
 
+        [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
+        
         public override ECubeState GetCubeState()
         {
             return ECubeState.Dash;
@@ -23,6 +25,7 @@ namespace BLUE.ACubeStory.Cube
                 new RewindSnapshot_Cube_Movement(
                     ECubeState.Dash,
                     _movementRewinder,
+                    _moveBehaviour,
                     _cubeRootTransform.position, 
                     _dashRewindSettings));
             

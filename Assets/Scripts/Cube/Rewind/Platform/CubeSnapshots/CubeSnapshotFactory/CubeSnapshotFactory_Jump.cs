@@ -12,6 +12,8 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _jumpRewindSettings = null;
 
+        [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
+
         public override ECubeState GetCubeState()
         {
             return ECubeState.Jump;
@@ -23,6 +25,7 @@ namespace BLUE.ACubeStory.Cube
                 new RewindSnapshot_Cube_Movement(
                     ECubeState.Jump,
                     _movementRewinder,
+                    _moveBehaviour,
                     _cubeRootTransform.position,
                     _jumpRewindSettings);
             

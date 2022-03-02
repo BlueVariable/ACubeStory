@@ -9,10 +9,11 @@ namespace BLUE.ACubeStory.Cube
             ECubeState cubeState, 
             CubeSnapshotRewinder_Movement movementRewinder, 
             Vector3 targetPosition, 
+            MoveBehaviour_Tween moveBehaviour,
             MoveBehaviour_Tween.TweenMoveSettings moveSettingsDefault,
             MoveBehaviour_Tween.TweenMoveSettings moveSettingsHalfway,
             State_Cube_Fall fallState) 
-            : base(cubeState, movementRewinder, targetPosition, moveSettingsDefault)
+            : base(cubeState, movementRewinder, moveBehaviour, targetPosition, moveSettingsDefault)
         {
             void onFallFinished()
             {
