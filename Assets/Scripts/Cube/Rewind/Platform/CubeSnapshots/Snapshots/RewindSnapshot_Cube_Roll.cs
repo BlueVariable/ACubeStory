@@ -55,7 +55,7 @@ namespace BLUE.ACubeStory.Cube
             }
             else
             {
-                _rollBehaviour.TryUndoRoll(() => { completedCallback?.Invoke(this); });
+                _rollBehaviour.TryUndoRoll(true,() => { completedCallback?.Invoke(this); });
             }
         }
 

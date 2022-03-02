@@ -90,9 +90,9 @@ namespace BLUE.ACubeStory.Common
             return true;
         }
 
-        public bool TryUndoRoll(Action onRolledCallback = null)
+        public bool TryUndoRoll(bool forceUndo = false, Action onRolledCallback = null)
         {
-            if (!IsRolling)
+            if (!IsRolling && !forceUndo)
             {
                 return false;
             }
