@@ -22,6 +22,8 @@ namespace BLUE.ACubeStory.Cube
         
         private bool _isInRewind = false;
         
+        private bool _isRewindContinuous = false;
+
         private IEnumerator _rewindControlRoutine;
         
         public override void Attached()
@@ -43,6 +45,7 @@ namespace BLUE.ACubeStory.Cube
         {
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyHold, OnKeyHold);
+            //InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
         }
 
         private void UnregisterFromInputManager()
@@ -54,6 +57,7 @@ namespace BLUE.ACubeStory.Cube
             
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyHold, OnKeyHold);
+            //InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
         }
         
         private void OnKeyDown(InputData_Key inputData)
@@ -61,18 +65,30 @@ namespace BLUE.ACubeStory.Cube
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
                 RegisterToRewindController();
+
+                _isRewindContinuous = true;
                 
                 _cubeFSM.TryChangeState(ECubeState.Rewind);
             }
         }
-        
+
         private void OnKeyHold(InputData_Key inputData)
         {
-            if (inputData.KeyCode == _rewindTriggerKeyCode)
+            _isRewindContinuous = _isRewindContinuous && _rewindController.IsThereAnyAvailableSnapshot();
+            
+            if (inputData.KeyCode == _rewindTriggerKeyCode && _isRewindContinuous)
             {
                 _cubeFSM.TryChangeState(ECubeState.Rewind);
             }
         }
+
+        /*private void OnKeyUp(InputData_Key inputData)
+        {
+            if (inputData.KeyCode == _rewindTriggerKeyCode)
+            {
+                
+            }
+        }*/
 
         private void RegisterToRewindController()
         {

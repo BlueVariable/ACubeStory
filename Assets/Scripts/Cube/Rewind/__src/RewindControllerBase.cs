@@ -8,7 +8,7 @@ namespace BLUE.ACubeStory.Cube.src
     where T : RewindSnapshotBase
     {
         protected List<T> _snapshots = new List<T>();
-
+        
         protected T _curRewindSnapshot = null;
 
         public Action OnRewindStarted { get; set; }
@@ -23,6 +23,11 @@ namespace BLUE.ACubeStory.Cube.src
         public bool CanRewind()
         {
             return !(_snapshots == null || _snapshots.Count == 0 || _curRewindSnapshot != null);
+        }
+
+        public bool IsThereAnyAvailableSnapshot()
+        {
+            return _snapshots != null && _snapshots.Count > 0;
         }
 
         public void TryRewind()

@@ -57,6 +57,8 @@ namespace BLUE.ACubeStory.Cube
             void onSnapshotCreated(RewindSnapshot_Cube snapshot)
             {
                 SaveSnapshot(snapshot);
+                
+                UnityEngine.Debug.Log($"Snapshot Saved {state}.");
             }
         }
 

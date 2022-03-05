@@ -45,11 +45,15 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube transitionMessage)
         {
+            UnityEngine.Debug.Log($"Fall State Entered.");
+
             if (_fallSkipConditions.Any(val => val.IsConditionSatisfied()))
             {
                 _cubeFSM.TryChangeState(ECubeState.Idle);
                 
                 OnFallSkipped?.Invoke();
+                
+                UnityEngine.Debug.Log($"Fall State OnFallSkipped.");
 
                 return;
             }
