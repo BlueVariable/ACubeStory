@@ -35,10 +35,10 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.Dash, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Climb, ECubeState.Idle),
-                // new FSMTransition_Cube(ECubeState.Climb, ECubeState.Rewind),
+                new FSMTransition_Cube(ECubeState.Climb, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Descend, ECubeState.Idle),
-                // new FSMTransition_Cube(ECubeState.Descend, ECubeState.Rewind),
+                new FSMTransition_Cube(ECubeState.Descend, ECubeState.Rewind),
                 
                 new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Idle),
                 new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Fall),

@@ -13,8 +13,8 @@ namespace BLUE.ACubeStory.Cube
         
         private CubeSnapshotRewinder_Movement _movementRewinder;
         private MoveBehaviour_Tween _moveBehaviour;
-        private float _rewindSpeed = 1;
-
+        private float _rewindSpeed;
+        
         private bool _curMovementCompleted;
         
         public RewindSnapshot_Cube_Movement(
@@ -23,7 +23,7 @@ namespace BLUE.ACubeStory.Cube
             MoveBehaviour_Tween moveBehaviour,
             Vector3 targetPosition, 
             MoveBehaviour_Tween.TweenMoveSettings moveSettings,
-            float rewindSpeed = 2)
+            float rewindSpeed = 4)
         : base(cubeState)
         {
             _movementRewinder = movementRewinder;
@@ -45,7 +45,10 @@ namespace BLUE.ACubeStory.Cube
             {
                 _moveBehaviour.TryInterruptAndSmoothRewind(
                     _rewindSpeed,
-                    () => { completedCallback?.Invoke(this); });
+                    () =>
+                    {
+                        completedCallback?.Invoke(this);
+                    });
             }
         }
 

@@ -39,7 +39,7 @@ namespace BLUE.ACubeStory.Common
         
         protected abstract void PauseRoll();
 
-        protected abstract void UndoRoll(Action onRolledCallback = null);
+        protected abstract void UndoRoll(Action onRolledCallback = null, float undoSpeed = 1);
 
         public bool TryRollTo(
             Vector3 direction,
@@ -90,14 +90,14 @@ namespace BLUE.ACubeStory.Common
             return true;
         }
 
-        public bool TryUndoRoll(bool forceUndo = false, Action onRolledCallback = null)
+        public bool TryUndoRoll(bool forceUndo = false, Action onRolledCallback = null, float undoSpeed = 1)
         {
             if (!IsRolling && !forceUndo)
             {
                 return false;
             }
             
-            UndoRoll(onRollEnded);
+            UndoRoll(onRollEnded, undoSpeed);
 
             void onRollEnded()
             {

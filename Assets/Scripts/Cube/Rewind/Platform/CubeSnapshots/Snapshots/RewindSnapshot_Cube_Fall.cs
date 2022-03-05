@@ -15,16 +15,7 @@ namespace BLUE.ACubeStory.Cube
             State_Cube_Fall fallState) 
             : base(cubeState, movementRewinder, moveBehaviour, targetPosition, moveSettingsDefault)
         {
-            void onFallFinished()
-            {
-                fallState.OnFallFinished -= onFallFinished;
-
-                MoveSettings = moveSettingsDefault;
-            }
             
-            fallState.OnFallFinished += onFallFinished;
-
-            MoveSettings = moveSettingsHalfway;
         }
     }
 }
