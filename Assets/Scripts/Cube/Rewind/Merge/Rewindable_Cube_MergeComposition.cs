@@ -27,12 +27,15 @@ namespace BLUE.ACubeStory.Cube
 
         private void UnregisterFromMerger()
         {
-            _merger.OnMerged -= OnMerged;
+            if (_merger != null)
+            {
+                _merger.OnMerged -= OnMerged;
+            }
         }
 
         private void OnMerged(Mergeable formerMergeable, Mergeable newMergeable)
         {
-            SaveSnapshot(new RewindSnapshot_Merge(newMergeable, _merger, _mergeableComposition));
+            SaveSnapshot(new RewindSnapshot_Merge(newMergeable, _mergeableComposition));
         }
     }
 }

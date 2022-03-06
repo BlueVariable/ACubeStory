@@ -7,19 +7,17 @@ namespace BLUE.ACubeStory.Cube
     public class RewindSnapshot_Merge : RewindSnapshot_Cube
     {
         private Mergeable _mergeable;
-        private MergerBase _merger;
         private MergeableComposition _mergeableComposition;
 
-        public RewindSnapshot_Merge(Mergeable mergeable, MergerBase merger, MergeableComposition mergeableComposition)
+        public RewindSnapshot_Merge(Mergeable mergeable, MergeableComposition mergeableComposition)
         {
             _mergeable = mergeable;
-            _merger = merger;
             _mergeableComposition = mergeableComposition;
         }
 
         public override void Rewind(Action<RewindSnapshotBase> completedCallback)
         {
-            bool res = _merger.TryUnmerge(_mergeableComposition.Mergeables, _mergeable);
+            bool res = _mergeableComposition.TryUnmerge(_mergeable);
 
             if (res)
             {

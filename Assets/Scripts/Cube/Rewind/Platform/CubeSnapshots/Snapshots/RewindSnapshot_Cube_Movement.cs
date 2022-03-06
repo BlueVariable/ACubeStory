@@ -9,7 +9,7 @@ namespace BLUE.ACubeStory.Cube
     {
         public Vector3 TargetPosition { get; }
         
-        public MoveBehaviour_Tween.TweenMoveSettings MoveSettings { get; protected set; }
+        public MoveBehaviour_Tween.TweenMoveSettings MoveSettings { get; }
         
         private CubeSnapshotRewinder_Movement _movementRewinder;
         private MoveBehaviour_Tween _moveBehaviour;
@@ -37,6 +37,8 @@ namespace BLUE.ACubeStory.Cube
 
         public override void Rewind(Action<RewindSnapshotBase> completedCallback)
         {
+            _moveBehaviour.OnMovementCompleted -= OnMovementCompleted;
+            
             if (_curMovementCompleted)
             {
                 _movementRewinder.RewindState(this, () => { completedCallback?.Invoke(this); });

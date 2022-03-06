@@ -56,7 +56,10 @@ namespace BLUE.ACubeStory.Cube
             
             void onSnapshotCreated(RewindSnapshot_Cube snapshot)
             {
-                SaveSnapshot(snapshot);
+                if (snapshot != null)
+                {
+                    SaveSnapshot(snapshot);
+                }
             }
         }
 

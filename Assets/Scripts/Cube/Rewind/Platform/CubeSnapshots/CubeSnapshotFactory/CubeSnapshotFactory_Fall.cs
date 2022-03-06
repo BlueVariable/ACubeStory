@@ -13,8 +13,6 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private CubeSnapshotRewinder_Movement _movementRewinder = null;
         
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettings = null; 
-
-        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettingsHalfway = null; 
         
         [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
 
@@ -71,14 +69,12 @@ namespace BLUE.ACubeStory.Cube
         {
             Vector3 fallStartPos = _cubeRootTransform.position;
 
-            RewindSnapshot_Cube_Fall fallSnapshot = new RewindSnapshot_Cube_Fall(
+            RewindSnapshot_Cube_Movement fallSnapshot = new RewindSnapshot_Cube_Movement(
                 ECubeState.Fall,
                 _movementRewinder,
-                fallStartPos,
                 _moveBehaviour,
-                _fallRewindSettings,
-                _fallRewindSettingsHalfway,
-                _fallState);
+                fallStartPos,
+                _fallRewindSettings);
 
             _createdCallback?.Invoke(fallSnapshot);
             

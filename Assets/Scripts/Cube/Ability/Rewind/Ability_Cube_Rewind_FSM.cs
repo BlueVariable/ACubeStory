@@ -21,7 +21,6 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private ActionExecutor _rewindCompletedActions = null;
         
         private bool _isInRewind = false;
-        
         private bool _isRewindContinuous = false;
 
         private IEnumerator _rewindControlRoutine;
@@ -66,9 +65,9 @@ namespace BLUE.ACubeStory.Cube
             {
                 RegisterToRewindController();
 
-                _isRewindContinuous = true;
-                
                 _cubeFSM.TryChangeState(ECubeState.Rewind);
+
+                _isRewindContinuous = true;
             }
         }
 

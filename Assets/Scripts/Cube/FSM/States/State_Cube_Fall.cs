@@ -62,7 +62,7 @@ namespace BLUE.ACubeStory.Cube
                     _cubeFSM.TryChangeState(ECubeState.Idle);
                     
                     OnFallSkipped?.Invoke();
-
+                    
                     return;
                 }
                 
@@ -91,6 +91,8 @@ namespace BLUE.ACubeStory.Cube
             _objectToFall.position + new Vector3(0, -_fallbackFallAmount, 0), 
                     onFallFinished);
 
+                UnityEngine.Debug.Log("Fall Started - Towards Void");
+                
                 OnFallStartedTowardsVoid?.Invoke();
             }
         }

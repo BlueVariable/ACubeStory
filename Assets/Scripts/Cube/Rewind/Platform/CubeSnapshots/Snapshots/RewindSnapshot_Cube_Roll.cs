@@ -49,6 +49,8 @@ namespace BLUE.ACubeStory.Cube
 
         public override void Rewind(Action<RewindSnapshotBase> completedCallback)
         {
+            _rollBehaviour.OnRollEnded -= OnRollEnded;
+            
             if (_isCurrentRollCompleted)
             {
                 _rollRewinder.RewindState(this, () => { completedCallback?.Invoke(this); });

@@ -39,8 +39,6 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void ExitStateCustomActions()
         {
-            UnityEngine.Debug.Log($"Rewind Exit.");
-
             _stateExitedActionExecutor.Execute();
             
             base.ExitStateCustomActions();
@@ -63,8 +61,6 @@ namespace BLUE.ACubeStory.Cube
                 {
                     if (_cubeFsm.TryGetCurStateType(out ECubeState curState) && curState != ECubeState.Rewind)
                     {
-                        UnityEngine.Debug.Log($"Rewind Completed Go Fall State.");
-                        
                         _cubeFsm.TryChangeState(ECubeState.Fall);
                     }
                 });
