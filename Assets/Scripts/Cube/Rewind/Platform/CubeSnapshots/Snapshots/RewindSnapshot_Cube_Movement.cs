@@ -38,20 +38,17 @@ namespace BLUE.ACubeStory.Cube
         public override void Rewind(Action<RewindSnapshotBase> completedCallback)
         {
             _moveBehaviour.OnMovementCompleted -= OnMovementCompleted;
+
+            if (!_curMovementCompleted)
+            {
+                if (_moveBehaviour.TryInterruptAndSmoothRewind(
+                        _rewindSpeed, () => { completedCallback?.Invoke(this); }))
+                {
+                    return;
+                }
+            }
             
-            if (_curMovementCompleted)
-            {
-                _movementRewinder.RewindState(this, () => { completedCallback?.Invoke(this); });
-            }
-            else
-            {
-                _moveBehaviour.TryInterruptAndSmoothRewind(
-                    _rewindSpeed,
-                    () =>
-                    {
-                        completedCallback?.Invoke(this);
-                    });
-            }
+            _movementRewinder.RewindState(this, () => { completedCallback?.Invoke(this); });
         }
 
         private void OnMovementCompleted()

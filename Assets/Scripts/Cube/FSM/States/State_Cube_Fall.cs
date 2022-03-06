@@ -90,8 +90,6 @@ namespace BLUE.ACubeStory.Cube
                 _moveBehaviour.StartMovementTowards(_moveSettings, 
             _objectToFall.position + new Vector3(0, -_fallbackFallAmount, 0), 
                     onFallFinished);
-
-                UnityEngine.Debug.Log("Fall Started - Towards Void");
                 
                 OnFallStartedTowardsVoid?.Invoke();
             }
