@@ -14,6 +14,7 @@ namespace BLUE.ACubeStory.Cube
         private CubeSnapshotRewinder_Movement _movementRewinder;
         private MoveBehaviour_Tween _moveBehaviour;
         private float _rewindSpeed;
+        private bool _forceTweenBack = false;
         
         private bool _curMovementCompleted;
         
@@ -23,21 +24,33 @@ namespace BLUE.ACubeStory.Cube
             MoveBehaviour_Tween moveBehaviour,
             Vector3 targetPosition, 
             MoveBehaviour_Tween.TweenMoveSettings moveSettings,
-            float rewindSpeed = 4)
+            float rewindSpeed = 4,
+            bool forceTweenBack = false)
         : base(cubeState)
         {
             _movementRewinder = movementRewinder;
             _moveBehaviour = moveBehaviour;
             _rewindSpeed = rewindSpeed;
+            _forceTweenBack = forceTweenBack;
             TargetPosition = targetPosition;
             MoveSettings = moveSettings;
 
-            _moveBehaviour.OnMovementCompleted += OnMovementCompleted;
+            if (!forceTweenBack)
+            {
+                _moveBehaviour.OnMovementCompleted += OnMovementCompleted;
+            }
         }
 
         public override void Rewind(Action<RewindSnapshotBase> completedCallback)
         {
             _moveBehaviour.OnMovementCompleted -= OnMovementCompleted;
+
+            if (_forceTweenBack)
+            {
+                _movementRewinder.RewindState(this, () => { completedCallback?.Invoke(this); });
+                
+                return;
+            }
 
             if (!_curMovementCompleted)
             {

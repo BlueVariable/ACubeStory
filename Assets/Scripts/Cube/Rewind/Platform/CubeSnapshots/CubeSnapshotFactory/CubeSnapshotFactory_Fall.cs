@@ -12,7 +12,9 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private CubeSnapshotRewinder_Movement _movementRewinder = null;
         
-        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettings = null; 
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettingsFromObject = null; 
+
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettingsFromVoid = null; 
         
         [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
 
@@ -48,14 +50,14 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnFallStartedTowardsToObject(RaycastHit hit)
         {
-            CreateSnapshot();
+            CreateSnapshot(_fallRewindSettingsFromObject);
 
             UnregisterFromFallState();
         }
 
         private void OnFallStartedTowardsVoid()
         {
-            CreateSnapshot();
+            CreateSnapshot(_fallRewindSettingsFromVoid, true);
             
             UnregisterFromFallState();
         }
@@ -65,7 +67,7 @@ namespace BLUE.ACubeStory.Cube
             UnregisterFromFallState();
         }
 
-        private RewindSnapshot_Cube CreateSnapshot()
+        private RewindSnapshot_Cube CreateSnapshot(MoveBehaviour_Tween.TweenMoveSettings moveSettings, bool forceTweenBack = false)
         {
             Vector3 fallStartPos = _cubeRootTransform.position;
 
@@ -74,7 +76,8 @@ namespace BLUE.ACubeStory.Cube
                 _movementRewinder,
                 _moveBehaviour,
                 fallStartPos,
-                _fallRewindSettings);
+                moveSettings,
+                forceTweenBack:forceTweenBack);
 
             _createdCallback?.Invoke(fallSnapshot);
             
