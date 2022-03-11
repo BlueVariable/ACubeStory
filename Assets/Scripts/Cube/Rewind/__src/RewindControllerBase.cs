@@ -48,10 +48,10 @@ namespace BLUE.ACubeStory.Cube.src
                 OnRewindCompleted?.Invoke(snapshot);
             }
             
+            OnRewindStarted?.Invoke();
+            
             _curRewindSnapshot.Rewind(onSnapshotRewindCompleted);
             
-            OnRewindStarted?.Invoke();
-
             TryRewindCustomActions();
         }
         

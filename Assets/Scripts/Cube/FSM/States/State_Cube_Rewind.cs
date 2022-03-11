@@ -15,7 +15,14 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private ActionExecutor _stateEnteredActionExecutor = null;
 
         [SerializeField] private ActionExecutor _stateExitedActionExecutor = null;
+
+        private bool _canContinueRewind = false;
         
+        public void TriggerExitRewindState()
+        {
+            _canContinueRewind = false;
+        }
+
         public override ECubeState GetStateType()
         {
             return ECubeState.Rewind;
@@ -28,6 +35,8 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube transitionMessage)
         {
+            _canContinueRewind = true;
+            
             _stateEnteredActionExecutor.Execute();
 
             _rewindController.OnRewindCompleted += OnRewindCompleted;
@@ -46,6 +55,13 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnRewindCompleted(RewindSnapshotBase snapshot)
         {
+            if (_rewindController.CanRewind() && _canContinueRewind)
+            {
+                _rewindController.TryRewind();
+                
+                return;
+            }
+            
             _rewindController.OnRewindCompleted -= OnRewindCompleted;
 
             if (!(snapshot is RewindSnapshot_Cube snapshotCube))

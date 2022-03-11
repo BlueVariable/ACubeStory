@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Ability;
 using BLUE.ACubeStory.Cube.src;
-using BLUE.Helpers;
 using BLUE.InputSystem;
 using UnityEngine;
 
@@ -12,7 +10,7 @@ namespace BLUE.ACubeStory.Cube
     public class Ability_Cube_Rewind_FSM : AbilityBase
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
-        
+        [SerializeField] private State_Cube_Rewind _rewindState = null;
         [SerializeField] private RewindController_Cube _rewindController = null;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
@@ -44,7 +42,7 @@ namespace BLUE.ACubeStory.Cube
         {
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyHold, OnKeyHold);
-            //InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
+            InputManager.Instance.TryRegisterToInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
         }
 
         private void UnregisterFromInputManager()
@@ -56,7 +54,7 @@ namespace BLUE.ACubeStory.Cube
             
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyDown, OnKeyDown);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyHold, OnKeyHold);
-            //InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(EInputEvent.KeyUp, OnKeyUp);
         }
         
         private void OnKeyDown(InputData_Key inputData)
@@ -81,13 +79,13 @@ namespace BLUE.ACubeStory.Cube
             }
         }
 
-        /*private void OnKeyUp(InputData_Key inputData)
+        private void OnKeyUp(InputData_Key inputData)
         {
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
-                
+                _rewindState.TriggerExitRewindState();
             }
-        }*/
+        }
 
         private void RegisterToRewindController()
         {
