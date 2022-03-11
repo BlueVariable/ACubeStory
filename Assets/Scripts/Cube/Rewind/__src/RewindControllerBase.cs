@@ -43,9 +43,9 @@ namespace BLUE.ACubeStory.Cube.src
 
             void onSnapshotRewindCompleted(RewindSnapshotBase snapshot)
             {
-                OnRewindCompleted?.Invoke(_curRewindSnapshot);
-                
                 _curRewindSnapshot = null;
+                
+                OnRewindCompleted?.Invoke(snapshot);
             }
             
             _curRewindSnapshot.Rewind(onSnapshotRewindCompleted);
