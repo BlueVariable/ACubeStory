@@ -1,11 +1,18 @@
 ﻿using System;
+using BLUE.ACubeStory.Common;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
     public class CubeSnapshotFactory_Roll : CubeSnapshotFactory_RollBased
     {
+        [SerializeField] private RollBehaviourBase _rollBehaviour = null;
+
+        [SerializeField] private RewindController_Cube _rewindController = null;
+        
         [SerializeField] private State_Cube_Roll _cubeRollState = null;
+
+        private RewindSnapshot_Cube_Roll _lastSnapshot = null;
         
         public override ECubeState GetCubeState()
         {
@@ -14,7 +21,9 @@ namespace BLUE.ACubeStory.Cube
 
         public override bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback)
         {
-            RewindSnapshot_Cube_Roll rollSnapshot = 
+            RegisterToRollBehaviour();
+            
+            _lastSnapshot = 
                 new RewindSnapshot_Cube_Roll(
                     ECubeState.Roll,
                     _rollRewinder,
@@ -25,9 +34,33 @@ namespace BLUE.ACubeStory.Cube
                     _rollCurve, 
                     _rollPointOffset);
             
-            createdCallback?.Invoke(rollSnapshot);
+            createdCallback?.Invoke(_lastSnapshot);
             
             return true;
+        }
+
+        private void RegisterToRollBehaviour()
+        {
+            _rollBehaviour.OnRollEnded += OnRollEnded;
+            _rollBehaviour.OnRollUndoStarted += OnUndoStarted;
+        }
+
+        private void UnregisterFromRollBehaviour()
+        {
+            _rollBehaviour.OnRollEnded -= OnRollEnded;
+            _rollBehaviour.OnRollUndoStarted -= OnUndoStarted;
+        }
+
+        private void OnRollEnded()
+        {
+            UnregisterFromRollBehaviour();
+        }
+
+        private void OnUndoStarted()
+        {
+            UnregisterFromRollBehaviour();
+
+            _rewindController.TryRemoveSnapshot(_lastSnapshot);
         }
     }
 }

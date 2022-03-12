@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using BLUE.FSMSystem;
 using BLUE.ActionSystem;
+using BLUE.ACubeStory.Common;
 using BLUE.ACubeStory.Cube.src;
 using BLUE.Helpers;
 
@@ -11,6 +12,8 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private FSM_Cube _cubeFsm = null;
         
         [SerializeField] private RewindController_Cube _rewindController = null;
+
+        [SerializeField] private RollBehaviourBase _rollBehaviour = null;
         
         [SerializeField] private ActionExecutor _stateEnteredActionExecutor = null;
 
@@ -30,7 +33,7 @@ namespace BLUE.ACubeStory.Cube
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube transitionMessage)
         {
-            return _rewindController.CanRewind();
+            return _rewindController.CanRewind() && !_rollBehaviour.IsUndoing;
         }
 
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube transitionMessage)
@@ -55,10 +58,8 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnRewindCompleted(RewindSnapshotBase snapshot)
         {
-            if (_rewindController.CanRewind() && _canContinueRewind)
+            if (_canContinueRewind && _rewindController.TryRewind())
             {
-                _rewindController.TryRewind();
-                
                 return;
             }
             

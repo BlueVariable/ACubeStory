@@ -30,11 +30,11 @@ namespace BLUE.ACubeStory.Cube.src
             return _snapshots != null && _snapshots.Count > 0;
         }
 
-        public void TryRewind()
+        public bool TryRewind()
         {
             if (_snapshots == null || _snapshots.Count == 0 || _curRewindSnapshot != null)
             {
-                return;
+                return false;
             }
 
             _curRewindSnapshot = _snapshots[_snapshots.Count - 1];
@@ -53,6 +53,20 @@ namespace BLUE.ACubeStory.Cube.src
             _curRewindSnapshot.Rewind(onSnapshotRewindCompleted);
             
             TryRewindCustomActions();
+
+            return true;
+        }
+
+        public bool TryRemoveSnapshot(T snapshot)
+        {
+            if (_snapshots[_snapshots.Count - 1] == snapshot)
+            {
+                _snapshots.RemoveAt(_snapshots.Count - 1);
+                
+                return true;
+            }
+
+            return false;
         }
         
         protected virtual void TryRewindCustomActions() { }

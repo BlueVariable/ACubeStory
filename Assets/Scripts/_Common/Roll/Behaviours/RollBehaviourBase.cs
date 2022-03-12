@@ -17,6 +17,8 @@ namespace BLUE.ACubeStory.Common
 
         public bool IsRolling { get; private set; }
         
+        public bool IsUndoing { get; set; }
+        
         public float CurRollAngle { get; protected set; }
         
         public Vector3 LastRollDirection { get; private set; }
@@ -26,6 +28,7 @@ namespace BLUE.ACubeStory.Common
         public Action OnRollStarted { get; set; }
         public Action OnRollEnded { get; set; }
         public Action OnRollPaused { get; set; }
+        public Action OnRollUndoStarted { get; set; }
 
         #endregion
 
@@ -96,11 +99,17 @@ namespace BLUE.ACubeStory.Common
             {
                 return false;
             }
+
+            IsUndoing = true;
+            
+            OnRollUndoStarted?.Invoke();
             
             UndoRoll(onRollEnded, undoSpeed);
 
             void onRollEnded()
             {
+                IsUndoing = false;
+                
                 IsRolling = false;
                 
                 OnRollEnded?.Invoke();

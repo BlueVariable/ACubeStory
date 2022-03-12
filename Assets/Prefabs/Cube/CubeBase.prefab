@@ -72,6 +72,8 @@ MonoBehaviour:
   _rollPointOffset: {x: 0, y: 0, z: 0}
   _rollRewinder: {fileID: 5026623072844196895}
   _rollBehaviourProvider: {fileID: 3867403072291783834}
+  _rollBehaviour: {fileID: 6118223996304352996}
+  _rewindController: {fileID: 1164730520007471747}
   _cubeRollState: {fileID: 8132517245878650085}
 --- !u!1 &249567091401102155
 GameObject:
@@ -265,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeFsm: {fileID: 5253448575363346710}
   _rewindController: {fileID: 1164730520007471747}
+  _rollBehaviour: {fileID: 6118223996304352996}
   _stateEnteredActionExecutor:
     _actionCarrier: {fileID: 0}
   _stateExitedActionExecutor:
