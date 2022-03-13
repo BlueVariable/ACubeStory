@@ -2,6 +2,7 @@
 using BLUE.ACubeStory.Cube.src;
 using UnityEngine;
 using BLUE.Common;
+using BLUE.Helpers;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -37,7 +38,10 @@ namespace BLUE.ACubeStory.Cube
 
             if (!forceTweenBack)
             {
-                _moveBehaviour.OnMovementCompleted += OnMovementCompleted;
+                CoroutineHelper.Instance.WaitForFixedUpdate(() =>
+                {
+                    _moveBehaviour.OnMovementCompleted += OnMovementCompleted;
+                });
             }
         }
 

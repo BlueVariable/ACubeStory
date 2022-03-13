@@ -84,5 +84,4 @@ namespace BLUE.ACubeStory.Cube
             return fallSnapshot;
         }
     }
-    
 }
