@@ -35,7 +35,10 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnMerged(Mergeable formerMergeable, Mergeable newMergeable)
         {
-            SaveSnapshot(new RewindSnapshot_Merge(newMergeable, _mergeableComposition));
+            if (!_mergeableComposition.Mergeables.Contains(newMergeable))
+            {
+                SaveSnapshot(new RewindSnapshot_Merge(newMergeable, _mergeableComposition));  
+            };
         }
     }
 }

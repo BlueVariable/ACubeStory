@@ -18,6 +18,8 @@ namespace BLUE.ACubeStory.Cube.src
         public void SaveSnapshot(T snapshot)
         {
             _snapshots.Add(snapshot);
+
+            SaveSnapshotCustomActions(snapshot);
         }
 
         public bool CanRewind()
@@ -68,6 +70,8 @@ namespace BLUE.ACubeStory.Cube.src
 
             return false;
         }
+
+        protected virtual void SaveSnapshotCustomActions(T snapshot) { }
         
         protected virtual void TryRewindCustomActions() { }
     }

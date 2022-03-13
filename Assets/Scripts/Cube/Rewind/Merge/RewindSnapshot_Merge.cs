@@ -19,14 +19,14 @@ namespace BLUE.ACubeStory.Cube
         {
             bool res = _mergeableComposition.TryUnmerge(_mergeable);
 
-            if (res)
+            if (!res)
             {
-                completedCallback?.Invoke(this);
+                // throw new Exception($"Rewind Merge Unmerge operation failed!..");
+                
+                UnityEngine.Debug.LogError($"Rewind Merge Unmerge operation failed!..");
             }
-            else
-            {
-                throw new Exception($"Rewind Merge Unmerge operation failed!..");
-            }
+            
+            completedCallback?.Invoke(this);
         }
     }
 }
