@@ -12,6 +12,8 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private FSM_Cube _cubeFSM = null;
         [SerializeField] private State_Cube_Rewind _rewindState = null;
         [SerializeField] private RewindController_Cube _rewindController = null;
+
+        [SerializeField] private float _ppCloseDelay = 0.1f;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
 
@@ -135,7 +137,7 @@ namespace BLUE.ACubeStory.Cube
 
         private IEnumerator RewindControlProgress()
         {
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(_ppCloseDelay);
             
             UnregisterFromRewindController();
 
