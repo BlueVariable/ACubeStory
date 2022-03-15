@@ -97,7 +97,10 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void ExitStateCustomActions()
         {
-            _moveBehaviour.StopMovement();
+            if (_cubeFSM.NextState != ECubeState.Rewind)
+            {
+                _moveBehaviour.StopMovement();
+            }
             
             base.ExitStateCustomActions();
         }
