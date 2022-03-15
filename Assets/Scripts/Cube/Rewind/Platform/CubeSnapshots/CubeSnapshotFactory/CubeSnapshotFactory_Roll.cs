@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using BLUE.ACubeStory.Common;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace BLUE.ACubeStory.Cube
         {
             RegisterToRollBehaviour();
             
-            _lastSnapshot = 
+            RewindSnapshot_Cube_Roll rollSnapshot =  
                 new RewindSnapshot_Cube_Roll(
                     ECubeState.Roll,
                     _rollRewinder,
@@ -33,7 +34,18 @@ namespace BLUE.ACubeStory.Cube
                     _rollAngle,
                     _rollCurve, 
                     _rollPointOffset);
-            
+
+            rollSnapshot.OnRewindStarted += onSnapshotRewind;
+
+            void onSnapshotRewind()
+            {
+                rollSnapshot.OnRewindStarted -= onSnapshotRewind;
+                
+                UnregisterFromRollBehaviour();
+            }
+
+            _lastSnapshot = rollSnapshot;
+
             createdCallback?.Invoke(_lastSnapshot);
             
             return true;

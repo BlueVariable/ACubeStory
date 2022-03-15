@@ -58,8 +58,6 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnRewindCompleted(RewindSnapshotBase snapshot)
         {
-            // UnityEngine.Debug.Log($"Rewind State Rewind Completed {Time.frameCount} {((RewindSnapshot_Cube) snapshot).CubeState}");
-            
             if (_canContinueRewind && _rewindController.TryRewind())
             {
                 return;
