@@ -100,6 +100,11 @@ namespace BLUE.ACubeStory.Common
                 return false;
             }
 
+            if (IsUndoing && !forceUndo)
+            {
+                return false;
+            }
+            
             IsUndoing = true;
             
             OnRollUndoStarted?.Invoke();
