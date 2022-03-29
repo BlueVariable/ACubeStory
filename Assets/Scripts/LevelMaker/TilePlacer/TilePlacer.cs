@@ -101,7 +101,9 @@ namespace BLUE.ACubeStory.LevelMaker
             {
                 if (hitInfo.collider.TryGetComponent(out Tile neighborCandidate))
                 {
+                    Vector3 placementOrigin = neighborCandidate.transform.position;
                     
+                    _placementHighlight.transform.position = placementOrigin + hitInfo.normal;        
                 }
                 
                 return;
