@@ -1,9 +1,9 @@
 using BLUE.ACubeStory.Scene;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Debug
+namespace BLUE.ACubeStory.Debugging
 {
-    public class Debug_Scene : MonoBehaviour
+    public class Debugging_Scene : MonoBehaviour
     {
         private void Update()
         {
