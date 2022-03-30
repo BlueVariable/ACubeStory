@@ -6,8 +6,6 @@ namespace BLUE.ACubeStory.LevelMaker
     [RequireComponent(typeof(ITileProvider))]
     public class TilePlacer : MonoBehaviour
     {
-        [SerializeField] private Transform _placementHighlight = null;
-        
         [SerializeField] private float _tilePlacementDistance = 25f;
         
         [SerializeField] private int _targetMouseButton = 0;
@@ -26,11 +24,51 @@ namespace BLUE.ACubeStory.LevelMaker
                 return _tileProvider;
             }
         }
+
+        private TilePlacementHighlighter _highlighter;
+
+        private TilePlacementHighlighter _Highlighter
+        {
+            get
+            {
+                if (_highlighter == null)
+                {
+                    _highlighter = GetComponent<TilePlacementHighlighter>();
+                }
+
+                return _highlighter;
+            }
+        }
+
+        private TilePlacementConditionBase[] _placementConditions;
+
+        private TilePlacementConditionBase[] _PlacementConditions
+        {
+            get
+            {
+                if (_placementConditions == null)
+                {
+                    _placementConditions = GetComponentsInChildren<TilePlacementConditionBase>();
+                }
+
+                return _placementConditions;
+            }
+        }
+
+        public bool CheckAllPlacementConditionsAreSatisfied(Vector3 pos)
+        {
+            bool satisfied = true;
+            
+            foreach (TilePlacementConditionBase placementCondition in _PlacementConditions)
+            {
+                satisfied = satisfied && placementCondition.IsSatisfied(pos);
+            }
+
+            return satisfied;
+        }
         
         private void Awake()
         {
-            _placementHighlight.transform.gameObject.SetActive(false);
-            
             RegisterToInputManager();
         }
 
@@ -41,6 +79,7 @@ namespace BLUE.ACubeStory.LevelMaker
 
         private void RegisterToInputManager()
         {
+            InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(EInputEvent.MouseButtonDown, OnMouseButtonDown);
             InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(EInputEvent.MouseButtonUp, OnMouseButtonUp);
             InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(EInputEvent.MouseButtonHold, OnMouseHold);
         }
@@ -51,8 +90,28 @@ namespace BLUE.ACubeStory.LevelMaker
             {
                 return;
             }
+            
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(EInputEvent.MouseButtonDown, OnMouseButtonDown);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(EInputEvent.MouseButtonUp, OnMouseButtonUp);
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(EInputEvent.MouseButtonHold, OnMouseHold);
+        }
+
+        private void OnMouseButtonDown(InputData_Mouse inputData)
+        {
+            if (inputData.MouseButton != _targetMouseButton)
+            {
+                return;
+            }
+            
+            if (_Highlighter != null)
+            {
+                _Highlighter.SetHighlightEnabled(true);
+                
+                if (CalculatePlacementPosition(inputData.CursorPosition, out Vector3 highlightPos))
+                {
+                    _Highlighter.HighlightPlacement(highlightPos);
+                }
+            }
         }
 
         private void OnMouseButtonUp(InputData_Mouse inputData)
@@ -63,8 +122,11 @@ namespace BLUE.ACubeStory.LevelMaker
             }
             
             TryToPlaceTile(inputData.CursorPosition);
-            
-            _placementHighlight.gameObject.SetActive(false);
+
+            if (_Highlighter != null)
+            {
+                _Highlighter.SetHighlightEnabled(false);
+            }
         }
 
         private void OnMouseHold(InputData_Mouse inputData)
@@ -73,43 +135,50 @@ namespace BLUE.ACubeStory.LevelMaker
             {
                 return;
             }
-            
-            TryHighlightTilePlacement(inputData.CursorPosition);
+
+            if (_Highlighter != null && 
+                CalculatePlacementPosition(inputData.CursorPosition, out Vector3 highlightPos))
+            {
+                _Highlighter.HighlightPlacement(highlightPos);
+            }
         }
 
         private void TryToPlaceTile(Vector3 screenPosition)
         {
-            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+            if (!CalculatePlacementPosition(screenPosition, out Vector3 position))
+            {
+                return;
+            }
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _tilePlacementDistance))
+            if (!CheckAllPlacementConditionsAreSatisfied(position))
             {
                 return;
             }
 
             GameObject tileObject = Instantiate(_TileProvider.GetTile().gameObject);
 
-            tileObject.transform.position = ray.origin + ray.direction * _tilePlacementDistance;
+            tileObject.transform.position = position;
         }
 
-        private void TryHighlightTilePlacement(Vector3 screenPosition)
+        private bool CalculatePlacementPosition(Vector3 screenPosition, out Vector3 placementPos)
         {
-            _placementHighlight.gameObject.SetActive(true);
+            placementPos = Vector3.zero;
             
             Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-
+            
             if (Physics.Raycast(ray, out RaycastHit hitInfo, _tilePlacementDistance)) 
             {
                 if (hitInfo.collider.TryGetComponent(out Tile neighborCandidate))
                 {
-                    Vector3 placementOrigin = neighborCandidate.transform.position;
-                    
-                    _placementHighlight.transform.position = placementOrigin + hitInfo.normal;        
+                    placementPos = neighborCandidate.transform.position + hitInfo.normal;
+
+                    return true;
                 }
-                
-                return;
             }
 
-            _placementHighlight.transform.position = ray.origin + ray.direction * _tilePlacementDistance;
+            placementPos = ray.origin + ray.direction.normalized * _tilePlacementDistance;
+
+            return true;
         }
     }
 }
