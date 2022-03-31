@@ -6,9 +6,15 @@ namespace BLUE.ACubeStory.LevelMaker
     [RequireComponent(typeof(ITileProvider))]
     public class TilePlacer : MonoBehaviour
     {
-        [SerializeField] private float _tilePlacementDistance = 25f;
+        [SerializeField] private TileHighlighter _highlighter = null;
         
+        [SerializeField] private float _tilePlacementDistance = 25f;
+
         [SerializeField] private int _targetMouseButton = 0;
+
+        [SerializeField] private Color _correctPlacementHighlightColor = default;
+        
+        [SerializeField] private Color _incorrectPlacementHighlightColor = default;
         
         private ITileProvider _tileProvider;
 
@@ -22,21 +28,6 @@ namespace BLUE.ACubeStory.LevelMaker
                 }
 
                 return _tileProvider;
-            }
-        }
-
-        private TilePlacementHighlighter _highlighter;
-
-        private TilePlacementHighlighter _Highlighter
-        {
-            get
-            {
-                if (_highlighter == null)
-                {
-                    _highlighter = GetComponent<TilePlacementHighlighter>();
-                }
-
-                return _highlighter;
             }
         }
 
@@ -119,13 +110,13 @@ namespace BLUE.ACubeStory.LevelMaker
                 return;
             }
             
-            if (_Highlighter != null)
+            if (_highlighter != null)
             {
-                _Highlighter.SetHighlightEnabled(true);
+                _highlighter.SetHighlightEnabled(true);
                 
                 if (CalculatePlacementPosition(inputData.CursorPosition, out Vector3 highlightPos))
                 {
-                    _Highlighter.HighlightPlacement(highlightPos);
+                    HighlightPosition(highlightPos);
                 }
             }
         }
@@ -139,9 +130,9 @@ namespace BLUE.ACubeStory.LevelMaker
             
             TryToPlaceTile(inputData.CursorPosition);
 
-            if (_Highlighter != null)
+            if (_highlighter != null)
             {
-                _Highlighter.SetHighlightEnabled(false);
+                _highlighter.SetHighlightEnabled(false);
             }
         }
 
@@ -152,10 +143,10 @@ namespace BLUE.ACubeStory.LevelMaker
                 return;
             }
 
-            if (_Highlighter != null && 
+            if (_highlighter != null && 
                 CalculatePlacementPosition(inputData.CursorPosition, out Vector3 highlightPos))
             {
-                _Highlighter.HighlightPlacement(highlightPos);
+                HighlightPosition(highlightPos);
             }
         }
 
@@ -195,6 +186,17 @@ namespace BLUE.ACubeStory.LevelMaker
             placementPos = ray.origin + ray.direction.normalized * _tilePlacementDistance;
 
             return true;
+        }
+
+        private void HighlightPosition(Vector3 highlightPosition)
+        {
+            bool isCorrectPlacement = CheckAllPlacementConditionsAreSatisfied(highlightPosition);
+
+            Color highlightColor = isCorrectPlacement
+                ? _correctPlacementHighlightColor
+                : _incorrectPlacementHighlightColor;
+                    
+            _highlighter.HighlightPosition(new TileHighlightData(highlightPosition, highlightColor));
         }
     }
 }
