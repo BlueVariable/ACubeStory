@@ -79,9 +79,17 @@ namespace BLUE.ACubeStory.LevelMaker
 
         private void RegisterToInputManager()
         {
-            InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(EInputEvent.MouseButtonDown, OnMouseButtonDown);
-            InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(EInputEvent.MouseButtonUp, OnMouseButtonUp);
-            InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(EInputEvent.MouseButtonHold, OnMouseHold);
+            InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(
+                EInputEvent.MouseButtonDown,
+                OnMouseButtonDown);
+            
+            InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(
+                EInputEvent.MouseButtonUp,
+                OnMouseButtonUp);
+            
+            InputManager.Instance.TryRegisterToInputListener<InputData_Mouse>(
+                EInputEvent.MouseButtonHold,
+                OnMouseHold);
         }
 
         private void UnregisterFromInputManager()
@@ -91,9 +99,17 @@ namespace BLUE.ACubeStory.LevelMaker
                 return;
             }
             
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(EInputEvent.MouseButtonDown, OnMouseButtonDown);
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(EInputEvent.MouseButtonUp, OnMouseButtonUp);
-            InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(EInputEvent.MouseButtonHold, OnMouseHold);
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(
+                EInputEvent.MouseButtonDown,
+                OnMouseButtonDown);
+            
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(
+                EInputEvent.MouseButtonUp, 
+                OnMouseButtonUp);
+            
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Mouse>(
+                EInputEvent.MouseButtonHold,
+                OnMouseHold);
         }
 
         private void OnMouseButtonDown(InputData_Mouse inputData)
@@ -166,7 +182,7 @@ namespace BLUE.ACubeStory.LevelMaker
             
             Ray ray = Camera.main.ScreenPointToRay(screenPosition);
             
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _tilePlacementDistance)) 
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) 
             {
                 if (hitInfo.collider.TryGetComponent(out Tile neighborCandidate))
                 {
