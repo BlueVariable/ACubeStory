@@ -9,6 +9,8 @@ namespace BLUE.ACubeStory.LevelMaker
         
         [SerializeField] private float _cameraMovementSpeed = 2.5f;
 
+        [Range(1, 5)] [SerializeField] private float _cameraMovementSpeedModifier = 1;
+        
         [SerializeField] private int _rotationMouseButton = 1;
 
         [SerializeField] private float _rotationSensivity = 0.1f;
@@ -16,11 +18,17 @@ namespace BLUE.ACubeStory.LevelMaker
         [SerializeField] private KeyCode _upwardsInput = KeyCode.Q;
 
         [SerializeField] private KeyCode _downwardsInput = KeyCode.E;
+
+        [SerializeField] private KeyCode _speedBoostInput = KeyCode.LeftShift;
         
         private Vector3 _lastCursorPosition;
+
+        private float _curCameraSpeed = 0;
         
         private void Awake()
         {
+            _curCameraSpeed = _cameraMovementSpeed;
+            
             RegisterToInputManager();
         }
 
@@ -80,6 +88,14 @@ namespace BLUE.ACubeStory.LevelMaker
             InputManager.Instance.TryRegisterToInputListener<InputData_Key>(
                 EInputEvent.KeyHold,
                 OnKeyHold);
+
+            InputManager.Instance.TryRegisterToInputListener<InputData_Key>(
+                EInputEvent.KeyUp,
+                OnKeyUp);
+            
+            InputManager.Instance.TryRegisterToInputListener<InputData_Key>(
+                EInputEvent.KeyDown,
+                OnKeyDown);
         }
 
         private void OnMouseButtonUp(InputData_Mouse inputData)
@@ -104,6 +120,34 @@ namespace BLUE.ACubeStory.LevelMaker
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(
                 EInputEvent.KeyHold,
                 OnKeyHold);
+            
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(
+                EInputEvent.KeyUp,
+                OnKeyUp);
+            
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Key>(
+                EInputEvent.KeyDown,
+                OnKeyDown);
+        }
+
+        private void OnKeyUp(InputData_Key inputData)
+        {
+            if (inputData.KeyCode != _speedBoostInput)
+            {
+                return;
+            }
+
+            _curCameraSpeed = _cameraMovementSpeed;
+        }
+
+        private void OnKeyDown(InputData_Key inputData)
+        {
+            if (inputData.KeyCode != _speedBoostInput)
+            {
+                return;
+            }
+            
+            _curCameraSpeed = _cameraMovementSpeedModifier * _cameraMovementSpeed;
         }
 
         private void OnMouseButtonHold(InputData_Mouse inputData)
@@ -130,13 +174,13 @@ namespace BLUE.ACubeStory.LevelMaker
         private void OnHorizontalInputPerformed(InputData_Axis inputData)
         {
             _camera.position +=
-                _camera.right * (inputData.Amount * Time.deltaTime * _cameraMovementSpeed);
+                _camera.right * (inputData.Amount * Time.deltaTime * _curCameraSpeed);
         }
 
         private void OnVerticalInputPerformed(InputData_Axis inputData)
         {
             _camera.position +=
-                _camera.forward * (inputData.Amount * Time.deltaTime * _cameraMovementSpeed);
+                _camera.forward * (inputData.Amount * Time.deltaTime * _curCameraSpeed);
         }
 
         private void OnKeyHold(InputData_Key inputData)
@@ -149,7 +193,7 @@ namespace BLUE.ACubeStory.LevelMaker
             
             int sign = inputData.KeyCode == _upwardsInput ? 1 : -1;
 
-            _camera.position += _camera.up * (sign * _cameraMovementSpeed * Time.deltaTime);
+            _camera.position += _camera.up * (sign * _curCameraSpeed * Time.deltaTime);
         }
     }
 }
