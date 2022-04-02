@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using BLUE.InputSystem;
+using UnityEngine.EventSystems;
 
 namespace BLUE.ACubeStory.LevelMaker
 {
@@ -143,11 +144,17 @@ namespace BLUE.ACubeStory.LevelMaker
                 return;
             }
 
-            if (_highlighter != null && 
+            if (_highlighter != null &&
                 CalculatePlacementPosition(inputData.CursorPosition, out Vector3 highlightPos))
             {
+                _highlighter.SetHighlightEnabled(true);
+
                 HighlightPosition(highlightPos);
+                
+                return;
             }
+            
+            _highlighter.SetHighlightEnabled(false);
         }
 
         private void TryToPlaceTile(Vector3 screenPosition)
@@ -170,6 +177,11 @@ namespace BLUE.ACubeStory.LevelMaker
         private bool CalculatePlacementPosition(Vector3 screenPosition, out Vector3 placementPos)
         {
             placementPos = Vector3.zero;
+
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return false;
+            }
             
             Ray ray = Camera.main.ScreenPointToRay(screenPosition);
             
