@@ -42,7 +42,7 @@ namespace BLUE.ACubeStory.Common
         
         protected abstract void PauseRoll();
 
-        protected abstract void UndoRoll(Action onRolledCallback = null, float undoSpeed = 1);
+        protected abstract void UndoRoll(Action onRolledCallback = null, float undoSpeedMultiplier = 1);
 
         public bool TryRollTo(
             Vector3 direction,
@@ -93,7 +93,7 @@ namespace BLUE.ACubeStory.Common
             return true;
         }
 
-        public bool TryUndoRoll(bool forceUndo = false, Action onRolledCallback = null, float undoSpeed = 1)
+        public bool TryUndoRoll(bool forceUndo = false, Action onRolledCallback = null, float undoSpeedMultiplier = 1)
         {
             if (!IsRolling && !forceUndo)
             {
@@ -109,7 +109,7 @@ namespace BLUE.ACubeStory.Common
             
             OnRollUndoStarted?.Invoke();
             
-            UndoRoll(onRollEnded, undoSpeed);
+            UndoRoll(onRollEnded, undoSpeedMultiplier);
 
             void onRollEnded()
             {
@@ -131,19 +131,22 @@ namespace BLUE.ACubeStory.Common
             {
                 return Vector3.forward;
             }
-            else if (direction == Vector3.right)
+
+            if (direction == Vector3.right)
             {
                 return Vector3.back;
             }
-            else if (direction == Vector3.forward)
+
+            if (direction == Vector3.forward)
             {
                 return Vector3.right;
             }
-            else if (direction == Vector3.back)
+
+            if (direction == Vector3.back)
             {
                 return Vector3.left;
             }
-            
+
             return default;
         }
 

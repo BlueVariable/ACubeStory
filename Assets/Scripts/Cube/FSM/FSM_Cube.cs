@@ -43,7 +43,7 @@ namespace BLUE.ACubeStory.Cube
                 new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Idle),
                 new FSMTransition_Cube(ECubeState.Rewind, ECubeState.Fall),
                 
-                new FSMTransition_Cube(ECubeState.Float, ECubeState.Idle),
+                new FSMTransition_Cube(ECubeState.Float, ECubeState.Idle)
             };
         }
     }

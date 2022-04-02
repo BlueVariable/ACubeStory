@@ -65,13 +65,13 @@ namespace BLUE.ACubeStory.Common
             StopRollRoutine();
         }
 
-        protected override void UndoRoll(Action onRolledCallback = null, float undoSpeed = 1)
+        protected override void UndoRoll(Action onRolledCallback = null, float undoSpeedMultiplier = 1)
         {
             StopRollRoutine();
             
             _direction *= -1;
             _angle = CurRollAngle;
-            _rollSpeed *= undoSpeed;
+            _rollSpeed *= undoSpeedMultiplier;
             _onRolledCallback = onRolledCallback;
             
             StartRollRoutine();
