@@ -265,13 +265,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8569c2e4880a480d9a32d0627bfb5212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubeFsm: {fileID: 5253448575363346710}
+  _cubeFSM: {fileID: 5253448575363346710}
   _rewindController: {fileID: 1164730520007471747}
   _rollBehaviour: {fileID: 6118223996304352996}
   _stateEnteredActionExecutor:
     _actionCarrier: {fileID: 0}
   _stateExitedActionExecutor:
     _actionCarrier: {fileID: 0}
+  _recursiveTransitionStates: 0400000005000000
+  _recursiveTransitionHandleDelay: 0.015
 --- !u!1 &592921618253821186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,8 +1799,8 @@ MonoBehaviour:
   _cubeFSM: {fileID: 5253448575363346710}
   _rewindState: {fileID: 2965066179334257219}
   _rewindController: {fileID: 1164730520007471747}
-  _abilityDeactivationDelay: 0.1
   _rewindTriggerKeyCode: 114
+  _abilityDeactivationDelay: 0.1
   _rewindAbilityStartedActionExecutor:
     _actionCarrier: {fileID: 8576745381569738223}
   _rewindAbilityFinishedActionExecutor:

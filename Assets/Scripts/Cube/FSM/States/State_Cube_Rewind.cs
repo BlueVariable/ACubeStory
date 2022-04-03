@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using BLUE.FSMSystem;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
@@ -9,7 +10,7 @@ namespace BLUE.ACubeStory.Cube
 {
     public class State_Cube_Rewind : StateBase<ECubeState, FSMTransitionMessage_Cube>
     {
-        [SerializeField] private FSM_Cube _cubeFsm = null;
+        [SerializeField] private FSM_Cube _cubeFSM = null;
         
         [SerializeField] private RewindController_Cube _rewindController = null;
 
@@ -19,12 +20,10 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private ActionExecutor _stateExitedActionExecutor = null;
 
-        private bool _canContinueRewind = false;
+        [SerializeField] private ECubeState[] _recursiveTransitionStates = default;
+        [SerializeField] private float _recursiveTransitionHandleDelay = 0.015f;
         
-        public void TriggerExitRewindState()
-        {
-            _canContinueRewind = false;
-        }
+        private bool _canContinueRewind = false;
 
         public override ECubeState GetStateType()
         {
@@ -55,6 +54,11 @@ namespace BLUE.ACubeStory.Cube
             
             base.ExitStateCustomActions();
         }
+        
+        public void SetCanContinueRewind(bool val)
+        {
+            _canContinueRewind = val;
+        }
 
         private void OnRewindCompleted(RewindSnapshotBase snapshot)
         {
@@ -70,18 +74,25 @@ namespace BLUE.ACubeStory.Cube
                 return;
             }
 
-            _cubeFsm.TryChangeState(ECubeState.Idle);
+            _cubeFSM.TryChangeState(ECubeState.Idle);
             
-            if (snapshotCube.CubeState == ECubeState.Fall || snapshotCube.CubeState == ECubeState.Dash)
+            if (_recursiveTransitionStates.Contains(snapshotCube.CubeState))
             {
-                CoroutineHelper.Instance.WaitForSeconds(1f / 60f,() =>
-                {
-                    if (_cubeFsm.TryGetCurStateType(out ECubeState curState) && curState != ECubeState.Rewind)
-                    {
-                        _cubeFsm.TryChangeState(ECubeState.Fall);
-                    }
-                });
+                HandleRecursiveTransition();
             }
+        }
+
+        private void HandleRecursiveTransition()
+        {
+            void onDelayCompleted()
+            {
+                if (_cubeFSM.TryGetCurStateType(out ECubeState curState) && curState != ECubeState.Rewind)
+                {
+                    _cubeFSM.TryChangeState(ECubeState.Fall);
+                }
+            }
+
+            CoroutineHelper.Instance.WaitForSeconds(_recursiveTransitionHandleDelay, onDelayCompleted);
         }
     }
 }

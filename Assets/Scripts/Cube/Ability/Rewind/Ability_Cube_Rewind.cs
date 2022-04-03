@@ -13,13 +13,13 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private State_Cube_Rewind _rewindState = null;
         [SerializeField] private RewindController_Cube _rewindController = null;
 
+        [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
+        
         [SerializeField] private float _abilityDeactivationDelay = 0.1f;
         
-        [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
-
         [SerializeField] private ActionExecutor _rewindAbilityStartedActionExecutor = null;
         [SerializeField] private ActionExecutor _rewindAbilityFinishedActionExecutor = null;
-        
+
         private bool _isRewinding = false;
 
         private IEnumerator _rewindAbilityDeactivationRoutine;
@@ -89,7 +89,7 @@ namespace BLUE.ACubeStory.Cube
         {
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
-                _rewindState.TriggerExitRewindState();
+                _rewindState.SetCanContinueRewind(false);
             }
         }
 
