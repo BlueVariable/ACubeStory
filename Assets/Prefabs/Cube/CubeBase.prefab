@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 1858119327866509241}
   - component: {fileID: 4962726733709039737}
   m_Layer: 8
-  m_Name: RewindStoppedActions
+  m_Name: FinishedActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,7 +1051,7 @@ GameObject:
   - component: {fileID: 3886758008310766429}
   - component: {fileID: 7298347242489318085}
   m_Layer: 8
-  m_Name: RewindStartedActions
+  m_Name: StartedActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1797,11 +1797,11 @@ MonoBehaviour:
   _cubeFSM: {fileID: 5253448575363346710}
   _rewindState: {fileID: 2965066179334257219}
   _rewindController: {fileID: 1164730520007471747}
-  _ppCloseDelay: 0.1
+  _abilityDeactivationDelay: 0.1
   _rewindTriggerKeyCode: 114
-  _rewindStartedActions:
+  _rewindAbilityStartedActionExecutor:
     _actionCarrier: {fileID: 8576745381569738223}
-  _rewindCompletedActions:
+  _rewindAbilityFinishedActionExecutor:
     _actionCarrier: {fileID: 7409694716241082338}
 --- !u!1 &3845191092780923674
 GameObject:
@@ -2917,6 +2917,8 @@ MonoBehaviour:
     _ability: {fileID: 107322596056555021}
   - _abilityType: 4
     _ability: {fileID: 1155004893680139138}
+  - _abilityType: 5
+    _ability: {fileID: 5223098711819377170}
   - _abilityType: 8
     _ability: {fileID: 7411198870335654486}
   _abilityAttachedActions:

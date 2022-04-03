@@ -16,9 +16,7 @@ namespace BLUE.ACubeStory.Ability
             Roll_2D = 3,
             Roll_3D = 4,
             
-            Rewind_OnFall = 5,
-            Rewind_OnObstacleHit = 6,
-            Rewind_MergePuzzle = 7,
+            Rewind = 5,
             
             Float = 8,
         }

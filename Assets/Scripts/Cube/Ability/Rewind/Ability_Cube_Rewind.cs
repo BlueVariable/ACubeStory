@@ -7,23 +7,22 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Ability_Cube_Rewind_FSM : AbilityBase
+    public class Ability_Cube_Rewind : AbilityBase
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
         [SerializeField] private State_Cube_Rewind _rewindState = null;
         [SerializeField] private RewindController_Cube _rewindController = null;
 
-        [SerializeField] private float _ppCloseDelay = 0.1f;
+        [SerializeField] private float _abilityDeactivationDelay = 0.1f;
         
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
 
-        [SerializeField] private ActionExecutor _rewindStartedActions = null;
-        [SerializeField] private ActionExecutor _rewindCompletedActions = null;
+        [SerializeField] private ActionExecutor _rewindAbilityStartedActionExecutor = null;
+        [SerializeField] private ActionExecutor _rewindAbilityFinishedActionExecutor = null;
         
-        private bool _isInRewind = false;
-        private bool _isRewindContinuous = false;
+        private bool _isRewinding = false;
 
-        private IEnumerator _rewindControlRoutine;
+        private IEnumerator _rewindAbilityDeactivationRoutine;
         
         public override void Attached()
         {
@@ -33,11 +32,19 @@ namespace BLUE.ACubeStory.Cube
         public override void Detached()
         {
             UnregisterFromInputManager();
+            
+            UnregisterFromRewindController();
+
+            StopRewindAbilityDeactivationRoutine();
         }
 
         private void OnDestroy()
         {
             UnregisterFromInputManager();
+            
+            UnregisterFromRewindController();
+
+            StopRewindAbilityDeactivationRoutine();
         }
 
         private void RegisterToInputManager()
@@ -66,16 +73,13 @@ namespace BLUE.ACubeStory.Cube
                 RegisterToRewindController();
 
                 _cubeFSM.TryChangeState(ECubeState.Rewind);
-
-                _isRewindContinuous = true;
             }
         }
 
         private void OnKeyHold(InputData_Key inputData)
         {
-            _isRewindContinuous = _isRewindContinuous && _rewindController.IsThereAnyAvailableSnapshot();
-            
-            if (inputData.KeyCode == _rewindTriggerKeyCode && _isRewindContinuous)
+            if (inputData.KeyCode == _rewindTriggerKeyCode 
+                && _rewindController.IsThereAnyAvailableSnapshot())
             {
                 _cubeFSM.TryChangeState(ECubeState.Rewind);
             }
@@ -103,47 +107,47 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnRewindStarted()
         {
-            if (!_isInRewind)
+            if (!_isRewinding)
             {
-                _isInRewind = true;
+                _isRewinding = true;
                 
-                _rewindStartedActions?.Execute();
+                _rewindAbilityStartedActionExecutor?.Execute();
             }
             
-            StopRewindControlRoutine();
+            StopRewindAbilityDeactivationRoutine();
         }
 
         private void OnRewindCompleted(RewindSnapshotBase rewindSnapshot)
         {
-            StartRewindControlRoutine();
+            StartRewindAbilityDeactivationRoutine();
         }
         
-        private void StartRewindControlRoutine()
+        private void StartRewindAbilityDeactivationRoutine()
         {
-            StopRewindControlRoutine();
+            StopRewindAbilityDeactivationRoutine();
 
-            _rewindControlRoutine = RewindControlProgress();
+            _rewindAbilityDeactivationRoutine = RewindAbilityDeactivationProgress();
 
-            StartCoroutine(_rewindControlRoutine);
+            StartCoroutine(_rewindAbilityDeactivationRoutine);
         }
 
-        private void StopRewindControlRoutine()
+        private void StopRewindAbilityDeactivationRoutine()
         {
-            if (_rewindControlRoutine != null)
+            if (_rewindAbilityDeactivationRoutine != null)
             {
-                StopCoroutine(_rewindControlRoutine);
+                StopCoroutine(_rewindAbilityDeactivationRoutine);
             }
         }
 
-        private IEnumerator RewindControlProgress()
+        private IEnumerator RewindAbilityDeactivationProgress()
         {
-            yield return new WaitForSecondsRealtime(_ppCloseDelay);
+            yield return new WaitForSecondsRealtime(_abilityDeactivationDelay);
             
             UnregisterFromRewindController();
 
-            _isInRewind = false;
+            _isRewinding = false;
             
-            _rewindCompletedActions?.Execute();
+            _rewindAbilityFinishedActionExecutor?.Execute();
         }
     }
 }
