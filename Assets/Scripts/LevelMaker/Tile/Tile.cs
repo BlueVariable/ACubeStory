@@ -4,6 +4,5 @@ namespace BLUE.ACubeStory.LevelMaker
 {
     public class Tile : MonoBehaviour
     {
-        
     }
 }

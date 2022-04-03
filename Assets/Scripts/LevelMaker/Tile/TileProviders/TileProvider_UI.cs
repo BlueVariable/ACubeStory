@@ -10,15 +10,15 @@ namespace BLUE.ACubeStory.LevelMaker
         
         [SerializeField] private int _defaultSelectedTile = 0;
 
-        private int _selectedTileID = 0;
-        
-        public Tile GetTile()
+        public int GetTileID()
         {
             TileSettingsContainer.Instance.TileSettingsSo.TryGetTileSettings(_selectedTileID,
                 out TileSettings settings);
 
-            return settings.Tile;
+            return settings.TileID;
         }
+
+        private int _selectedTileID = 0;
 
         private void Awake()
         {

@@ -2,6 +2,6 @@
 {
     public interface ITileProvider
     {
-        Tile GetTile();
+        int GetTileID();
     }
 }

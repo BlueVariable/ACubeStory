@@ -5,11 +5,11 @@ namespace BLUE.ACubeStory.LevelMaker
     public class TileProvider_Serialized : MonoBehaviour,
         ITileProvider
     {
-        [SerializeField] private Tile _tile = null;
+        [SerializeField] private int _tileId = 0;
 
-        public Tile GetTile()
+        public int GetTileID()
         {
-            return _tile;
+            return _tileId;
         }
     }
 }

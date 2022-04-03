@@ -169,9 +169,7 @@ namespace BLUE.ACubeStory.LevelMaker
                 return;
             }
 
-            GameObject tileObject = Instantiate(_TileProvider.GetTile().gameObject);
-
-            tileObject.transform.position = position;
+            TileFactory.Instance.TryCreateTile(_TileProvider.GetTileID(), position, out Tile createdTile);
         }
 
         private bool CalculatePlacementPosition(Vector3 screenPosition, out Vector3 placementPos)
