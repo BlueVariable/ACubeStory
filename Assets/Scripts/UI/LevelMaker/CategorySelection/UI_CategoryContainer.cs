@@ -22,6 +22,8 @@ namespace BLUE.ACubeStory.UI
             InitCategoryContainerItems();
             
             RegisterToLevelMakerEvents();
+
+            _addCategoryButton.TryActivate();
             
             base.ActivatingCustomActions(onCompleted);
         }
@@ -29,6 +31,8 @@ namespace BLUE.ACubeStory.UI
         protected override void DeactivatingCustomActions(Action onCompleted = null)
         {
             RegisterToLevelMakerEvents();
+            
+            _addCategoryButton.TryDeactivate();
             
             base.DeactivatingCustomActions(onCompleted);
         }
@@ -38,6 +42,23 @@ namespace BLUE.ACubeStory.UI
             DisposeActivatedItems();
             
             base.DeactivatedCustomActions();
+        }
+
+        private void RegisterToAddNewCategoryButton()
+        {
+            _addCategoryButton.OnClick += OnPressedNewCategoryButton;
+        }
+
+        private void UnregisterFromAddNewCategoryButton()
+        {
+            _addCategoryButton.OnClick -= OnPressedNewCategoryButton;
+        }
+
+        private void OnPressedNewCategoryButton(ButtonBase button)
+        {
+            TryDeactivate();
+            
+            
         }
 
         private void RegisterToLevelMakerEvents()
