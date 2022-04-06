@@ -58,7 +58,7 @@ namespace BLUE.ACubeStory.UI
 
             UI_TileSelectionOption option = poolObject.GetComponent<UI_TileSelectionOption>();
 
-            option.transform.parent = _optionHolder;
+            option.transform.SetParent(_optionHolder);
 
             option.transform.localRotation = Quaternion.identity;
             

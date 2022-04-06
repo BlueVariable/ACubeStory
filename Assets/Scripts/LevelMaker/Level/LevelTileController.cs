@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelMaker
@@ -13,6 +14,12 @@ namespace BLUE.ACubeStory.LevelMaker
 
         private List<TileContainer> _tileContainers = new List<TileContainer>();
 
+        public List<TileContainer> TileContainers => _tileContainers;
+
+        public Action OnCurTileContainerUpdated { get; set; }
+        
+        public Action OnNewContainerAdded { get; set; }
+
         public LevelTileController(Transform tileContainerHolder)
         {
             _tileContainerHolder = tileContainerHolder;
@@ -20,6 +27,8 @@ namespace BLUE.ACubeStory.LevelMaker
             TryAddNewTileContainer(DEFAULT_TILE_CONTAINER_NAME, out TileContainer tileContainer);
 
             SelectedContainer = tileContainer;
+            
+            OnCurTileContainerUpdated?.Invoke();
         }
 
         public bool TryAddNewTileContainer(string containerName, out TileContainer tileContainer)
@@ -35,8 +44,25 @@ namespace BLUE.ACubeStory.LevelMaker
             tileContainer.InitContainer(containerName);
             
             _tileContainers.Add(tileContainer);
+            
+            OnNewContainerAdded?.Invoke();
 
             return true;
+        }
+
+        public void SelectTileContainer(string containerName)
+        {
+            foreach (TileContainer container in _tileContainers)
+            {
+                if (container.ContainerName.Equals(containerName))
+                {
+                    SelectedContainer = container;
+                    
+                    OnCurTileContainerUpdated?.Invoke();
+                    
+                    return;
+                }
+            }
         }
     }
 }

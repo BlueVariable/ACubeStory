@@ -159,8 +159,6 @@ namespace BLUE.ACubeStory.LevelMaker
 
             Vector3 delta = inputData.CursorPosition - _lastCursorPosition;
             
-            UnityEngine.Debug.Log(delta);
-
             delta = new Vector3(-delta.y, delta.x, 0);
 
             Vector3 deltaRotation = delta * (_rotationSensivity * Time.deltaTime);
