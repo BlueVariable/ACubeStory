@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelMaker
+namespace BLUE.ACubeStory.LevelEditor
 {
     public class TileFactory : MonoBehaviour
     {
@@ -38,7 +38,7 @@ namespace BLUE.ACubeStory.LevelMaker
 
             tile = tileObject.GetComponent<Tile>();
             
-            LevelMaker.Instance.CurLevel.TileController.SelectedContainer.AddTileIntoContainer(tile);
+            // LevelMaker.Instance.CurLevel.TileController.SelectedContainer.AddTileIntoContainer(tile);
             
             return true;
         }

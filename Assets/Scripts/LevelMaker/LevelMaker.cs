@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelMaker
+namespace BLUE.ACubeStory.LevelEditor
 {
     public class LevelMaker : MonoBehaviour
     {
@@ -18,36 +18,6 @@ namespace BLUE.ACubeStory.LevelMaker
                 return _instance;
             }
         }
-        
-        private Level _curLevel;
-
-        public Level CurLevel
-        {
-            get
-            {
-                if (_curLevel == null)
-                {
-                    InitCurLevel();
-                }
-
-                return _curLevel;
-            }
-        }
-
-        private ILevelIDProvider _levelIDProvider;
-
-        private ILevelIDProvider _LevelIDProvider
-        {
-            get
-            {
-                if (_levelIDProvider == null)
-                {
-                    _levelIDProvider = GetComponent<ILevelIDProvider>();
-                }
-
-                return _levelIDProvider;
-            }
-        }
 
         private void Awake()
         {
@@ -56,7 +26,7 @@ namespace BLUE.ACubeStory.LevelMaker
 
         private void InitCurLevel()
         {
-            string levelID = _LevelIDProvider.GetLevelID();
+            /*string levelID = _LevelIDProvider.GetLevelID();
 
             GameObject gameObject = new GameObject();
             gameObject.transform.parent = transform;
@@ -65,7 +35,7 @@ namespace BLUE.ACubeStory.LevelMaker
             Level level = gameObject.AddComponent<Level>();
             level.InitLevel(levelID);
 
-            _curLevel = level;
+            _curLevel = level;*/
         }
     }
 }

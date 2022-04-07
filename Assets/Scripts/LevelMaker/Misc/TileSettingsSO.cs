@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelMaker
+namespace BLUE.ACubeStory.LevelEditor
 {
     [Serializable]
     public class TileSettings

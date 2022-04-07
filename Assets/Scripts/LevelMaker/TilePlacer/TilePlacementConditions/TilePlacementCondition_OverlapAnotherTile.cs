@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelMaker
+namespace BLUE.ACubeStory.LevelEditor
 {
     public class TilePlacementCondition_OverlapAnotherTile : TilePlacementConditionBase
     {

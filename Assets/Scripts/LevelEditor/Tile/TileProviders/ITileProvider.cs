@@ -1,4 +1,4 @@
-﻿namespace BLUE.ACubeStory.LevelMaker
+﻿namespace BLUE.ACubeStory.LevelEditor
 {
     public interface ITileProvider
     {

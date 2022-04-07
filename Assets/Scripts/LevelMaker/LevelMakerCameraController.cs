@@ -1,7 +1,7 @@
 ﻿using BLUE.InputSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelMaker
+namespace BLUE.ACubeStory.LevelEditor
 {
     public class LevelMakerCameraController : MonoBehaviour
     {

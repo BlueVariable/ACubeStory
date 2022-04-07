@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelMaker
+namespace BLUE.ACubeStory.LevelEditor
 {
     public class LevelTileController
     {
@@ -10,7 +10,7 @@ namespace BLUE.ACubeStory.LevelMaker
         
         private Transform _tileContainerHolder;
 
-        public TileContainer SelectedContainer { get; private set; }
+        /*public TileContainer SelectedContainer { get; private set; }
 
         private List<TileContainer> _tileContainers = new List<TileContainer>();
 
@@ -63,6 +63,6 @@ namespace BLUE.ACubeStory.LevelMaker
                     return;
                 }
             }
-        }
+        }*/
     }
 }

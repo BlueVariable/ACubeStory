@@ -2,7 +2,7 @@
 using BLUE.InputSystem;
 using UnityEngine.EventSystems;
 
-namespace BLUE.ACubeStory.LevelMaker
+namespace BLUE.ACubeStory.LevelEditor
 {
     [RequireComponent(typeof(ITileProvider))]
     public class TilePlacer : MonoBehaviour
