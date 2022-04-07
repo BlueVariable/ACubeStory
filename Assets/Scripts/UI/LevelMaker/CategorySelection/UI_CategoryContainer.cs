@@ -15,6 +15,8 @@ namespace BLUE.ACubeStory.UI
 
         [SerializeField] private Transform _itemContainer = null;
 
+        [SerializeField] private UI_CategorySelection _categorySelection = null;
+        
         private List<UI_CategoryContainerItem> _activatedItems = new List<UI_CategoryContainerItem>();
 
         protected override void ActivatingCustomActions(Action onCompleted = null)
@@ -23,6 +25,8 @@ namespace BLUE.ACubeStory.UI
             
             RegisterToLevelMakerEvents();
 
+            RegisterToAddNewCategoryButton();
+
             _addCategoryButton.TryActivate();
             
             base.ActivatingCustomActions(onCompleted);
@@ -30,7 +34,9 @@ namespace BLUE.ACubeStory.UI
 
         protected override void DeactivatingCustomActions(Action onCompleted = null)
         {
-            RegisterToLevelMakerEvents();
+            UnregisterFromLevelMakerEvents();
+            
+            UnregisterFromAddNewCategoryButton();
             
             _addCategoryButton.TryDeactivate();
             
@@ -56,9 +62,9 @@ namespace BLUE.ACubeStory.UI
 
         private void OnPressedNewCategoryButton(ButtonBase button)
         {
+            _categorySelection.ActivateCategoryAddInputField();
+            
             TryDeactivate();
-            
-            
         }
 
         private void RegisterToLevelMakerEvents()
@@ -108,11 +114,6 @@ namespace BLUE.ACubeStory.UI
             }
             
             _activatedItems.Clear();
-        }
-
-        private void InitLevelContainers()
-        {
-            
         }
     }
 }
