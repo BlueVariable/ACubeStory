@@ -4,7 +4,7 @@ namespace BLUE.ACubeStory.LevelEditor
 {
     public class TilePlacementCondition_OverlapAnotherTile : TilePlacementConditionBase
     {
-        [SerializeField] private float _overlapBoxHalfExtent = 0.5f;
+        private float _overlapBoxHalfExtent = 0.5f;
         
         public override bool IsSatisfied(Vector3 position)
         {

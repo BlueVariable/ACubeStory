@@ -1,10 +1,16 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
     public class CubeLevelEditorHandler_Activation : CubeLevelEditorHandlerBase
     {
+        private List<CubeLevelEditorHandlerBase> _handlers = new List<CubeLevelEditorHandlerBase>()
+        {
+            new CubeLevelEditorHandler_TilePlacer()
+        };
+
         private bool _isEditorActive = false;
 
         private bool _isCtrlDown = false;
@@ -69,20 +75,12 @@ namespace BLUE.ACubeStory.LevelEditor
                 
                 GUILayout.EndArea();
                 Handles.EndGUI();
+
+                foreach (CubeLevelEditorHandlerBase handler in _handlers)
+                {
+                    handler.Handle(e);
+                }
             }
-        }
-        
-        private Texture2D MakeTex( int width, int height, Color col )
-        {
-            Color[] pix = new Color[width * height];
-            for( int i = 0; i < pix.Length; ++i )
-            {
-                pix[ i ] = col;
-            }
-            Texture2D result = new Texture2D( width, height );
-            result.SetPixels( pix );
-            result.Apply();
-            return result;
         }
     }
 }

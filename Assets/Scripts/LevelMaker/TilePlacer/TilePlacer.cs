@@ -32,7 +32,7 @@ namespace BLUE.ACubeStory.LevelEditor
             }
         }
 
-        private TilePlacementConditionBase[] _placementConditions;
+        /*private TilePlacementConditionBase[] _placementConditions;
 
         private TilePlacementConditionBase[] _PlacementConditions
         {
@@ -45,16 +45,16 @@ namespace BLUE.ACubeStory.LevelEditor
 
                 return _placementConditions;
             }
-        }
+        }*/
 
         public bool CheckAllPlacementConditionsAreSatisfied(Vector3 pos)
         {
             bool satisfied = true;
             
-            foreach (TilePlacementConditionBase placementCondition in _PlacementConditions)
+            /*foreach (TilePlacementConditionBase placementCondition in _PlacementConditions)
             {
                 satisfied = satisfied && placementCondition.IsSatisfied(pos);
-            }
+            }*/
 
             return satisfied;
         }
