@@ -32,17 +32,19 @@ namespace BLUE.ACubeStory.LevelEditor
             Vector3 curPlacementPos = GetPlacementPosition(e.mousePosition);
 
             bool isPlacementValid = CanPlaceTile(curPlacementPos);
-
+            
             if (_isPlacerActivated)
             {
                 Handles.color = isPlacementValid ? Color.green : Color.red;
-                
                 Handles.DrawWireCube(curPlacementPos, Vector3.one);
+                
+                int controlID = GUIUtility.GetControlID(FocusType.Passive);
+                GUIUtility.hotControl = controlID;
             }
 
-            if (e.type == EventType.MouseDown && e.button == 0)
+            if (_isPlacerActivated && e.type == EventType.MouseUp && e.button == 0 && isPlacementValid)
             {
-                
+                TryPlaceTile(curPlacementPos);
             }
         }
 
@@ -50,13 +52,14 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             Vector3 placementPos;
             
+            // check screen position in view frustum
             Ray ray = Camera.current.ScreenPointToRay(new Vector3(mousePosition.x, Screen.height - mousePosition.y, 0));
             
             if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) 
             {
                 if (hitInfo.collider.TryGetComponent(out Tile neighborCandidate))
                 {
-                    placementPos = neighborCandidate.transform.position + hitInfo.normal;
+                    placementPos = neighborCandidate.transform.position + hitInfo.normal * 1.0001f;
                     
                     return placementPos;
                 }
@@ -69,9 +72,21 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private bool TryPlaceTile(Vector3 position)
         {
+            bool res = TileFactory.Instance.TryCreateTile(CubeEditor.Instance.SelectedTileID, position, out Tile tile);
+
+            if (!res)
+            {
+                return false;
+            }
             
+            tile.transform.SetParent(CubeEditor.Instance.SelectedTileGroup.transform);
+
+            if (Selection.activeGameObject == tile.gameObject)
+            {
+                Selection.activeGameObject = null;
+            }
             
-            return true;
+            return res;
         }
 
         private bool CanPlaceTile(Vector3 position)

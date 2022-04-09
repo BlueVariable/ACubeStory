@@ -38,8 +38,6 @@ namespace BLUE.ACubeStory.LevelEditor
 
             tile = tileObject.GetComponent<Tile>();
             
-            // LevelMaker.Instance.CurLevel.TileController.SelectedContainer.AddTileIntoContainer(tile);
-            
             return true;
         }
     }
