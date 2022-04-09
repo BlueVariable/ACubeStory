@@ -52,7 +52,6 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             Vector3 placementPos;
             
-            // check screen position in view frustum
             Ray ray = Camera.current.ScreenPointToRay(new Vector3(mousePosition.x, Screen.height - mousePosition.y, 0));
             
             if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) 
@@ -80,6 +79,8 @@ namespace BLUE.ACubeStory.LevelEditor
             }
             
             tile.transform.SetParent(CubeEditor.Instance.SelectedTileGroup.transform);
+            
+            EditorUtility.SetDirty(tile.gameObject);
 
             if (Selection.activeGameObject == tile.gameObject)
             {

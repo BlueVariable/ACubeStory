@@ -8,7 +8,8 @@ namespace BLUE.ACubeStory.LevelEditor
     {
         private List<CubeLevelEditorHandlerBase> _handlers = new List<CubeLevelEditorHandlerBase>()
         {
-            new CubeLevelEditorHandler_TilePlacer()
+            new CubeLevelEditorHandler_TilePlacer(),
+            new CubeLevelEditorHandler_TileRemover()
         };
 
         private bool _isEditorActive = false;
