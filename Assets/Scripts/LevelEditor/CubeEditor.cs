@@ -21,6 +21,9 @@ namespace BLUE.ACubeStory.LevelEditor
         
         [SerializeField] private ACubeStory.Level.Level _level = null;
 
+        [SerializeField] private bool _displayToolTips = false;
+        public bool DisplayToolTips => _displayToolTips;
+        
         private ITileProvider _tileProvider;
 
         private ITileProvider _TileProvider
@@ -42,9 +45,11 @@ namespace BLUE.ACubeStory.LevelEditor
 
             set => _level = value;
         }
+        
+        public int SelectedTileGroupIndex { get; set; }
 
         public int SelectedTileID => _TileProvider.GetTileID();
 
-        public TileGroup SelectedTileGroup => Level.transform.GetChild(0).transform.GetComponent<TileGroup>();
+        public TileGroup SelectedTileGroup => Level.transform.GetChild(SelectedTileGroupIndex).transform.GetComponent<TileGroup>();
     }
 }

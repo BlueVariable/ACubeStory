@@ -111,7 +111,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
             if (GUILayout.Button("Update Selected Tile", selectionButtonStyle))
             {
-                
+                TileProvider_Editor.Instance.SelectedTileID = _selectedIndex;
             }
             
             GUILayout.FlexibleSpace();
