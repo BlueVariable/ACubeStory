@@ -21,8 +21,10 @@ namespace BLUE.ACubeStory.Cube
 
         #region Events
 
-        public Action<Vector3> OnDashStarted { get; set; }
+        public Action<Vector3> OnEnteringDashState { get; set; }
+        public Action OnSkippingDash { get; set; }
         public Action OnDashCompleted { get; set; }
+        public Action OnExitingDashState { get; set; }
 
         #endregion
 
@@ -38,16 +40,18 @@ namespace BLUE.ACubeStory.Cube
 
         protected override void EnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
-            OnDashStarted?.Invoke(transitionMessage.DashDirection);
+            OnEnteringDashState?.Invoke(transitionMessage.DashDirection);
             
-            bool dashing = Dash(transitionMessage.DashDirection,
+            bool validDash = TryDash(transitionMessage.DashDirection,
                                     _dashDistance,
                                     Vector3.zero, 
                                     onDashCompleted);
 
-            if (!dashing)
+            if (!validDash)
             {
                 base.EnterStateCustomActions(transitionMessage);
+
+                OnSkippingDash?.Invoke();
                 
                 _cubeFSM.TryChangeState(ECubeState.Fall);
 
@@ -64,7 +68,14 @@ namespace BLUE.ACubeStory.Cube
             base.EnterStateCustomActions(transitionMessage);
         }
 
-        private bool Dash(
+        protected override void ExitStateCustomActions()
+        {
+            OnExitingDashState?.Invoke();
+            
+            base.ExitStateCustomActions();
+        }
+
+        private bool TryDash(
             Vector3 dashDirection, 
             int dashDistance, 
             Vector3 destinationOffset,

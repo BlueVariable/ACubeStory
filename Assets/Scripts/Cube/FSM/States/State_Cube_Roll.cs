@@ -39,7 +39,7 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private TriggerBase[] _undoRequestors = new TriggerBase[0];
         
         public FSMTransitionMessage_Cube_Roll LastCandidateTransitionMessage { get; private set; }
-
+        
         public override ECubeState GetStateType()
         {
             return ECubeState.Roll;
