@@ -3,7 +3,7 @@ using BLUE.ACubeStory.Common;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public abstract class CubeSnapshotFactory_RollBased : CubeSnapshotFactory
+    public abstract class CubeRewindSnapshotFactory_RollBase : CubeRewindSnapshotFactoryBase
     {
         [SerializeField] protected float _rollSpeed = 5;
 

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using BLUE.ACubeStory.Common;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeSnapshotFactory_Roll : CubeSnapshotFactory_RollBased
+    public class CubeRewindSnapshotFactory_Roll_Default : CubeRewindSnapshotFactory_RollBase
     {
         [SerializeField] private RollBehaviourBase _rollBehaviour = null;
 
@@ -20,7 +19,7 @@ namespace BLUE.ACubeStory.Cube
             return ECubeState.Roll;
         }
 
-        public override bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback)
+        public override bool CreateSnapshot(Action<RewindSnapshot_CubeBase> createdCallback)
         {
             RegisterToRollBehaviour();
             
@@ -35,11 +34,11 @@ namespace BLUE.ACubeStory.Cube
                     _rollCurve, 
                     _rollPointOffset);
 
-            rollSnapshot.OnRewindStarted += onSnapshotRewind;
+            rollSnapshot.OnRewindStarted += onSnapshotRewindStarted;
 
-            void onSnapshotRewind()
+            void onSnapshotRewindStarted()
             {
-                rollSnapshot.OnRewindStarted -= onSnapshotRewind;
+                rollSnapshot.OnRewindStarted -= onSnapshotRewindStarted;
                 
                 UnregisterFromRollBehaviour();
             }

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using BLUE.ACubeStory.Merge;
-using BLUE.ACubeStory.Cube.src;
+using BLUE.RewindSystem;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Rewindable_Cube_MergeComposition : RewindableBase<RewindController_Cube, RewindSnapshot_Cube>
+    public class Rewindable_Cube_Merge : RewindableBase<RewindController_Cube, RewindSnapshot_CubeBase>
     {
         [SerializeField] private MergerBase _merger = null;
 
@@ -37,7 +37,7 @@ namespace BLUE.ACubeStory.Cube
         {
             if (!_mergeableComposition.Mergeables.Contains(newMergeable))
             {
-                SaveSnapshot(new RewindSnapshot_Merge(newMergeable, _mergeableComposition));  
+                SaveSnapshot(new RewindSnapshot_Cube_Merge(newMergeable, _mergeableComposition));  
             };
         }
     }

@@ -1,17 +1,23 @@
 ﻿using System;
 using BLUE.ACubeStory.Common;
+using BLUE.RewindSystem;
 using UnityEngine;
-using BLUE.ACubeStory.Cube.src;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class RewindSnapshot_Cube_Roll : RewindSnapshot_Cube_Platform
+    public class RewindSnapshot_Cube_Roll : RewindSnapshot_Cube_PlatformBase
     {
+        #region Constants
+
+        private const float UNDO_SPEED_MULTIPLIER = 2f;
+
+        #endregion
+        
         public Vector3 RollDirection { get; }
         
         public float RollSpeed { get; }
         
-        public float RollAngle { get; private set; }
+        public float RollAngle { get; }
         
         public AnimationCurve RollCurve { get; }
         
@@ -22,8 +28,12 @@ namespace BLUE.ACubeStory.Cube
         private RollBehaviourBase _rollBehaviour;
 
         private bool _isCurrentRollCompleted;
-        
+
+        #region Events
+
         public Action OnRewindStarted { get; set; }
+
+        #endregion
 
         public RewindSnapshot_Cube_Roll(
             ECubeState cubeState,
@@ -57,14 +67,14 @@ namespace BLUE.ACubeStory.Cube
             
             if (_isCurrentRollCompleted)
             {
-                _rollRewinder.RewindState(this, () => { completedCallback?.Invoke(this); });
+                _rollRewinder.RewindSnapshot(this, () => { completedCallback?.Invoke(this); });
             }
             else
             {
                 _rollBehaviour.TryUndoRoll(
                     true,
                     () => { completedCallback?.Invoke(this); },
-                    2);
+                    UNDO_SPEED_MULTIPLIER);
             }
         }
 

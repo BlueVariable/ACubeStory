@@ -4,32 +4,30 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeSnapshotFactory_Jump : CubeSnapshotFactory
+    public class CubeRewindSnapshotFactory_Dash : CubeRewindSnapshotFactoryBase
     {
         [SerializeField] private Transform _cubeRootTransform = null;
-        
+
         [SerializeField] private CubeSnapshotRewinder_Movement _movementRewinder = null;
-        
-        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _jumpRewindSettings = null;
 
         [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
-
+        
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _dashRewindSettings = null;
+        
         public override ECubeState GetCubeState()
         {
-            return ECubeState.Jump;
+            return ECubeState.Dash;
         }
 
-        public override bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback)
+        public override bool CreateSnapshot(Action<RewindSnapshot_CubeBase> createdCallback)
         {
-            RewindSnapshot_Cube_Movement snapshot = 
+            createdCallback?.Invoke(
                 new RewindSnapshot_Cube_Movement(
-                    ECubeState.Jump,
+                    ECubeState.Dash,
                     _movementRewinder,
                     _moveBehaviour,
-                    _cubeRootTransform.position,
-                    _jumpRewindSettings);
-            
-            createdCallback?.Invoke(snapshot);
+                    _cubeRootTransform.position, 
+                    _dashRewindSettings));
             
             return true;
         }

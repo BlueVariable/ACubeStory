@@ -2,16 +2,16 @@
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeSnapshotFactory_Climb : CubeSnapshotFactory_RollBased
+    public class CubeRewindSnapshotFactory_Roll_Climb : CubeRewindSnapshotFactory_RollBase
     {
-        private Action<RewindSnapshot_Cube> _createdCallback;
+        private Action<RewindSnapshot_CubeBase> _createdCallback;
 
         public override ECubeState GetCubeState()
         {
             return ECubeState.Climb;
         }
 
-        public override bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback)
+        public override bool CreateSnapshot(Action<RewindSnapshot_CubeBase> createdCallback)
         {
             _createdCallback = createdCallback;
 

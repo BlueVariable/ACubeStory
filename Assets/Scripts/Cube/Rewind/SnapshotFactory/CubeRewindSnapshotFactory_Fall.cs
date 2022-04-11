@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeSnapshotFactory_Fall : CubeSnapshotFactory
+    public class CubeRewindSnapshotFactory_Fall : CubeRewindSnapshotFactoryBase
     {
         [SerializeField] private Transform _cubeRootTransform = null;
         
@@ -12,20 +12,20 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private CubeSnapshotRewinder_Movement _movementRewinder = null;
         
+        [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
+        
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettingsFromObject = null; 
 
-        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettingsFromVoid = null; 
-        
-        [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
+        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _fallRewindSettingsFromVoid = null;
 
-        private Action<RewindSnapshot_Cube> _createdCallback;
+        private Action<RewindSnapshot_CubeBase> _createdCallback;
 
         public override ECubeState GetCubeState()
         {
             return ECubeState.Fall;
         }
 
-        public override bool CreateSnapshot(Action<RewindSnapshot_Cube> createdCallback)
+        public override bool CreateSnapshot(Action<RewindSnapshot_CubeBase> createdCallback)
         {
             _createdCallback = createdCallback;
             
@@ -36,19 +36,19 @@ namespace BLUE.ACubeStory.Cube
 
         private void RegisterToFallState()
         {
-            _fallState.OnFallStartedTowardsHitObject += OnFallStartedTowardsToObject;
+            _fallState.OnFallStartedTowardsHitObject += OnFallStartedTowardsObject;
             _fallState.OnFallStartedTowardsVoid += OnFallStartedTowardsVoid;
             _fallState.OnFallSkipped += OnFallSkipped;
         }
 
         private void UnregisterFromFallState()
         {
-            _fallState.OnFallStartedTowardsHitObject -= OnFallStartedTowardsToObject;
+            _fallState.OnFallStartedTowardsHitObject -= OnFallStartedTowardsObject;
             _fallState.OnFallStartedTowardsVoid -= OnFallStartedTowardsVoid;
             _fallState.OnFallSkipped -= OnFallSkipped;
         }
 
-        private void OnFallStartedTowardsToObject(RaycastHit hit)
+        private void OnFallStartedTowardsObject(RaycastHit hit)
         {
             CreateSnapshot(_fallRewindSettingsFromObject);
 
@@ -57,7 +57,7 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnFallStartedTowardsVoid()
         {
-            CreateSnapshot(_fallRewindSettingsFromVoid, true);
+            CreateSnapshot(_fallRewindSettingsFromVoid);
             
             UnregisterFromFallState();
         }
@@ -67,7 +67,7 @@ namespace BLUE.ACubeStory.Cube
             UnregisterFromFallState();
         }
 
-        private RewindSnapshot_Cube CreateSnapshot(MoveBehaviour_Tween.TweenMoveSettings moveSettings, bool forceTweenBack = false)
+        private RewindSnapshot_CubeBase CreateSnapshot(MoveBehaviour_Tween.TweenMoveSettings moveSettings)
         {
             Vector3 fallStartPos = _cubeRootTransform.position;
 
@@ -76,8 +76,7 @@ namespace BLUE.ACubeStory.Cube
                 _movementRewinder,
                 _moveBehaviour,
                 fallStartPos,
-                moveSettings,
-                forceTweenBack:forceTweenBack);
+                moveSettings);
 
             _createdCallback?.Invoke(fallSnapshot);
             

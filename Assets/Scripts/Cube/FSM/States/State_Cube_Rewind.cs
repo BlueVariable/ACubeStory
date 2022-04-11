@@ -3,8 +3,8 @@ using UnityEngine;
 using BLUE.FSMSystem;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
-using BLUE.ACubeStory.Cube.src;
 using BLUE.Helpers;
+using BLUE.RewindSystem;
 
 namespace BLUE.ACubeStory.Cube
 {
@@ -69,7 +69,7 @@ namespace BLUE.ACubeStory.Cube
             
             _rewindController.OnRewindCompleted -= OnRewindCompleted;
 
-            if (!(snapshot is RewindSnapshot_Cube snapshotCube))
+            if (!(snapshot is RewindSnapshot_CubeBase snapshotCube))
             {
                 return;
             }

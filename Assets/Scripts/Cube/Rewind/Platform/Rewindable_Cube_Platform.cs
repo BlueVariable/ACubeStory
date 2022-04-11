@@ -1,24 +1,28 @@
-﻿using UnityEngine;
-using BLUE.ACubeStory.Cube.src;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using BLUE.RewindSystem;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Rewindable_Cube_Platform : RewindableBase<RewindController_Cube, RewindSnapshot_Cube>
+    public class Rewindable_Cube_Platform : RewindableBase<RewindController_Cube, RewindSnapshot_CubeBase>
     {
-        [SerializeField] private FSM_Cube _cubeFsm = null;
+        [SerializeField] private FSM_Cube _cubeFSM = null;
 
-        private Dictionary<ECubeState, CubeSnapshotFactory> _snapshotFactories;
-
-        private Dictionary<ECubeState, CubeSnapshotFactory> _SnapshotFactories
+        private Dictionary<ECubeState, CubeRewindSnapshotFactoryBase> _snapshotFactories;
+        private Dictionary<ECubeState, CubeRewindSnapshotFactoryBase> _SnapshotFactories
         {
             get
             {
-                InitSnapshotFactories();
-                
+                if (!_snapshotFactoriesInited)
+                {
+                    InitSnapshotFactories();
+                }
+
                 return _snapshotFactories;
             }
         }
+
+        private bool _snapshotFactoriesInited;
         
         private void Awake()
         {
@@ -32,15 +36,15 @@ namespace BLUE.ACubeStory.Cube
 
         private void RegisterToCubeFSM()
         {
-            _cubeFsm.OnStateEntered += OnCubeFSMEnterState;
+            _cubeFSM.OnStateEntered += OnCubeEnteredState;
         }
 
         private void UnregisterFromCubeFSM()
         {
-            _cubeFsm.OnStateEntered -= OnCubeFSMEnterState;
+            _cubeFSM.OnStateEntered -= OnCubeEnteredState;
         }
 
-        private void OnCubeFSMEnterState(ECubeState state)
+        private void OnCubeEnteredState(ECubeState state)
         {
             CreateAndSaveSnapshot(state);
         }
@@ -54,7 +58,7 @@ namespace BLUE.ACubeStory.Cube
 
             _SnapshotFactories[state].CreateSnapshot(onSnapshotCreated);
             
-            void onSnapshotCreated(RewindSnapshot_Cube snapshot)
+            void onSnapshotCreated(RewindSnapshot_CubeBase snapshot)
             {
                 if (snapshot != null)
                 {
@@ -65,12 +69,14 @@ namespace BLUE.ACubeStory.Cube
 
         private void InitSnapshotFactories()
         {
-            _snapshotFactories = new Dictionary<ECubeState, CubeSnapshotFactory>();
+            _snapshotFactories = new Dictionary<ECubeState, CubeRewindSnapshotFactoryBase>();
                 
-            foreach (CubeSnapshotFactory factory in GetComponentsInChildren<CubeSnapshotFactory>())
+            foreach (CubeRewindSnapshotFactoryBase factory in GetComponentsInChildren<CubeRewindSnapshotFactoryBase>())
             {
                 _snapshotFactories.Add(factory.GetCubeState(), factory);
             }
+
+            _snapshotFactoriesInited = true;
         }
     }
 }
