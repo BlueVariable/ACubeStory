@@ -17,6 +17,8 @@ namespace BLUE.ACubeStory.Common
 
         public bool IsRolling { get; private set; }
         
+        public bool IsUndoing { get; set; }
+        
         public float CurRollAngle { get; protected set; }
         
         public Vector3 LastRollDirection { get; private set; }
@@ -26,6 +28,7 @@ namespace BLUE.ACubeStory.Common
         public Action OnRollStarted { get; set; }
         public Action OnRollEnded { get; set; }
         public Action OnRollPaused { get; set; }
+        public Action OnRollUndoStarted { get; set; }
 
         #endregion
 
@@ -39,7 +42,7 @@ namespace BLUE.ACubeStory.Common
         
         protected abstract void PauseRoll();
 
-        protected abstract void UndoRoll(Action onRolledCallback = null);
+        protected abstract void UndoRoll(Action onRolledCallback = null, float undoSpeedMultiplier = 1);
 
         public bool TryRollTo(
             Vector3 direction,
@@ -90,17 +93,28 @@ namespace BLUE.ACubeStory.Common
             return true;
         }
 
-        public bool TryUndoRoll(Action onRolledCallback = null)
+        public bool TryUndoRoll(bool forceUndo = false, Action onRolledCallback = null, float undoSpeedMultiplier = 1)
         {
-            if (!IsRolling)
+            if (!IsRolling && !forceUndo)
+            {
+                return false;
+            }
+
+            if (IsUndoing && !forceUndo)
             {
                 return false;
             }
             
-            UndoRoll(onRollEnded);
+            IsUndoing = true;
+            
+            OnRollUndoStarted?.Invoke();
+            
+            UndoRoll(onRollEnded, undoSpeedMultiplier);
 
             void onRollEnded()
             {
+                IsUndoing = false;
+                
                 IsRolling = false;
                 
                 OnRollEnded?.Invoke();
@@ -117,19 +131,22 @@ namespace BLUE.ACubeStory.Common
             {
                 return Vector3.forward;
             }
-            else if (direction == Vector3.right)
+
+            if (direction == Vector3.right)
             {
                 return Vector3.back;
             }
-            else if (direction == Vector3.forward)
+
+            if (direction == Vector3.forward)
             {
                 return Vector3.right;
             }
-            else if (direction == Vector3.back)
+
+            if (direction == Vector3.back)
             {
                 return Vector3.left;
             }
-            
+
             return default;
         }
 

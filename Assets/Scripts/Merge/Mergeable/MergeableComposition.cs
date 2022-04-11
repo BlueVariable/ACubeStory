@@ -64,6 +64,22 @@ namespace BLUE.ACubeStory.Merge
             return unmerged;
         }
 
+        public bool TryUnmerge(Mergeable targetMergeable)
+        {
+            bool unmerged = _merger.TryUnmerge(Mergeables, targetMergeable);
+
+            if (unmerged)
+            {
+                Mergeables.Remove(targetMergeable);
+
+                OnUnmerged?.Invoke(targetMergeable);
+
+                return true;
+            }
+
+            return false;
+        }
+
         private void Awake()
         {
             TryInitInitialMergeables();
@@ -135,7 +151,7 @@ namespace BLUE.ACubeStory.Merge
             }
             while(merged);
         }
-        
+
         private bool TryMerge(Mergeable targetMergeable)
         {
             bool merged = _merger.TryMerge(Mergeables, targetMergeable);
@@ -145,22 +161,6 @@ namespace BLUE.ACubeStory.Merge
                 Mergeables.Add(targetMergeable);
 
                 OnMerged?.Invoke(targetMergeable);
-
-                return true;
-            }
-
-            return false;
-        }
-        
-        private bool TryUnmerge(Mergeable targetMergeable)
-        {
-            bool unmerged = _merger.TryUnmerge(Mergeables, targetMergeable);
-
-            if (unmerged)
-            {
-                Mergeables.Remove(targetMergeable);
-
-                OnUnmerged?.Invoke(targetMergeable);
 
                 return true;
             }
