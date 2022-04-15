@@ -1,22 +1,15 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
     public class CubeLevelEditorHandler_Activation : CubeLevelEditorHandlerBase
     {
-        private List<CubeLevelEditorHandlerBase> _handlers = new List<CubeLevelEditorHandlerBase>()
-        {
-            new CubeLevelEditorHandler_TilePlacer(),
-            new CubeLevelEditorHandler_TileRemover()
-        };
-
         private bool _isEditorActive = false;
 
         private bool _isCtrlDown = false;
         private bool _isAltDown = false;
-        
+
         public override void Handle(Event e)
         {
             if (e.type == EventType.KeyDown)
@@ -44,13 +37,12 @@ namespace BLUE.ACubeStory.LevelEditor
                     _isAltDown = false;
                 }
             }
-            
 
             if (_isCtrlDown && _isAltDown && e.type == EventType.KeyDown && e.keyCode == KeyCode.O)
             {
                 _isEditorActive = !_isEditorActive;
                 
-                UnityEngine.Debug.Log($"Cube Level Editor {_isEditorActive}");
+                return;
             }
 
             if (_isEditorActive)
@@ -77,11 +69,16 @@ namespace BLUE.ACubeStory.LevelEditor
                 GUILayout.EndArea();
                 Handles.EndGUI();
 
-                foreach (CubeLevelEditorHandlerBase handler in _handlers)
+                foreach (CubeLevelEditorHandlerBase handler in _SubHandlers)
                 {
                     handler.Handle(e);
                 }
             }
+        }
+
+        protected override CubeLevelEditorHandlerBase[] GetSubHandlers()
+        {
+            return new []{ new CubeLevelEditorHandler_TileModifier() };
         }
     }
 }

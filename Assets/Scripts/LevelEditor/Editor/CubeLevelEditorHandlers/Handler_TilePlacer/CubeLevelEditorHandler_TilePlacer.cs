@@ -7,11 +7,7 @@ namespace BLUE.ACubeStory.LevelEditor
     public class CubeLevelEditorHandler_TilePlacer : CubeLevelEditorHandlerBase
     {
         private float _tilePlacementDistance = 10;
-        
-        private KeyCode _inputKeyCode = KeyCode.O;
 
-        private bool _isPlacerActivated;
-        
         private List<TilePlacementConditionBase> _placementConditions = new List<TilePlacementConditionBase>()
         {
             new TilePlacementCondition_OverlapAnotherTile()
@@ -19,30 +15,14 @@ namespace BLUE.ACubeStory.LevelEditor
 
         public override void Handle(Event e)
         {
-            if (e.type == EventType.KeyDown && e.keyCode == _inputKeyCode)
-            {
-                _isPlacerActivated = true;
-            }
-            
-            if (e.type == EventType.KeyUp && e.keyCode == _inputKeyCode)
-            {
-                _isPlacerActivated = false;
-            }
-
             Vector3 curPlacementPos = GetPlacementPosition(e.mousePosition);
 
             bool isPlacementValid = CanPlaceTile(curPlacementPos);
             
-            if (_isPlacerActivated)
-            {
-                Handles.color = isPlacementValid ? Color.green : Color.red;
-                Handles.DrawWireCube(curPlacementPos, Vector3.one);
-                
-                int controlID = GUIUtility.GetControlID(FocusType.Passive);
-                GUIUtility.hotControl = controlID;
-            }
+            Handles.color = isPlacementValid ? Color.green : Color.red;
+            Handles.DrawWireCube(curPlacementPos, Vector3.one);
 
-            if (_isPlacerActivated && e.type == EventType.MouseUp && e.button == 0 && isPlacementValid)
+            if (e.type == EventType.MouseDown && e.button == 0 && isPlacementValid)
             {
                 TryPlaceTile(curPlacementPos);
             }
