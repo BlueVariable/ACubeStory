@@ -78,7 +78,6 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GUIStyle itemStyle = new GUIStyle(GUI.skin.button);
             itemStyle.alignment = TextAnchor.MiddleLeft; 
-            // itemStyle.active.background = itemStyle.normal.background;
             itemStyle.margin = new RectOffset(25, 25, 5, 5);
 
             TileSettings[] settingsArr = TileSettingsContainer.Instance.TileSettingsSo.TileSettings;
