@@ -59,14 +59,6 @@ namespace BLUE.ACubeStory.LevelEditor
 
             this.Divider();
             
-            GUILayout.Space(25);
-
-            CreateUpdateButton();
-            
-            GUILayout.Space(25);
-
-            this.Divider();
-
             CreateTilePreview();
             
             GUILayout.EndVertical();
@@ -91,30 +83,14 @@ namespace BLUE.ACubeStory.LevelEditor
                 if (GUILayout.Button(itemName, itemStyle)) 
                 {
                     _selectedIndex = i;
+                    
+                    TileProvider_Editor.Instance.SelectedTileID = _selectedIndex;
                 }
                 
                 GUI.backgroundColor = _defaultBGColor;
             }
             
             GUILayout.EndScrollView();
-        }
-
-        private void CreateUpdateButton()
-        {
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            
-            GUIStyle selectionButtonStyle = new GUIStyle(GUI.skin.button);
-            selectionButtonStyle.margin = new RectOffset(25, 25, 0, 0);
-            selectionButtonStyle.fixedWidth = 150;
-
-            if (GUILayout.Button("Update Selected Tile", selectionButtonStyle))
-            {
-                TileProvider_Editor.Instance.SelectedTileID = _selectedIndex;
-            }
-            
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
         }
 
         #region Mesh Drawing

@@ -7,38 +7,24 @@ namespace BLUE.ACubeStory.LevelEditor
     {
         private bool _isEditorActive = false;
 
-        private bool _isCtrlDown = false;
-        private bool _isAltDown = false;
+        private CubeEditorInputHandler _inputHandler;
 
+        private CubeEditorInputHandler _InputHandler
+        {
+            get
+            {
+                if (_inputHandler == null)
+                {
+                    _inputHandler = new CubeEditorInputHandler(ECubeEditorControlType.Activation);
+                }
+
+                return _inputHandler;
+            }
+        }
+        
         public override void Handle(Event e)
         {
-            if (e.type == EventType.KeyDown)
-            {
-                if (e.keyCode == KeyCode.LeftControl)
-                {
-                    _isCtrlDown = true;
-                }
-
-                if (e.keyCode == KeyCode.LeftAlt)
-                {
-                    _isAltDown = true;
-                }
-            }
-
-            if (e.type == EventType.KeyUp)
-            {
-                if (e.keyCode == KeyCode.LeftControl)
-                {
-                    _isCtrlDown = false;
-                }
-
-                if (e.keyCode == KeyCode.LeftAlt)
-                {
-                    _isAltDown = false;
-                }
-            }
-
-            if (_isCtrlDown && _isAltDown && e.type == EventType.KeyDown && e.keyCode == KeyCode.O)
+            if (_InputHandler.Handle(e))
             {
                 _isEditorActive = !_isEditorActive;
                 

@@ -21,6 +21,9 @@ namespace BLUE.ACubeStory.LevelEditor
         
         [SerializeField] private ACubeStory.Level.Level _level = null;
 
+        [SerializeField] private CubeEditorInputSO _inputSo = null;
+        public CubeEditorInputSO InputSo => _inputSo;
+
         [SerializeField] private bool _displayToolTips = false;
         public bool DisplayToolTips => _displayToolTips;
         

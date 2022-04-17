@@ -124,12 +124,12 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GUILayout.BeginHorizontal();
             GUILayout.Label("Tile Addition :", GUILayout.Width(labelWidth));
-            GUILayout.Label("O + MOUSE1");
+            GUILayout.Label("Left Alt + MOUSE1");
             GUILayout.EndVertical();
             
             GUILayout.BeginHorizontal();
             GUILayout.Label("Tile Deletion :", GUILayout.Width(labelWidth));
-            GUILayout.Label("P + MOUSE1");
+            GUILayout.Label("Left Alt + MOUSE2");
             GUILayout.EndVertical();
 
             GUILayout.EndVertical();
