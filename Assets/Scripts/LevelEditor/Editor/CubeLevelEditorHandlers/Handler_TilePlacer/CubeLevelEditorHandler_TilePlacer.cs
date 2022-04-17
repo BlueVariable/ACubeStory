@@ -31,15 +31,15 @@ namespace BLUE.ACubeStory.LevelEditor
         private Vector3 GetPlacementPosition(Vector2 mousePosition)
         {
             Vector3 placementPos;
-            
-            Ray ray = Camera.current.ScreenPointToRay(new Vector3(mousePosition.x, Screen.height - mousePosition.y, 0));
-            
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) 
+
+            Ray ray = Camera.current.ScreenPointToRay(new Vector3(mousePosition.x, Camera.current.pixelHeight - mousePosition.y, 0));
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity))
             {
                 if (hitInfo.collider.TryGetComponent(out Tile neighborCandidate))
                 {
                     placementPos = neighborCandidate.transform.position + hitInfo.normal * 1.0001f;
-                    
+
                     return placementPos;
                 }
             }

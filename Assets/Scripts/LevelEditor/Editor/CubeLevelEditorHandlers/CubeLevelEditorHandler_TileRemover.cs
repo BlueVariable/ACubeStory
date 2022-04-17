@@ -32,7 +32,7 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             deletionCandidate = null;
             
-            Ray ray = Camera.current.ScreenPointToRay(new Vector3(mousePosition.x, Screen.height - mousePosition.y, 0));
+            Ray ray = Camera.current.ScreenPointToRay(new Vector3(mousePosition.x, Camera.current.pixelHeight - mousePosition.y, 0));
             
             if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) 
             {
