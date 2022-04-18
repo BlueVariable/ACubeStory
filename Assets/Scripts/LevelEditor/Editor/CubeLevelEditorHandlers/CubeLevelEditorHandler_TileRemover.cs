@@ -5,6 +5,21 @@ namespace BLUE.ACubeStory.LevelEditor
 {
     public class CubeLevelEditorHandler_TileRemover : CubeLevelEditorHandlerBase
     {
+        private CubeEditorInputHandler _inputHandler;
+
+        private CubeEditorInputHandler _InputHandler
+        {
+            get
+            {
+                if (_inputHandler == null)
+                {
+                    _inputHandler = new CubeEditorInputHandler(ECubeEditorControlType.TileRemove);
+                }
+
+                return _inputHandler;
+            }
+        }
+        
         public override void Handle(Event e)
         {
             TryGetTileToDelete(e.mousePosition, out Tile deletionCandidate);
@@ -17,7 +32,7 @@ namespace BLUE.ACubeStory.LevelEditor
                     Handles.DrawWireCube(deletionCandidate.transform.position, Vector3.one);
                 }
                 
-                if (e.type == EventType.MouseDown && e.button == 1)
+                if (_InputHandler.Handle(e))
                 {
                     EditorUtility.SetDirty(deletionCandidate.gameObject);
                 

@@ -5,19 +5,26 @@ namespace BLUE.ACubeStory.LevelEditor
 {
     public class CubeLevelEditorHandler_TileModifier : CubeLevelEditorHandlerBase
     {
+        private CubeEditorInputHandler _inputHandler;
+
+        private CubeEditorInputHandler _InputHandler
+        {
+            get
+            {
+                if (_inputHandler == null)
+                {
+                    _inputHandler = new CubeEditorInputHandler(ECubeEditorControlType.Modification);
+                }
+
+                return _inputHandler;
+            }
+        }
+        
         private bool _isModifierActive;
         
         public override void Handle(Event e)
         {
-            if (e.type == EventType.KeyDown && e.keyCode == KeyCode.LeftAlt)
-            {
-                _isModifierActive = true;
-            }
-
-            if (e.type == EventType.KeyUp && e.keyCode == KeyCode.LeftAlt)
-            {
-                _isModifierActive = false;
-            }
+            _isModifierActive = _InputHandler.Handle(e);
 
             if (_isModifierActive)
             {

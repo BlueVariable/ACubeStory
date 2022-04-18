@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BLUE._Common.Cooldown;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,8 +11,26 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private List<TilePlacementConditionBase> _placementConditions = new List<TilePlacementConditionBase>()
         {
-            new TilePlacementCondition_OverlapAnotherTile()
+            new TilePlacementCondition_OverlapAnotherTile(),
+            new TilePlacementCondition_Cooldown()
         };
+        
+        private CubeEditorInputHandler _inputHandler;
+
+        private CubeEditorInputHandler _InputHandler
+        {
+            get
+            {
+                if (_inputHandler == null)
+                {
+                    _inputHandler = new CubeEditorInputHandler(ECubeEditorControlType.TileAddition);
+                }
+
+                return _inputHandler;
+            }
+        }
+        
+        public double LastTilePlacementTime = 0;
 
         public override void Handle(Event e)
         {
@@ -21,10 +40,12 @@ namespace BLUE.ACubeStory.LevelEditor
             
             Handles.color = isPlacementValid ? Color.green : Color.red;
             Handles.DrawWireCube(curPlacementPos, Vector3.one);
-
-            if (e.type == EventType.MouseDown && e.button == 0 && isPlacementValid)
+            
+            if (_InputHandler.Handle(e) && isPlacementValid)
             {
                 TryPlaceTile(curPlacementPos);
+
+                LastTilePlacementTime = EditorApplication.timeSinceStartup;
             }
         }
 
@@ -74,7 +95,7 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             foreach (TilePlacementConditionBase condition in _placementConditions)
             {
-                if (!condition.IsSatisfied(position))
+                if (!condition.IsSatisfied(this, position))
                 {
                     return false;
                 }

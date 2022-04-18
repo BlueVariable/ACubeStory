@@ -4,7 +4,8 @@
     {
         None = 0,
         Activation = 1,
-        TileAddition = 2,
-        TileRemove = 3
+        Modification = 2,
+        TileAddition = 3,
+        TileRemove = 4
     }
 }
