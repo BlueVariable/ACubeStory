@@ -2345,6 +2345,7 @@ GameObject:
   - component: {fileID: 7074784438819274613}
   - component: {fileID: 8132517245878650085}
   - component: {fileID: 1615147408662205967}
+  - component: {fileID: 8837944966001382926}
   m_Layer: 8
   m_Name: RollState
   m_TagString: Untagged
@@ -2404,6 +2405,8 @@ MonoBehaviour:
   - {fileID: 145977267681140389}
   - {fileID: 6992611269288237745}
   - {fileID: 805281267369754191}
+  _forceEnterConditions:
+  - {fileID: 8837944966001382926}
 --- !u!114 &1615147408662205967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,6 +2421,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeDashAbility: {fileID: 4096651698303276022}
   _negateResult: 1
+--- !u!114 &8837944966001382926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6136131640736145654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d983fec1f6428dadab14acc83710c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _states: 1e000000
 --- !u!1 &6203869505261698018
 GameObject:
   m_ObjectHideFlags: 0
