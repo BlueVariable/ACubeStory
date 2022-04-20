@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using BLUE._Common.Cooldown;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
@@ -40,6 +39,8 @@ namespace BLUE.ACubeStory.LevelEditor
             
             Handles.color = isPlacementValid ? Color.green : Color.red;
             Handles.DrawWireCube(curPlacementPos, Vector3.one);
+
+            bool inputRes = _InputHandler.Handle(e);
             
             if (_InputHandler.Handle(e) && isPlacementValid)
             {
@@ -47,6 +48,10 @@ namespace BLUE.ACubeStory.LevelEditor
 
                 LastTilePlacementTime = EditorApplication.timeSinceStartup;
             }
+            else if (!inputRes)
+            {
+                LastTilePlacementTime = 0;
+            } 
         }
 
         private Vector3 GetPlacementPosition(Vector2 mousePosition)

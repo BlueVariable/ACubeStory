@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
@@ -20,19 +21,26 @@ namespace BLUE.ACubeStory.LevelEditor
             }
         }
         
+        private List<TileRemovingConditionBase> _removingConditions = new List<TileRemovingConditionBase>()
+        {
+            new TileRemovingCondition_IsTileValid(),
+            new TileRemovingCondition_Cooldown()
+        };
+        
+        public double LastTilePlacementTime = 0;
+        
         public override void Handle(Event e)
         {
             TryGetTileToDelete(e.mousePosition, out Tile deletionCandidate);
 
             bool input = _InputHandler.Handle(e);
-                        
-            if (deletionCandidate != null)
+
+            bool canRemoveTile = CanRemoveTile(deletionCandidate);
+
+            if (canRemoveTile)
             {
-                if (deletionCandidate != null)
-                {
-                    Handles.color = Color.magenta;
-                    Handles.DrawWireCube(deletionCandidate.transform.position, Vector3.one);
-                }
+                Handles.color = Color.magenta;
+                Handles.DrawWireCube(deletionCandidate.transform.position, Vector3.one);
                 
                 if (input)
                 {
@@ -41,6 +49,12 @@ namespace BLUE.ACubeStory.LevelEditor
                     GameObject.DestroyImmediate(deletionCandidate.gameObject);
 
                     deletionCandidate = null;
+                    
+                    LastTilePlacementTime = EditorApplication.timeSinceStartup;
+                }
+                else
+                {
+                    LastTilePlacementTime = 0;
                 }
             }
         }
@@ -60,6 +74,19 @@ namespace BLUE.ACubeStory.LevelEditor
             }
 
             return false;
+        }
+
+        private bool CanRemoveTile(Tile tile)
+        {
+            foreach (TileRemovingConditionBase condition in _removingConditions)
+            {
+                if (!condition.IsSatisfied(this, tile))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

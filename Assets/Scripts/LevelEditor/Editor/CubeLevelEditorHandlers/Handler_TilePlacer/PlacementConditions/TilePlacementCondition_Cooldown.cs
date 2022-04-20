@@ -7,7 +7,7 @@ namespace BLUE.ACubeStory.LevelEditor
     {
         public override bool IsSatisfied(CubeLevelEditorHandler_TilePlacer tilePlacer, Vector3 position)
         {
-            return EditorApplication.timeSinceStartup - tilePlacer.LastTilePlacementTime > 0.75f;
+            return EditorApplication.timeSinceStartup - tilePlacer.LastTilePlacementTime > 0.25f;
         }
     }
 }
