@@ -23,7 +23,9 @@ namespace BLUE.ACubeStory.LevelEditor
         public override void Handle(Event e)
         {
             TryGetTileToDelete(e.mousePosition, out Tile deletionCandidate);
-            
+
+            bool input = _InputHandler.Handle(e);
+                        
             if (deletionCandidate != null)
             {
                 if (deletionCandidate != null)
@@ -32,7 +34,7 @@ namespace BLUE.ACubeStory.LevelEditor
                     Handles.DrawWireCube(deletionCandidate.transform.position, Vector3.one);
                 }
                 
-                if (_InputHandler.Handle(e))
+                if (input)
                 {
                     EditorUtility.SetDirty(deletionCandidate.gameObject);
                 
