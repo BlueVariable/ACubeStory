@@ -4,6 +4,12 @@ namespace BLUE.ACubeStory.Merge
 {
     public static class Extensions_Mergeable
     {
+        #region Constants
+
+        private const float DISTANCE_TOLERANCE = 0.1f;
+
+        #endregion
+        
         public static bool WillOverlapGround(this Mergeable mergeable, 
             MergeableComposition mergeableComposition, Vector3 normalizedDirection)
         {
@@ -23,12 +29,26 @@ namespace BLUE.ACubeStory.Merge
             {
                 return true;
             }
-            else if (Mathf.RoundToInt(sum) < 0 && Mathf.Sign(normalizedDirSum) < 0)
+
+            if (Mathf.RoundToInt(sum) < 0 && Mathf.Sign(normalizedDirSum) < 0)
             {
                 return true;
             }
 
             return false;
+        }
+        
+        public static bool WillOverlapInDirection(this Mergeable mergeable, 
+            MergeableComposition mergeableComposition, Vector3 normalizedDirection, LayerMask mask)
+        {
+            Vector3 mergedPos = mergeable.GetMergeablePos();
+
+            Vector3 anchorPos = mergeableComposition.GetAnchorMergeable(normalizedDirection).GetMergeablePos();
+
+            bool hit = Physics.Raycast(mergedPos, normalizedDirection, 
+                Mathf.CeilToInt(mergedPos.y - anchorPos.y + DISTANCE_TOLERANCE), mask);
+
+            return hit;
         }
     }
 }

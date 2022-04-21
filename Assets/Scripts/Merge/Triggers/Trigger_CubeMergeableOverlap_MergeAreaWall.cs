@@ -8,12 +8,13 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Merge
 {
-    // TODO: Gokay Update Bottleneck mergeables
     public class Trigger_CubeMergeableOverlap_MergeAreaWall : Trigger_CubeMergeableOverlapBase, IUndoRollReasonProvider
     {
         [SerializeField] private MergeableComposition _mergeableComposition = null;
 
         [SerializeField] private State_Cube_Roll _cubeRollState = null;
+
+        [SerializeField] private LayerMask _mergeAreaWallMask = default;
         
         [SerializeField] private ActionExecutor _triggerAttemptedActionExecutor = null;
 
@@ -29,7 +30,7 @@ namespace BLUE.ACubeStory.Merge
         
         public override HashSet<Mergeable> GetLastBottleneckMergeables()
         {
-            return _mergeableComposition.Mergeables;
+            return _bottleneckMergeables;
         }
 
         protected override void ActivateCustomActions()
@@ -80,12 +81,11 @@ namespace BLUE.ACubeStory.Merge
 
             foreach (Mergeable mergedMergeable in _mergeableComposition.Mergeables)
             {
-                /*if (mergedMergeable.WillOverlapGround(_mergeableComposition, transitionMessage.Direction.normalized))
+                if (mergedMergeable.WillOverlapInDirection(_mergeableComposition, 
+                    transitionMessage.Direction.normalized, _mergeAreaWallMask))
                 {
                     _bottleneckMergeables.Add(mergedMergeable);
-                }*/
-                
-                _bottleneckMergeables.Add(mergedMergeable);
+                }
             }
         }
 
