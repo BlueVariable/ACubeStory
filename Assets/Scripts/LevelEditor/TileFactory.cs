@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
@@ -18,7 +19,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 return _instance;
             }
         }
-
+        
         public bool TryCreateTile(
             int tileId,
             Vector3 position,
@@ -32,7 +33,9 @@ namespace BLUE.ACubeStory.LevelEditor
                 return false;
             }
             
-            GameObject tileObject = Instantiate(tileSettings.Tile.gameObject);
+            // GameObject tileObject = Instantiate(tileSettings.Tile.gameObject);
+            
+            GameObject tileObject = PrefabUtility.InstantiatePrefab(tileSettings.Tile.gameObject) as GameObject;
 
             tileObject.transform.position = position;
 
