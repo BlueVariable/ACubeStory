@@ -246,6 +246,8 @@ namespace BLUE.ACubeStory.Merge
                     }
                     
                     _bottleneckMergeables.Add(mergedMergeable);
+
+                    _bottleneckMergeables.Add(mergeable);
                 }
             }
         }
