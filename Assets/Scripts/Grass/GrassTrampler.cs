@@ -2,17 +2,17 @@
 
 namespace BLUE.ACubeStory.Grass
 {
-    public class GrassSmasher_Cube : MonoBehaviour
+    public class GrassTrampler : MonoBehaviour
     {
-        [SerializeField] private Transform _cubeRoot = null;
+        [SerializeField] private Transform _root = null;
         
-        [SerializeField] private Vector3 _smasherPositionOffset = new Vector3(0, 0.5f, 0);
+        [SerializeField] private Vector3 _tramplerPositionOffset = new Vector3(0, 0.5f, 0);
         
         private void Update()
         {
-            Vector3 pos = _cubeRoot.position;
+            Vector3 pos = _root.position;
 
-            pos -= _smasherPositionOffset;
+            pos -= _tramplerPositionOffset;
 
             transform.position = pos;
         }
@@ -26,7 +26,7 @@ namespace BLUE.ACubeStory.Grass
                 return;
             }
             
-            grass.SmashGrass();
+            grass.TrampleGrass();
         }
 
         private void OnTriggerExit(Collider other)
@@ -38,7 +38,7 @@ namespace BLUE.ACubeStory.Grass
                 return;
             }
             
-            grass.RecoveryGrass(true);
+            grass.RecoverGrass(true);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
+using BLUE.Common;
 using BLUE.FSMSystem;
 using BLUE.TriggerSystem;
 using UnityEngine;
@@ -37,6 +38,9 @@ namespace BLUE.ACubeStory.Cube
 
         [Header("Triggers")]
         [SerializeField] private TriggerBase[] _undoRequestors = new TriggerBase[0];
+
+        [Header("Conditions")] 
+        [SerializeField] private SimpleConditionBase[] _forceEnterConditions = null;
         
         public FSMTransitionMessage_Cube_Roll LastCandidateTransitionMessage { get; private set; }
         
@@ -48,6 +52,11 @@ namespace BLUE.ACubeStory.Cube
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
         {
             LastCandidateTransitionMessage = transitionMessage;
+
+            if (_forceEnterConditions.Any(val => val.IsConditionSatisfied()))
+            {
+                return true;
+            }
             
             return !Physics.Raycast(_objectToRoll.position, transitionMessage.Direction,
                 out RaycastHit hit, _rollRayDistance, _layerMask);

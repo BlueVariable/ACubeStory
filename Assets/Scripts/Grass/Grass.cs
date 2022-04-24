@@ -10,140 +10,140 @@ namespace BLUE.ACubeStory.Grass
 
         [SerializeField] private int _grassMaterialIndex = 0;
 
-        [SerializeField] private float _grassSmashDuration = 0.25f;
+        [SerializeField] private float _grassTrampleDuration = 0.25f;
 
         [SerializeField] private float _grassRecoveryDuration = 1f;
 
-        [SerializeField] private string _heightPropertyId = "";
+        [SerializeField] private string _heightPropertyID = "_GrassHeight";
         
-        private MaterialPropertyBlock _mpb;
-        private MaterialPropertyBlock _Mpb
+        private MaterialPropertyBlock _propertyBlock;
+        private MaterialPropertyBlock _PropertyBlock
         {
             get
             {
-                if (_mpb == null)
+                if (_propertyBlock == null)
                 {
                     MaterialPropertyBlock mpb = new MaterialPropertyBlock();
 
                     _meshRenderer.GetPropertyBlock(mpb, _grassMaterialIndex);
 
-                    _mpb = mpb;
+                    _propertyBlock = mpb;
 
-                    _mpb.SetFloat(_heightPropertyId, _meshRenderer.materials[_grassMaterialIndex].GetFloat(_heightPropertyId));
+                    _propertyBlock.SetFloat(_heightPropertyID, _meshRenderer.materials[_grassMaterialIndex].GetFloat(_heightPropertyID));
                 }
 
-                return _mpb;
+                return _propertyBlock;
             }
         }
 
-        private bool _smashing = false;
+        private bool _trampling = false;
         
-        private IEnumerator _grassSmashRoutine;
-        private IEnumerator _grassStepRoutine;
+        private IEnumerator _grassTrampleRoutine;
+        private IEnumerator _grassRecoveryRoutine;
+
+        private Action _onTrampleCompleted;
         
-        private Action _onSmashCompleted { get; set; }
-        
-        public void SmashGrass()
+        public void TrampleGrass()
         {
-            StopGrassFreeRoutine();
+            StopGrassRecoveryRoutine();
             
-            StartGrassSmashRoutine();
+            StartGrassTrampleRoutine();
             
-            _onSmashCompleted -= OnSmashCompleted;
+            _onTrampleCompleted -= OnTrampleCompleted;
         }
 
-        public void RecoveryGrass(bool waitForSmash = false)
+        public void RecoverGrass(bool waitForTrampleCompletion = false)
         {
-            if (waitForSmash && _smashing)
+            if (waitForTrampleCompletion && _trampling)
             {
-                _onSmashCompleted += OnSmashCompleted;
+                _onTrampleCompleted += OnTrampleCompleted;
                     
                 return;
             }
 
-            StopGrassSmashRoutine();
+            StopGrassTrampleRoutine();
             
-            StartGrassFreeRoutine();
+            StartGrassRecoveryRoutine();
         }
         
-        private void OnSmashCompleted()
+        private void OnTrampleCompleted()
         {
-            _onSmashCompleted -= OnSmashCompleted;
+            _onTrampleCompleted -= OnTrampleCompleted;
             
-            StartGrassFreeRoutine();
+            StartGrassRecoveryRoutine();
         }
 
-        private void StartGrassSmashRoutine()
+        private void StartGrassTrampleRoutine()
         {
-            StopGrassSmashRoutine();
+            StopGrassTrampleRoutine();
 
-            _grassSmashRoutine = GrassSmashProgress();
+            _grassTrampleRoutine = GrassTrampleProgress();
 
-            StartCoroutine(_grassSmashRoutine);
+            StartCoroutine(_grassTrampleRoutine);
         }
 
-        private void StopGrassSmashRoutine()
+        private void StopGrassTrampleRoutine()
         {
-            if (_grassSmashRoutine != null)
+            if (_grassTrampleRoutine != null)
             {
-                StopCoroutine(_grassSmashRoutine);
+                StopCoroutine(_grassTrampleRoutine);
             }
         }
 
-        private IEnumerator GrassSmashProgress()
+        private IEnumerator GrassTrampleProgress()
         {
-            _smashing = true;
+            _trampling = true;
             
             float timePassed = 0;
 
-            float startingHeight = _Mpb.GetFloat(_heightPropertyId);
+            float startHeight = _PropertyBlock.GetFloat(_heightPropertyID);
             
-            while (timePassed < _grassSmashDuration)
+            while (timePassed < _grassTrampleDuration)
             {
                 timePassed += Time.deltaTime;
 
-                float height = Mathf.Lerp(startingHeight, 0, timePassed / _grassSmashDuration);
+                float height = Mathf.Lerp(startHeight, 0, timePassed / _grassTrampleDuration);
                 
                 SetGrassHeight(height);
                 
                 yield return null;
             }
             
-            _smashing = false;
+            _trampling = false;
             
-            _onSmashCompleted?.Invoke();
+            _onTrampleCompleted?.Invoke();
         }
 
-        private void StartGrassFreeRoutine()
+        private void StartGrassRecoveryRoutine()
         {
-            StopGrassFreeRoutine();
+            StopGrassRecoveryRoutine();
 
-            _grassStepRoutine = GrassFreeProgress();
+            _grassRecoveryRoutine = GrassRecoveryProgress();
 
-            StartCoroutine(_grassStepRoutine);
+            StartCoroutine(_grassRecoveryRoutine);
         }
 
-        private void StopGrassFreeRoutine()
+        private void StopGrassRecoveryRoutine()
         {
-            if (_grassStepRoutine != null)
+            if (_grassRecoveryRoutine != null)
             {
-                StopCoroutine(_grassStepRoutine);
+                StopCoroutine(_grassRecoveryRoutine);
             }
         }
 
-        private IEnumerator GrassFreeProgress()
+        private IEnumerator GrassRecoveryProgress()
         {
             yield return new WaitForSeconds(_grassRecoveryDuration);
             
             float timePassed = 0;
 
-            float startingHeight = _Mpb.GetFloat(_heightPropertyId);
+            float startHeight = _PropertyBlock.GetFloat(_heightPropertyID);
             
-            while (timePassed < _grassSmashDuration)
+            while (timePassed < _grassTrampleDuration)
             {
                 timePassed += Time.deltaTime;
 
-                float height = Mathf.Lerp(startingHeight, 1, timePassed / _grassSmashDuration);
+                float height = Mathf.Lerp(startHeight, 1, timePassed / _grassTrampleDuration);
                 
                 SetGrassHeight(height);
                 
@@ -155,9 +155,9 @@ namespace BLUE.ACubeStory.Grass
         {
             val = Mathf.Clamp(val, 0, 1);
             
-            _Mpb.SetFloat(_heightPropertyId, val);
+            _PropertyBlock.SetFloat(_heightPropertyID, val);
             
-            _meshRenderer.SetPropertyBlock(_Mpb, _grassMaterialIndex);
+            _meshRenderer.SetPropertyBlock(_PropertyBlock, _grassMaterialIndex);
         }
     }
 }
