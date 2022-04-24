@@ -42,11 +42,20 @@ namespace BLUE.ACubeStory.Merge
             MergeableComposition mergeableComposition, Vector3 normalizedDirection, LayerMask mask)
         {
             Vector3 mergedPos = mergeable.GetMergeablePos();
+            Vector3 scaledMergedPos = mergedPos;
+            scaledMergedPos.Scale(normalizedDirection);
 
             Vector3 anchorPos = mergeableComposition.GetAnchorMergeable(normalizedDirection).GetMergeablePos();
+            Vector3 scaledAnchorPos = anchorPos;
+            scaledAnchorPos.Scale(normalizedDirection);
+            
+            Vector3 scaledDir = scaledMergedPos - scaledAnchorPos;
 
-            bool hit = Physics.Raycast(mergedPos, normalizedDirection, 
-                Mathf.CeilToInt(mergedPos.y - anchorPos.y + DISTANCE_TOLERANCE), mask);
+            float scaledSum = Mathf.Abs(scaledDir.x) + Mathf.Abs(scaledDir.y) + Mathf.Abs(scaledDir.z);
+
+            float rayDist = Mathf.CeilToInt(mergedPos.y - anchorPos.y + scaledSum + DISTANCE_TOLERANCE);
+            
+            bool hit = Physics.Raycast(mergedPos, normalizedDirection, rayDist, mask);
 
             return hit;
         }
