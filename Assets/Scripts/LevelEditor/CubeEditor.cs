@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BLUE.ACubeStory.Merge;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
@@ -23,6 +24,9 @@ namespace BLUE.ACubeStory.LevelEditor
 
         [SerializeField] private CubeEditorInputSO _inputSo = null;
         public CubeEditorInputSO InputSo => _inputSo;
+
+        [SerializeField] private MergePuzzle _defaultMergePuzzle = null;
+        public MergePuzzle DefaultMergePuzzle => _defaultMergePuzzle;
 
         [SerializeField] private bool _displayToolTips = false;
         public bool DisplayToolTips => _displayToolTips;

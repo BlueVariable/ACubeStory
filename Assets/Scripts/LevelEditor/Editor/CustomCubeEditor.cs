@@ -48,6 +48,12 @@ namespace BLUE.ACubeStory.LevelEditor
             
             InitCategorySelection();
 
+            EditorGUILayout.Space(10);
+
+            CreateMergePuzzleButton();
+
+            EditorGUILayout.Space(10);
+
             CreateToolTips();
             
             GUILayout.EndVertical();
@@ -82,6 +88,40 @@ namespace BLUE.ACubeStory.LevelEditor
             EditorGUILayout.EndHorizontal();
         }
 
+        private void CreateMergePuzzleButton()
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
+            if (GUILayout.Button("Init Merge Puzzle", GUILayout.Width(200), GUILayout.Height(25)))
+            {
+                CubeEditor cubeEditor = (CubeEditor) target;
+
+                foreach (Transform child in cubeEditor.Level.transform)
+                {
+                    Debug.Log(child.gameObject.name);
+                    
+                    if (child.gameObject.name.Equals("MERGE"))
+                    {
+                        DestroyImmediate(child.gameObject);
+                    }
+                }
+                
+                GameObject mergeCategory = new GameObject();
+                mergeCategory.name = "MERGE";
+                mergeCategory.AddComponent<TileGroup>();
+                ResetGameObject(mergeCategory, cubeEditor.Level.transform);
+
+                GameObject mergePuzzle = PrefabUtility.InstantiatePrefab(cubeEditor.DefaultMergePuzzle.gameObject) as GameObject;
+                
+                mergePuzzle.name = "MERGE_PUZZLE";
+                ResetGameObject(mergePuzzle, mergeCategory.transform);
+            }
+            
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+        }
+
         private void CreateToolTips()
         {
             if (!_toolTipProperty.boolValue)
@@ -90,6 +130,8 @@ namespace BLUE.ACubeStory.LevelEditor
             }
 
             float labelWidth = 200;
+
+            CubeEditor cubeEditor = (CubeEditor) target;
             
             EditorGUILayout.Space(20);
             
@@ -119,17 +161,22 @@ namespace BLUE.ACubeStory.LevelEditor
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Activate Disable Editor :", GUILayout.Width(labelWidth));
-            GUILayout.Label("Left Ctrl + Left Alt + O");
+            GUILayout.Label(GetControlString(cubeEditor, ECubeEditorControlType.Activation));
+            GUILayout.EndVertical();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Tile Modification Activation :", GUILayout.Width(labelWidth));
+            GUILayout.Label(GetControlString(cubeEditor, ECubeEditorControlType.Modification));
             GUILayout.EndVertical();
             
             GUILayout.BeginHorizontal();
             GUILayout.Label("Tile Addition :", GUILayout.Width(labelWidth));
-            GUILayout.Label("Left Alt + MOUSE1");
+            GUILayout.Label(GetControlString(cubeEditor, ECubeEditorControlType.TileAddition));
             GUILayout.EndVertical();
             
             GUILayout.BeginHorizontal();
             GUILayout.Label("Tile Deletion :", GUILayout.Width(labelWidth));
-            GUILayout.Label("Left Alt + MOUSE2");
+            GUILayout.Label(GetControlString(cubeEditor, ECubeEditorControlType.TileRemove));
             GUILayout.EndVertical();
 
             GUILayout.EndVertical();
@@ -147,6 +194,35 @@ namespace BLUE.ACubeStory.LevelEditor
             
             gameObject.transform.SetParent(parent);
             EditorUtility.SetDirty(gameObject);
+        }
+
+        private static string GetControlString(CubeEditor cubeEditor, ECubeEditorControlType controlType)
+        {
+            string text = string.Empty;
+
+            cubeEditor.InputSo.TryGetControlSettings(controlType, out CubeEditorControlSettings settings);
+            
+            for (int i = 0; i < settings.KeyCombination.Count; i++)
+            {
+                text += settings.KeyCombination[i].ToString();
+
+                if (i != settings.KeyCombination.Count - 1)
+                {
+                    text += " + ";
+                }
+            }
+            
+            for (int i = 0; i < settings.MouseButton.Count; i++)
+            {
+                text += $"MOUSE{settings.MouseButton[i]}";
+
+                if (i != settings.MouseButton.Count - 1)
+                {
+                    text += " + ";
+                }
+            }
+
+            return text;
         }
     }
 }
