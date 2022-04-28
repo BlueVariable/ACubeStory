@@ -2,6 +2,7 @@
 using UnityEngine;
 using BLUE.Extensions;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
@@ -14,7 +15,8 @@ namespace BLUE.ACubeStory.LevelEditor
         
         private Color _defaultBGColor;
         private Color _selectedBGColor = new Color(0, 1, 1, 0.5f);
-        
+
+        private ETileCategory _selectedTileCategory = ETileCategory.None;
         private int _selectedIndex = -1;
         
         [MenuItem("BLUE/Level Editor/Tile Selection Window")]
@@ -53,6 +55,12 @@ namespace BLUE.ACubeStory.LevelEditor
 
             GUILayout.BeginVertical();
 
+            GUILayout.Space(10);
+            
+            CreateTileCategorySelection();
+            
+            GUILayout.Space(10);
+            
             CreateTileScrollView();
             
             GUILayout.Space(10);
@@ -64,6 +72,18 @@ namespace BLUE.ACubeStory.LevelEditor
             GUILayout.EndVertical();
         }
 
+        private void CreateTileCategorySelection()
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
+            EditorGUIUtility.labelWidth = 100; 
+            _selectedTileCategory = (ETileCategory) EditorGUILayout.EnumPopup("Tile Category", _selectedTileCategory, GUILayout.Width(350));
+            
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+        }
+
         private void CreateTileScrollView()
         {
             _scrollPos = GUILayout.BeginScrollView(_scrollPos, false, true, GUILayout.Width(position.width), GUILayout.Height(0));
@@ -72,7 +92,9 @@ namespace BLUE.ACubeStory.LevelEditor
             itemStyle.alignment = TextAnchor.MiddleLeft; 
             itemStyle.margin = new RectOffset(25, 25, 5, 5);
 
-            TileSettings[] settingsArr = TileSettingsContainer.Instance.TileSettingsSo.TileSettings;
+            TileSettings[] settingsArr =
+                TileSettingsContainer.Instance.TileSettingsSo.TileSettings.Where(i =>
+                    i.Tile.TileCategory == _selectedTileCategory).ToArray();
 
             for (int i = 0; i < settingsArr.Length; i++)
             {

@@ -2,7 +2,16 @@
 
 namespace BLUE.ACubeStory.LevelEditor
 {
+    public enum ETileCategory
+    {
+        None = 0,
+        Ground = 10,
+        Mergeable = 20
+    }
+
     public class Tile : MonoBehaviour
     {
+        [SerializeField] private ETileCategory _tileCategory = ETileCategory.None;
+        public ETileCategory TileCategory => _tileCategory;
     }
 }
