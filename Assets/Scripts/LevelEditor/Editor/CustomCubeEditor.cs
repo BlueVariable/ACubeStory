@@ -1,4 +1,5 @@
 ﻿using System;
+using BLUE.ACubeStory.Merge;
 using UnityEditor;
 using UnityEngine;
 using Unity.Mathematics;
@@ -93,7 +94,14 @@ namespace BLUE.ACubeStory.LevelEditor
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
 
-            if (GUILayout.Button("Init Merge Puzzle", GUILayout.Width(200), GUILayout.Height(25)))
+            string buttonText = "Init Merge Puzzle";
+
+            if (FindObjectOfType<MergePuzzle>() != null)
+            {
+                buttonText = "Reset Merge Puzzle";
+            }
+            
+            if (GUILayout.Button(buttonText, GUILayout.Width(200), GUILayout.Height(25)))
             {
                 CubeEditor cubeEditor = (CubeEditor) target;
 

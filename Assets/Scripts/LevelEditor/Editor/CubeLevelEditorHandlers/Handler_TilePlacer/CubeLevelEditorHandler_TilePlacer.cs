@@ -28,6 +28,21 @@ namespace BLUE.ACubeStory.LevelEditor
                 return _inputHandler;
             }
         }
+
+        private TileParentProvider _parentProvider;
+
+        private TileParentProvider _ParentProvider
+        {
+            get
+            {
+                if (_parentProvider == null)
+                {
+                    _parentProvider = new TileParentProvider();
+                }
+
+                return _parentProvider;
+            }
+        }
         
         public double LastTilePlacementTime = 0;
 
@@ -84,7 +99,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 return false;
             }
             
-            tile.transform.SetParent(CubeEditor.Instance.SelectedTileGroup.transform);
+            tile.transform.SetParent(_ParentProvider.GetTileParent(tile));
             
             EditorUtility.SetDirty(tile.gameObject);
 
