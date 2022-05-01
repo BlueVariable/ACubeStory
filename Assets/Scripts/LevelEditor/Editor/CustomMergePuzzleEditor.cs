@@ -45,6 +45,8 @@ namespace BLUE.ACubeStory.LevelEditor
                 CreateNextSceneTrigger(mergePuzzle, mergeTiles);
 
                 CreateMergeInvisibleGround(mergePuzzle, mergeTiles);
+
+                CreateMergeAreaWalls(mergePuzzle, mergeTiles);
             }
             
             GUILayout.FlexibleSpace();
@@ -113,11 +115,32 @@ namespace BLUE.ACubeStory.LevelEditor
             
             foreach (Tile tile in mergeTiles)
             {
-                GameObject invisibleTile = Instantiate(nextSceneTrigger.InvisibleTileReference.gameObject,
-                    nextSceneTrigger.InvisibleGroundContainer);
+                GameObject invisibleTile = PrefabUtility.InstantiatePrefab(nextSceneTrigger.InvisibleTileReference.gameObject) as GameObject;
+                invisibleTile.transform.SetParent(nextSceneTrigger.InvisibleGroundContainer.transform);
 
                 invisibleTile.transform.position = tile.transform.position + new Vector3(0, verticalOffset, 0);
             }
+        }
+
+        private void CreateMergeAreaWalls(MergePuzzle mergePuzzle, Tile[] mergeTiles)
+        {
+            MergePuzzleWallContainer wallContainer = mergePuzzle.GetComponentInChildren<MergePuzzleWallContainer>(true);
+            
+            GetMergeTilesExtensions(mergeTiles, out Vector3 center, out Vector3 size);
+
+            CreateWall(wallContainer, center + new Vector3(0, 0, size.z / 2), new Vector3(size.x, 7.5f, 0.1f));
+            CreateWall(wallContainer, center + new Vector3(0, 0, -size.z / 2), new Vector3(size.x, 7.5f, 0.1f));
+            CreateWall(wallContainer, center + new Vector3(size.x / 2, 0, 0), new Vector3(0.1f, 7.5f, size.z));
+            CreateWall(wallContainer, center + new Vector3(-size.x / 2, 0, 0), new Vector3(0.1f, 7.5f, size.z));
+        }
+
+        private void CreateWall(MergePuzzleWallContainer wallContainer, Vector3 center, Vector3 size)
+        {
+            GameObject wall = PrefabUtility.InstantiatePrefab(wallContainer.ReferenceWall.gameObject) as GameObject;
+            wall.transform.SetParent(wallContainer.transform);
+
+            wall.transform.position = center;
+            wall.transform.localScale = size;
         }
     }
 }
