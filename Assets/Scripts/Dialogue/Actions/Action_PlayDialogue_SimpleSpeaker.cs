@@ -37,6 +37,11 @@ namespace BLUE.ACubeStory.Dialogue
 
         public override void Interrupt()
         {
+            if (DialoguePlayer_SimpleSpeaker.Instance == null)
+            {
+                return;
+            }
+            
             DialoguePlayer_SimpleSpeaker.Instance.Stop();
         }
 
