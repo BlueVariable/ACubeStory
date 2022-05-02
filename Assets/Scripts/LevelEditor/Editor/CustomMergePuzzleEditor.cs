@@ -7,6 +7,10 @@ namespace BLUE.ACubeStory.LevelEditor
     [CustomEditor(typeof(MergePuzzleEditor))]
     public class CustomMergePuzzleEditor : Editor
     {
+        private float _nextSceneTriggerVerticalOffset = -2.5f;
+        private float _invisibleGroundVerticalOffset = -5f;
+        private float _wallVerticalOffset = 5f;
+        
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -32,6 +36,8 @@ namespace BLUE.ACubeStory.LevelEditor
                     return;
                 }
                 
+                ResetMergePuzzle(mergePuzzle);
+                
                 TileGroup mergeTileGroup = mergePuzzle.GetComponentInParent<TileGroup>();
                 
                 Tile[] mergeTiles = mergeTileGroup.GetComponentsInChildren<Tile>();
@@ -53,6 +59,25 @@ namespace BLUE.ACubeStory.LevelEditor
             EditorGUILayout.EndHorizontal();
         }
 
+        private void ResetMergePuzzle(MergePuzzle mergePuzzle)
+        {
+            MergeAreaWall[] existingWalls = mergePuzzle.GetComponentsInChildren<MergeAreaWall>();
+
+            for (int i = 0; i < existingWalls.Length; i++)
+            {
+                DestroyImmediate(existingWalls[i].gameObject);
+            }
+
+            MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
+
+            Tile[] invisibleGroundTiles = nextSceneTrigger.GetComponentsInChildren<Tile>();
+            
+            for (int i = 0; i < invisibleGroundTiles.Length; i++)
+            {
+                DestroyImmediate(invisibleGroundTiles[i].gameObject);
+            }
+        }
+
         private void CreateNextSceneTrigger(MergePuzzle mergePuzzle, Tile[] mergeTiles)
         {
             MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
@@ -70,10 +95,8 @@ namespace BLUE.ACubeStory.LevelEditor
             
             Vector3 min = Vector3.positiveInfinity;
             Vector3 max = Vector3.negativeInfinity;
-
-            float verticalOffset = -5;
-
-            min.y = max.y = mergeTiles[0].transform.position.y + verticalOffset;
+            
+            min.y = max.y = mergeTiles[0].transform.position.y + _nextSceneTriggerVerticalOffset;
 
             size.y = 1;
 
@@ -110,15 +133,13 @@ namespace BLUE.ACubeStory.LevelEditor
         private void CreateMergeInvisibleGround(MergePuzzle mergePuzzle, Tile[] mergeTiles)
         {
             MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
-
-            float verticalOffset = -7.5f;
             
             foreach (Tile tile in mergeTiles)
             {
                 GameObject invisibleTile = PrefabUtility.InstantiatePrefab(nextSceneTrigger.InvisibleTileReference.gameObject) as GameObject;
                 invisibleTile.transform.SetParent(nextSceneTrigger.InvisibleGroundContainer.transform);
 
-                invisibleTile.transform.position = tile.transform.position + new Vector3(0, verticalOffset, 0);
+                invisibleTile.transform.position = tile.transform.position + new Vector3(0, _invisibleGroundVerticalOffset, 0);
             }
         }
 
@@ -128,10 +149,10 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GetMergeTilesExtensions(mergeTiles, out Vector3 center, out Vector3 size);
 
-            CreateWall(wallContainer, center + new Vector3(0, 0, size.z / 2), new Vector3(size.x, 7.5f, 0.1f));
-            CreateWall(wallContainer, center + new Vector3(0, 0, -size.z / 2), new Vector3(size.x, 7.5f, 0.1f));
-            CreateWall(wallContainer, center + new Vector3(size.x / 2, 0, 0), new Vector3(0.1f, 7.5f, size.z));
-            CreateWall(wallContainer, center + new Vector3(-size.x / 2, 0, 0), new Vector3(0.1f, 7.5f, size.z));
+            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, size.z / 2), new Vector3(size.x, 5f, 0.1f));
+            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, -size.z / 2), new Vector3(size.x, 5f, 0.1f));
+            CreateWall(wallContainer, center + new Vector3(size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, 5f, size.z));
+            CreateWall(wallContainer, center + new Vector3(-size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, 5f, size.z));
         }
 
         private void CreateWall(MergePuzzleWallContainer wallContainer, Vector3 center, Vector3 size)
