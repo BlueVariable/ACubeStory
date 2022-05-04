@@ -18,7 +18,10 @@ namespace BLUE.ACubeStory.Common
 
             [SerializeField] private float _spawnRadius = 0f;
             public float SpawnRadius => _spawnRadius;
-
+            
+            [SerializeField] private int _spawnAmount = 1;
+            public int SpawnAmount => _spawnAmount;
+            
             [SerializeField] private float _minSpawnInterval = 0f;
             public float MinSpawnInterval => _minSpawnInterval;
             
@@ -60,7 +63,10 @@ namespace BLUE.ACubeStory.Common
         {
             while (true)
             {
-                SpawnMovingObject();
+                for (int i = 0; i < _spawnSettings.SpawnAmount; i++)
+                {
+                    SpawnMovingObject();
+                }
                 
                 float randomInterval = Random.Range(
                     _spawnSettings.MinSpawnInterval,
