@@ -5,23 +5,28 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Common
 {
-    public class FallingObject_Rain : FallingObjectBase
+    public class MovingObject_Simple : MovingObjectBase
     {
         [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _moveSettings = null;
         [SerializeField] private ActionExecutor _reachedTargetActions = null;
 
+        [SerializeField] private bool _manageGameObjectActivation = true;
+        
         #region Events
 
-        public override Action<FallingObjectBase> OnCompleted { get; set; }
+        public override Action<MovingObjectBase> OnSequenceCompleted { get; set; }
 
         #endregion
         
-        public override void Fall(Vector3 fallPosition)
+        public override void Move(Vector3 targetPosition)
         {
-            gameObject.SetActive(true);
+            if (_manageGameObjectActivation)
+            {
+                gameObject.SetActive(true);
+            }
 
-            _moveBehaviour.StartMovementTowards(_moveSettings, fallPosition, onReachedTarget);
+            _moveBehaviour.StartMovementTowards(_moveSettings, targetPosition, onReachedTarget);
 
             void onReachedTarget()
             {
@@ -33,9 +38,12 @@ namespace BLUE.ACubeStory.Common
             {
                 _reachedTargetActions.OnExecutionCompleted -= onReachedTargetActionsCompleted;
 
-                gameObject.SetActive(false);
-                
-                OnCompleted?.Invoke(this);
+                if (_manageGameObjectActivation)
+                {
+                    gameObject.SetActive(false);
+                }
+
+                OnSequenceCompleted?.Invoke(this);
             }
         }
     }
