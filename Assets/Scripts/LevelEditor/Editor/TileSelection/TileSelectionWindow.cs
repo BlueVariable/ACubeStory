@@ -80,7 +80,15 @@ namespace BLUE.ACubeStory.LevelEditor
             GUILayout.FlexibleSpace();
 
             EditorGUIUtility.labelWidth = 100; 
-            _selectedTileCategory = (ETileCategory) EditorGUILayout.EnumPopup("Tile Category", _selectedTileCategory, GUILayout.Width(350));
+            
+            ETileCategory selectedTileCategory = (ETileCategory) EditorGUILayout.EnumPopup("Tile Category", _selectedTileCategory, GUILayout.Width(350));
+
+            if (_selectedTileCategory != selectedTileCategory)
+            {
+                _selectedIndex = -1;
+            }
+            
+            _selectedTileCategory = selectedTileCategory;
             
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -123,9 +131,13 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             if (_selectedIndex >= 0)
             {   
-                GameObject gameObject = TileSettingsContainer.Instance.TileSettingsSo.TileSettings[_selectedIndex].Tile.gameObject;
+                TileSettings[] settingsArr =
+                    TileSettingsContainer.Instance.TileSettingsSo.TileSettings.Where(i =>
+                        i.Tile.TileCategory == _selectedTileCategory).ToArray();
                 
-                Rect rect = new Rect(0, position.height - height, position.width, height);
+                GameObject gameObject = settingsArr[_selectedIndex].Tile.gameObject;
+                
+                Rect rect = new Rect(0, position.height - (height - 35), position.width, height);
 
                 BeginDraw(rect);
                 DrawRenderPreview(gameObject);
