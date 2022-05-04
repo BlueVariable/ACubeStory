@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_VFX_RainRipple_Circle_Emission
+  m_Name: Mat_VFX_RainRipple_Square_Emission_White
   m_Shader: {fileID: 4800000, guid: 8516d7a69675844a7a0b7095af7c46af, type: 3}
   m_ShaderKeywords: _EMISSION _RECEIVE_SHADOWS_OFF _SPECULAR_COLOR
   m_LightmapFlags: 2
@@ -35,7 +35,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: a1f1d5d29ae493f4b897a27168b433df, type: 3}
+        m_Texture: {fileID: 2800000, guid: 73c7498a1c0b93e43966cf84b900d196, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -139,11 +139,11 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.6392157}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1.9766746, g: 1.9766746, b: 1.9766746, a: 1}
+    - _EmissionColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 0.19999182, g: 0.19999182, b: 0.19999182, a: 0}
+    - _SpecColor: {r: 0.19999263, g: 0.19999263, b: 0.19999263, a: 0}
   m_BuildTextureStacks: []
