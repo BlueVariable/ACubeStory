@@ -40,6 +40,8 @@ namespace BLUE.ACubeStory.Common
         private Dictionary<MovingObjectBase, PoolObject> _movingObjectMap =
             new Dictionary<MovingObjectBase, PoolObject>();
         
+        public Action<MovingObjectBase> OnMovingObjectSequenceCompleted { get; set; }
+        
         public void StartSpawning(SpawnSettings settings)
         {
             _spawnSettings = settings;
@@ -95,17 +97,19 @@ namespace BLUE.ACubeStory.Common
             
             _movingObjectMap.Add(movingObject, poolObject);
 
-            movingObject.OnSequenceCompleted += OnMovingObjectSequenceCompleted;
+            movingObject.OnSequenceCompleted += OnSequenceCompleted;
             
             movingObject.Move(targetPosition);
         }
 
-        private void OnMovingObjectSequenceCompleted(MovingObjectBase movingObject)
+        private void OnSequenceCompleted(MovingObjectBase movingObject)
         {
-            movingObject.OnSequenceCompleted -= OnMovingObjectSequenceCompleted;
+            movingObject.OnSequenceCompleted -= OnSequenceCompleted;
 
             PoolObject poolObject = _movingObjectMap[movingObject];
             
+            OnMovingObjectSequenceCompleted?.Invoke(movingObject);
+
             _spawnSettings.MovingObjectPool.DeallocatePoolObject(poolObject);
 
             _movingObjectMap.Remove(movingObject);
