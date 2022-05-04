@@ -8,6 +8,7 @@ namespace BLUE.ACubeStory.LevelEditor
         Ground = 10,
         Mergeable = 20,
         MergeableSlot = 30,
+        Checkpoint = 40,
     }
 
     public class Tile : MonoBehaviour

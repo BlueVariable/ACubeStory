@@ -25,8 +25,6 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             if (Tile != null)
             {
-                Debug.Log(Tile.gameObject.name);
-                
                 _displayName = Tile.gameObject.name;
             }
         }
