@@ -39,9 +39,13 @@ namespace BLUE.ACubeStory.Common
 
         private Dictionary<MovingObjectBase, PoolObject> _movingObjectMap =
             new Dictionary<MovingObjectBase, PoolObject>();
-        
+
+        #region Events
+
         public Action<MovingObjectBase> OnMovingObjectSequenceCompleted { get; set; }
-        
+
+        #endregion
+
         public void StartSpawning(SpawnSettings settings)
         {
             _spawnSettings = settings;

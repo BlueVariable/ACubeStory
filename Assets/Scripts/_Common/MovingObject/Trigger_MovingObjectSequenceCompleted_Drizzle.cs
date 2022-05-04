@@ -7,8 +7,12 @@ namespace BLUE.ACubeStory.Common
     public class Trigger_MovingObjectSequenceCompleted_Drizzle : TriggerBase
     {
         [SerializeField] private MovingObjectSpawner_Drizzle _movingObjectSpawner = null;
-        
+
+        #region Events
+
         protected override Action OnTriggerAttempt { get; set; }
+
+        #endregion
 
         protected override void ActivateCustomActions()
         {
