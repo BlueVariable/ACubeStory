@@ -53,6 +53,8 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             Tiles.Clear();
 
+            float totalHeight = position.height - 30;
+
             GUILayout.BeginVertical();
 
             GUILayout.Space(10);
@@ -61,13 +63,13 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GUILayout.Space(10);
             
-            CreateTileScrollView();
+            CreateTileScrollView(totalHeight * 0.6f);
             
             GUILayout.Space(10);
 
             this.Divider();
             
-            CreateTilePreview();
+            CreateTilePreview(totalHeight * 0.4f);
             
             GUILayout.EndVertical();
         }
@@ -84,9 +86,9 @@ namespace BLUE.ACubeStory.LevelEditor
             GUILayout.EndHorizontal();
         }
 
-        private void CreateTileScrollView()
+        private void CreateTileScrollView(float height)
         {
-            _scrollPos = GUILayout.BeginScrollView(_scrollPos, false, true, GUILayout.Width(position.width), GUILayout.Height(0));
+            _scrollPos = GUILayout.BeginScrollView(_scrollPos, false, true, GUILayout.Width(position.width), GUILayout.Height(height));
             
             GUIStyle itemStyle = new GUIStyle(GUI.skin.button);
             itemStyle.alignment = TextAnchor.MiddleLeft; 
@@ -106,7 +108,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 {
                     _selectedIndex = i;
                     
-                    TileProvider_Editor.Instance.SelectedTileID = _selectedIndex;
+                    TileProvider_Editor.Instance.SelectedTileID = settingsArr[i].TileID;
                 }
                 
                 GUI.backgroundColor = _defaultBGColor;
@@ -117,13 +119,13 @@ namespace BLUE.ACubeStory.LevelEditor
 
         #region Mesh Drawing
 
-        private void CreateTilePreview()
+        private void CreateTilePreview(float height)
         {
             if (_selectedIndex >= 0)
             {   
                 GameObject gameObject = TileSettingsContainer.Instance.TileSettingsSo.TileSettings[_selectedIndex].Tile.gameObject;
                 
-                Rect rect = new Rect(0, position.height - 250, position.width, 250);
+                Rect rect = new Rect(0, position.height - height, position.width, height);
 
                 BeginDraw(rect);
                 DrawRenderPreview(gameObject);
@@ -141,6 +143,7 @@ namespace BLUE.ACubeStory.LevelEditor
             _renderUtility.camera.transform.position = new Vector3(1, 2, 10);
             _renderUtility.camera.transform.LookAt(Vector3.zero, Vector3.up);
             _renderUtility.camera.farClipPlane = 30;
+            _renderUtility.camera.fieldOfView = 10;
  
             _renderUtility.lights[0].intensity = 0.5f;
             _renderUtility.lights[0].transform.rotation = Quaternion.Euler(30f, 30f, 0f);

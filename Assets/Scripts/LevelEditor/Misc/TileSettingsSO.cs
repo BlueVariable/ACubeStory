@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,7 +9,11 @@ namespace BLUE.ACubeStory.LevelEditor
     public class TileSettings
     {
         [SerializeField] private int _tileID = -1;
-        public int TileID => _tileID;
+        public int TileID
+        {
+            get => _tileID;
+            set => _tileID = value;
+        }
 
         [SerializeField] private Tile _tile = null;
         public Tile Tile => _tile;
@@ -18,8 +23,10 @@ namespace BLUE.ACubeStory.LevelEditor
 
         public void InitDisplayName()
         {
-            if (Tile != null && _displayName.Equals(string.Empty))
+            if (Tile != null)
             {
+                Debug.Log(Tile.gameObject.name);
+                
                 _displayName = Tile.gameObject.name;
             }
         }
@@ -28,9 +35,15 @@ namespace BLUE.ACubeStory.LevelEditor
     [CreateAssetMenu(fileName = "TileSettingsSO", menuName = "BLUE/Settings/Level Maker/Create New Tile Settings")]
     public class TileSettingsSO : ScriptableObject
     {
-        [SerializeField] private TileSettings[] _tiles = null;
+        [SerializeField] private List<TileSettings> _tiles = null;
         
-        public TileSettings[] TileSettings => _tiles;
+        public List<TileSettings> TileSettings => _tiles;
+
+        [ContextMenu("Validate Scriptable Object")]
+        public void ValidateSO()
+        {
+            ValidateScriptableObject();
+        }
 
         public bool TryGetTileSettings(int tileId, out TileSettings tileSettings)
         {
@@ -41,6 +54,11 @@ namespace BLUE.ACubeStory.LevelEditor
         
         private void OnValidate()
         {
+            ValidateScriptableObject();
+        }
+
+        private void ValidateScriptableObject()
+        {
             if (_tiles == null)
             {
                 return;
@@ -49,6 +67,8 @@ namespace BLUE.ACubeStory.LevelEditor
             foreach (TileSettings tileSettings in _tiles)
             {
                 tileSettings.InitDisplayName();
+
+                tileSettings.TileID = _tiles.IndexOf(tileSettings);
             }
         }
     }
