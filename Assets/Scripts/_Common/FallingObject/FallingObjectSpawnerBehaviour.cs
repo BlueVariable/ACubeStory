@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using BLUE.Extensions;
 using BLUE.PoolingSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,8 +10,6 @@ namespace BLUE.ACubeStory.Common
 {
     public class FallingObjectSpawnerBehaviour : MonoBehaviour
     {
-        [SerializeField] private Collider _fallArea = null;
-
         [Serializable]
         public class FallSettings
         {
@@ -29,6 +28,8 @@ namespace BLUE.ACubeStory.Common
             [SerializeField] private Pool_MB _fallingObjectPool = null;
             public Pool_MB FallingObjectPool => _fallingObjectPool;
         }
+        
+        [SerializeField] private Collider _fallArea = null;
 
         private IEnumerator _fallRoutine;
         private FallSettings _fallSettings;
@@ -117,16 +118,7 @@ namespace BLUE.ACubeStory.Common
 
         private Vector3 GetRandomFallPos()
         {
-            return RandomPointInBounds(_fallArea.bounds);
-        }
-        
-        public Vector3 RandomPointInBounds(Bounds bounds) {
-            
-            return new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                Random.Range(bounds.min.y, bounds.max.y),
-                Random.Range(bounds.min.z, bounds.max.z)
-            );
+            return _fallArea.bounds.GetRandomPointInBounds();
         }
     }
 }

@@ -10,9 +10,13 @@ namespace BLUE.ACubeStory.Common
         [SerializeField] private MoveBehaviour_Tween _moveBehaviour = null;
         [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _moveSettings = null;
         [SerializeField] private ActionExecutor _reachedTargetActions = null;
-        
+
+        #region Events
+
         public override Action<FallingObjectBase> OnCompleted { get; set; }
 
+        #endregion
+        
         public override void Fall(Vector3 fallPosition)
         {
             gameObject.SetActive(true);
@@ -21,13 +25,13 @@ namespace BLUE.ACubeStory.Common
 
             void onReachedTarget()
             {
-                _reachedTargetActions.OnExecutionCompleted += onCompleted;
+                _reachedTargetActions.OnExecutionCompleted += onReachedTargetActionsCompleted;
                 _reachedTargetActions.Execute();
             }
 
-            void onCompleted()
+            void onReachedTargetActionsCompleted()
             {
-                _reachedTargetActions.OnExecutionCompleted -= onCompleted;
+                _reachedTargetActions.OnExecutionCompleted -= onReachedTargetActionsCompleted;
 
                 gameObject.SetActive(false);
                 
