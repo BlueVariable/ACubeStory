@@ -11,6 +11,8 @@ namespace BLUE.ACubeStory.Common
 
         #endregion
         
-        public abstract void Move(Vector3 targetPosition);
+        public abstract void Move(
+            Vector3 targetPosition, 
+            Action onReachedCallback = null);
     }
 }

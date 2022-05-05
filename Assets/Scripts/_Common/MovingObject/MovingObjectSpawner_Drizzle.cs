@@ -43,6 +43,7 @@ namespace BLUE.ACubeStory.Common
         #region Events
 
         public Action<MovingObjectBase> OnMovingObjectSequenceCompleted { get; set; }
+        public Action OnMovingObjectReachedTarget { get; set; }
 
         #endregion
 
@@ -103,7 +104,12 @@ namespace BLUE.ACubeStory.Common
 
             movingObject.OnSequenceCompleted += OnSequenceCompleted;
             
-            movingObject.Move(targetPosition);
+            movingObject.Move(targetPosition, OnReachedTarget);
+        }
+
+        private void OnReachedTarget()
+        {
+            OnMovingObjectReachedTarget?.Invoke();
         }
 
         private void OnSequenceCompleted(MovingObjectBase movingObject)

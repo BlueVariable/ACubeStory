@@ -19,7 +19,9 @@ namespace BLUE.ACubeStory.Common
 
         #endregion
         
-        public override void Move(Vector3 targetPosition)
+        public override void Move(
+            Vector3 targetPosition,
+            Action onReachedCallback = null)
         {
             if (_manageGameObjectActivation)
             {
@@ -30,6 +32,7 @@ namespace BLUE.ACubeStory.Common
 
             void onReachedTarget()
             {
+                onReachedCallback?.Invoke();
                 _reachedTargetActions.OnExecutionCompleted += onReachedTargetActionsCompleted;
                 _reachedTargetActions.Execute();
             }

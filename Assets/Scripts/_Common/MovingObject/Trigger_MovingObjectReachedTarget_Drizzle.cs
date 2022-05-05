@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Common
 {
-    public class Trigger_MovingObjectSequenceCompleted_Drizzle : TriggerBase
+    public class Trigger_MovingObjectReachedTarget_Drizzle : TriggerBase
     {
         [SerializeField] private MovingObjectSpawner_Drizzle _movingObjectSpawner = null;
 
@@ -16,19 +16,19 @@ namespace BLUE.ACubeStory.Common
 
         protected override void ActivateCustomActions()
         {
-            _movingObjectSpawner.OnMovingObjectSequenceCompleted += OnMovingObjectSequenceCompleted;
+            _movingObjectSpawner.OnMovingObjectReachedTarget += OnMovingObjectReachedTarget;
             
             base.ActivateCustomActions();
         }
 
         protected override void DeactivateCustomActions()
         {
-            _movingObjectSpawner.OnMovingObjectSequenceCompleted -= OnMovingObjectSequenceCompleted;
+            _movingObjectSpawner.OnMovingObjectReachedTarget -= OnMovingObjectReachedTarget;
 
             base.DeactivateCustomActions();
         }
 
-        private void OnMovingObjectSequenceCompleted(MovingObjectBase movingObject)
+        private void OnMovingObjectReachedTarget()
         {
             OnTriggerAttempt?.Invoke();
         }
