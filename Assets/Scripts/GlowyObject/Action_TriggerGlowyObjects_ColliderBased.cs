@@ -2,14 +2,14 @@
 using BLUE.ActionSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.NightLight
+namespace BLUE.ACubeStory.GlowyObject
 {
-    public class Action_Trigger_NightLight_ColliderBased : ActionBase
+    public class Action_TriggerGlowyObjects_ColliderBased : ActionBase
     {
         [SerializeField] private Collider _collider = null;
         
-        private List<Trigger_NightLight> _triggers;
-        private List<Trigger_NightLight> _Triggers
+        private List<Trigger_External_GlowyObject> _triggers;
+        private List<Trigger_External_GlowyObject> _Triggers
         {
             get
             {
@@ -27,31 +27,31 @@ namespace BLUE.ACubeStory.NightLight
             _Triggers.ForEach(i => i.Trigger());
         }
         
-        private List<Trigger_NightLight> GetTriggers()
+        private List<Trigger_External_GlowyObject> GetTriggers()
         {
             Collider[] colliders = Physics.OverlapBox(
                 _collider.bounds.center, 
                 _collider.bounds.size / 2, 
                 _collider.transform.rotation);
 
-            List<Trigger_NightLight> colorTweeners = 
-                new List<Trigger_NightLight>();
+            List<Trigger_External_GlowyObject> glowyObjectTriggers = 
+                new List<Trigger_External_GlowyObject>();
             
             foreach (Collider c in colliders)
             {
-                Trigger_NightLight colorTweener = c
+                Trigger_External_GlowyObject glowyObjectTrigger = c
                     .gameObject
-                    .GetComponentInChildren<Trigger_NightLight>();
+                    .GetComponentInChildren<Trigger_External_GlowyObject>();
 
-                if (colorTweener == null)
+                if (glowyObjectTrigger == null)
                 {
                     continue;
                 }
 
-                colorTweeners.Add(colorTweener);
+                glowyObjectTriggers.Add(glowyObjectTrigger);
             }
 
-            return colorTweeners;
+            return glowyObjectTriggers;
         }
     }
 }
