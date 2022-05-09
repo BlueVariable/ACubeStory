@@ -19,6 +19,11 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private static void OnSceneGUI(SceneView sceneView)
         {
+            if (CubeEditor.Instance == null)
+            {
+                return;
+            }
+        
             Event e = Event.current;
             
             foreach (CubeLevelEditorHandlerBase handler in _handlers)
