@@ -9,8 +9,11 @@ namespace BLUE.ACubeStory.LevelEditor
     {
         private float _nextSceneTriggerVerticalOffset = -2.5f;
         private float _invisibleGroundVerticalOffset = -5f;
-        private float _wallVerticalOffset = 5f;
         
+        private float _wallVerticalOffset = 2.5f;
+        private float _wallHeight = 5f;
+        private float _wallPlacementOffset = 0.75f;
+
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -48,11 +51,11 @@ namespace BLUE.ACubeStory.LevelEditor
                     return;
                 }
                 
+                CreateMergeAreaWalls(mergePuzzle, mergeTiles);
+                
                 CreateNextSceneTrigger(mergePuzzle, mergeTiles);
 
                 CreateMergeInvisibleGround(mergePuzzle, mergeTiles);
-
-                CreateMergeAreaWalls(mergePuzzle, mergeTiles);
             }
             
             GUILayout.FlexibleSpace();
@@ -61,7 +64,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private void ResetMergePuzzle(MergePuzzle mergePuzzle)
         {
-            MergeAreaWall[] existingWalls = mergePuzzle.GetComponentsInChildren<MergeAreaWall>();
+            MergeAreaWall[] existingWalls = mergePuzzle.GetComponentsInChildren<MergeAreaWall>(true);
 
             for (int i = 0; i < existingWalls.Length; i++)
             {
@@ -84,6 +87,8 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GetMergeTilesExtensions(mergeTiles, out Vector3 center, out Vector3 size);
 
+            center.y += _nextSceneTriggerVerticalOffset;
+
             nextSceneTrigger.NextSceneTriggerCollider.transform.position = center;
             nextSceneTrigger.NextSceneTriggerCollider.size = size;
         }
@@ -95,8 +100,8 @@ namespace BLUE.ACubeStory.LevelEditor
             
             Vector3 min = Vector3.positiveInfinity;
             Vector3 max = Vector3.negativeInfinity;
-            
-            min.y = max.y = mergeTiles[0].transform.position.y + _nextSceneTriggerVerticalOffset;
+
+            min.y = max.y = mergeTiles[0].transform.position.y;
 
             size.y = 1;
 
@@ -149,19 +154,27 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GetMergeTilesExtensions(mergeTiles, out Vector3 center, out Vector3 size);
 
-            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, size.z / 2), new Vector3(size.x, 5f, 0.1f));
-            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, -size.z / 2), new Vector3(size.x, 5f, 0.1f));
-            CreateWall(wallContainer, center + new Vector3(size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, 5f, size.z));
-            CreateWall(wallContainer, center + new Vector3(-size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, 5f, size.z));
+            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, size.z / 2), new Vector3(size.x, _wallHeight, 0.1f), center);
+            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, -size.z / 2), new Vector3(size.x, _wallHeight, 0.1f), center);
+            CreateWall(wallContainer, center + new Vector3(size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, _wallHeight, size.z), center);
+            CreateWall(wallContainer, center + new Vector3(-size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, _wallHeight, size.z), center);
         }
 
-        private void CreateWall(MergePuzzleWallContainer wallContainer, Vector3 center, Vector3 size)
+        private void CreateWall(MergePuzzleWallContainer wallContainer, Vector3 center, Vector3 size, Vector3 mergeAreaCenter)
         {
             GameObject wall = PrefabUtility.InstantiatePrefab(wallContainer.ReferenceWall.gameObject) as GameObject;
             wall.transform.SetParent(wallContainer.transform);
 
             wall.transform.position = center;
             wall.transform.localScale = size;
+
+            MergeAreaWall mergeAreaWall = wall.GetComponent<MergeAreaWall>();
+
+            Vector3 dir = (center - mergeAreaCenter);
+            dir.y = 0;
+
+            mergeAreaWall.Collider.transform.localPosition = dir.normalized * _wallPlacementOffset;
+            mergeAreaWall.Renderer.transform.localPosition = new Vector3(0, -0.4f, 0);
         }
     }
 }
