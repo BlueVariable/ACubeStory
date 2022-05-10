@@ -79,7 +79,7 @@ namespace BLUE.ACubeStory.LevelEditor
             {
                 if (hitInfo.collider.TryGetComponent(out Tile neighborCandidate))
                 {
-                    placementPos = neighborCandidate.transform.position + hitInfo.normal * 1.0001f;
+                    placementPos = neighborCandidate.transform.position + hitInfo.normal;
 
                     return placementPos;
                 }
