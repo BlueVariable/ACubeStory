@@ -13,6 +13,8 @@ namespace BLUE.ACubeStory.LevelEditor
         private float _wallVerticalOffset = 2.5f;
         private float _wallHeight = 5f;
         private float _wallPlacementOffset = 0.75f;
+        private float _wallRendererThickness = 0.01f;
+        private float _wallThickness = 0.1f;
 
         public override void OnInspectorGUI()
         {
@@ -154,10 +156,10 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GetMergeTilesExtensions(mergeTiles, out Vector3 center, out Vector3 size);
 
-            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, size.z / 2), new Vector3(size.x, _wallHeight, 0.1f), center);
-            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, -size.z / 2), new Vector3(size.x, _wallHeight, 0.1f), center);
-            CreateWall(wallContainer, center + new Vector3(size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, _wallHeight, size.z), center);
-            CreateWall(wallContainer, center + new Vector3(-size.x / 2, _wallVerticalOffset, 0), new Vector3(0.1f, _wallHeight, size.z), center);
+            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, size.z / 2), new Vector3(size.x, _wallHeight, _wallThickness), center);
+            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, -size.z / 2), new Vector3(size.x, _wallHeight, _wallThickness), center);
+            CreateWall(wallContainer, center + new Vector3(size.x / 2, _wallVerticalOffset, 0), new Vector3(_wallThickness, _wallHeight, size.z), center);
+            CreateWall(wallContainer, center + new Vector3(-size.x / 2, _wallVerticalOffset, 0), new Vector3(_wallThickness, _wallHeight, size.z), center);
         }
 
         private void CreateWall(MergePuzzleWallContainer wallContainer, Vector3 center, Vector3 size, Vector3 mergeAreaCenter)
@@ -175,6 +177,20 @@ namespace BLUE.ACubeStory.LevelEditor
 
             mergeAreaWall.Collider.transform.localPosition = dir.normalized * _wallPlacementOffset;
             mergeAreaWall.Renderer.transform.localPosition = new Vector3(0, -0.4f, 0);
+
+            Vector3 wallSize = new Vector3(_wallRendererThickness, _wallRendererThickness, _wallRendererThickness);
+            
+            if (size.x > _wallThickness)
+            {
+                wallSize.x = 1;
+            }
+
+            if (size.z > _wallThickness)
+            {
+                wallSize.z = 1;
+            }
+
+            mergeAreaWall.Renderer.transform.localScale = wallSize;
         }
     }
 }
