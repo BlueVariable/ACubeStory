@@ -20,8 +20,6 @@ namespace BLUE.ACubeStory.LevelEditor
             }
         }
         
-        [SerializeField] private ACubeStory.Level.Level _level = null;
-
         [SerializeField] private CubeEditorInputSO _inputSo = null;
         public CubeEditorInputSO InputSo => _inputSo;
 
@@ -48,9 +46,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 
         public ACubeStory.Level.Level Level
         {
-            get => _level;
-
-            set => _level = value;
+            get => FindObjectOfType<Level.Level>();
         }
         
         public int SelectedTileGroupIndex { get; set; }

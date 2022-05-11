@@ -64,7 +64,11 @@ namespace BLUE.ACubeStory.LevelEditor
 
         protected override CubeLevelEditorHandlerBase[] GetSubHandlers()
         {
-            return new []{ new CubeLevelEditorHandler_TileModifier() };
+            return new CubeLevelEditorHandlerBase[]
+            {
+                new CubeLevelEditorHandler_TileModifier(),
+                new CubeLevelEditorHandler_CategorySelection(),
+            };
         }
     }
 }

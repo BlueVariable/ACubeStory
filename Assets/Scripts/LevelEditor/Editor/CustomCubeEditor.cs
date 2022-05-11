@@ -30,7 +30,6 @@ namespace BLUE.ACubeStory.LevelEditor
 
             GameObject levelObject = new GameObject();
             levelObject.name = "=== LEVEL ===";
-            editor.Level = levelObject.AddComponent<Level.Level>();
             ResetGameObject(levelObject, null);
 
             GameObject baseCategory = new GameObject();
@@ -47,9 +46,9 @@ namespace BLUE.ACubeStory.LevelEditor
             
             EditorGUILayout.Space(10);
             
-            InitCategorySelection();
+            // InitCategorySelection();
 
-            EditorGUILayout.Space(10);
+            // EditorGUILayout.Space(10);
 
             CreateMergePuzzleButton();
 
