@@ -6393,13 +6393,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719a583f1dbf4f70b2ae8214211dd04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movingObjectSpawner: {fileID: 331809633}
+  _stallExecution: 1
+  _movingObjectSpawners:
+  - {fileID: 331809633}
   _spawnSettings:
     _moveFromOffset: {x: 0, y: 20, z: -8}
     _spawnRadius: 2
+    _spawnAmount: 1
     _minSpawnInterval: 0
     _maxSpawnInterval: 0.1
     _movingObjectPool: {fileID: 1195609369}
+    _isLooping: 1
+  _delayBtwSpawners: 0
 --- !u!1001 &1266341763
 PrefabInstance:
   m_ObjectHideFlags: 0

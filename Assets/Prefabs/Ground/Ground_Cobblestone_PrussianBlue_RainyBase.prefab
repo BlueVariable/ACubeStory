@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719a583f1dbf4f70b2ae8214211dd04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movingObjectSpawner: {fileID: 5090860788499161035}
+  _stallExecution: 1
+  _movingObjectSpawners:
+  - {fileID: 5090860788499161035}
   _spawnSettings:
     _moveFromOffset: {x: 0, y: 20, z: -8}
     _spawnRadius: 2
@@ -51,6 +53,8 @@ MonoBehaviour:
     _minSpawnInterval: 0
     _maxSpawnInterval: 2
     _movingObjectPool: {fileID: 9058228685309952334}
+    _isLooping: 1
+  _delayBtwSpawners: 0
 --- !u!1 &8562460188950802683
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +179,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1659125450899012724, guid: 911ccdcaf6d40a64986300b897cd4980, type: 3}
       propertyPath: m_Name
-      value: Ground_Cobblestone_PrussianBlue_Rainy
+      value: Ground_Cobblestone_PrussianBlue_RainyBase
       objectReference: {fileID: 0}
     - target: {fileID: 1659125450899012727, guid: 911ccdcaf6d40a64986300b897cd4980, type: 3}
       propertyPath: m_RootOrder

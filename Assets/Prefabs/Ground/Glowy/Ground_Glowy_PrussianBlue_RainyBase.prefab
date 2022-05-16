@@ -676,7 +676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719a583f1dbf4f70b2ae8214211dd04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movingObjectSpawner: {fileID: 9178187609004280170}
+  _stallExecution: 1
+  _movingObjectSpawners:
+  - {fileID: 9178187609004280170}
   _spawnSettings:
     _moveFromOffset: {x: 0, y: 20, z: -8}
     _spawnRadius: 2
@@ -684,6 +686,8 @@ MonoBehaviour:
     _minSpawnInterval: 3
     _maxSpawnInterval: 5
     _movingObjectPool: {fileID: 4921428432417839087}
+    _isLooping: 1
+  _delayBtwSpawners: 0
 --- !u!114 &9003190678173965830
 MonoBehaviour:
   m_ObjectHideFlags: 0
