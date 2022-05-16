@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using BLUE.ActionSystem;
+using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.GlowyObject
 {
-    public class Action_TriggerGlowyObjects_ColliderBased : ActionBase
+    public class Action_TriggerExternalGlowyObjects_ColliderBased : ActionBase
     {
         [SerializeField] private Collider _collider = null;
         
-        private List<Trigger_External_GlowyObject> _triggers;
-        private List<Trigger_External_GlowyObject> _Triggers
+        private List<Trigger_External> _triggers;
+        private List<Trigger_External> _Triggers
         {
             get
             {
@@ -27,28 +28,35 @@ namespace BLUE.ACubeStory.GlowyObject
             _Triggers.ForEach(i => i.Trigger());
         }
         
-        private List<Trigger_External_GlowyObject> GetTriggers()
+        private List<Trigger_External> GetTriggers()
         {
             Collider[] colliders = Physics.OverlapBox(
                 _collider.bounds.center, 
                 _collider.bounds.size / 2, 
                 _collider.transform.rotation);
 
-            List<Trigger_External_GlowyObject> glowyObjectTriggers = 
-                new List<Trigger_External_GlowyObject>();
+            List<Trigger_External> glowyObjectTriggers = 
+                new List<Trigger_External>();
             
             foreach (Collider c in colliders)
             {
-                Trigger_External_GlowyObject glowyObjectTrigger = c
+                GlowyObject glowyObject = c
                     .gameObject
-                    .GetComponentInChildren<Trigger_External_GlowyObject>();
+                    .GetComponentInChildren<GlowyObject>();
 
-                if (glowyObjectTrigger == null)
+                if (glowyObject == null)
                 {
                     continue;
                 }
 
-                glowyObjectTriggers.Add(glowyObjectTrigger);
+                Trigger_External externalGlowyObjectTrigger = glowyObject.GlowTrigger as Trigger_External;
+
+                if (externalGlowyObjectTrigger == null)
+                {
+                    continue;
+                }
+                
+                glowyObjectTriggers.Add(externalGlowyObjectTrigger);
             }
 
             return glowyObjectTriggers;
