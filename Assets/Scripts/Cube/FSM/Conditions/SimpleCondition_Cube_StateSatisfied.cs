@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class SimpleCondition_NextCubeStateSatisfied : SimpleConditionBase
+    public class SimpleCondition_Cube_StateSatisfied : SimpleConditionBase
     {
         [SerializeField] private FSM_Cube _cubeFSM = null;
 
@@ -12,7 +12,14 @@ namespace BLUE.ACubeStory.Cube
         
         public override bool IsConditionSatisfied()
         {
-            return _targetStates.Contains(_cubeFSM.NextState);
+            bool isStateValid = _cubeFSM.TryGetCurStateType(out ECubeState cubeState);
+
+            if (!isStateValid)
+            {
+                return false;
+            }
+
+            return _targetStates.Contains(cubeState);
         }
     }
 }
