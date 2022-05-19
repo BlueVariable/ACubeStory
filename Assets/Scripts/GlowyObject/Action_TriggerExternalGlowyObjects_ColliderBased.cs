@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using BLUE.ActionSystem;
 using BLUE.TriggerSystem;
 using UnityEngine;
@@ -7,7 +9,13 @@ namespace BLUE.ACubeStory.GlowyObject
 {
     public class Action_TriggerExternalGlowyObjects_ColliderBased : ActionBase
     {
+        [SerializeField] private Transform _triggerOrigin = null;
+        
         [SerializeField] private Collider _collider = null;
+
+        [SerializeField] private float _delayBetweenGlowyObjects = 0.1f;
+
+        private IEnumerator _triggerRoutine;
         
         private List<Trigger_External> _triggers;
         private List<Trigger_External> _Triggers
@@ -17,6 +25,9 @@ namespace BLUE.ACubeStory.GlowyObject
                 if (_triggers == null)
                 {
                     _triggers = GetTriggers();
+
+                    _triggers = _triggers.OrderBy(val 
+                        => Vector3.Distance(_triggerOrigin.position, val.transform.position)).ToList();
                 }
 
                 return _triggers;
@@ -25,7 +36,37 @@ namespace BLUE.ACubeStory.GlowyObject
         
         public override void Execute()
         {
-            _Triggers.ForEach(i => i.Trigger());
+            StartTriggerRoutine();
+        }
+
+        private void StartTriggerRoutine()
+        {
+            StopTriggerRoutine();
+
+            _triggerRoutine = TriggerProgress();
+
+            StartCoroutine(_triggerRoutine);
+        }
+
+        private void StopTriggerRoutine()
+        {
+            if (_triggerRoutine != null)
+            {
+                StopCoroutine(_triggerRoutine);
+            }
+        }
+
+        private IEnumerator TriggerProgress()
+        {
+            foreach (Trigger_External externalTrigger in _Triggers)
+            {
+                externalTrigger.Trigger();
+
+                if (_delayBetweenGlowyObjects > 0)
+                {
+                    yield return new WaitForSeconds(_delayBetweenGlowyObjects);
+                }
+            }
         }
         
         private List<Trigger_External> GetTriggers()

@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4798832515670223768}
   - component: {fileID: 3939581830905791795}
   m_Layer: 11
-  m_Name: TriggerGlowyGrounds
+  m_Name: TriggerGlowyObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce4f09f1510466b95ea8a10ff4c86d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _triggerOrigin: {fileID: 6457832299354657893}
   _collider: {fileID: 4889941398957217978}
+  _delayBetweenGlowyObjects: 0.025
 --- !u!114 &3939581830905791795
 MonoBehaviour:
   m_ObjectHideFlags: 0
