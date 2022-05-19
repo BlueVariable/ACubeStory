@@ -1,112 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &754167246677673603
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2789160336708114365}
-  - component: {fileID: 4857107442413710989}
-  m_Layer: 0
-  m_Name: Disappear
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2789160336708114365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754167246677673603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7374535918201395199}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4857107442413710989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754167246677673603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17bb6195f85d4a61ba8e6f035be7c8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stallExecution: 1
-  _colorTweener: {fileID: 0}
-  _colorSettingsComposition:
-    _tweenColorSettingsColl:
-    - _renderer: {fileID: 3567680994748664186}
-      _materialPropertyKey: _BaseColor
-      _targetColor: {r: 0, g: 0, b: 0, a: 0}
-      _onlyUseAlpha: 1
-      _useSpeedAsDuration: 1
-      _speed: 0
-      _targetEase: 4
-    - _renderer: {fileID: 7985082584777884835}
-      _materialPropertyKey: _BaseColor
-      _targetColor: {r: 0, g: 0, b: 0, a: 0}
-      _onlyUseAlpha: 1
-      _useSpeedAsDuration: 1
-      _speed: 0
-      _targetEase: 4
---- !u!1 &7869644770138342115
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7374535918201395199}
-  - component: {fileID: 2517089903277292810}
-  m_Layer: 0
-  m_Name: ActionExecutorRunner_OnStart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7374535918201395199
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7869644770138342115}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2789160336708114365}
-  m_Father: {fileID: 454862388104239138}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2517089903277292810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7869644770138342115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cd1ec5d9cca974448797f0529b68309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _actionExecutor:
-    _actionCarrier: {fileID: 2789160336708114365}
 --- !u!1001 &3945760825860126211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7037638390741496460, guid: 663dc25d4e3609b4b92f87dae5638142, type: 3}
+      propertyPath: _colorSettingsComposition._tweenColorSettingsColl.Array.data[0]._renderer
+      value: 
+      objectReference: {fileID: 3567680994748664186}
+    - target: {fileID: 7037638390741496460, guid: 663dc25d4e3609b4b92f87dae5638142, type: 3}
+      propertyPath: _colorSettingsComposition._tweenColorSettingsColl.Array.data[1]._renderer
+      value: 
+      objectReference: {fileID: 7985082584777884835}
     - target: {fileID: 7343513952952756888, guid: 663dc25d4e3609b4b92f87dae5638142, type: 3}
       propertyPath: m_Name
       value: Ground_Glowy_Contact_PrussianBlue_DisabledRainOnStart
@@ -176,10 +77,5 @@ MeshRenderer:
 --- !u!23 &7985082584777884835 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6346309497443807904, guid: 663dc25d4e3609b4b92f87dae5638142, type: 3}
-  m_PrefabInstance: {fileID: 3945760825860126211}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &454862388104239138 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3498688323577769505, guid: 663dc25d4e3609b4b92f87dae5638142, type: 3}
   m_PrefabInstance: {fileID: 3945760825860126211}
   m_PrefabAsset: {fileID: 0}
