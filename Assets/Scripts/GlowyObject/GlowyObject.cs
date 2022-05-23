@@ -5,7 +5,7 @@ namespace BLUE.ACubeStory.GlowyObject
 {
     public class GlowyObject : MonoBehaviour
     {
-        [SerializeField] private TriggerBase _glowTrigger = null;
-        public TriggerBase GlowTrigger => _glowTrigger;
+        [SerializeField] private TriggerBase[] _glowTriggers = null;
+        public TriggerBase[] GlowTriggers => _glowTriggers;
     }
 }

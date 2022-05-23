@@ -90,14 +90,15 @@ namespace BLUE.ACubeStory.GlowyObject
                     continue;
                 }
 
-                Trigger_External externalGlowyObjectTrigger = glowyObject.GlowTrigger as Trigger_External;
+                TriggerBase externalGlowyObjectTrigger = glowyObject.GlowTriggers.FirstOrDefault(val 
+                        => val is Trigger_External);
 
                 if (externalGlowyObjectTrigger == null)
                 {
                     continue;
                 }
                 
-                glowyObjectTriggers.Add(externalGlowyObjectTrigger);
+                glowyObjectTriggers.Add(externalGlowyObjectTrigger as Trigger_External);
             }
 
             return glowyObjectTriggers;
