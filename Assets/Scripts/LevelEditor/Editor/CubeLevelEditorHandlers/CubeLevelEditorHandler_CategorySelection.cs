@@ -57,10 +57,8 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GUILayout.EndArea();
             Handles.EndGUI();
-            
+
             CubeEditor.Instance.SelectedTileGroupIndex = _selectedIndex;
-            
-            
         }
     }
 }
