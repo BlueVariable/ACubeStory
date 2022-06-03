@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 3725019684300556094}
   - component: {fileID: 7044341295791847917}
   - component: {fileID: 4083032525967885103}
+  - component: {fileID: 6788332616985164715}
   m_Layer: 11
   m_Name: InteractionOutline
   m_TagString: Untagged
@@ -338,6 +339,32 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6788332616985164715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087627558182855711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19b7e2285c104f6ca47d583f3e5444f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectFactor: 0.15235399
+  m_Width: 0.25
+  m_Rotation: 135
+  m_Softness: 1
+  m_Brightness: 1
+  m_Gloss: 1
+  m_EffectArea: 0
+  m_Player:
+    play: 1
+    initialPlayDelay: 0
+    duration: 1
+    loop: 1
+    loopDelay: 0.5
+    updateMode: 0
 --- !u!1 &2109212821364125095
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,14 +6851,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
---- !u!1 &9163689544082909616 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7299530802616357787, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
+--- !u!4 &4227070574176642157 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2364180671166127686, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
   m_PrefabInstance: {fileID: 1902440447641238059}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4487262680419773217 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2603966944800674058, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
+--- !u!1 &2912348826093869472 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3606378701536912267, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
   m_PrefabInstance: {fileID: 1902440447641238059}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4236219286904696048 stripped
@@ -6842,16 +6869,6 @@ GameObject:
 --- !u!4 &8184205573267139076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7778543503107264559, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
-  m_PrefabInstance: {fileID: 1902440447641238059}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2912348826093869472 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3606378701536912267, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
-  m_PrefabInstance: {fileID: 1902440447641238059}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2705348030416782708 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4606478949683707743, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
   m_PrefabInstance: {fileID: 1902440447641238059}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2122747789122995590 stripped
@@ -6870,9 +6887,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1113350674021000250, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
   m_PrefabInstance: {fileID: 1902440447641238059}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4227070574176642157 stripped
+--- !u!1 &9163689544082909616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7299530802616357787, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
+  m_PrefabInstance: {fileID: 1902440447641238059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4487262680419773217 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2364180671166127686, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2603966944800674058, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
+  m_PrefabInstance: {fileID: 1902440447641238059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2705348030416782708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4606478949683707743, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
   m_PrefabInstance: {fileID: 1902440447641238059}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5389312463007413397
