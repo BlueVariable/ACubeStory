@@ -58,6 +58,8 @@ namespace BLUE.ACubeStory.LevelEditor
                 CreateNextSceneTrigger(mergePuzzle, mergeTiles);
 
                 CreateMergeInvisibleGround(mergePuzzle, mergeTiles);
+
+                CreateMergeableSlotGrounds(mergePuzzle);
             }
             
             GUILayout.FlexibleSpace();
@@ -147,6 +149,22 @@ namespace BLUE.ACubeStory.LevelEditor
                 invisibleTile.transform.SetParent(nextSceneTrigger.InvisibleGroundContainer.transform);
 
                 invisibleTile.transform.position = tile.transform.position + new Vector3(0, _invisibleGroundVerticalOffset, 0);
+            }
+        }
+
+        private void CreateMergeableSlotGrounds(MergePuzzle mergePuzzle)
+        {
+            MergeableSlot[] mergeableSlots = mergePuzzle.GetComponentsInChildren<MergeableSlot>();
+
+            MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
+            
+            foreach (MergeableSlot slot in mergeableSlots)
+            {
+                GameObject invisibleTile = PrefabUtility.InstantiatePrefab(nextSceneTrigger.InvisibleTileReference.gameObject) as GameObject;  
+                
+                invisibleTile.transform.SetParent(nextSceneTrigger.MergableSlotGrounds);
+
+                invisibleTile.transform.position = slot.transform.position;
             }
         }
 

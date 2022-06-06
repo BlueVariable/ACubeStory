@@ -13,5 +13,7 @@ namespace BLUE.ACubeStory.Merge
 
         [SerializeField] private Tile _invisibleTileReference = null;
         public Tile InvisibleTileReference => _invisibleTileReference;
+        
+        [field: SerializeField] public Transform MergableSlotGrounds { get; private set; }
     }
 }

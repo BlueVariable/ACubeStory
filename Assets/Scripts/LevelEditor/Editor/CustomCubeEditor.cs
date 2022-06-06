@@ -106,8 +106,6 @@ namespace BLUE.ACubeStory.LevelEditor
 
                 foreach (Transform child in cubeEditor.Level.transform)
                 {
-                    Debug.Log(child.gameObject.name);
-                    
                     if (child.gameObject.name.Equals("MERGE"))
                     {
                         DestroyImmediate(child.gameObject);
