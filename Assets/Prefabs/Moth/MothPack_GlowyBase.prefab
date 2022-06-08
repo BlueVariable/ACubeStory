@@ -1,5 +1,34 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2326548228192992299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3216312444181701614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc34090e2e3a54b854f99891c5221f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnableObjects: []
+  _spawnParent: {fileID: 321933898074941392}
+  _minSpawnCount: 2
+  _maxSpawnCount: 4
+--- !u!114 &970560898389722203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3216312444181701614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b310fe15b2b4ad29595405d59fc4d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objects: []
 --- !u!1 &1543260489301290524
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,27 +59,6 @@ Transform:
   m_Father: {fileID: 7171559574054224452}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2326548228192992299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3216312444181701614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45bc34090e2e3a54b854f99891c5221f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pathObjects: []
-  _spawnParent: {fileID: 321933898074941392}
-  _minSpawnCount: 2
-  _maxSpawnCount: 4
-  _paths:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1001 &5365837551990170
 PrefabInstance:
   m_ObjectHideFlags: 0
