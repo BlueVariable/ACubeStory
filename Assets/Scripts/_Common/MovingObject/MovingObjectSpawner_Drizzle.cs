@@ -30,6 +30,9 @@ namespace BLUE.ACubeStory.Common
 
             [SerializeField] private Pool_MB _movingObjectPool = null;
             public Pool_MB MovingObjectPool => _movingObjectPool;
+
+            [SerializeField] private bool _isLooping = true;
+            public bool IsLooping => _isLooping;
         }
         
         [SerializeField] private Collider _targetArea = null;
@@ -73,6 +76,11 @@ namespace BLUE.ACubeStory.Common
                 for (int i = 0; i < _spawnSettings.SpawnAmount; i++)
                 {
                     SpawnMovingObject();
+                }
+
+                if (!_spawnSettings.IsLooping)
+                {
+                    yield break;
                 }
                 
                 float randomInterval = Random.Range(
