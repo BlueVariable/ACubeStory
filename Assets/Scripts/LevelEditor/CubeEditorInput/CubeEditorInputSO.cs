@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace BLUE.ACubeStory.LevelEditor
     [CreateAssetMenu(fileName = "CubeEditorInputSO", menuName = "BLUE/Settings/Level Maker/Create Editor Input Settings SO", order = 0)]
     public class CubeEditorInputSO : ScriptableObject
     {
+        public static Action OnInputSettingsValidated { get; set; }
+        
         [SerializeField] private List<CubeEditorControlSettings> _controlSettings = new List<CubeEditorControlSettings>();
         public List<CubeEditorControlSettings> ControlSettings => _controlSettings;
 
@@ -15,6 +18,11 @@ namespace BLUE.ACubeStory.LevelEditor
             settings = _controlSettings.SingleOrDefault(i => i.ControlType == controlType);
 
             return settings != null;
+        }
+
+        private void OnValidate()
+        {
+            OnInputSettingsValidated?.Invoke();
         }
     }
 }

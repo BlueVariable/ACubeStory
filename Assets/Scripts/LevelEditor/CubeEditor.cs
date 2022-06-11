@@ -19,9 +19,8 @@ namespace BLUE.ACubeStory.LevelEditor
                 return _instance;
             }
         }
-        
-        [SerializeField] private CubeEditorInputSO _inputSo = null;
-        public CubeEditorInputSO InputSo => _inputSo;
+
+        public CubeEditorInputSO InputSo => CubeEditorInputSettingsContainer.Instance.InputSO;
 
         [SerializeField] private MergePuzzle _defaultMergePuzzle = null;
         public MergePuzzle DefaultMergePuzzle => _defaultMergePuzzle;
@@ -44,15 +43,12 @@ namespace BLUE.ACubeStory.LevelEditor
             }
         }
                 
-        public ACubeStory.Level.Level Level
-        {
-            get => FindObjectOfType<Level.Level>();
-        }
+        public LevelHolder LevelHolder => FindObjectOfType<LevelHolder>();
         
         public int SelectedTileGroupIndex { get; set; }
 
         public int SelectedTileID => _TileProvider.GetTileID();
 
-        public TileGroup SelectedTileGroup => Level.transform.GetChild(SelectedTileGroupIndex).transform.GetComponent<TileGroup>();
+        public TileGroup SelectedTileGroup => LevelHolder.transform.GetChild(SelectedTileGroupIndex).transform.GetComponent<TileGroup>();
     }
 }

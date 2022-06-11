@@ -15,17 +15,14 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             _controlType = controlType;
 
-            CubeEditor.Instance.InputSo.TryGetControlSettings(_controlType, out CubeEditorControlSettings settings);
+            InitInputDictionaries();
             
-            foreach (KeyCode key in settings.KeyCombination)
-            {
-                _keycodes.Add(key, false);
-            }
+            CubeEditorInputSO.OnInputSettingsValidated += OnInputSettingsUpdated;
+        }
 
-            foreach (int mouseButton in settings.MouseButton)
-            {
-                _mouseButtons.Add(mouseButton, false);
-            }
+        ~CubeEditorInputHandler()
+        {
+            CubeEditorInputSO.OnInputSettingsValidated -= OnInputSettingsUpdated;
         }
 
         public bool Handle(Event e)
@@ -63,6 +60,29 @@ namespace BLUE.ACubeStory.LevelEditor
             }
 
             return res;
+        }
+
+        private void OnInputSettingsUpdated()
+        {
+            InitInputDictionaries();
+        }
+
+        private void InitInputDictionaries()
+        {
+            CubeEditor.Instance.InputSo.TryGetControlSettings(_controlType, out CubeEditorControlSettings settings);
+            
+            _keycodes.Clear();
+            _mouseButtons.Clear();
+            
+            foreach (KeyCode key in settings.KeyCombination)
+            {
+                _keycodes.Add(key, false);
+            }
+
+            foreach (int mouseButton in settings.MouseButton)
+            {
+                _mouseButtons.Add(mouseButton, false);
+            }
         }
     }
 }
