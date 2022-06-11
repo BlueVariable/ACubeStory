@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using BLUE.ACubeStory.Ability;
 using BLUE.InputSystem;
