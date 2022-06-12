@@ -137,7 +137,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 GameObject mergePuzzle = PrefabUtility.InstantiatePrefab(cubeEditor.DefaultMergePuzzle.gameObject) as GameObject;
                 
                 mergePuzzle.name = "MERGE_PUZZLE";
-                ResetGameObject(mergePuzzle, mergeCategory.transform);
+                ResetGameObject(mergePuzzle, cubeEditor.LevelHolder.transform);
             }
             
             GUILayout.FlexibleSpace();

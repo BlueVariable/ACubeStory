@@ -20,9 +20,9 @@ namespace BLUE.ACubeStory.LevelEditor
                 return;
             }
             
-            foreach (object o in CubeEditor.Instance.LevelHolder.transform)
+            foreach (TileGroup tileGroup in CubeEditor.Instance.LevelHolder.GetComponentsInChildren<TileGroup>())
             {
-                categories.Add(((Transform) o).gameObject.name);
+                categories.Add(tileGroup.gameObject.name);
             }
 
             Handles.BeginGUI();

@@ -42,8 +42,16 @@ namespace BLUE.ACubeStory.LevelEditor
                 }
                 
                 ResetMergePuzzle(mergePuzzle);
-                
-                TileGroup mergeTileGroup = mergePuzzle.GetComponentInParent<TileGroup>();
+
+                TileGroup mergeTileGroup = null;
+
+                foreach (TileGroup tileGroup in CubeEditor.Instance.LevelHolder.GetComponentsInChildren<TileGroup>())
+                {
+                    if (tileGroup.gameObject.name.Equals("MERGE"))
+                    {
+                        mergeTileGroup = tileGroup;
+                    }
+                }
                 
                 Tile[] mergeTiles = mergeTileGroup.GetComponentsInChildren<Tile>();
 
