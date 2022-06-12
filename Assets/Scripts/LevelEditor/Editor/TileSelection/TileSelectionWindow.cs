@@ -52,6 +52,11 @@ namespace BLUE.ACubeStory.LevelEditor
         private void OnGUI()
         {
             Tiles.Clear();
+            
+            if (TileSettingsContainer.Instance == null)
+            {
+                return;
+            }
 
             float totalHeight = position.height - 30;
 
@@ -130,7 +135,7 @@ namespace BLUE.ACubeStory.LevelEditor
         private void CreateTilePreview(float height)
         {
             if (_selectedIndex >= 0)
-            {   
+            {
                 TileSettings[] settingsArr =
                     TileSettingsContainer.Instance.TileSettingsSo.TileSettings.Where(i =>
                         i.Tile.TileCategory == _selectedTileCategory).ToArray();
