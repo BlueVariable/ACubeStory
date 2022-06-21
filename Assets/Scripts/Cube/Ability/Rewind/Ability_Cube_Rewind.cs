@@ -19,10 +19,25 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private ActionExecutor _rewindAbilityStartedActionExecutor = null;
         [SerializeField] private ActionExecutor _rewindAbilityFinishedActionExecutor = null;
-
+        
         private bool _isRewinding = false;
 
         private IEnumerator _rewindAbilityDeactivationRoutine;
+
+        private RewindAbilityConditionBase[] _conditions;
+
+        private RewindAbilityConditionBase[] _Conditions
+        {
+            get
+            {
+                if (_conditions == null)
+                {
+                    _conditions = GetComponentsInChildren<RewindAbilityConditionBase>();
+                }
+
+                return _conditions;
+            }
+        }
         
         public override void Attached()
         {
@@ -70,9 +85,12 @@ namespace BLUE.ACubeStory.Cube
         {
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
-                RegisterToRewindController();
+                if (CanTriggerAbility())
+                {
+                    RegisterToRewindController();
+                }
 
-                _cubeFSM.TryChangeState(ECubeState.Rewind);
+                TryTriggerRewind();
             }
         }
 
@@ -81,7 +99,7 @@ namespace BLUE.ACubeStory.Cube
             if (inputData.KeyCode == _rewindTriggerKeyCode 
                 && _rewindController.IsThereAnyAvailableSnapshot())
             {
-                _cubeFSM.TryChangeState(ECubeState.Rewind);
+                TryTriggerRewind();
             }
         }
 
@@ -91,6 +109,29 @@ namespace BLUE.ACubeStory.Cube
             {
                 _rewindState.SetCanContinueRewind(false);
             }
+        }
+
+        private void TryTriggerRewind()
+        {
+            if (!CanTriggerAbility())
+            {
+                return;
+            }
+            
+            _cubeFSM.TryChangeState(ECubeState.Rewind);
+        }
+
+        private bool CanTriggerAbility()
+        {
+            foreach (RewindAbilityConditionBase condition in _Conditions)
+            {
+                if (!condition.CanTriggerAbility())
+                {
+                    return false;
+                }
+            }
+            
+            return true;
         }
 
         private void RegisterToRewindController()
