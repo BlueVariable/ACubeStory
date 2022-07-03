@@ -40,13 +40,18 @@ namespace BLUE.ACubeStory.Cube
         private void RegisterToLevelEvents()
         {
             Level.Level.Instance.LevelFSM.OnStateEntered += OnLevelStateEntered;
-            Level.Level.Instance.LevelFSM.OnStateExited += OnStateExited;
+            Level.Level.Instance.LevelFSM.OnStateExited += OnLevelStateExited;
         }
 
         private void UnregisterFromLevelEvents()
         {
+            if (Level.Level.Instance == null)
+            {
+                return;
+            }
+            
             Level.Level.Instance.LevelFSM.OnStateEntered -= OnLevelStateEntered;
-            Level.Level.Instance.LevelFSM.OnStateExited -= OnStateExited;
+            Level.Level.Instance.LevelFSM.OnStateExited -= OnLevelStateExited;
         }
 
         private void OnLevelStateEntered(ELevelState levelState)
@@ -59,7 +64,7 @@ namespace BLUE.ACubeStory.Cube
             RegisterToCubeFSM();
         }
 
-        private void OnStateExited(ELevelState levelState)
+        private void OnLevelStateExited(ELevelState levelState)
         {
             if (levelState != ELevelState.Merge)
             {

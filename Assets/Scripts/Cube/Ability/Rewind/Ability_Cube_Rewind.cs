@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Ability;
+using BLUE.Common;
 using BLUE.InputSystem;
 using BLUE.RewindSystem;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private State_Cube_Rewind _rewindState = null;
         [SerializeField] private RewindController_Cube _rewindController = null;
 
+        [SerializeField] private Transform _canTriggerConditionsObj = null;
+        
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
         
         [SerializeField] private float _abilityDeactivationDelay = 0.1f;
@@ -24,21 +27,20 @@ namespace BLUE.ACubeStory.Cube
 
         private IEnumerator _rewindAbilityDeactivationRoutine;
 
-        private RewindAbilityConditionBase[] _conditions;
-
-        private RewindAbilityConditionBase[] _Conditions
+        private SimpleConditionBase[] _canTriggerConditions;
+        private SimpleConditionBase[] _CanTriggerConditions
         {
             get
             {
-                if (_conditions == null)
+                if (_canTriggerConditions == null)
                 {
-                    _conditions = GetComponentsInChildren<RewindAbilityConditionBase>();
+                    _canTriggerConditions = _canTriggerConditionsObj.GetComponentsInChildren<SimpleConditionBase>();
                 }
 
-                return _conditions;
+                return _canTriggerConditions;
             }
         }
-        
+
         public override void Attached()
         {
             RegisterToInputManager();
@@ -123,9 +125,9 @@ namespace BLUE.ACubeStory.Cube
 
         private bool CanTriggerAbility()
         {
-            foreach (RewindAbilityConditionBase condition in _Conditions)
+            foreach (SimpleConditionBase condition in _CanTriggerConditions)
             {
-                if (!condition.CanTriggerAbility())
+                if (!condition.IsConditionSatisfied())
                 {
                     return false;
                 }
