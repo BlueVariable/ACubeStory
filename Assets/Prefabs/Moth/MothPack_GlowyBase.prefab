@@ -1470,7 +1470,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerOrigin: {fileID: 7171559574054224452}
   _collider: {fileID: 6807290143066023880}
-  _delayBetweenGlowyObjects: 0.025
+  _baseGlowDuration: 3
+  _glowDurationMultiplierBetweenDelays: 20
+  _delayBetweenGlowyObjects: 0.005
 --- !u!1 &5953769556029151370
 GameObject:
   m_ObjectHideFlags: 0
