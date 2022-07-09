@@ -284,6 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6326964586861764062}
   - component: {fileID: 7388737038391768350}
+  - component: {fileID: 5716057496056849116}
   m_Layer: 0
   m_Name: DetectRequestors
   m_TagString: Untagged
@@ -324,6 +325,24 @@ MonoBehaviour:
   _triggeredActions:
     _actionCarrier: {fileID: 0}
   _cubeState: 1
+--- !u!114 &5716057496056849116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529306255626653847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8cd26062370f449a7cccd2c17bb135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
 --- !u!1 &592921618253821186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,6 +2975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _detectRequestors:
   - {fileID: 7388737038391768350}
+  - {fileID: 5716057496056849116}
   _forcedUndetectRequestors:
   - {fileID: 372524831103548734}
   _rayOrigin: {fileID: 7075618033240990871}
@@ -2969,6 +2989,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 524288
   _includeReversedRayTowardsOrigin: 1
+  _excludeDefaultRay: 1
 --- !u!1 &6736891764558199860
 GameObject:
   m_ObjectHideFlags: 0
