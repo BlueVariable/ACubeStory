@@ -72,7 +72,7 @@ namespace BLUE.ACubeStory.LevelEditor
             
             GUILayout.Space(10);
 
-            this.Divider();
+            this.AddHorizontalDivider();
             
             CreateTilePreview(totalHeight * 0.4f);
             
