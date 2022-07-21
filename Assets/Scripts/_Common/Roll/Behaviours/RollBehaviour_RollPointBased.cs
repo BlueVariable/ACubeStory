@@ -111,13 +111,19 @@ namespace BLUE.ACubeStory.Common
                 curNormValue += step;
 
                 curNormValue = Mathf.Min(curNormValue, targetNormValue);
-            
+
                 CurRollAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
                 
                 _rollableTransform.RotateAround(LastRollPoint, GetRollAxis(_direction), CurRollAngle - prevAngle);
 
                 if (curNormValue >= targetNormValue)
                 {
+                    prevAngle = _rollCurve.Evaluate(curNormValue) * targetAngle;
+                    
+                    CurRollAngle = _rollCurve.Evaluate(1) * targetAngle;
+                
+                    _rollableTransform.RotateAround(LastRollPoint, GetRollAxis(_direction), CurRollAngle - prevAngle);
+                    
                     break;
                 }
 

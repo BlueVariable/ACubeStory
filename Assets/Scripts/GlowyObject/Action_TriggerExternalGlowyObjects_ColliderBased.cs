@@ -13,6 +13,10 @@ namespace BLUE.ACubeStory.GlowyObject
         
         [SerializeField] private Collider _collider = null;
 
+        [SerializeField] private float _baseGlowDuration = 3f;
+
+        [SerializeField] private float _glowDurationMultiplierBetweenDelays = 2;
+        
         [SerializeField] private float _delayBetweenGlowyObjects = 0.1f;
 
         private IEnumerator _triggerRoutine;
@@ -58,14 +62,25 @@ namespace BLUE.ACubeStory.GlowyObject
 
         private IEnumerator TriggerProgress()
         {
+            int count = 0;
+            
             foreach (Trigger_External externalTrigger in _Triggers)
             {
                 externalTrigger.Trigger();
 
                 if (_delayBetweenGlowyObjects > 0)
                 {
+                    GlowyObject_GlowDurationController glowDurationController = externalTrigger
+                        .GetComponentInChildren<GlowyObject_GlowDurationController>();
+
+                    float additionalDuration = count * _delayBetweenGlowyObjects * _glowDurationMultiplierBetweenDelays;
+                    
+                    glowDurationController.TrySetDuration(_baseGlowDuration + additionalDuration);
+                    
                     yield return new WaitForSeconds(_delayBetweenGlowyObjects);
                 }
+
+                count++;
             }
         }
         

@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 4061786117771997679}
   - component: {fileID: 1581361868361014225}
   m_Layer: 11
-  m_Name: CubeTriggerExit
+  m_Name: Cube_TriggerExit_Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,6 +268,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 0}
@@ -275,6 +282,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1 &3963475069798442139
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +343,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 1
       _speed: 0
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 0}
@@ -336,6 +357,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 1
       _speed: 0
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1 &4814900532173155201
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +492,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 1
       _speed: 0
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 0}
@@ -471,6 +506,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 1
       _speed: 0
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1 &5568400566106573956
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +567,85 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 1
+      _animCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 2
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.2047022
+          value: -0.005209446
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.22000913
+          value: 0.99725354
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.59444034
+          value: 0.003030017
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.606215
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.80746716
+          value: -0.0051994324
+          inSlope: -0.000047884547
+          outSlope: -0.000047884547
+          tangentMode: 0
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.82498574
+          value: 0.99289167
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 97
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 1}
@@ -532,6 +653,85 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 1
+      _animCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 2
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.2047022
+          value: -0.005209446
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.22000913
+          value: 0.99725354
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.59444034
+          value: 0.003030017
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.606215
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.80746716
+          value: -0.0051994324
+          inSlope: -0.000047884547
+          outSlope: -0.000047884547
+          tangentMode: 0
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.82498574
+          value: 0.99289167
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 97
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 3
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1 &6594904243095533467
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +790,7 @@ GameObject:
   - component: {fileID: 8403156608052843637}
   - component: {fileID: 8378995748986005659}
   m_Layer: 6
-  m_Name: CubeExitedTriggerActions
+  m_Name: ExitedTriggerActions_NoGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -633,6 +833,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 0}
@@ -640,6 +847,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!114 &8378995748986005659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +869,89 @@ MonoBehaviour:
   _triggers:
   - {fileID: 6256490355695918115}
   _active: 1
+--- !u!1 &7100045919062749495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3935207838318600826}
+  - component: {fileID: 5298625781036903388}
+  - component: {fileID: 5184877090224134984}
+  - component: {fileID: 2583745229266674100}
+  m_Layer: 21
+  m_Name: GlowyGroundTrigger_TriggerExit_Glow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3935207838318600826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100045919062749495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3376882293170828828}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5298625781036903388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100045919062749495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb0d4858ac64f1482e7d56930d48038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 226927635185803184}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 1048576
+--- !u!65 &5184877090224134984
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100045919062749495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &2583745229266674100
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100045919062749495}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7202043026598197409
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +964,7 @@ GameObject:
   - component: {fileID: 3260953957628645106}
   - component: {fileID: 1816223450981904402}
   m_Layer: 6
-  m_Name: CubeEnteredTriggerActions
+  m_Name: EnteredTriggerActions_Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,6 +1007,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 1}
@@ -717,6 +1021,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!114 &1816223450981904402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,7 +1056,7 @@ GameObject:
   - component: {fileID: 3367182594879668604}
   - component: {fileID: 4485968132791406512}
   m_Layer: 11
-  m_Name: CubeTriggerEnter
+  m_Name: Cube_TriggerEnter_Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,6 +1171,89 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _duration: 0.2
+--- !u!1 &8934696269899690597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3545423481108060399}
+  - component: {fileID: 3019600942167030669}
+  - component: {fileID: 6822407376775951686}
+  - component: {fileID: 6553938437197679624}
+  m_Layer: 21
+  m_Name: GlowyGroundTrigger_TriggerEnter_Glow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3545423481108060399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8934696269899690597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3376882293170828828}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3019600942167030669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8934696269899690597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3b728bf3bf403fb0e9ec8d8daefc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 396830763678109448}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 1048576
+--- !u!65 &6822407376775951686
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8934696269899690597}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &6553938437197679624
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8934696269899690597}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7300236470344187958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1052,7 +1446,7 @@ PrefabInstance:
       objectReference: {fileID: 6256490355695918115}
     - target: {fileID: 8892719648721833917, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
       propertyPath: _glowTriggers.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8892719648721833917, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
       propertyPath: _glowTriggers.Array.data[0]
@@ -1062,6 +1456,10 @@ PrefabInstance:
       propertyPath: _glowTriggers.Array.data[1]
       value: 
       objectReference: {fileID: 6256490355695918115}
+    - target: {fileID: 8892719648721833917, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
+      propertyPath: _glowTriggers.Array.data[2]
+      value: 
+      objectReference: {fileID: 3019600942167030669}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
 --- !u!4 &3553477644678011353 stripped

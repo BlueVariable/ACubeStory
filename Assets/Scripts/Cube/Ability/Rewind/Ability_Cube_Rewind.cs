@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Ability;
+using BLUE.Common;
 using BLUE.InputSystem;
 using BLUE.RewindSystem;
 using UnityEngine;
@@ -13,17 +14,33 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private State_Cube_Rewind _rewindState = null;
         [SerializeField] private RewindController_Cube _rewindController = null;
 
+        [SerializeField] private Transform _canTriggerConditionsObj = null;
+        
         [SerializeField] private KeyCode _rewindTriggerKeyCode = KeyCode.R;
         
         [SerializeField] private float _abilityDeactivationDelay = 0.1f;
         
         [SerializeField] private ActionExecutor _rewindAbilityStartedActionExecutor = null;
         [SerializeField] private ActionExecutor _rewindAbilityFinishedActionExecutor = null;
-
+        
         private bool _isRewinding = false;
 
         private IEnumerator _rewindAbilityDeactivationRoutine;
-        
+
+        private SimpleConditionBase[] _canTriggerConditions;
+        private SimpleConditionBase[] _CanTriggerConditions
+        {
+            get
+            {
+                if (_canTriggerConditions == null)
+                {
+                    _canTriggerConditions = _canTriggerConditionsObj.GetComponentsInChildren<SimpleConditionBase>();
+                }
+
+                return _canTriggerConditions;
+            }
+        }
+
         public override void Attached()
         {
             RegisterToInputManager();
@@ -70,9 +87,12 @@ namespace BLUE.ACubeStory.Cube
         {
             if (inputData.KeyCode == _rewindTriggerKeyCode)
             {
-                RegisterToRewindController();
+                if (CanTriggerAbility())
+                {
+                    RegisterToRewindController();
+                }
 
-                _cubeFSM.TryChangeState(ECubeState.Rewind);
+                TryTriggerRewind();
             }
         }
 
@@ -81,7 +101,7 @@ namespace BLUE.ACubeStory.Cube
             if (inputData.KeyCode == _rewindTriggerKeyCode 
                 && _rewindController.IsThereAnyAvailableSnapshot())
             {
-                _cubeFSM.TryChangeState(ECubeState.Rewind);
+                TryTriggerRewind();
             }
         }
 
@@ -91,6 +111,29 @@ namespace BLUE.ACubeStory.Cube
             {
                 _rewindState.SetCanContinueRewind(false);
             }
+        }
+
+        private void TryTriggerRewind()
+        {
+            if (!CanTriggerAbility())
+            {
+                return;
+            }
+            
+            _cubeFSM.TryChangeState(ECubeState.Rewind);
+        }
+
+        private bool CanTriggerAbility()
+        {
+            foreach (SimpleConditionBase condition in _CanTriggerConditions)
+            {
+                if (!condition.IsConditionSatisfied())
+                {
+                    return false;
+                }
+            }
+            
+            return true;
         }
 
         private void RegisterToRewindController()

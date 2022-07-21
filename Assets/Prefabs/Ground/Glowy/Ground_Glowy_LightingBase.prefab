@@ -85,6 +85,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 1
       _speed: 0
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 0}
@@ -92,6 +99,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 1
       _speed: 0
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1 &1717836946122749708
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5969896345455591622}
   - component: {fileID: 5132461569933554686}
+  - component: {fileID: 8427532273154256533}
   m_Layer: 6
   m_Name: Wait
   m_TagString: Untagged
@@ -183,6 +198,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _duration: 3
+--- !u!114 &8427532273154256533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255769497191146527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7831e0f83d0ed438030561933e1e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waitAction: {fileID: 5132461569933554686}
 --- !u!1 &2494311033215926866
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +265,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 1}
@@ -244,6 +279,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1 &4172400043919737491
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +391,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     - _renderer: {fileID: 0}
       _materialPropertyKey: _BaseColor
       _targetColor: {r: 0, g: 0, b: 0, a: 0}
@@ -356,6 +405,13 @@ MonoBehaviour:
       _useSpeedAsDuration: 0
       _speed: 2
       _targetEase: 4
+      _useAnimationCurve: 0
+      _animCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1 &7510458473628047664
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,11 +675,6 @@ PrefabInstance:
       objectReference: {fileID: 6646784752331413989}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
---- !u!4 &3376882293170828828 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6037702844310100113, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
-  m_PrefabInstance: {fileID: 9013710780347510413}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7309789145738381582 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1758290949286848387, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
@@ -638,6 +689,11 @@ MonoBehaviour:
 --- !u!65 &8703167646952430132 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 419115070547391673, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
+  m_PrefabInstance: {fileID: 9013710780347510413}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3376882293170828828 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6037702844310100113, guid: 0d9348421a2c70645bcb4b544a8ff26f, type: 3}
   m_PrefabInstance: {fileID: 9013710780347510413}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3553477644678011353 stripped

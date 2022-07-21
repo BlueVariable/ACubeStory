@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BLUE.ACubeStory.Level;
 using BLUE.RewindSystem;
 using UnityEngine;
 
@@ -26,11 +27,50 @@ namespace BLUE.ACubeStory.Cube
         
         private void Awake()
         {
-            RegisterToCubeFSM();
+            RegisterToLevelEvents();
         }
 
         private void OnDestroy()
         {
+            UnregisterFromLevelEvents();
+
+            UnregisterFromCubeFSM();
+        }
+
+        private void RegisterToLevelEvents()
+        {
+            Level.Level.Instance.LevelFSM.OnStateEntered += OnLevelStateEntered;
+            Level.Level.Instance.LevelFSM.OnStateExited += OnLevelStateExited;
+        }
+
+        private void UnregisterFromLevelEvents()
+        {
+            if (Level.Level.Instance == null)
+            {
+                return;
+            }
+            
+            Level.Level.Instance.LevelFSM.OnStateEntered -= OnLevelStateEntered;
+            Level.Level.Instance.LevelFSM.OnStateExited -= OnLevelStateExited;
+        }
+
+        private void OnLevelStateEntered(ELevelState levelState)
+        {
+            if (levelState != ELevelState.Merge)
+            {
+                return;
+            }
+            
+            RegisterToCubeFSM();
+        }
+
+        private void OnLevelStateExited(ELevelState levelState)
+        {
+            if (levelState != ELevelState.Merge)
+            {
+                return;
+            }
+            
             UnregisterFromCubeFSM();
         }
 
