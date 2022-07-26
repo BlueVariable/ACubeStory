@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Merge
 {
-    public class MergeNextSceneTrigger : MonoBehaviour
+    public class MergePuzzleExitArea : MonoBehaviour
     {
         [SerializeField] private BoxCollider _nextSceneTriggerCollider = null;
         public BoxCollider NextSceneTriggerCollider => _nextSceneTriggerCollider;

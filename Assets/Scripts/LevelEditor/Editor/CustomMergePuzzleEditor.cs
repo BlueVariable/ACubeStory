@@ -83,9 +83,9 @@ namespace BLUE.ACubeStory.LevelEditor
                 DestroyImmediate(existingWalls[i].gameObject);
             }
 
-            MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
+            MergePuzzleExitArea mergePuzzleExitArea = mergePuzzle.GetComponentInChildren<MergePuzzleExitArea>();
 
-            Tile[] invisibleGroundTiles = nextSceneTrigger.GetComponentsInChildren<Tile>();
+            Tile[] invisibleGroundTiles = mergePuzzleExitArea.GetComponentsInChildren<Tile>();
             
             for (int i = 0; i < invisibleGroundTiles.Length; i++)
             {
@@ -95,14 +95,14 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private void CreateNextSceneTrigger(MergePuzzle mergePuzzle, Tile[] mergeTiles)
         {
-            MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
+            MergePuzzleExitArea mergePuzzleExitArea = mergePuzzle.GetComponentInChildren<MergePuzzleExitArea>();
             
             GetMergeTilesExtensions(mergeTiles, out Vector3 center, out Vector3 size);
 
             center.y += _nextSceneTriggerVerticalOffset;
 
-            nextSceneTrigger.NextSceneTriggerCollider.transform.position = center;
-            nextSceneTrigger.NextSceneTriggerCollider.size = size;
+            mergePuzzleExitArea.NextSceneTriggerCollider.transform.position = center;
+            mergePuzzleExitArea.NextSceneTriggerCollider.size = size;
         }
 
         private void GetMergeTilesExtensions(Tile[] mergeTiles, out Vector3 center, out Vector3 size)
@@ -149,12 +149,12 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private void CreateMergeInvisibleGround(MergePuzzle mergePuzzle, Tile[] mergeTiles)
         {
-            MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
+            MergePuzzleExitArea mergePuzzleExitArea = mergePuzzle.GetComponentInChildren<MergePuzzleExitArea>();
             
             foreach (Tile tile in mergeTiles)
             {
-                GameObject invisibleTile = PrefabUtility.InstantiatePrefab(nextSceneTrigger.InvisibleTileReference.gameObject) as GameObject;
-                invisibleTile.transform.SetParent(nextSceneTrigger.InvisibleGroundContainer.transform);
+                GameObject invisibleTile = PrefabUtility.InstantiatePrefab(mergePuzzleExitArea.InvisibleTileReference.gameObject) as GameObject;
+                invisibleTile.transform.SetParent(mergePuzzleExitArea.InvisibleGroundContainer.transform);
 
                 invisibleTile.transform.position = tile.transform.position + new Vector3(0, _invisibleGroundVerticalOffset, 0);
             }
@@ -164,13 +164,13 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             MergeableSlot[] mergeableSlots = mergePuzzle.GetComponentsInChildren<MergeableSlot>();
 
-            MergeNextSceneTrigger nextSceneTrigger = mergePuzzle.GetComponentInChildren<MergeNextSceneTrigger>();
+            MergePuzzleExitArea mergePuzzleExitArea = mergePuzzle.GetComponentInChildren<MergePuzzleExitArea>();
             
             foreach (MergeableSlot slot in mergeableSlots)
             {
-                GameObject invisibleTile = PrefabUtility.InstantiatePrefab(nextSceneTrigger.InvisibleTileReference.gameObject) as GameObject;  
+                GameObject invisibleTile = PrefabUtility.InstantiatePrefab(mergePuzzleExitArea.InvisibleTileReference.gameObject) as GameObject;  
                 
-                invisibleTile.transform.SetParent(nextSceneTrigger.MergableSlotGrounds);
+                invisibleTile.transform.SetParent(mergePuzzleExitArea.MergableSlotGrounds);
 
                 invisibleTile.transform.position = slot.transform.position;
             }
@@ -178,20 +178,20 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private void CreateMergeAreaWalls(MergePuzzle mergePuzzle, Tile[] mergeTiles)
         {
-            MergePuzzleWallContainer wallContainer = mergePuzzle.GetComponentInChildren<MergePuzzleWallContainer>(true);
+            MergeAreaWallContainer areaWallContainer = mergePuzzle.GetComponentInChildren<MergeAreaWallContainer>(true);
             
             GetMergeTilesExtensions(mergeTiles, out Vector3 center, out Vector3 size);
 
-            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, size.z / 2), new Vector3(size.x, _wallHeight, _wallThickness), center);
-            CreateWall(wallContainer, center + new Vector3(0, _wallVerticalOffset, -size.z / 2), new Vector3(size.x, _wallHeight, _wallThickness), center);
-            CreateWall(wallContainer, center + new Vector3(size.x / 2, _wallVerticalOffset, 0), new Vector3(_wallThickness, _wallHeight, size.z), center);
-            CreateWall(wallContainer, center + new Vector3(-size.x / 2, _wallVerticalOffset, 0), new Vector3(_wallThickness, _wallHeight, size.z), center);
+            CreateWall(areaWallContainer, center + new Vector3(0, _wallVerticalOffset, size.z / 2), new Vector3(size.x, _wallHeight, _wallThickness), center);
+            CreateWall(areaWallContainer, center + new Vector3(0, _wallVerticalOffset, -size.z / 2), new Vector3(size.x, _wallHeight, _wallThickness), center);
+            CreateWall(areaWallContainer, center + new Vector3(size.x / 2, _wallVerticalOffset, 0), new Vector3(_wallThickness, _wallHeight, size.z), center);
+            CreateWall(areaWallContainer, center + new Vector3(-size.x / 2, _wallVerticalOffset, 0), new Vector3(_wallThickness, _wallHeight, size.z), center);
         }
 
-        private void CreateWall(MergePuzzleWallContainer wallContainer, Vector3 center, Vector3 size, Vector3 mergeAreaCenter)
+        private void CreateWall(MergeAreaWallContainer areaWallContainer, Vector3 center, Vector3 size, Vector3 mergeAreaCenter)
         {
-            GameObject wall = PrefabUtility.InstantiatePrefab(wallContainer.ReferenceWall.gameObject) as GameObject;
-            wall.transform.SetParent(wallContainer.transform);
+            GameObject wall = PrefabUtility.InstantiatePrefab(areaWallContainer.ReferenceWall.gameObject) as GameObject;
+            wall.transform.SetParent(areaWallContainer.transform);
 
             wall.transform.position = center;
             wall.transform.localScale = size;

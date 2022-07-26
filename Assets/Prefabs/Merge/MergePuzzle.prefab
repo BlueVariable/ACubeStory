@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4203124666421154374}
   m_Father: {fileID: 8819147275372693613}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1883830429643475135
 MonoBehaviour:
@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8819147275372693613}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5813291034252864630
 MonoBehaviour:
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6953809384588331854}
   - component: {fileID: 720814584399094199}
   m_Layer: 0
-  m_Name: NextSceneTriggerContainer
+  m_Name: ExitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +197,7 @@ Transform:
   - {fileID: 6239275758281460268}
   - {fileID: 334491640253707755}
   m_Father: {fileID: 8819147275372693613}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &720814584399094199
 MonoBehaviour:
@@ -274,7 +274,7 @@ Transform:
   m_Children:
   - {fileID: 5381137933484835970}
   m_Father: {fileID: 8819147275372693613}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5894392038961107099
 GameObject:
@@ -286,7 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3611763042237268226}
   m_Layer: 0
-  m_Name: InvisibleGrounds
+  m_Name: MergeableSlotGrounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,7 +304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8819147275372693613}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6148625035964243247
 GameObject:
@@ -468,7 +468,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8819147275372693613}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4844234267235371305
 MonoBehaviour:
@@ -513,12 +513,12 @@ Transform:
   m_Children:
   - {fileID: 4542467187966445104}
   - {fileID: 3777821066005252288}
+  - {fileID: 3611763042237268226}
   - {fileID: 8773935202245358661}
   - {fileID: 1853416336380005963}
   - {fileID: 6953809384588331854}
   - {fileID: 6126735830999690577}
   - {fileID: 2257774731087904073}
-  - {fileID: 3611763042237268226}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
