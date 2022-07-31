@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Obstacle
 {
-    public class Obstacle_Patrol : ObstacleBase
+    public class ObstaclePatrolController : MonoBehaviour
     {
         [SerializeField] private PatrolBehaviourBase _patrolBehaviour = null;
         
@@ -12,16 +12,16 @@ namespace BLUE.ACubeStory.Obstacle
         
         private IEnumerator _patrolRoutine;
         
-        private void StartPatrolRoutine()
+        public void StartPatrolling()
         {
-            StopPatrolRoutine();
+            StopPatrolling();
             
             _patrolRoutine = PatrolProgress();
 
             StartCoroutine(_patrolRoutine);
         }
 
-        private void StopPatrolRoutine()
+        public void StopPatrolling()
         {
             if (_patrolRoutine != null)
             {
