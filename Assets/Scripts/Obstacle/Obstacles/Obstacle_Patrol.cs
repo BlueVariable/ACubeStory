@@ -1,41 +1,17 @@
 ﻿using System.Collections;
-using BLUE.Common;
+using BLUE.ACubeStory.Common;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Obstacle
 {
     public class Obstacle_Patrol : ObstacleBase
     {
-        [SerializeField] private Transform[] _patrolPoints = null;
-
-        [SerializeField] private MoveBehaviour_Tween _movementBehaviour = null;
-
-        [SerializeField] private MoveBehaviour_Tween.TweenMoveSettings _movementSettings = default;
-
+        [SerializeField] private PatrolBehaviourBase _patrolBehaviour = null;
+        
         [SerializeField] private float _idleDurationOnPatrolPointReached = 0.5f;
         
         private IEnumerator _patrolRoutine;
         
-        private void Start()
-        {
-            ActivateObstacle();
-        }
-
-        private void OnDestroy()
-        {
-            DeactivateObstacle();
-        }
-
-        private void ActivateObstacle()
-        {
-            StartPatrolRoutine();
-        }
-
-        private void DeactivateObstacle()
-        {
-            StopPatrolRoutine();
-        }
-
         private void StartPatrolRoutine()
         {
             StopPatrolRoutine();
@@ -55,28 +31,12 @@ namespace BLUE.ACubeStory.Obstacle
 
         private IEnumerator PatrolProgress()
         {
-            int patrolIndex = 0;
-            
             while (true)
             {
-                bool completed = false;
-                
-                _movementBehaviour
-                .StartMovementTowards(
-                    _movementSettings,
-                    _patrolPoints[patrolIndex % _patrolPoints.Length].position,
-            () =>
-                       {
-                          completed = true;
-                       });
+                _patrolBehaviour.GoToNextPatrolPoint();
 
-                while (!completed)
-                {
-                    yield return null;
-                }
+                yield return new WaitUntil(() => _patrolBehaviour.IsPatrolling);
 
-                patrolIndex++;
-                
                 yield return new WaitForSeconds(_idleDurationOnPatrolPointReached);
             }
         }

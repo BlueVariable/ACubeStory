@@ -8,6 +8,8 @@ namespace BLUE.ACubeStory.Common
 {
     public abstract class PatrolBehaviourBase : MonoBehaviour
     {
+        public bool IsPatrolling => _curTargetPoint != null;
+        
         private List<PatrolPointBase> _patrolPoints;
 
         private List<PatrolPointBase> _PatrolPoints
@@ -25,8 +27,11 @@ namespace BLUE.ACubeStory.Common
 
         private PatrolPointBase _curTargetPoint;
         private PatrolPointBase _prevTargetPoint;
+
+        private IEnumerator _patrolRoutine;
         
         protected abstract void MoveToTargetPoint(PatrolPointBase patrolPoint, Action completedCallback);
+        protected abstract bool TryStopMoving();
 
         public void GoToNextPatrolPoint()
         {
@@ -45,10 +50,42 @@ namespace BLUE.ACubeStory.Common
             MoveToTargetPoint(_curTargetPoint, OnPatrolCompleted);
         }
 
+        public void StartPatrolLoop()
+        {
+            CancelPatrol();
+
+            _patrolRoutine = PatrolProgress();
+
+            StartCoroutine(_patrolRoutine);
+        }
+
+        public void CancelPatrol(bool forceStop = true)
+        {
+            if (forceStop)
+            {
+                TryStopMoving();
+            }
+
+            if (_patrolRoutine != null)
+            {
+                StopCoroutine(_patrolRoutine);
+            }
+        }
+
         private void OnPatrolCompleted()
         {
             _prevTargetPoint = _curTargetPoint;
             _curTargetPoint = null;
+        }
+
+        private IEnumerator PatrolProgress()
+        {
+            while (true)
+            {
+                yield return new WaitUntil(() => !IsPatrolling);
+                
+                GoToNextPatrolPoint();
+            }
         }
 
         private PatrolPointBase GetNextPatrolPoint(PatrolPointBase patrolPoint)
