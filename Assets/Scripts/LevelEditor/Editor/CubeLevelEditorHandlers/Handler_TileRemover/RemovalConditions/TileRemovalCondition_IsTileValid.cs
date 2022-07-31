@@ -1,13 +1,12 @@
 ﻿using BLUE.ACubeStory.TileSystem;
-using UnityEditor;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class TileRemovingCondition_Cooldown : TileRemovingConditionBase
+    public class TileRemovalCondition_IsTileValid : TileRemovalConditionBase
     {
         public override bool IsSatisfied(CubeLevelEditorHandler_TileRemover tileRemover, Tile candidate)
         {
-            return EditorApplication.timeSinceStartup - tileRemover.LastTilePlacementTime > 0.25f;
+            return candidate != null;
         }
     }
 }

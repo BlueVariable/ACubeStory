@@ -44,12 +44,12 @@ namespace BLUE.ACubeStory.LevelEditor
             }
         }
                 
-        public LevelHolder LevelHolder => FindObjectOfType<LevelHolder>();
+        public LevelEditorContainer LevelEditorContainer => FindObjectOfType<LevelEditorContainer>();
         
         public int SelectedTileGroupIndex { get; set; }
 
         public int SelectedTileID => TileIDProvider.GetTileID();
 
-        public TileGroup SelectedTileGroup => LevelHolder.transform.GetChild(SelectedTileGroupIndex).transform.GetComponent<TileGroup>();
+        public TileGroupEditorContainer SelectedTileGroupEditorContainer => LevelEditorContainer.transform.GetChild(SelectedTileGroupIndex).transform.GetComponent<TileGroupEditorContainer>();
     }
 }

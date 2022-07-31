@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    [CustomEditor(typeof(TileGroup))]
-    public class CustomTileGroupEditor : Editor
+    [CustomEditor(typeof(TileGroupEditorContainer))]
+    public class Editor_TileGroup : Editor
     {
         public override void OnInspectorGUI()
         {
@@ -13,15 +13,15 @@ namespace BLUE.ACubeStory.LevelEditor
 
             GUILayout.Space(10);
             
-            CreateUpdateTilesButton();
+            CreateUpdateTileGroupButton();
         }
 
-        private void CreateUpdateTilesButton()
+        private void CreateUpdateTileGroupButton()
         {
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
 
-            if (GUILayout.Button("Update Children Tiles", GUILayout.Width(200), GUILayout.Height(25)))
+            if (GUILayout.Button("Update Tile Group (Children Tiles)", GUILayout.Width(250), GUILayout.Height(25)))
             {
                 UpdateTileGroup();
             }
@@ -32,25 +32,30 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private void UpdateTileGroup()
         {
-            TileGroup tileGroup = target as TileGroup;
+            TileGroupEditorContainer tileGroupEditorContainer = target as TileGroupEditorContainer;
 
-            int tileCount = tileGroup.transform.childCount;
+            if (tileGroupEditorContainer == null)
+            {
+                return;
+            }
+            
+            int tileCount = tileGroupEditorContainer.transform.childCount;
 
             for (int i = 0; i < tileCount; i++)
             {
-                Transform child = tileGroup.transform.GetChild(0);
+                Transform child = tileGroupEditorContainer.transform.GetChild(0);
 
                 Vector3 position = child.transform.position;
                 
                 DestroyImmediate(child.gameObject);
 
-                CreateTile(position, tileGroup.transform);
+                CreateTile(position, tileGroupEditorContainer.transform);
             }
         }
 
         private void CreateTile(Vector3 position, Transform parent)
         {
-            bool res = TileFactory.Instance.TryCreateTile(CubeEditor.Instance.SelectedTileID, position, out Tile tile);
+            TileFactory.Instance.TryCreateTile(CubeEditor.Instance.SelectedTileID, position, out Tile tile);
             
             tile.transform.SetParent(parent);
         }

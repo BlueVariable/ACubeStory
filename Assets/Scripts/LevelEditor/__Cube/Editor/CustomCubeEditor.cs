@@ -32,26 +32,26 @@ namespace BLUE.ACubeStory.LevelEditor
             cubeEditor.name = $"=== CUBE_EDITOR ===";
             CubeEditor editor = cubeEditor.AddComponent<CubeEditor>();
             cubeEditor.AddComponent<TileIDProvider_Editor>();
-            cubeEditor.AddComponent<MergePuzzleEditor>();
+            cubeEditor.AddComponent<MergePuzzleEditorContainer>();
             
             ResetGameObject(cubeEditor, null);
         }
 
         private static void InitializeLevel()
         {
-            if (FindObjectOfType<LevelHolder>() != null)
+            if (FindObjectOfType<LevelEditorContainer>() != null)
             {
                 return;
             }
             
             GameObject levelObject = new GameObject();
-            levelObject.AddComponent<LevelHolder>();
+            levelObject.AddComponent<LevelEditorContainer>();
             levelObject.name = "=== LEVEL_HOLDER ===";
             ResetGameObject(levelObject, null);
 
             GameObject baseCategory = new GameObject();
             baseCategory.name = "BASE";
-            baseCategory.AddComponent<TileGroup>();
+            baseCategory.AddComponent<TileGroupEditorContainer>();
             ResetGameObject(baseCategory, levelObject.transform);
         }
 
@@ -85,13 +85,13 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             CubeEditor cubeEditor = (CubeEditor) target;
 
-            int categoryCount = cubeEditor.LevelHolder.transform.childCount;
+            int categoryCount = cubeEditor.LevelEditorContainer.transform.childCount;
             
             string[] categories = new string[categoryCount];
 
             for (int i = 0; i < categoryCount; i++)
             {
-                categories[i] = cubeEditor.LevelHolder.transform.GetChild(i).name;
+                categories[i] = cubeEditor.LevelEditorContainer.transform.GetChild(i).name;
             }
 
             EditorGUILayout.BeginHorizontal();
@@ -121,7 +121,7 @@ namespace BLUE.ACubeStory.LevelEditor
             {
                 CubeEditor cubeEditor = (CubeEditor) target;
 
-                foreach (Transform child in cubeEditor.LevelHolder.transform)
+                foreach (Transform child in cubeEditor.LevelEditorContainer.transform)
                 {
                     if (child.gameObject.name.Equals("MERGE"))
                     {
@@ -131,13 +131,13 @@ namespace BLUE.ACubeStory.LevelEditor
                 
                 GameObject mergeCategory = new GameObject();
                 mergeCategory.name = "MERGE";
-                mergeCategory.AddComponent<TileGroup>();
-                ResetGameObject(mergeCategory, cubeEditor.LevelHolder.transform);
+                mergeCategory.AddComponent<TileGroupEditorContainer>();
+                ResetGameObject(mergeCategory, cubeEditor.LevelEditorContainer.transform);
 
                 GameObject mergePuzzle = PrefabUtility.InstantiatePrefab(cubeEditor.DefaultMergePuzzle.gameObject) as GameObject;
                 
                 mergePuzzle.name = "MERGE_PUZZLE";
-                ResetGameObject(mergePuzzle, cubeEditor.LevelHolder.transform);
+                ResetGameObject(mergePuzzle, cubeEditor.LevelEditorContainer.transform);
             }
             
             GUILayout.FlexibleSpace();

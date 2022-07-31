@@ -2,7 +2,7 @@
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class LevelHolder : MonoBehaviour
+    public class MergePuzzleEditorContainer : MonoBehaviour
     {
         
     }

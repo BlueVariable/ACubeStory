@@ -22,10 +22,10 @@ namespace BLUE.ACubeStory.LevelEditor
             }
         }
         
-        private List<TileRemovingConditionBase> _removingConditions = new List<TileRemovingConditionBase>()
+        private List<TileRemovalConditionBase> _removingConditions = new List<TileRemovalConditionBase>()
         {
-            new TileRemovingCondition_IsTileValid(),
-            new TileRemovingCondition_Cooldown()
+            new TileRemovalCondition_IsTileValid(),
+            new TileRemovalCondition_Cooldown()
         };
         
         public double LastTilePlacementTime = 0;
@@ -79,7 +79,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private bool CanRemoveTile(Tile tile)
         {
-            foreach (TileRemovingConditionBase condition in _removingConditions)
+            foreach (TileRemovalConditionBase condition in _removingConditions)
             {
                 if (!condition.IsSatisfied(this, tile))
                 {

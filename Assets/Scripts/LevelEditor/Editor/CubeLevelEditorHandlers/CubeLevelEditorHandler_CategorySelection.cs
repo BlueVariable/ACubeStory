@@ -16,12 +16,12 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             List<string> categories = new List<string>();
 
-            if (CubeEditor.Instance.LevelHolder == null)
+            if (CubeEditor.Instance.LevelEditorContainer == null)
             {
                 return;
             }
             
-            foreach (TileGroup tileGroup in CubeEditor.Instance.LevelHolder.GetComponentsInChildren<TileGroup>())
+            foreach (TileGroupEditorContainer tileGroup in CubeEditor.Instance.LevelEditorContainer.GetComponentsInChildren<TileGroupEditorContainer>())
             {
                 categories.Add(tileGroup.gameObject.name);
             }
