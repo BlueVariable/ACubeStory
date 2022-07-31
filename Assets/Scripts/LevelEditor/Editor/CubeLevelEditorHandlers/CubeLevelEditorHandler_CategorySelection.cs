@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using BLUE.ACubeStory.TileSystem;
 
 namespace BLUE.ACubeStory.LevelEditor
 {

@@ -1,12 +1,13 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelEditor
+namespace BLUE.ACubeStory.TileSystem
 {
     public class TileFactory : MonoBehaviour
     {
-        private static TileFactory _instance;
+        #region Singleton
 
+        private static TileFactory _instance;
         public static TileFactory Instance
         {
             get
@@ -19,22 +20,22 @@ namespace BLUE.ACubeStory.LevelEditor
                 return _instance;
             }
         }
+
+        #endregion
         
         public bool TryCreateTile(
-            int tileId,
+            int tileID,
             Vector3 position,
             out Tile tile)
         {
             tile = null;
 
-            if (!TileSettingsContainer.Instance.
-                TileSettingsSo.TryGetTileSettings(tileId, out TileSettings tileSettings))
+            if (!SettingsContainer_Tile.Instance.
+                TileSettingsSO.TryGetTileSettings(tileID, out TileSettings tileSettings))
             {
                 return false;
             }
-            
-            // GameObject tileObject = Instantiate(tileSettings.Tile.gameObject);
-            
+
             GameObject tileObject = PrefabUtility.InstantiatePrefab(tileSettings.Tile.gameObject) as GameObject;
 
             tileObject.transform.position = position;

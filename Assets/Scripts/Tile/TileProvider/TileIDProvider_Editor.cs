@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelEditor
+namespace BLUE.ACubeStory.TileSystem
 {
-    public class TileProvider_Editor : MonoBehaviour, ITileProvider
+    public class TileIDProvider_Editor : MonoBehaviour, ITileIDProvider
     {
-        private static TileProvider_Editor _instance;
-
-        public static TileProvider_Editor Instance
+        #region Singleton
+        
+        private static TileIDProvider_Editor _instance;
+        public static TileIDProvider_Editor Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType<TileProvider_Editor>();
+                    _instance = FindObjectOfType<TileIDProvider_Editor>();
                 }
 
                 return _instance;
             }
         }
+
+        #endregion
         
         public int SelectedTileID { get; set; }
         

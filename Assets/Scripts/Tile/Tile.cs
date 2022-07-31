@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BLUE.ACubeStory.LevelEditor
+namespace BLUE.ACubeStory.TileSystem
 {
     public enum ETileCategory
     {

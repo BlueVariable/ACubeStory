@@ -1,4 +1,5 @@
 ﻿using BLUE.ACubeStory.Merge;
+using BLUE.ACubeStory.TileSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
@@ -28,18 +29,18 @@ namespace BLUE.ACubeStory.LevelEditor
         [SerializeField] private bool _displayToolTips = false;
         public bool DisplayToolTips => _displayToolTips;
         
-        private ITileProvider _tileProvider;
+        private ITileIDProvider _tileIDProvider;
 
-        private ITileProvider _TileProvider
+        private ITileIDProvider TileIDProvider
         {
             get
             {
-                if (_tileProvider == null)
+                if (_tileIDProvider == null)
                 {
-                    _tileProvider = GetComponent<ITileProvider>();
+                    _tileIDProvider = GetComponent<ITileIDProvider>();
                 }
 
-                return _tileProvider;
+                return _tileIDProvider;
             }
         }
                 
@@ -47,7 +48,7 @@ namespace BLUE.ACubeStory.LevelEditor
         
         public int SelectedTileGroupIndex { get; set; }
 
-        public int SelectedTileID => _TileProvider.GetTileID();
+        public int SelectedTileID => TileIDProvider.GetTileID();
 
         public TileGroup SelectedTileGroup => LevelHolder.transform.GetChild(SelectedTileGroupIndex).transform.GetComponent<TileGroup>();
     }

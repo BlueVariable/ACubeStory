@@ -1,5 +1,5 @@
-﻿using System;
-using BLUE.ACubeStory.Merge;
+﻿using BLUE.ACubeStory.Merge;
+using BLUE.ACubeStory.TileSystem;
 using UnityEditor;
 using UnityEngine;
 using Unity.Mathematics;
@@ -31,7 +31,7 @@ namespace BLUE.ACubeStory.LevelEditor
             GameObject cubeEditor = new GameObject();
             cubeEditor.name = $"=== CUBE_EDITOR ===";
             CubeEditor editor = cubeEditor.AddComponent<CubeEditor>();
-            cubeEditor.AddComponent<TileProvider_Editor>();
+            cubeEditor.AddComponent<TileIDProvider_Editor>();
             cubeEditor.AddComponent<MergePuzzleEditor>();
             
             ResetGameObject(cubeEditor, null);

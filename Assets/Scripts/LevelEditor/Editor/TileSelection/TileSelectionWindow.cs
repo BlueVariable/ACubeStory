@@ -3,6 +3,7 @@ using UnityEngine;
 using BLUE.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using BLUE.ACubeStory.TileSystem;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
@@ -53,7 +54,7 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             Tiles.Clear();
             
-            if (TileSettingsContainer.Instance == null)
+            if (SettingsContainer_Tile.Instance == null)
             {
                 return;
             }
@@ -108,7 +109,7 @@ namespace BLUE.ACubeStory.LevelEditor
             itemStyle.margin = new RectOffset(25, 25, 5, 5);
 
             TileSettings[] settingsArr =
-                TileSettingsContainer.Instance.TileSettingsSo.TileSettings.Where(i =>
+                SettingsContainer_Tile.Instance.TileSettingsSO.TileSettingsColl.Where(i =>
                     i.Tile.TileCategory == _selectedTileCategory).ToArray();
 
             for (int i = 0; i < settingsArr.Length; i++)
@@ -121,7 +122,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 {
                     _selectedIndex = i;
                     
-                    TileProvider_Editor.Instance.SelectedTileID = settingsArr[i].TileID;
+                    TileIDProvider_Editor.Instance.SelectedTileID = settingsArr[i].TileID;
                 }
                 
                 GUI.backgroundColor = _defaultBGColor;
@@ -137,7 +138,7 @@ namespace BLUE.ACubeStory.LevelEditor
             if (_selectedIndex >= 0)
             {
                 TileSettings[] settingsArr =
-                    TileSettingsContainer.Instance.TileSettingsSo.TileSettings.Where(i =>
+                    SettingsContainer_Tile.Instance.TileSettingsSO.TileSettingsColl.Where(i =>
                         i.Tile.TileCategory == _selectedTileCategory).ToArray();
                 
                 GameObject gameObject = settingsArr[_selectedIndex].Tile.gameObject;

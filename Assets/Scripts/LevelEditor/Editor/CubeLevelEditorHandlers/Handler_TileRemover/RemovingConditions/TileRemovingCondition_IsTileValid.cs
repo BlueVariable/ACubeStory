@@ -1,4 +1,6 @@
-﻿namespace BLUE.ACubeStory.LevelEditor
+﻿using BLUE.ACubeStory.TileSystem;
+
+namespace BLUE.ACubeStory.LevelEditor
 {
     public class TileRemovingCondition_IsTileValid : TileRemovingConditionBase
     {
