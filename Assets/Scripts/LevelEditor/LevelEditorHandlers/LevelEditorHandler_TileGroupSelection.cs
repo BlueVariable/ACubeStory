@@ -1,11 +1,10 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using BLUE.ACubeStory.TileSystem;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class CubeLevelEditorHandler_CategorySelection : CubeLevelEditorHandlerBase
+    public class LevelEditorHandler_TileGroupSelection : LevelEditorHandlerBase
     {
         private int _selectedIndex = 0;
 
@@ -39,7 +38,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Select Tile Group : ");
+            GUILayout.Label("Select Tile Group: ");
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
 

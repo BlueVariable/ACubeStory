@@ -11,9 +11,9 @@ namespace BLUE.ACubeStory.LevelEditor
 
         #endregion
         
-        public override bool IsSatisfied(CubeLevelEditorHandler_TileRemover tileRemover, Tile candidate)
+        public override bool IsSatisfied(LevelEditorHandler_TileRemover tileRemover, Tile candidate)
         {
-            return EditorApplication.timeSinceStartup - tileRemover.LastTilePlacementTime > COOLDOWN;
+            return EditorApplication.timeSinceStartup - tileRemover.LastTileRemovalTime > COOLDOWN;
         }
     }
 }

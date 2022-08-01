@@ -4,6 +4,6 @@ namespace BLUE.ACubeStory.LevelEditor
 {
     public abstract class TileRemovalConditionBase
     {
-        public abstract bool IsSatisfied(CubeLevelEditorHandler_TileRemover tileRemover, Tile candidate);
+        public abstract bool IsSatisfied(LevelEditorHandler_TileRemover tileRemover, Tile candidate);
     }
 }

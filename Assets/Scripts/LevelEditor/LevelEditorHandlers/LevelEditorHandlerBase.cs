@@ -2,11 +2,10 @@
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public abstract class CubeLevelEditorHandlerBase
+    public abstract class LevelEditorHandlerBase
     {
-        private CubeLevelEditorHandlerBase[] _subHandlers;
-
-        protected CubeLevelEditorHandlerBase[] _SubHandlers
+        private LevelEditorHandlerBase[] _subHandlers;
+        protected LevelEditorHandlerBase[] _SubHandlers
         {
             get
             {
@@ -21,6 +20,6 @@ namespace BLUE.ACubeStory.LevelEditor
 
         public abstract void Handle(Event e);
 
-        protected virtual CubeLevelEditorHandlerBase[] GetSubHandlers() => null;
+        protected virtual LevelEditorHandlerBase[] GetSubHandlers() => null;
     }
 }

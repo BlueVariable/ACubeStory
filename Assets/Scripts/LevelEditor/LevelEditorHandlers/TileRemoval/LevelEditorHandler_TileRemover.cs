@@ -5,10 +5,15 @@ using BLUE.ACubeStory.TileSystem;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class CubeLevelEditorHandler_TileRemover : CubeLevelEditorHandlerBase
+    public class LevelEditorHandler_TileRemover : LevelEditorHandlerBase
     {
+        private List<TileRemovalConditionBase> _removalConditions = new List<TileRemovalConditionBase>()
+        {
+            new TileRemovalCondition_IsTileValid(),
+            new TileRemovalCondition_Cooldown()
+        };
+        
         private CubeEditorInputHandler _inputHandler;
-
         private CubeEditorInputHandler _InputHandler
         {
             get
@@ -21,18 +26,12 @@ namespace BLUE.ACubeStory.LevelEditor
                 return _inputHandler;
             }
         }
-        
-        private List<TileRemovalConditionBase> _removingConditions = new List<TileRemovalConditionBase>()
-        {
-            new TileRemovalCondition_IsTileValid(),
-            new TileRemovalCondition_Cooldown()
-        };
-        
-        public double LastTilePlacementTime = 0;
-        
+
+        public double LastTileRemovalTime { get; private set; } = 0;
+
         public override void Handle(Event e)
         {
-            TryGetTileToDelete(e.mousePosition, out Tile deletionCandidate);
+            TryGetTileToRemove(e.mousePosition, out Tile deletionCandidate);
 
             bool input = _InputHandler.Handle(e);
 
@@ -47,28 +46,28 @@ namespace BLUE.ACubeStory.LevelEditor
                 {
                     EditorUtility.SetDirty(deletionCandidate.gameObject);
                 
-                    GameObject.DestroyImmediate(deletionCandidate.gameObject);
+                    Object.DestroyImmediate(deletionCandidate.gameObject);
 
                     deletionCandidate = null;
                     
-                    LastTilePlacementTime = EditorApplication.timeSinceStartup;
+                    LastTileRemovalTime = EditorApplication.timeSinceStartup;
                 }
                 else
                 {
-                    LastTilePlacementTime = 0;
+                    LastTileRemovalTime = 0;
                 }
             }
         }
 
-        private bool TryGetTileToDelete(Vector2 mousePosition, out Tile deletionCandidate)
+        private bool TryGetTileToRemove(Vector2 mousePosition, out Tile removalCandidate)
         {
-            deletionCandidate = null;
+            removalCandidate = null;
             
             Ray ray = Camera.current.ScreenPointToRay(new Vector3(mousePosition.x, Camera.current.pixelHeight - mousePosition.y, 0));
             
             if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) 
             {
-                if (hitInfo.collider.TryGetComponent(out deletionCandidate))
+                if (hitInfo.collider.TryGetComponent(out removalCandidate))
                 {
                     return true;
                 }
@@ -79,7 +78,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private bool CanRemoveTile(Tile tile)
         {
-            foreach (TileRemovalConditionBase condition in _removingConditions)
+            foreach (TileRemovalConditionBase condition in _removalConditions)
             {
                 if (!condition.IsSatisfied(this, tile))
                 {

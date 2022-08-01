@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class TileParentProvider
+    public class EditorTileParentProvider
     {
         public Transform GetTileParent(Tile tile)
         {
@@ -13,26 +13,26 @@ namespace BLUE.ACubeStory.LevelEditor
                 return CubeEditor.Instance.SelectedTileGroupEditorContainer.transform;
             }
 
-            MergePuzzle mergePuzzle = GameObject.FindObjectOfType<MergePuzzle>();
+            MergePuzzle mergePuzzle = Object.FindObjectOfType<MergePuzzle>();
 
             if (tile.TileCategory == ETileCategory.Mergeable)
             {
                 if (mergePuzzle == null)
                 {
-                    Debug.LogError($"Mergeable could not be placed. Merge Puzzle not initialized.");
+                    Debug.LogError($"Mergeable can not be placed, merge puzzle is not initialized!");
                 }
 
-                return mergePuzzle.transform.GetChild(0);
+                return mergePuzzle.GetComponentInChildren<MergeableContainer>().transform;
             }
 
             if (tile.TileCategory == ETileCategory.MergeableSlot)
             {
                 if (mergePuzzle == null)
                 {
-                    Debug.LogError($"Mergeable Slot could not be placed. Merge Puzzle not initialized.");
+                    Debug.LogError($"Mergeable Slot can not be placed, merge puzzle is not initialized!");
                 }
                 
-                return mergePuzzle.transform.GetChild(1);
+                return mergePuzzle.GetComponentInChildren<MergeableSlotContainer>().transform;
             }
 
             return null;

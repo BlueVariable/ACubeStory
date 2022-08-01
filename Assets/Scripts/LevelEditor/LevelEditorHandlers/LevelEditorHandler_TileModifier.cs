@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class CubeLevelEditorHandler_TileModifier : CubeLevelEditorHandlerBase
+    public class LevelEditorHandler_TileModifier : LevelEditorHandlerBase
     {
+        private bool _isModifierActive;
+        
         private CubeEditorInputHandler _inputHandler;
-
         private CubeEditorInputHandler _InputHandler
         {
             get
@@ -19,9 +20,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 return _inputHandler;
             }
         }
-        
-        private bool _isModifierActive;
-        
+
         public override void Handle(Event e)
         {
             _isModifierActive = _InputHandler.Handle(e);
@@ -31,25 +30,25 @@ namespace BLUE.ACubeStory.LevelEditor
                 int controlID = GUIUtility.GetControlID(FocusType.Passive);
                 GUIUtility.hotControl = controlID;
                 
-                CreateTileModificationActivated();
+                DisplayTileModifierNotification();
                 
-                foreach (CubeLevelEditorHandlerBase subHandler in _SubHandlers)
+                foreach (LevelEditorHandlerBase subHandler in _SubHandlers)
                 {
                     subHandler.Handle(e);
                 }
             }
         }
 
-        protected override CubeLevelEditorHandlerBase[] GetSubHandlers()
+        protected override LevelEditorHandlerBase[] GetSubHandlers()
         {
-            return new CubeLevelEditorHandlerBase[]
+            return new LevelEditorHandlerBase[]
             {
-                new CubeLevelEditorHandler_TilePlacer(),
-                new CubeLevelEditorHandler_TileRemover(),
+                new LevelEditorHandler_TilePlacer(),
+                new LevelEditorHandler_TileRemover(),
             };
         }
 
-        private void CreateTileModificationActivated()
+        private void DisplayTileModifierNotification()
         {
             Handles.BeginGUI();
             GUILayout.BeginArea(new Rect(20, 80, 200, 100));
@@ -63,7 +62,7 @@ namespace BLUE.ACubeStory.LevelEditor
             GUI.color = Color.white;
             GUILayout.BeginHorizontal();
             GUILayout.Space(25);
-            GUILayout.Label("Tile Modifier Activated.");
+            GUILayout.Label("Tile Modifier activated.");
             GUILayout.Space(25);
             GUILayout.EndHorizontal();
                 

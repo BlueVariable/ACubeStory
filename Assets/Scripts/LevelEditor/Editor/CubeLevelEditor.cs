@@ -7,9 +7,9 @@ namespace BLUE.ACubeStory.LevelEditor
     [InitializeOnLoad]
     public static class CubeLevelEditor
     {
-        private static List<CubeLevelEditorHandlerBase> _handlers = new List<CubeLevelEditorHandlerBase>()
+        private static List<LevelEditorHandlerBase> _handlers = new List<LevelEditorHandlerBase>()
         {
-            new CubeLevelEditorHandler_Activation(),
+            new LevelEditorHandler_Activation(),
         };
 
         static CubeLevelEditor()
@@ -26,7 +26,7 @@ namespace BLUE.ACubeStory.LevelEditor
         
             Event e = Event.current;
             
-            foreach (CubeLevelEditorHandlerBase handler in _handlers)
+            foreach (LevelEditorHandlerBase handler in _handlers)
             {
                 handler.Handle(e);
             }

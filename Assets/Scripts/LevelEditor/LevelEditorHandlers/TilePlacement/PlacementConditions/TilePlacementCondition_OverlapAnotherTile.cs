@@ -11,7 +11,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
         #endregion
 
-        public override bool IsSatisfied(CubeLevelEditorHandler_TilePlacer tilePlacer, Vector3 position)
+        public override bool IsSatisfied(LevelEditorHandler_TilePlacer tilePlacer, Vector3 position)
         {
             Collider[] overlaps = Physics.OverlapBox(position, Vector3.one * OVERLAP_BOX_HALF_EXTENTS);
 

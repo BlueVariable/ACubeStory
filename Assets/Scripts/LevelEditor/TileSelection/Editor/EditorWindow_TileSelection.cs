@@ -7,25 +7,26 @@ using BLUE.ACubeStory.TileSystem;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class TileSelectionWindow : EditorWindow
+    public class EditorWindow_TileSelection : EditorWindow
     {
-        static public List<GameObject> Tiles = new List<GameObject>();
+        private static List<GameObject> _tiles = new List<GameObject>();
 
         private PreviewRenderUtility _renderUtility;
+        
         private Vector2 _scrollPos;
         
         private Color _defaultBGColor;
-        private Color _selectedBGColor = new Color(0, 1, 1, 0.5f);
+        private readonly Color _selectedBGColor = new Color(0, 1, 1, 0.5f);
 
         private ETileCategory _selectedTileCategory = ETileCategory.None;
         private int _selectedIndex = -1;
         
-        [MenuItem("BLUE/Level Editor/Tile Selection Window")]
-        public static void ShowWindow()
+        [MenuItem("BLUE/Level Editor/Create Tile Selection Window")]
+        public static void DisplayWindow()
         {
-            GetWindow<TileSelectionWindow>().Close();
+            GetWindow<EditorWindow_TileSelection>().Close();
             
-            GetWindow<TileSelectionWindow>();
+            GetWindow<EditorWindow_TileSelection>();
         }
 
         private void OnEnable()
@@ -39,20 +40,10 @@ namespace BLUE.ACubeStory.LevelEditor
             
             CleanUpPreviewRenderUtility();
         }
-
-        private void OnDisable()
-        {
-            CleanUpPreviewRenderUtility();
-        }
-
-        private void OnDestroy()
-        {
-            CleanUpPreviewRenderUtility();
-        }
-
+        
         private void OnGUI()
         {
-            Tiles.Clear();
+            _tiles.Clear();
             
             if (SettingsContainer_Tile.Instance == null)
             {
@@ -80,6 +71,16 @@ namespace BLUE.ACubeStory.LevelEditor
             GUILayout.EndVertical();
         }
 
+        private void OnDisable()
+        {
+            CleanUpPreviewRenderUtility();
+        }
+
+        private void OnDestroy()
+        {
+            CleanUpPreviewRenderUtility();
+        }
+        
         private void CreateTileCategorySelection()
         {
             GUILayout.BeginHorizontal();
@@ -145,13 +146,13 @@ namespace BLUE.ACubeStory.LevelEditor
                 
                 Rect rect = new Rect(0, position.height - (height - 35), position.width, height);
 
-                BeginDraw(rect);
-                DrawRenderPreview(gameObject);
-                EndDraw(rect);
+                BeginRenderUtilityPreview(rect);
+                DrawMesh(gameObject);
+                EndRenderUtilityPreview(rect);
             }
         }
 
-        private void BeginDraw(Rect rect)
+        private void BeginRenderUtilityPreview(Rect rect)
         {
             if (_renderUtility == null)
             {
@@ -167,48 +168,57 @@ namespace BLUE.ACubeStory.LevelEditor
             _renderUtility.lights[0].transform.rotation = Quaternion.Euler(30f, 30f, 0f);
             _renderUtility.lights[1].intensity = 0.5f;
 
-            GUIStyle renderPrev = new GUIStyle();
-            renderPrev.active.background = Texture2D.whiteTexture;
-            
+            GUIStyle renderPrev = new GUIStyle
+            {
+                active =
+                {
+                    background = Texture2D.whiteTexture
+                }
+            };
+
             _renderUtility.BeginPreview(rect, renderPrev);
         }
 
-        private void EndDraw(Rect rect)
-        {
-            bool fog = RenderSettings.fog;
-            Unsupported.SetRenderSettingsUseFogNoDirty(false);
-            _renderUtility.camera.Render();
-            Unsupported.SetRenderSettingsUseFogNoDirty(fog);
- 
-            Texture texture = _renderUtility.EndPreview();
-            GUI.DrawTexture(rect, texture);
-        }
-
-        private void DrawRenderPreview(GameObject gameObject)
+        private void DrawMesh(GameObject gameObject)
         {
             MeshFilter[] meshFilters = gameObject.GetComponentsInChildren<MeshFilter>();
 
             for (int i = 0; i < meshFilters.Length; i++)
             {
-                if (meshFilters[i].sharedMesh)
+                if (!meshFilters[i].sharedMesh)
                 {
-                    MeshRenderer meshRenderer = meshFilters[i].gameObject.GetComponent<MeshRenderer>();
+                    continue;
+                }
+                
+                MeshRenderer meshRenderer = meshFilters[i].gameObject.GetComponent<MeshRenderer>();
+                
+                if (meshRenderer == null)
+                {
+                    continue;
+                }
 
-                    for (int j = 0; j < meshFilters[i].sharedMesh.subMeshCount; j++)
-                    {
-                        if (meshRenderer != null)
-                        {
-                            int matIndex = Mathf.Clamp(j, 0, meshRenderer.sharedMaterials.Length - 1);
+                for (int j = 0; j < meshFilters[i].sharedMesh.subMeshCount; j++)
+                {
+                    int matIndex = Mathf.Clamp(j, 0, meshRenderer.sharedMaterials.Length - 1);
                             
-                            _renderUtility.DrawMesh(
-                                meshFilters[i].sharedMesh,
-                                gameObject.transform.worldToLocalMatrix * meshRenderer.transform.localToWorldMatrix,
-                                meshRenderer.sharedMaterials[matIndex],
-                                j);
-                        }
-                    }
+                    _renderUtility.DrawMesh(
+                        meshFilters[i].sharedMesh,
+                        gameObject.transform.worldToLocalMatrix * meshRenderer.transform.localToWorldMatrix,
+                        meshRenderer.sharedMaterials[matIndex],
+                        j);
                 }
             }
+        }
+        
+        private void EndRenderUtilityPreview(Rect rect)
+        {
+            bool isFogEnabled = RenderSettings.fog;
+            Unsupported.SetRenderSettingsUseFogNoDirty(false);
+            _renderUtility.camera.Render();
+            Unsupported.SetRenderSettingsUseFogNoDirty(isFogEnabled);
+ 
+            Texture texture = _renderUtility.EndPreview();
+            GUI.DrawTexture(rect, texture);
         }
 
         private void CleanUpPreviewRenderUtility()

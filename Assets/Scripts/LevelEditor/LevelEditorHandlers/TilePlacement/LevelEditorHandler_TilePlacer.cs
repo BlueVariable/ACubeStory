@@ -5,7 +5,7 @@ using BLUE.ACubeStory.TileSystem;
 
 namespace BLUE.ACubeStory.LevelEditor
 {
-    public class CubeLevelEditorHandler_TilePlacer : CubeLevelEditorHandlerBase
+    public class LevelEditorHandler_TilePlacer : LevelEditorHandlerBase
     {
         private float _tilePlacementDistance = 10;
 
@@ -16,7 +16,6 @@ namespace BLUE.ACubeStory.LevelEditor
         };
         
         private CubeEditorInputHandler _inputHandler;
-
         private CubeEditorInputHandler _InputHandler
         {
             get
@@ -30,22 +29,21 @@ namespace BLUE.ACubeStory.LevelEditor
             }
         }
 
-        private TileParentProvider _parentProvider;
-
-        private TileParentProvider _ParentProvider
+        private EditorTileParentProvider _parentProvider;
+        private EditorTileParentProvider _ParentProvider
         {
             get
             {
                 if (_parentProvider == null)
                 {
-                    _parentProvider = new TileParentProvider();
+                    _parentProvider = new EditorTileParentProvider();
                 }
 
                 return _parentProvider;
             }
         }
-        
-        public double LastTilePlacementTime = 0;
+
+        public double LastTilePlacementTime { get; private set; } = 0;
 
         public override void Handle(Event e)
         {
@@ -109,7 +107,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 Selection.activeGameObject = null;
             }
             
-            return res;
+            return true;
         }
 
         private bool CanPlaceTile(Vector3 position)
