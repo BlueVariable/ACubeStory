@@ -10,7 +10,7 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             if (tile.TileCategory == ETileCategory.Ground)
             {
-                return CubeEditor.Instance.SelectedTileGroupEditorContainer.transform;
+                return LevelEditorContainer.Instance.SelectedTileGroupEditorContainer.transform;
             }
 
             MergePuzzle mergePuzzle = Object.FindObjectOfType<MergePuzzle>();

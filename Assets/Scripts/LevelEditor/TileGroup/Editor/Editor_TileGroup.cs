@@ -55,7 +55,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private void CreateTile(Vector3 position, Transform parent)
         {
-            TileFactory.Instance.TryCreateTile(CubeEditor.Instance.SelectedTileID, position, out Tile tile);
+            TileFactory.Instance.TryCreateTile(LevelEditorContainer.Instance.SelectedTileID, position, out Tile tile);
             
             tile.transform.SetParent(parent);
         }

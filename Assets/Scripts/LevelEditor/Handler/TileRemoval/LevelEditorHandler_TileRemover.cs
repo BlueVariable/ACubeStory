@@ -13,17 +13,17 @@ namespace BLUE.ACubeStory.LevelEditor
             new TileRemovalCondition_Cooldown()
         };
         
-        private CubeEditorInputHandler _inputHandler;
-        private CubeEditorInputHandler _InputHandler
+        private LevelEditorCommandController _commandController;
+        private LevelEditorCommandController _CommandController
         {
             get
             {
-                if (_inputHandler == null)
+                if (_commandController == null)
                 {
-                    _inputHandler = new CubeEditorInputHandler(ECubeEditorControlType.TileRemove);
+                    _commandController = new LevelEditorCommandController(ELevelEditorCommand.TileRemove);
                 }
 
-                return _inputHandler;
+                return _commandController;
             }
         }
 
@@ -33,7 +33,7 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             TryGetTileToRemove(e.mousePosition, out Tile deletionCandidate);
 
-            bool input = _InputHandler.Handle(e);
+            bool input = _CommandController.Handle(e);
 
             bool canRemoveTile = CanRemoveTile(deletionCandidate);
 

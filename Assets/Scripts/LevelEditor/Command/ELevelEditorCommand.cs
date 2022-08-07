@@ -1,6 +1,6 @@
 ﻿namespace BLUE.ACubeStory.LevelEditor
 {
-    public enum ECubeEditorControlType
+    public enum ELevelEditorCommand
     {
         None = 0,
         Activation = 1,

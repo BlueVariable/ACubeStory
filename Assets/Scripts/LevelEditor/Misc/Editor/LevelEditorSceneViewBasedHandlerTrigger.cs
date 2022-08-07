@@ -5,21 +5,22 @@ using UnityEngine;
 namespace BLUE.ACubeStory.LevelEditor
 {
     [InitializeOnLoad]
-    public static class CubeLevelEditor
+    public static class LevelEditorSceneViewBasedHandlerTrigger
     {
-        private static List<LevelEditorHandlerBase> _handlers = new List<LevelEditorHandlerBase>()
+        private static readonly List<LevelEditorHandlerBase> _handlers = new List<LevelEditorHandlerBase>()
         {
             new LevelEditorHandler_Activation(),
         };
 
-        static CubeLevelEditor()
+        static LevelEditorSceneViewBasedHandlerTrigger()
         {
+            SceneView.duringSceneGui -= OnSceneGUI;
             SceneView.duringSceneGui += OnSceneGUI;
         }
 
         private static void OnSceneGUI(SceneView sceneView)
         {
-            if (CubeEditor.Instance == null)
+            if (LevelEditorContainer.Instance == null)
             {
                 return;
             }

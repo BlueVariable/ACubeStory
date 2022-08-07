@@ -58,7 +58,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
             TileGroupEditorContainer mergeTileGroupEditorContainer = null;
 
-            foreach (TileGroupEditorContainer tileGroup in CubeEditor.Instance.LevelEditorContainer.GetComponentsInChildren<TileGroupEditorContainer>())
+            foreach (TileGroupEditorContainer tileGroup in LevelEditorContainer.Instance.EditorLevelRef.GetComponentsInChildren<TileGroupEditorContainer>())
             {
                 if (tileGroup.gameObject.name.Equals(LevelEditorHelper.MERGE_TILE_GROUP_NAME))
                 {

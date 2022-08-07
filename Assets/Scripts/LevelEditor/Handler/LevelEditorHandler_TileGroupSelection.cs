@@ -15,12 +15,12 @@ namespace BLUE.ACubeStory.LevelEditor
         {
             List<string> categories = new List<string>();
 
-            if (CubeEditor.Instance.LevelEditorContainer == null)
+            if (LevelEditorContainer.Instance.EditorLevelRef == null)
             {
                 return;
             }
             
-            foreach (TileGroupEditorContainer tileGroup in CubeEditor.Instance.LevelEditorContainer.GetComponentsInChildren<TileGroupEditorContainer>())
+            foreach (TileGroupEditorContainer tileGroup in LevelEditorContainer.Instance.EditorLevelRef.GetComponentsInChildren<TileGroupEditorContainer>())
             {
                 categories.Add(tileGroup.gameObject.name);
             }
@@ -58,7 +58,7 @@ namespace BLUE.ACubeStory.LevelEditor
             GUILayout.EndArea();
             Handles.EndGUI();
 
-            CubeEditor.Instance.SelectedTileGroupIndex = _selectedIndex;
+            LevelEditorContainer.Instance.SelectedTileGroupIndex = _selectedIndex;
         }
     }
 }

@@ -7,23 +7,23 @@ namespace BLUE.ACubeStory.LevelEditor
     {
         private bool _isEditorActive = false;
 
-        private CubeEditorInputHandler _inputHandler;
-        private CubeEditorInputHandler _InputHandler
+        private LevelEditorCommandController _commandController;
+        private LevelEditorCommandController _CommandController
         {
             get
             {
-                if (_inputHandler == null)
+                if (_commandController == null)
                 {
-                    _inputHandler = new CubeEditorInputHandler(ECubeEditorControlType.Activation);
+                    _commandController = new LevelEditorCommandController(ELevelEditorCommand.Activation);
                 }
 
-                return _inputHandler;
+                return _commandController;
             }
         }
         
         public override void Handle(Event e)
         {
-            if (_InputHandler.Handle(e))
+            if (_CommandController.Handle(e))
             {
                 _isEditorActive = !_isEditorActive;
                 

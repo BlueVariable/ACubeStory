@@ -15,17 +15,17 @@ namespace BLUE.ACubeStory.LevelEditor
             new TilePlacementCondition_Cooldown()
         };
         
-        private CubeEditorInputHandler _inputHandler;
-        private CubeEditorInputHandler _InputHandler
+        private LevelEditorCommandController _commandController;
+        private LevelEditorCommandController _CommandController
         {
             get
             {
-                if (_inputHandler == null)
+                if (_commandController == null)
                 {
-                    _inputHandler = new CubeEditorInputHandler(ECubeEditorControlType.TileAddition);
+                    _commandController = new LevelEditorCommandController(ELevelEditorCommand.TileAddition);
                 }
 
-                return _inputHandler;
+                return _commandController;
             }
         }
 
@@ -54,9 +54,9 @@ namespace BLUE.ACubeStory.LevelEditor
             Handles.color = isPlacementValid ? Color.green : Color.red;
             Handles.DrawWireCube(curPlacementPos, Vector3.one);
 
-            bool inputRes = _InputHandler.Handle(e);
+            bool inputRes = _CommandController.Handle(e);
             
-            if (_InputHandler.Handle(e) && isPlacementValid)
+            if (_CommandController.Handle(e) && isPlacementValid)
             {
                 TryPlaceTile(curPlacementPos);
 
@@ -91,7 +91,7 @@ namespace BLUE.ACubeStory.LevelEditor
 
         private bool TryPlaceTile(Vector3 position)
         {
-            bool res = TileFactory.Instance.TryCreateTile(CubeEditor.Instance.SelectedTileID, position, out Tile tile);
+            bool res = TileFactory.Instance.TryCreateTile(LevelEditorContainer.Instance.SelectedTileID, position, out Tile tile);
 
             if (!res)
             {
