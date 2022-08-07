@@ -9,8 +9,6 @@ namespace BLUE.ACubeStory.LevelEditor
     [CustomEditor(typeof(LevelEditorContainer))]
     public class Editor_Level : Editor
     {
-        private int _selectedCategoryIndex = 0;
-
         private SerializedProperty _tooltipProperty;
         
         public override void OnInspectorGUI()
