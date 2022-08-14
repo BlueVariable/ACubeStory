@@ -73,9 +73,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &1348623090733254053
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -163,9 +163,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &7539979145000445193
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -223,9 +223,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &2221672876162345931
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -313,9 +313,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &1845607237608657482
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -357,6 +357,10 @@ PrefabInstance:
       propertyPath: _targetTransform
       value: 
       objectReference: {fileID: 6967320602676687216}
+    - target: {fileID: 4705726682090446331, guid: cee6090692e1ce3429ac86f9967e147a, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4824284430570517390, guid: cee6090692e1ce3429ac86f9967e147a, type: 3}
       propertyPath: _colorSettingsComposition._tweenColorSettingsColl.Array.data[0]._renderer
       value: 
