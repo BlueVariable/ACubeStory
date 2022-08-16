@@ -17,15 +17,11 @@ namespace BLUE.ACubeStory.AnimationSequencer
 
         public override void Execute()
         {
-            _animationSequencerController.OnFinishedEvent.AddListener(OnAnimationSequenceCompleted);
-
-            _animationSequencerController.Play();
+            _animationSequencerController.Play(OnAnimationSequenceCompleted);
         }
 
         public override void Interrupt()
         {
-            _animationSequencerController.OnFinishedEvent.RemoveListener(OnAnimationSequenceCompleted);
-
             _animationSequencerController.Kill();
         }
 
