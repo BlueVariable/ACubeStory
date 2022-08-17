@@ -1,5 +1,5 @@
-﻿using BLUE.ActionSystem;
-using UnityEngine;
+﻿using UnityEngine;
+using BLUE.ActionSystem;
 
 namespace BLUE.ACubeStory.Obstacle
 {
@@ -17,6 +17,11 @@ namespace BLUE.ACubeStory.Obstacle
             {
                ActivateObstacle();     
             }
+        }
+
+        private void OnDestroy()
+        {
+            DeactivateObstacle();
         }
 
         public void ActivateObstacle()

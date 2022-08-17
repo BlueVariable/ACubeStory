@@ -8,6 +8,10 @@ namespace BLUE.ACubeStory.Common
 {
     public abstract class PatrolBehaviourBase : MonoBehaviour
     {
+        [SerializeField] private Transform _moveObjectReference = null;
+        
+        [SerializeField] private bool _startPatrollingOnEnable = false;
+        
         public bool IsPatrolling => _curTargetPoint != null;
         
         private List<PatrolPointBase> _patrolPoints;
@@ -46,6 +50,13 @@ namespace BLUE.ACubeStory.Common
             }
 
             _curTargetPoint = GetNextPatrolPoint(_prevTargetPoint);
+
+            if (_curTargetPoint.GetPatrolPointPosition() == _moveObjectReference.position)
+            {
+                OnPatrolCompleted();
+                
+                return;
+            }
             
             MoveToTargetPoint(_curTargetPoint, OnPatrolCompleted);
         }
@@ -72,6 +83,19 @@ namespace BLUE.ACubeStory.Common
             }
         }
 
+        private void OnEnable()
+        {
+            if (_startPatrollingOnEnable)
+            {
+                StartPatrolLoop();
+            }
+        }
+
+        private void OnDisable()
+        {
+            CancelPatrol();
+        }
+
         private void OnPatrolCompleted()
         {
             _prevTargetPoint = _curTargetPoint;
@@ -88,14 +112,14 @@ namespace BLUE.ACubeStory.Common
             }
         }
 
-        private PatrolPointBase GetNextPatrolPoint(PatrolPointBase patrolPoint)
+        private PatrolPointBase GetNextPatrolPoint(PatrolPointBase curPatrolPoint)
         {
-            if (patrolPoint == null)
+            if (curPatrolPoint == null)
             {
                 return _PatrolPoints[0];
             }
 
-            int patrolPointIndex = _PatrolPoints.IndexOf(patrolPoint);
+            int patrolPointIndex = _PatrolPoints.IndexOf(curPatrolPoint);
 
             if (patrolPointIndex == -1 || patrolPointIndex == _PatrolPoints.Count - 1)
             {

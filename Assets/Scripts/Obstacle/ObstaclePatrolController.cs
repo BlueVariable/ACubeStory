@@ -35,7 +35,7 @@ namespace BLUE.ACubeStory.Obstacle
             {
                 _patrolBehaviour.GoToNextPatrolPoint();
 
-                yield return new WaitUntil(() => _patrolBehaviour.IsPatrolling);
+                yield return new WaitWhile(() => _patrolBehaviour.IsPatrolling);
 
                 yield return new WaitForSeconds(_idleDurationOnPatrolPointReached);
             }
