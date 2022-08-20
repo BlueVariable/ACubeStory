@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Platform
+namespace BLUE.ACubeStory.Common
 {
-    public abstract class PlatformPatrolTriggerBase : MonoBehaviour
+    public abstract class PatrolTriggerBase : MonoBehaviour
     {
         public abstract Action OnPatrolTriggered { get; set; }
     }

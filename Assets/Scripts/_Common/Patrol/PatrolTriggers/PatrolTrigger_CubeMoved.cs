@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using BLUE.ACubeStory.Cube;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.Platform
+namespace BLUE.ACubeStory.Common
 {
-    public class PlatformPatrolTrigger_CubeMoved : PlatformPatrolTriggerBase
+    public class PatrolTrigger_CubeMoved : PatrolTriggerBase
     {
         [SerializeField] private List<ECubeState> _triggerStates = new List<ECubeState>();
 

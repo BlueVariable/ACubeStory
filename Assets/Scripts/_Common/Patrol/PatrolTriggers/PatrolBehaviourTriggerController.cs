@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 using BLUE.ACubeStory.Common;
 
-namespace BLUE.ACubeStory.Platform
+namespace BLUE.ACubeStory.Common
 {
-    public class PlatformPatrolController : MonoBehaviour
+    public class PatrolBehaviourTriggerController : MonoBehaviour
     {
         [SerializeField] private PatrolBehaviourBase _patrolBehaviour = null;
 
-        private PlatformPatrolTriggerBase _patrolTrigger;
+        private PatrolTriggerBase _patrolTrigger;
 
-        private PlatformPatrolTriggerBase _PatrolTrigger
+        private PatrolTriggerBase _PatrolTrigger
         {
             get
             {
                 if (_patrolTrigger == null)
                 {
-                    _patrolTrigger = GetComponent<PlatformPatrolTriggerBase>();
+                    _patrolTrigger = GetComponent<PatrolTriggerBase>();
                 }
 
                 return _patrolTrigger;
