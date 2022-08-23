@@ -10,7 +10,7 @@ namespace BLUE.ACubeStory.Common
         [SerializeField] private List<ECubeState> _triggerStates = new List<ECubeState>();
 
         public override Action OnPatrolTriggered { get; set; }
-
+        
         private void Awake()
         {
             RegisterToCubeEvents();
@@ -23,15 +23,15 @@ namespace BLUE.ACubeStory.Common
 
         private void RegisterToCubeEvents()
         {
-            Cube.Cube.Instance.CubeFSM.OnStateEntered += OnCubeEnteredState;
+            Cube.Cube.Instance.CubeFSM.OnStateExited += OnCubeStateExited;
         }
 
         private void UnregisterFromCubeEvents()
         {
-            Cube.Cube.Instance.CubeFSM.OnStateEntered -= OnCubeEnteredState;   
+            Cube.Cube.Instance.CubeFSM.OnStateExited -= OnCubeStateExited;   
         }
 
-        private void OnCubeEnteredState(ECubeState cubeState)
+        private void OnCubeStateExited(ECubeState cubeState)
         {
             if (!_triggerStates.Contains(cubeState))
             {
