@@ -34,7 +34,13 @@ namespace BLUE.ACubeStory.Cube
                 && Mathf.Abs(dir.y) < _minDirectionThreshold 
                 && Mathf.Abs(dir.z) < _minDirectionThreshold)
             {
-                pos = new Vector3(0, 0, _strength);
+                int multiplierX = Random.Range(-1, 2);
+                int multiplierY = Random.Range(-1, 2);
+                int multiplierZ = Random.Range(-1, 2);
+                
+                pos = new Vector3(_strength * multiplierX, _strength * multiplierY, _strength * multiplierZ);
+
+                pos.Scale(_targetAxis);
             }
             
             if (_behaveAsOffset)
