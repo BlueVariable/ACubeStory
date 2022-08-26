@@ -2,7 +2,7 @@ using BLUE.Common;
 
 namespace BLUE.ACubeStory.Moth
 {
-    public class Condition_ParentMothPackAscendingCompleted : SimpleConditionBase
+    public class SimpleCondition_ParentMothPackAscendingCompleted : SimpleConditionBase
     {
         public override bool IsConditionSatisfied()
         {
