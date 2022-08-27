@@ -11022,7 +11022,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1956358518}
   - component: {fileID: 1956358521}
-  - component: {fileID: 1956358522}
   - component: {fileID: 1956358520}
   - component: {fileID: 1956358519}
   m_Layer: 22
@@ -11055,39 +11054,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956358517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb0d4858ac64f1482e7d56930d48038, type: 3}
+  m_Script: {fileID: 11500000, guid: 03af97c788dd488c80f1acbdb231e937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugEnabled: 1
-  _activateOnAwake: 1
-  _once: 0
-  _triggerConditions: []
-  _triggeredActions:
-    _actionCarrier: {fileID: 0}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!114 &1956358520
-MonoBehaviour:
+--- !u!54 &1956358520
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956358517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3b728bf3bf403fb0e9ec8d8daefc1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debugEnabled: 1
-  _activateOnAwake: 1
-  _once: 0
-  _triggerConditions: []
-  _triggeredActions:
-    _actionCarrier: {fileID: 0}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &1956358521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11101,20 +11086,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1956358522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956358517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8211597bea134066a07dab4030d59f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enterTrigger: {fileID: 1956358520}
-  _exitTrigger: {fileID: 1956358519}
 --- !u!1 &1964626127
 GameObject:
   m_ObjectHideFlags: 0
@@ -12249,9 +12220,9 @@ MonoBehaviour:
   _moveBehaviour: {fileID: 8766534326000669632}
   _movementSettings:
     _movableObject: {fileID: 8766534326000669631}
-    _useSpeedAsDuration: 0
-    _moveSpeed: 2
-    _moveEase: 1
+    _useSpeedAsDuration: 1
+    _moveSpeed: 0.2
+    _moveEase: 32
     _doLocalMove: 0
 --- !u!114 &8766534326000669635
 MonoBehaviour:

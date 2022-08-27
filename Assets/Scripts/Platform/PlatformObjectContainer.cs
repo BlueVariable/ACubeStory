@@ -16,14 +16,14 @@ namespace BLUE.ACubeStory.Platform
         public Transform LastEnteredObject { get; private set; }
         public Transform LastExitedObject { get; private set; }
         
-        private List<PlatformEntrancePoint> _entrancePoints;
-        private List<PlatformEntrancePoint> _EntrancePoints
+        private List<IPlatformEntrance> _entrancePoints;
+        private List<IPlatformEntrance> _EntrancePoints
         {
             get
             {
                 if (_entrancePoints == null)
                 {
-                    _entrancePoints = GetComponentsInChildren<PlatformEntrancePoint>().ToList();
+                    _entrancePoints = GetComponentsInChildren<IPlatformEntrance>().ToList();
                 }
 
                 return _entrancePoints;
@@ -42,7 +42,7 @@ namespace BLUE.ACubeStory.Platform
 
         private void RegisterToEntrancePoints()
         {
-            foreach (PlatformEntrancePoint entrancePoint in _EntrancePoints)
+            foreach (IPlatformEntrance entrancePoint in _EntrancePoints)
             {
                 entrancePoint.OnObjectEntered += OnObjectEnteredPlatform;
                 entrancePoint.OnObjectExited += OnObjectExitedPlatform;
@@ -51,7 +51,7 @@ namespace BLUE.ACubeStory.Platform
 
         private void UnregisterFromEntrancePoints()
         {
-            foreach (PlatformEntrancePoint entrancePoint in _EntrancePoints)
+            foreach (IPlatformEntrance entrancePoint in _EntrancePoints)
             {
                 entrancePoint.OnObjectEntered -= OnObjectEnteredPlatform;
                 entrancePoint.OnObjectExited -= OnObjectExitedPlatform;
