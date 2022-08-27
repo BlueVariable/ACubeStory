@@ -6,7 +6,7 @@ namespace BLUE.ACubeStory.Moth
     {
         public override bool IsConditionSatisfied()
         {
-            return GetComponentInParent<MothPackAscendingController>() != null;
+            return GetComponentInParent<MothPackAscendable>() != null;
         }
     }
 }
