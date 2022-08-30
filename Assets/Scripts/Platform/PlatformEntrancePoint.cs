@@ -1,33 +1,47 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Platform
 {
-    public abstract class PlatformEntrancePoint<TTargetComponent> : MonoBehaviour, IPlatformEntrance
-    where TTargetComponent : MonoBehaviour 
+    public abstract class PlatformEntrancePoint : MonoBehaviour
     {
-        public Action<Transform> OnObjectEntered { get; set; }
-        public Action<Transform> OnObjectExited { get; set; }
-        
+        public abstract Action<Transform> OnObjectEntered { get; set; }
+        public abstract Action<Transform> OnObjectExited { get; set; }
 
-        private void OnTriggerEnter(Collider other)
+        public readonly List<Transform> ObjectsOnPlatform = new List<Transform>();
+
+        public abstract List<Transform> GetCurrentObjectsOnPlatform();
+
+        public void UpdateObjectsOnPlatform(List<Transform> currentObjects)
         {
-            if (!other.TryGetComponent(out TTargetComponent target))
-            {
-                return;
-            }
+            ObjectsOnPlatform.Clear();
             
-            OnObjectEntered?.Invoke(other.transform);
+            ObjectsOnPlatform.AddRange(currentObjects);
         }
 
-        private void OnTriggerExit(Collider other)
+        public void UpdateExitedObjects(List<Transform> currentObjects)
         {
-            if (!other.TryGetComponent(out TTargetComponent target))
+            foreach (Transform objectOnPlatform in ObjectsOnPlatform)
             {
-                return;
+                if (!currentObjects.Contains(objectOnPlatform))
+                {
+                    OnObjectExited?.Invoke(objectOnPlatform);
+                }
             }
-            
-            OnObjectExited?.Invoke(other.transform);
+        }
+
+        public void UpdateEnteredObjects(List<Transform> currentObjects)
+        {
+            foreach (Transform curObj in currentObjects)
+            {
+                if (ObjectsOnPlatform.Contains(curObj))
+                {
+                    continue;
+                }
+
+                OnObjectEntered?.Invoke(curObj);
+            }
         }
     }
 }

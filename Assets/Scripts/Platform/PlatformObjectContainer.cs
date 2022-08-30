@@ -7,8 +7,6 @@ namespace BLUE.ACubeStory.Platform
 {
     public class PlatformObjectContainer : MonoBehaviour
     {
-        private List<Transform> _objectsInPlatform = new List<Transform>();
-
         [SerializeField] private ActionExecutor _objectEnterActionExecutor = null;
 
         [SerializeField] private ActionExecutor _objectExitedActionExecutor = null;
@@ -16,14 +14,16 @@ namespace BLUE.ACubeStory.Platform
         public Transform LastEnteredObject { get; private set; }
         public Transform LastExitedObject { get; private set; }
         
-        private List<IPlatformEntrance> _entrancePoints;
-        private List<IPlatformEntrance> _EntrancePoints
+        private List<Transform> _objectsInPlatform = new List<Transform>();
+        
+        private List<PlatformEntrancePoint> _entrancePoints;
+        public List<PlatformEntrancePoint> EntrancePoints
         {
             get
             {
                 if (_entrancePoints == null)
                 {
-                    _entrancePoints = GetComponentsInChildren<IPlatformEntrance>().ToList();
+                    _entrancePoints = GetComponentsInChildren<PlatformEntrancePoint>().ToList();
                 }
 
                 return _entrancePoints;
@@ -42,7 +42,7 @@ namespace BLUE.ACubeStory.Platform
 
         private void RegisterToEntrancePoints()
         {
-            foreach (IPlatformEntrance entrancePoint in _EntrancePoints)
+            foreach (PlatformEntrancePoint entrancePoint in EntrancePoints)
             {
                 entrancePoint.OnObjectEntered += OnObjectEnteredPlatform;
                 entrancePoint.OnObjectExited += OnObjectExitedPlatform;
@@ -51,7 +51,7 @@ namespace BLUE.ACubeStory.Platform
 
         private void UnregisterFromEntrancePoints()
         {
-            foreach (IPlatformEntrance entrancePoint in _EntrancePoints)
+            foreach (PlatformEntrancePoint entrancePoint in EntrancePoints)
             {
                 entrancePoint.OnObjectEntered -= OnObjectEnteredPlatform;
                 entrancePoint.OnObjectExited -= OnObjectExitedPlatform;

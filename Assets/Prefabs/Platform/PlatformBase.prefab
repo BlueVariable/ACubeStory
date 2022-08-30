@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 7552612280279498304}
   - component: {fileID: 6146288327913451216}
   - component: {fileID: 7474601965368260073}
+  - component: {fileID: 1466919287907937335}
   m_Layer: 0
   m_Name: PlatformBase
   m_TagString: Untagged
@@ -120,10 +121,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e430a04ee3804f79b0aa6abc738fb905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _updaters:
+  - {fileID: 1466919287907937335}
   _objectEnterActionExecutor:
     _actionCarrier: {fileID: 9073522694099059485}
   _objectExitedActionExecutor:
     _actionCarrier: {fileID: 3306705216765400567}
+--- !u!114 &1466919287907937335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276510706080931070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e8c5cc8eef4030855c4b32236d9261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectContainer: {fileID: 7474601965368260073}
+  _updateStates: 02000000050000000800000007000000
 --- !u!1 &1366072360906195571
 GameObject:
   m_ObjectHideFlags: 0

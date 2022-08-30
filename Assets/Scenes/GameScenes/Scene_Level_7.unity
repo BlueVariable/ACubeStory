@@ -5635,11 +5635,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857335021}
-  - component: {fileID: 857335024}
   - component: {fileID: 857335023}
-  - component: {fileID: 857335022}
   m_Layer: 22
-  m_Name: Entrance_1
+  m_Name: Entrance_2
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5659,7 +5657,7 @@ Transform:
   m_Father: {fileID: 848675875}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &857335022
+--- !u!114 &857335023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5668,38 +5666,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 857335020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03af97c788dd488c80f1acbdb231e937, type: 3}
+  m_Script: {fileID: 11500000, guid: 994e309eb6634382a2b87bf138d662da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &857335023
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857335020}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &857335024
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857335020}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999, y: 0.99999, z: 0.99999}
-  m_Center: {x: 0, y: 0, z: 0}
+  _sphereCastRadius: 0.35
+  _sphereCastLocalPosition: {x: 0, y: 0, z: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &869824848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5828,9 +5802,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 891522017}
-  - component: {fileID: 891522020}
   - component: {fileID: 891522019}
-  - component: {fileID: 891522018}
   m_Layer: 22
   m_Name: Entrance_1
   m_TagString: Untagged
@@ -5852,7 +5824,7 @@ Transform:
   m_Father: {fileID: 1348013150}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &891522018
+--- !u!114 &891522019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5861,38 +5833,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 891522016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03af97c788dd488c80f1acbdb231e937, type: 3}
+  m_Script: {fileID: 11500000, guid: 994e309eb6634382a2b87bf138d662da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &891522019
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891522016}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &891522020
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891522016}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999, y: 0.99999, z: 0.99999}
-  m_Center: {x: 0, y: 0, z: 0}
+  _sphereCastRadius: 0.35
+  _sphereCastLocalPosition: {x: 0, y: 0, z: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &901191088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10354,11 +10302,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1816179000}
-  - component: {fileID: 1816179003}
-  - component: {fileID: 1816179002}
   - component: {fileID: 1816179001}
   m_Layer: 22
-  m_Name: Entrance_1
+  m_Name: Entrance_3
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -10387,38 +10333,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1816178999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03af97c788dd488c80f1acbdb231e937, type: 3}
+  m_Script: {fileID: 11500000, guid: 994e309eb6634382a2b87bf138d662da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1816179002
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816178999}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &1816179003
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816178999}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999, y: 0.99999, z: 0.99999}
-  m_Center: {x: 0, y: 0, z: 0}
+  _sphereCastRadius: 0.35
+  _sphereCastLocalPosition: {x: 0, y: 0, z: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &1821074247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11037,11 +10959,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1956358518}
-  - component: {fileID: 1956358521}
-  - component: {fileID: 1956358520}
   - component: {fileID: 1956358519}
   m_Layer: 22
-  m_Name: Entrance_1
+  m_Name: Entrance_0
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -11070,38 +10990,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956358517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03af97c788dd488c80f1acbdb231e937, type: 3}
+  m_Script: {fileID: 11500000, guid: 994e309eb6634382a2b87bf138d662da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1956358520
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956358517}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &1956358521
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956358517}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999, y: 0.99999, z: 0.99999}
-  m_Center: {x: 0, y: 0, z: 0}
+  _sphereCastRadius: 0.35
+  _sphereCastLocalPosition: {x: 0, y: 0, z: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &1966357232
 PrefabInstance:
   m_ObjectHideFlags: 0
