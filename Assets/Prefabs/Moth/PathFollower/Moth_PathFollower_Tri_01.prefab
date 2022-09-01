@@ -44,11 +44,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.4999999
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5000001
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_LocalRotation.y
@@ -56,7 +56,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -64,11 +64,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_DirtyAABB
@@ -98,6 +98,10 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.0019295961
       objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aac1d8e8910babe478353045ea8663a7, type: 2}
     - target: {fileID: 919132149155446097, guid: 07985fe12cb3dad47b0db785b0c5f3a0, type: 3}
       propertyPath: m_Name
       value: MothTri
@@ -118,7 +122,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1659517720368014748, guid: 54a458acfed358941ab08434367c610f, type: 3}
       propertyPath: m_Name
-      value: Moth_PathFollower_Tri
+      value: Moth_PathFollower_Tri_01
       objectReference: {fileID: 0}
     - target: {fileID: 6350945041423516726, guid: 54a458acfed358941ab08434367c610f, type: 3}
       propertyPath: m_RootOrder
