@@ -12,8 +12,6 @@ namespace BLUE.ACubeStory.Common
 
         private void Awake()
         {
-            Application.targetFrameRate = 15;
-            
             RegisterToUpdater();
         }
 

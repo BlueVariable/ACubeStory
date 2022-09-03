@@ -806,6 +806,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7139000386886286077, guid: 9e7c3c4113e244043817e5c003cb9fd7, type: 3}
+      propertyPath: _debugEnabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e7c3c4113e244043817e5c003cb9fd7, type: 3}
 --- !u!4 &113658202 stripped
@@ -8698,7 +8702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _positionOffset: {x: 0.5, y: 0.8, z: -0.5}
-  _overlapBoxHalfExtents: {x: 1, y: 0.25, z: 1}
+  _overlapBoxHalfExtents: {x: 0.8, y: 0.25, z: 0.8}
   _layerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -12147,9 +12151,10 @@ MonoBehaviour:
   _movementSettings:
     _movableObject: {fileID: 8766534326000669631}
     _useSpeedAsDuration: 1
-    _moveSpeed: 2
+    _moveSpeed: 0.25
     _moveEase: 32
     _doLocalMove: 0
+  _delayInSeconds: 0.125
 --- !u!114 &8766534326000669635
 MonoBehaviour:
   m_ObjectHideFlags: 0
