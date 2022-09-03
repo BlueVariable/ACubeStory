@@ -39,7 +39,7 @@ namespace BLUE.ACubeStory.Platform
             {
                 return;
             }
-            
+
             UpdatePlatformObjectContainer();
         }
     }

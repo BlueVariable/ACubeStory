@@ -12,6 +12,8 @@ namespace BLUE.ACubeStory.Platform.Task
         public override void Execute()
         {
             _platformObjectContainer.LastEnteredObject.SetParent(_newParent);
+            
+            Debug.Log($"Action Platform Update Entered Object Parent {Time.frameCount}");
         }
     }
 }

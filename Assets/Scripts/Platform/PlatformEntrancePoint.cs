@@ -6,8 +6,8 @@ namespace BLUE.ACubeStory.Platform
 {
     public abstract class PlatformEntrancePoint : MonoBehaviour
     {
-        public abstract Action<Transform> OnObjectEntered { get; set; }
-        public abstract Action<Transform> OnObjectExited { get; set; }
+        public Action<Transform> OnObjectEntered { get; set; }
+        public Action<Transform> OnObjectExited { get; set; }
 
         public readonly List<Transform> ObjectsOnPlatform = new List<Transform>();
 

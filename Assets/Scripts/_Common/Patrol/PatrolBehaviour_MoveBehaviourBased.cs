@@ -12,6 +12,10 @@ namespace BLUE.ACubeStory.Common
         
         protected override void MoveToTargetPoint(PatrolPointBase patrolPoint, Action completedCallback)
         {
+            string parentName = Cube.Cube.Instance.transform.parent != null ? Cube.Cube.Instance.transform.parent.gameObject.name : "null";
+            
+            Debug.Log(parentName);
+            
             _moveBehaviour.StartMovementTowards(
                 _movementSettings,
                 patrolPoint.GetPatrolPointPosition(),

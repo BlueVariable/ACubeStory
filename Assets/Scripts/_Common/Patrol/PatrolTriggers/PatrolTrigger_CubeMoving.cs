@@ -28,6 +28,11 @@ namespace BLUE.ACubeStory.Common
 
         private void UnregisterFromCubeEvents()
         {
+            if (Cube.Cube.Instance == null)
+            {
+                return;
+            }
+            
             Cube.Cube.Instance.CubeFSM.OnStateEntered -= OnCubeEnteredState;   
         }
 

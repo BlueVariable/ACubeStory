@@ -12,6 +12,8 @@ namespace BLUE.ACubeStory.Platform.Task
         public override void Execute()
         {
             _platformObjectContainer.LastExitedObject.SetParent(_newParent);
+            
+            Debug.Log($"Action Platform Update Exited Object Parent {Time.frameCount}");
         }
     }
 }

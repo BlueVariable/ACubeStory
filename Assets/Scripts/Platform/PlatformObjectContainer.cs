@@ -65,6 +65,8 @@ namespace BLUE.ACubeStory.Platform
                 return;
             }
             
+            Debug.Log($"Object Entered Platform -- {newObject.gameObject.name} -- {Time.frameCount}");
+            
             _objectsInPlatform.Add(newObject);
 
             LastEnteredObject = newObject;
@@ -78,6 +80,8 @@ namespace BLUE.ACubeStory.Platform
             {
                 return;
             }
+            
+            Debug.Log($"Object Exit Platform -- {newObject.gameObject.name} -- {Time.frameCount}");
 
             _objectsInPlatform.Remove(newObject);
 

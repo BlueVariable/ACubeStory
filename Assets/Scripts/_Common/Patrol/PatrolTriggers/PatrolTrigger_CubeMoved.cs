@@ -43,7 +43,7 @@ namespace BLUE.ACubeStory.Common
                 return;
             }
             
-            OnPatrolTriggered?.Invoke();
+            OnPatrolTriggered?.Invoke(); 
         }
     }
 }

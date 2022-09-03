@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Platform
@@ -7,6 +8,8 @@ namespace BLUE.ACubeStory.Platform
     {
         [SerializeField] private PlatformObjectContainer _objectContainer = null;
 
+        public Action OnUpdateCompleted { get; set; }
+        
         protected void UpdatePlatformObjectContainer()
         {
             Dictionary<PlatformEntrancePoint, List<Transform>> entranceObjectMappings =
@@ -19,6 +22,8 @@ namespace BLUE.ACubeStory.Platform
                 entranceObjectMappings.Add(entrancePoint, entrancePoint.GetCurrentObjectsOnPlatform());
                 
                 entrancePoint.UpdateExitedObjects(entranceObjectMappings[entrancePoint]);
+                
+                Debug.Log($"Cur Objects {entrancePoint.transform.gameObject.name} == {entranceObjectMappings[entrancePoint].Count}");
             }
 
             foreach (PlatformEntrancePoint entrancePoint in entrancePoints)
@@ -27,6 +32,8 @@ namespace BLUE.ACubeStory.Platform
                 
                 entrancePoint.UpdateObjectsOnPlatform(entranceObjectMappings[entrancePoint]);
             }
+            
+            OnUpdateCompleted?.Invoke();
         }
     }
 }
