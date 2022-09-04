@@ -8,5 +8,10 @@ namespace BLUE.ACubeStory.Common
         {
             return transform.position;
         }
+
+        public override Quaternion GetPatrolPointRotation()
+        {
+            return transform.rotation;
+        }
     }
 }

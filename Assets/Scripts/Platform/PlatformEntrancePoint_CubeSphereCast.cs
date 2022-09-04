@@ -10,8 +10,7 @@ namespace BLUE.ACubeStory.Platform
         [SerializeField] private Vector3 _sphereCastLocalPosition = Vector3.zero;
 
         [SerializeField] private LayerMask _layerMask = default;
-        
-        
+
         public override List<Transform> GetCurrentObjectsOnPlatform()
         {
             Collider[] overlappedColliders =
