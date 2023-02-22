@@ -36,6 +36,11 @@ namespace BLUE.ACubeStory.Cube
         
         private void UnregisterFromCubeFSM()
         {
+            if (Cube.Instance == null)
+            {
+                return;
+            }
+            
             Cube.Instance.CubeFSM.OnStateEntered -= OnCubeStateEntered;
         }
 
