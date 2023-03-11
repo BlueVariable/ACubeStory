@@ -6,13 +6,45 @@ namespace BLUE.ACubeStory.Ability
 {
     public class Action_DetachAbilities : ActionBase
     {
-        [SerializeField] private AttachableController_Ability _abilityAttachableController = null;
+        [SerializeField] private Transform _abilityAttachableControllerProviderObj = null;
 
-        [SerializeField] private AbilityBase[] _abilitiesToDetach = default;
+        [SerializeField] private Transform _abilityProviderObj = null;
+        
+        private IAbilityAttachableControllerProvider _abilityAttachableControllerProvider;
+        private IAbilityAttachableControllerProvider _AbilityAttachableControllerProvider
+        {
+            get
+            {
+                if (_abilityAttachableControllerProvider == null)
+                {
+                    _abilityAttachableControllerProvider = _abilityAttachableControllerProviderObj
+                        .GetComponent<IAbilityAttachableControllerProvider>();
+                }
+
+                return _abilityAttachableControllerProvider;
+            }
+        }
+        
+        private IAbilityProvider _abilityProvider;
+        private IAbilityProvider _AbilityProvider
+        {
+            get
+            {
+                if (_abilityProvider == null)
+                {
+                    _abilityProvider = _abilityProviderObj
+                        .GetComponent<IAbilityProvider>();
+                }
+
+                return _abilityProvider;
+            }
+        }
         
         public override void Execute()
         {
-            Array.ForEach(_abilitiesToDetach, val => _abilityAttachableController.TryDetach(val));
+            AttachableController_Ability _abilityAttachableController = _AbilityAttachableControllerProvider.GetAbilityAttachableController();
+            
+            Array.ForEach(_AbilityProvider.GetAbilities(), val => _abilityAttachableController.TryDetach(val));
         }
     }
 }
