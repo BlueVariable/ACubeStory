@@ -4,6 +4,7 @@
     {
         None = 0,
         Idle = 1,
-        Fly = 2
+        Fly = 2,
+        Fall = 30,
     }
 }
