@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
+    [Serializable]
     public class FSMTransitionMessage_Cube_Dash : FSMTransitionMessage_Cube
     {
-        public Vector3 DashDirection { get; }
+        [SerializeField] private Vector3 _dashDirection = default;
+        public Vector3 DashDirection => _dashDirection;
 
         public FSMTransitionMessage_Cube_Dash(Vector3 dashDirection)
         {
-            DashDirection = dashDirection;
+            _dashDirection = dashDirection;
         }
     }
 }

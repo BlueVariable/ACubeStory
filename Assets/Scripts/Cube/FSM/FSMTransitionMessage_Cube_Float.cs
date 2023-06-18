@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
+    [Serializable]
     public class FSMTransitionMessage_Cube_Float : FSMTransitionMessage_Cube
     {
-        public Vector3 Direction { get; }
+        [SerializeField] private Vector3 _direction = default;
+        public Vector3 Direction => _direction;
 
         public FSMTransitionMessage_Cube_Float(Vector3 direction)
         {
-            Direction = direction;
+            _direction = direction;
         }
     }
 }
