@@ -97229,7 +97229,7 @@ MonoBehaviour:
   _stallExecution: 1
   _moveBehaviour: {fileID: 1335124085}
   _moveSettings:
-    _movableObject: {fileID: 1425825312}
+    _movableObject: {fileID: 446653683}
     _useSpeedAsDuration: 0
     _moveSpeed: 2
     _moveEase: 4
@@ -209293,7 +209293,7 @@ MonoBehaviour:
   _stallExecution: 1
   _moveBehaviour: {fileID: 1335124085}
   _moveSettings:
-    _movableObject: {fileID: 1425825312}
+    _movableObject: {fileID: 446653683}
     _useSpeedAsDuration: 0
     _moveSpeed: 2
     _moveEase: 4
@@ -240851,11 +240851,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!4 &1425825312 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6558172303927861815, guid: 7b35bb3bb38bd9c42b9d0e6d54cca753, type: 3}
-  m_PrefabInstance: {fileID: 1425825307}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1426114658
 GameObject:
   m_ObjectHideFlags: 0
@@ -304888,13 +304883,16 @@ MonoBehaviour:
   _stateTransitionInfoColl:
   - <Message>k__BackingField:
       _direction: {x: 0, y: 0, z: -1}
-    <PostDelay>k__BackingField: 0.5
+      _speed: 10
+    <PostDelay>k__BackingField: 0
   - <Message>k__BackingField:
       _direction: {x: 0, y: 0, z: -1}
-    <PostDelay>k__BackingField: 0.5
+      _speed: 10
+    <PostDelay>k__BackingField: 0
   - <Message>k__BackingField:
       _direction: {x: 0, y: 0, z: -1}
-    <PostDelay>k__BackingField: 0.5
+      _speed: 10
+    <PostDelay>k__BackingField: 0
 --- !u!1 &1837159148
 GameObject:
   m_ObjectHideFlags: 0
