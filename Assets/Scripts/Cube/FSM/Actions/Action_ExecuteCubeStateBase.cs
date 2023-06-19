@@ -66,8 +66,18 @@ namespace BLUE.ACubeStory.Cube
         {
             foreach (StateTransitionInfo transitionInfo in _stateTransitionInfoColl)
             {
-                Cube.Instance.CubeFSM.TryChangeState(GetTargetState(),
-                    transitionInfo.Message);
+                while (true)
+                {
+                    bool isSuccess = Cube.Instance.CubeFSM.TryChangeState(GetTargetState(),
+                        transitionInfo.Message);
+
+                    if (isSuccess)
+                    {
+                        break;
+                    }
+
+                    yield return null;
+                }
 
                 if (transitionInfo.PostDelay <= 0)
                 {

@@ -66,10 +66,20 @@ namespace BLUE.ACubeStory.Cube
             FSMTransitionMessage_Cube_Roll transitionMessage)
         {
             RegisterToUndoRequestors();
-            
-            _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
-                transitionMessage.Direction, 
-                onRolledCallback: OnRollCompleted);
+
+            if (transitionMessage.Speed != 0f)
+            {
+                _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
+                    transitionMessage.Direction,
+                    speed: transitionMessage.Speed,
+                    onRolledCallback: OnRollCompleted);
+            }
+            else
+            {
+                _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
+                    transitionMessage.Direction, 
+                    onRolledCallback: OnRollCompleted);
+            }
         }
 
         protected override void ExitStateCustomActions()
