@@ -26,7 +26,7 @@ namespace BLUE.ACubeStory.Cube
         
         #endregion
         
-        protected abstract ECubeState GetTargetState();
+        protected abstract ECubeState[] GetTargetStates();
         
         public override void Execute()
         {
@@ -66,16 +66,8 @@ namespace BLUE.ACubeStory.Cube
         {
             foreach (StateTransitionInfo transitionInfo in _stateTransitionInfoColl)
             {
-                while (true)
+                while (!TryChangeState(transitionInfo))
                 {
-                    bool isSuccess = Cube.Instance.CubeFSM.TryChangeState(GetTargetState(),
-                        transitionInfo.Message);
-
-                    if (isSuccess)
-                    {
-                        break;
-                    }
-
                     yield return null;
                 }
 
@@ -89,5 +81,22 @@ namespace BLUE.ACubeStory.Cube
 
             OnCompleted?.Invoke(this);
         }
+
+        private bool TryChangeState(StateTransitionInfo transitionInfo)
+        {
+            foreach (ECubeState cubeState in GetTargetStates())
+            {
+                bool isSuccess = Cube.Instance.CubeFSM.TryChangeState(cubeState,
+                    transitionInfo.Message);
+
+                if (isSuccess)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
     }
+
 }

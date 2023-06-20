@@ -2,9 +2,9 @@
 {
     public class Action_ExecuteCubeState_Roll : Action_ExecuteCubeStateBase<FSMTransitionMessage_Cube_Roll>
     {
-        protected override ECubeState GetTargetState()
+        protected override ECubeState[] GetTargetStates()
         {
-            return ECubeState.Roll;
+            return new[] {ECubeState.Roll, ECubeState.Climb, ECubeState.Descend};
         }
     }
 }
