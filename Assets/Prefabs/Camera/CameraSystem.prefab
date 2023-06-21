@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4886072442928444038}
   m_RootOrder: 0
@@ -131,6 +132,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4886072443188189670}
   - {fileID: 4886072442928444038}
@@ -166,6 +168,7 @@ Transform:
   m_LocalRotation: {x: -0.09904573, y: 0.8923992, z: -0.23911768, w: -0.36964363}
   m_LocalPosition: {x: 12.28, y: 20.02, z: 12.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4886072441561053618}
   m_Father: {fileID: 4886072442649793632}
@@ -200,7 +203,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -221,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c209ae72fad4846907efb16e9ff6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraType: 100
+  _cameraType: 10
 --- !u!114 &2631995086641004920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +266,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4886072442649793632}
   m_Father: {fileID: 0}
@@ -281,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugEnabled: 0
-  _initialCameraType: 100
+  _initialCameraType: 10
 --- !u!1 &4886072443188189671
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +317,7 @@ Transform:
   m_LocalRotation: {x: -0.09904573, y: 0.8923992, z: -0.23911768, w: -0.36964363}
   m_LocalPosition: {x: 12.28, y: 20.02, z: 12.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4886072442649793632}
   m_RootOrder: 0
@@ -424,6 +429,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -446,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGlobal: 1
+  m_IsGlobal: 1
   priority: 0
   blendDistance: 0
   weight: 1
