@@ -49,6 +49,11 @@ namespace BLUE.ACubeStory.Cube
 
         private void StopRotation()
         {
+            if (_rotationBehaviour == null)
+            {
+                return;
+            }
+            
             _rotationBehaviour.StopRotation();
         }
     }
