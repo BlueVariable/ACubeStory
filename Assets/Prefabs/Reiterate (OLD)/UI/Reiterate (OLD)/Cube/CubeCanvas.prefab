@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7619878022795166737}
   - component: {fileID: 8343015006112940094}
   - component: {fileID: 1086767978209865576}
-  m_Layer: 5
+  m_Layer: 22
   m_Name: CubeCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +31,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.10000001, y: 0.1, z: 0.10000001}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2431452817129805342}
   m_Father: {fileID: 0}
@@ -140,7 +141,7 @@ GameObject:
   - component: {fileID: 2431452815649419244}
   - component: {fileID: 2431452815649419245}
   - component: {fileID: 2431452815649419241}
-  m_Layer: 5
+  m_Layer: 22
   m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,6 +158,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2431452816408867840}
   m_RootOrder: 0
@@ -327,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2431452816408867840}
-  m_Layer: 5
+  m_Layer: 22
   m_Name: DialogueContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,6 +346,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2431452815649419246}
   m_Father: {fileID: 2431452817129805342}
@@ -365,7 +368,7 @@ GameObject:
   - component: {fileID: 2431452817129805342}
   - component: {fileID: 2431452817129805341}
   - component: {fileID: 2431452817129805340}
-  m_Layer: 5
+  m_Layer: 22
   m_Name: UI_SimpleSpeakerDialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,6 +385,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2431452816408867840}
   m_Father: {fileID: 2431452815306392731}
