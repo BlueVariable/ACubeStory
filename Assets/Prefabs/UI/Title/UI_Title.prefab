@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7685507774776547666}
   - component: {fileID: 7685507774776547693}
   - component: {fileID: 7685507774776547692}
-  - component: {fileID: 7685507774776547695}
   - component: {fileID: 7685507774776547694}
   - component: {fileID: 7685507774776547689}
+  - component: {fileID: 5432569783366131908}
   m_Layer: 3
   m_Name: ChapterText
   m_TagString: Untagged
@@ -168,20 +168,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7685507774776547695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7685507774776547691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc70abddf3a740f2af8d4404481e24e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _delayBtwEachChar: 0.15
-  _skipTrigger: {fileID: 0}
 --- !u!225 &7685507774776547694
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -264,6 +250,45 @@ MonoBehaviour:
   _hasInitialDelay: 0
   _initialAlpha: 1
   _targetAlpha: 0.8
+--- !u!114 &5432569783366131908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7685507774776547691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab82b1f85d148eea8eb477aed55910d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delayBtwEachChar: 0.2
+  _riseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -30
+      inSlope: 75.43845
+      outSlope: 75.43845
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.079617836
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 4.507616
+      outSlope: 4.507616
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20382166
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _riseSpeed: 1
+  _skipTrigger: {fileID: 0}
 --- !u!1 &7685507774831799941
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,9 +525,9 @@ GameObject:
   - component: {fileID: 7685507775486222066}
   - component: {fileID: 7685507775486221837}
   - component: {fileID: 7685507775486221836}
-  - component: {fileID: 7685507775486221839}
   - component: {fileID: 7685507775486221838}
   - component: {fileID: 7685507775486221833}
+  - component: {fileID: 2391702749440018098}
   m_Layer: 3
   m_Name: HeaderText
   m_TagString: Untagged
@@ -658,20 +683,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7685507775486221839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7685507775486221835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc70abddf3a740f2af8d4404481e24e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _delayBtwEachChar: 0.15
-  _skipTrigger: {fileID: 0}
 --- !u!225 &7685507775486221838
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -754,6 +765,45 @@ MonoBehaviour:
   _hasInitialDelay: 0
   _initialAlpha: 1
   _targetAlpha: 0.8
+--- !u!114 &2391702749440018098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7685507775486221835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab82b1f85d148eea8eb477aed55910d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delayBtwEachChar: 0.2
+  _riseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -30
+      inSlope: 75.43845
+      outSlope: 75.43845
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.079617836
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 4.507616
+      outSlope: 4.507616
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20382166
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _riseSpeed: 1
+  _skipTrigger: {fileID: 0}
 --- !u!1 &7685507775486469953
 GameObject:
   m_ObjectHideFlags: 0
