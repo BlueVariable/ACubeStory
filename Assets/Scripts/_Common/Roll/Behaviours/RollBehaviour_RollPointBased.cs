@@ -127,7 +127,7 @@ namespace BLUE.ACubeStory.Common
                     break;
                 }
 
-                yield return new WaitForSeconds(Time.deltaTime);
+                yield return null;
             }
             
             _onRolledCallback?.Invoke();
