@@ -617,6 +617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5477052083016420646}
   - component: {fileID: 2878040362038289625}
+  - component: {fileID: 1309096168105060922}
   m_Layer: 0
   m_Name: Action_IncreaseSpeed
   m_TagString: Untagged
@@ -654,8 +655,22 @@ MonoBehaviour:
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 8709154938258817069}
   _targetMoveSpeed: 2
+  _speedProvider: {fileID: 1309096168105060922}
   _tweenDuration: 0
   _ease: 1
+--- !u!114 &1309096168105060922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539187948490223324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 2
 --- !u!1 &1585661110376166440
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,6 +779,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8436380921400851590}
   - component: {fileID: 2127077943731084287}
+  - component: {fileID: 3709737177083766373}
   m_Layer: 0
   m_Name: Action_ResetSpeed
   m_TagString: Untagged
@@ -801,8 +817,22 @@ MonoBehaviour:
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 828612116561094768}
   _targetMoveSpeed: 0
+  _speedProvider: {fileID: 3709737177083766373}
   _tweenDuration: 0
   _ease: 1
+--- !u!114 &3709737177083766373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648389304963021427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 0
 --- !u!1 &1661257046962448776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2381693522313540064}
   - component: {fileID: 8320285858568067787}
+  - component: {fileID: 227064081489637424}
   m_Layer: 0
   m_Name: Action_IncreaseSpeed
   m_TagString: Untagged
@@ -1279,8 +1310,22 @@ MonoBehaviour:
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 8709154938258817069}
   _targetMoveSpeed: 2
+  _speedProvider: {fileID: 227064081489637424}
   _tweenDuration: 4
   _ease: 1
+--- !u!114 &227064081489637424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613172753986850167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 2
 --- !u!1 &2652546001863009001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6107061584736986058}
   - component: {fileID: 1697732342089759171}
+  - component: {fileID: 4725804876926858130}
   m_Layer: 0
   m_Name: Action_DecreaseSpeed
   m_TagString: Untagged
@@ -1539,8 +1585,22 @@ MonoBehaviour:
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 8709154938258817069}
   _targetMoveSpeed: 0.85
+  _speedProvider: {fileID: 4725804876926858130}
   _tweenDuration: 4
   _ease: 1
+--- !u!114 &4725804876926858130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167432679335590808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 0.85
 --- !u!1 &3289983864393233602
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,6 +2189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8855937197361833051}
   - component: {fileID: 1035091115438127024}
+  - component: {fileID: 6421714813854926481}
   m_Layer: 0
   m_Name: Action_DecreaseSpeed
   m_TagString: Untagged
@@ -2166,8 +2227,22 @@ MonoBehaviour:
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 828612116561094768}
   _targetMoveSpeed: 5
+  _speedProvider: {fileID: 6421714813854926481}
   _tweenDuration: 0.35
   _ease: 1
+--- !u!114 &6421714813854926481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241448234934303602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 5
 --- !u!1 &4271072180204617885
 GameObject:
   m_ObjectHideFlags: 0
@@ -4863,6 +4938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 899002606288216904}
   - component: {fileID: 2556623687261830314}
+  - component: {fileID: 3375613935017869046}
   m_Layer: 0
   m_Name: Action_IncreaseSpeed
   m_TagString: Untagged
@@ -4900,8 +4976,22 @@ MonoBehaviour:
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 828612116561094768}
   _targetMoveSpeed: 7
+  _speedProvider: {fileID: 3375613935017869046}
   _tweenDuration: 0.5
   _ease: 6
+--- !u!114 &3375613935017869046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7545655286786638557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 7
 --- !u!1 &7595242424867644256
 GameObject:
   m_ObjectHideFlags: 0

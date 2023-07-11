@@ -80189,6 +80189,7 @@ GameObject:
   - component: {fileID: 479850648}
   - component: {fileID: 479850647}
   - component: {fileID: 479850649}
+  - component: {fileID: 479850650}
   m_Layer: 0
   m_Name: MothFall
   m_TagString: Untagged
@@ -80269,6 +80270,7 @@ MonoBehaviour:
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 2034491678}
   _targetMoveSpeed: 1
+  _speedProvider: {fileID: 479850650}
   _tweenDuration: 4
   _ease: 2
 --- !u!114 &479850648
@@ -80299,6 +80301,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animControllerObj: {fileID: 2123961254}
   _targetAnim: 30
+--- !u!114 &479850650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479850642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 1
 --- !u!1 &480065741
 GameObject:
   m_ObjectHideFlags: 0
@@ -162501,6 +162516,7 @@ GameObject:
   - component: {fileID: 968346939}
   - component: {fileID: 968346945}
   - component: {fileID: 968346946}
+  - component: {fileID: 968346947}
   m_Layer: 0
   m_Name: Moth_Awake
   m_TagString: Untagged
@@ -162553,6 +162569,7 @@ MonoBehaviour:
   _stallExecution: 0
   _pathObjectMoveBehaviourObj: {fileID: 2034491678}
   _targetMoveSpeed: 1
+  _speedProvider: {fileID: 968346947}
   _tweenDuration: 1
   _ease: 2
 --- !u!114 &968346941
@@ -162639,6 +162656,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actions:
   - {fileID: 1509144594}
+--- !u!114 &968346947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968346937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b00ff1a224a60b88b55bb5282ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 1
 --- !u!1 &968739461
 GameObject:
   m_ObjectHideFlags: 0
