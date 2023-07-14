@@ -1,12 +1,13 @@
 using System;
 using System.Linq;
 using BLUE.ActionSystem;
+using BLUE.ACubeStory.Fail;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class CubeFailController : MonoBehaviour
+    public class CubeFailController : MonoBehaviour, IFailController
     {
         public enum ECubeFail
         {
@@ -34,6 +35,8 @@ namespace BLUE.ACubeStory.Cube
         
         #region Events
 
+        public Action<IFailController> OnFailed { get; set; }
+
         public Action<ECubeFail, TriggerBase> OnFailTriggered { get; set; }
 
         #endregion
@@ -41,11 +44,18 @@ namespace BLUE.ACubeStory.Cube
         private void Awake()
         {
             RegisterToFailTriggers();
+
+            FailManager.Instance.RegisterFailController(this);
         }
 
         private void OnDestroy()
         {
             UnregisterFromFailTriggers();
+
+            if (FailManager.Instance != null)
+            {
+                FailManager.Instance.UnregisterFailController(this);
+            }
         }
 
         private void RegisterToFailTriggers()
@@ -78,6 +88,8 @@ namespace BLUE.ACubeStory.Cube
             _failTriggeredActionExecutor.Execute();
 
             OnFailTriggered?.Invoke(info.CubeFailType, failTrigger);
+
+            OnFailed?.Invoke(this);
         }
     }
 }

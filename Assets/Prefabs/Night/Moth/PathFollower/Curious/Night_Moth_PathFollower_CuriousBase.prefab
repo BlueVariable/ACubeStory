@@ -654,7 +654,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 8709154938258817069}
-  _targetMoveSpeed: 2
   _speedProvider: {fileID: 1309096168105060922}
   _tweenDuration: 0
   _ease: 1
@@ -816,7 +815,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 828612116561094768}
-  _targetMoveSpeed: 0
   _speedProvider: {fileID: 3709737177083766373}
   _tweenDuration: 0
   _ease: 1
@@ -1158,6 +1156,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actions:
   - {fileID: 3358530151592326679}
+--- !u!1 &2452830390236268398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7480503305043020908}
+  - component: {fileID: 3306179036652515636}
+  m_Layer: 0
+  m_Name: CuriousMothFailObserver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7480503305043020908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452830390236268398}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4869956165831896671}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3306179036652515636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452830390236268398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a977eb2ccc635c3448be83ff6f2b198f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mothRoot: {fileID: 828612116561094768}
 --- !u!1 &2536277753417551757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,7 +1352,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 8709154938258817069}
-  _targetMoveSpeed: 2
   _speedProvider: {fileID: 227064081489637424}
   _tweenDuration: 4
   _ease: 1
@@ -1584,7 +1626,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 8709154938258817069}
-  _targetMoveSpeed: 0.85
   _speedProvider: {fileID: 4725804876926858130}
   _tweenDuration: 4
   _ease: 1
@@ -2226,7 +2267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 828612116561094768}
-  _targetMoveSpeed: 5
   _speedProvider: {fileID: 6421714813854926481}
   _tweenDuration: 0.35
   _ease: 1
@@ -4975,7 +5015,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stallExecution: 1
   _pathObjectMoveBehaviourObj: {fileID: 828612116561094768}
-  _targetMoveSpeed: 7
   _speedProvider: {fileID: 3375613935017869046}
   _tweenDuration: 0.5
   _ease: 6
@@ -5180,6 +5219,38 @@ MonoBehaviour:
   _stallExecution: 1
   _minDuration: 0.2
   _maxDuration: 0.3
+--- !u!1 &7911960092646881046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4869956165831896671}
+  m_Layer: 0
+  m_Name: Fail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4869956165831896671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911960092646881046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7480503305043020908}
+  m_Father: {fileID: 828612116561094768}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7916475829599540368
 GameObject:
   m_ObjectHideFlags: 0
