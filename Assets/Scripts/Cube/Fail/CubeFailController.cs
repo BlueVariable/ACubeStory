@@ -28,6 +28,8 @@ namespace BLUE.ACubeStory.Cube
         #endregion
 
         [SerializeField] private ActionExecutor _failTriggeredActionExecutor = null;
+        
+        public Trigger_CubeFailBase LastCubeFailTrigger { get; private set; }
 
         private readonly List<Trigger_CubeFailBase> _cubeFailTriggers = new();
         
@@ -61,6 +63,8 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnFailTriggerStarted(Trigger_CubeFailBase cubeFailTrigger)
         {
+            LastCubeFailTrigger = cubeFailTrigger;
+            
             OnFailStarted?.Invoke(this);
         }
 

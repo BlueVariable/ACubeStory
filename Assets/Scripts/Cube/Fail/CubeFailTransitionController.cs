@@ -1,12 +1,19 @@
+using System.Collections.Generic;
 using BLUE.ACubeStory.Cube;
 using BLUE.ACubeStory.Fail;
 using BLUE.ACubeStory.LoadingScreen;
+using BLUE.Helpers;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Scene
 {
     public class CubeFailTransitionController : MonoBehaviour
     {
+        private readonly Dictionary<ECubeFail, float> _failTypeDelayMapping = new()
+        {
+            {ECubeFail.Fall_Void, 0.5f}
+        };
+        
         private readonly EventRaiser_OnLoadingScreenRequested _loadingScreenRequestor = new();
         
         private void Awake()
@@ -33,8 +40,24 @@ namespace BLUE.ACubeStory.Scene
 
         private void OnFailStarted(IFailController failController)
         {
-            _loadingScreenRequestor.Raise(
-                new EventRaiserArgs_OnLoadingScreenRequested(true));
+            CubeFailController cubeFailController = failController as CubeFailController;
+
+            ECubeFail cubeFailType = cubeFailController.LastCubeFailTrigger.CubeFailType;
+            
+            if (_failTypeDelayMapping.TryGetValue(cubeFailType, out float delay))
+            {
+                CoroutineHelper.Instance.WaitForSeconds(delay, onPreFailActionsCompleted);
+            }
+            else
+            {
+                onPreFailActionsCompleted();
+            }
+
+            void onPreFailActionsCompleted()
+            {
+                _loadingScreenRequestor.Raise(
+                    new EventRaiserArgs_OnLoadingScreenRequested(true));
+            }
         }
         
         private void OnFailed(IFailController failController)
