@@ -1,11 +1,10 @@
 using System;
 using BLUE.Helpers;
-using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Trigger_CubeFallingTowardsVoid : TriggerBase
+    public class Trigger_CubeFail_FallTowardsVoid : Trigger_CubeFailBase
     {
         [SerializeField] private State_Cube_Fall _cubeFallState = null;
 
@@ -13,6 +12,8 @@ namespace BLUE.ACubeStory.Cube
         
         #region Events
 
+        public override Action<Trigger_CubeFailBase> OnFailStarted { get; set; }
+        
         protected override Action OnTriggerAttempt { get; set; }
 
         #endregion
@@ -37,6 +38,8 @@ namespace BLUE.ACubeStory.Cube
             {
                 OnTriggerAttempt?.Invoke();
             }
+
+            OnFailStarted?.Invoke(this);
             
             CoroutineHelper.Instance.WaitForSeconds(_triggerDelay, onDelayFinished);
         }

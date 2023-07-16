@@ -1,3 +1,4 @@
+using BLUE.ACubeStory.LoadingScreen;
 using BLUE.UISystem;
 
 namespace BLUE.ACubeStory.UI
@@ -6,19 +7,19 @@ namespace BLUE.ACubeStory.UI
     {
         protected override void AwakeCustomActions()
         {
-            EventRaiser_OnLoadingScreenUIRequested.OnRaisedStatic += OnLoadingScreenUIRequested;
+            EventRaiser_OnLoadingScreenRequested.OnRaisedStatic += OnLoadingScreenUIRequested;
             
             base.AwakeCustomActions();
         }
 
         protected override void DestroyCustomActions()
         {
-            EventRaiser_OnLoadingScreenUIRequested.OnRaisedStatic -= OnLoadingScreenUIRequested;
+            EventRaiser_OnLoadingScreenRequested.OnRaisedStatic -= OnLoadingScreenUIRequested;
 
             base.DestroyCustomActions();
         }
 
-        private void OnLoadingScreenUIRequested(object sender, EventRaiserArgs_OnLoadingScreenUIRequested e)
+        private void OnLoadingScreenUIRequested(object sender, EventRaiserArgs_OnLoadingScreenRequested e)
         {
             void onActivated()
             {

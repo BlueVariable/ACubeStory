@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Fail;
 using BLUE.TriggerSystem;
@@ -9,85 +9,77 @@ namespace BLUE.ACubeStory.Cube
 {
     public class CubeFailController : MonoBehaviour, IFailController
     {
-        public enum ECubeFail
+        #region Singleton
+
+        private static CubeFailController _instance;
+        public static CubeFailController Instance
         {
-            None = 0,
-        
-            Fall_Void = 1,
-            Fall_Water = 2,
-            
-            Trap_Obstacle = 10,
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<CubeFailController>();
+                }
+
+                return _instance;
+            }
         }
 
-        [Serializable]
-        private class CubeFailTriggerInfo
-        {
-            [SerializeField] private ECubeFail _cubeFailType = default;
-            public ECubeFail CubeFailType => _cubeFailType;
-
-            [SerializeField] private TriggerBase[] _failTriggers = default;
-            public TriggerBase[] FailTriggers => _failTriggers;
-        }
-
-        [SerializeField] private CubeFailTriggerInfo[] _cubeFailTriggerMapping = default;
+        #endregion
 
         [SerializeField] private ActionExecutor _failTriggeredActionExecutor = null;
+
+        private readonly List<Trigger_CubeFailBase> _cubeFailTriggers = new();
         
         #region Events
 
+        public Action<IFailController> OnFailStarted { get; set; }
         public Action<IFailController> OnFailed { get; set; }
-
-        public Action<ECubeFail, TriggerBase> OnFailTriggered { get; set; }
-
-        #endregion
         
+        #endregion
+
+        public void RegisterTrigger(Trigger_CubeFailBase cubeFailTrigger)
+        {
+            if (!_cubeFailTriggers.Contains(cubeFailTrigger))
+            {
+                _cubeFailTriggers.Add(cubeFailTrigger);
+
+                cubeFailTrigger.OnFailStarted += OnFailTriggerStarted;
+                
+                cubeFailTrigger.OnTriggered += OnTriggered;
+            }
+        }
+
+        public void UnregisterTrigger(Trigger_CubeFailBase cubeFailTrigger)
+        {
+            _cubeFailTriggers.Remove(cubeFailTrigger);
+
+            cubeFailTrigger.OnFailStarted -= OnFailTriggerStarted;
+            
+            cubeFailTrigger.OnTriggered -= OnTriggered;
+        }
+
+        private void OnFailTriggerStarted(Trigger_CubeFailBase cubeFailTrigger)
+        {
+            OnFailStarted?.Invoke(this);
+        }
+
         private void Awake()
         {
-            RegisterToFailTriggers();
-
             FailManager.Instance.RegisterFailController(this);
         }
 
         private void OnDestroy()
         {
-            UnregisterFromFailTriggers();
-
             if (FailManager.Instance != null)
             {
                 FailManager.Instance.UnregisterFailController(this);
             }
         }
 
-        private void RegisterToFailTriggers()
-        {
-            foreach (CubeFailTriggerInfo info in _cubeFailTriggerMapping)
-            {
-                foreach (TriggerBase failTrigger in info.FailTriggers)
-                {
-                    failTrigger.OnTriggered += OnTriggered;
-                }
-            }
-        }
-
-        private void UnregisterFromFailTriggers()
-        {
-            foreach (CubeFailTriggerInfo info in _cubeFailTriggerMapping)
-            {
-                foreach (TriggerBase failTrigger in info.FailTriggers)
-                {
-                    failTrigger.OnTriggered -= OnTriggered;
-                }
-            }
-        }
-
         private void OnTriggered(TriggerBase failTrigger)
         {
-            CubeFailTriggerInfo info = _cubeFailTriggerMapping.FirstOrDefault(val 
-                => val.FailTriggers.Contains(failTrigger));
-            
             _failTriggeredActionExecutor.Execute();
-
-            OnFailTriggered?.Invoke(info.CubeFailType, failTrigger);
 
             OnFailed?.Invoke(this);
         }

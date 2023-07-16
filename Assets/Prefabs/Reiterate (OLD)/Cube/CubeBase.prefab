@@ -654,6 +654,7 @@ MonoBehaviour:
   _triggerConditions: []
   _triggeredActions:
     _actionCarrier: {fileID: 0}
+  <CubeFailType>k__BackingField: 1
   _cubeFallState: {fileID: 7001314770246708851}
   _triggerDelay: 2
 --- !u!1 &824589053605917631
@@ -1475,6 +1476,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activatableBehaviour: {fileID: 8707924507000020273}
   _activate: 1
+--- !u!1 &3107222178252318198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7807780936416801875}
+  - component: {fileID: 4390143653419511898}
+  m_Layer: 8
+  m_Name: Trap_Obstacle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7807780936416801875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107222178252318198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7462084036431926008}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4390143653419511898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107222178252318198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c409eb93d044898d25067f5256d298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugEnabled: 0
+  _activateOnAwake: 1
+  _once: 0
+  _triggerConditions: []
+  _triggeredActions:
+    _actionCarrier: {fileID: 0}
+  <CubeFailType>k__BackingField: 10
+  _obstacleHitTrigger: {fileID: 3891170105445084914}
 --- !u!1 &3116384811473135859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,6 +1722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 658493567379591202}
   - component: {fileID: 8279820758743888544}
+  - component: {fileID: 2566856606428366970}
   m_Layer: 8
   m_Name: Fail
   m_TagString: Untagged
@@ -1705,15 +1759,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7aa6eff708861143b7816d7b8de8843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubeFailTriggerMapping:
-  - _cubeFailType: 1
-    _failTriggers:
-    - {fileID: 6292666353403957168}
-  - _cubeFailType: 10
-    _failTriggers:
-    - {fileID: 3891170105445084914}
   _failTriggeredActionExecutor:
     _actionCarrier: {fileID: 3935871948099875438}
+--- !u!114 &2566856606428366970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3287526933068655041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8348d1f2d13a4cb469c127c902856167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3439525637733461568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,6 +1849,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7076386389426300353}
+  - {fileID: 7807780936416801875}
   m_Father: {fileID: 658493567379591202}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3358,6 +3418,8 @@ MonoBehaviour:
   _abilityProviderObj: {fileID: 6740107185475920425}
   _abilityAttachedActions:
     _actionCarrier: {fileID: 3102037536888011951}
+  _abilityDetachedActions:
+    _actionCarrier: {fileID: 0}
 --- !u!1 &7331309771532701547
 GameObject:
   m_ObjectHideFlags: 0

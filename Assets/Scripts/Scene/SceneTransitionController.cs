@@ -1,14 +1,14 @@
-using BLUE.ACubeStory.Scene;
+using BLUE.ACubeStory.LoadingScreen;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
-namespace BLUE.ACubeStory.UI
+namespace BLUE.ACubeStory.Scene
 {
     public class SceneTransitionController : MonoBehaviour
     {
         [SerializeField] private TriggerBase _transitionTrigger = null;
 
-        private readonly EventRaiser_OnLoadingScreenUIRequested _loadingScreenUIRequestor = new();
+        private readonly EventRaiser_OnLoadingScreenRequested _loadingScreenRequestor = new();
         
         private void Awake()
         {
@@ -34,8 +34,8 @@ namespace BLUE.ACubeStory.UI
         {
             UnregisterFromTrigger();
 
-            _loadingScreenUIRequestor.Raise(
-                new EventRaiserArgs_OnLoadingScreenUIRequested(true, OnLoadingScreenResulted));
+            _loadingScreenRequestor.Raise(
+                new EventRaiserArgs_OnLoadingScreenRequested(true, OnLoadingScreenResulted));
         }
         
         private void OnLoadingScreenResulted(bool result)
@@ -59,8 +59,8 @@ namespace BLUE.ACubeStory.UI
         {
             UnregisterFromSceneLoad();
             
-            _loadingScreenUIRequestor.Raise(
-                new EventRaiserArgs_OnLoadingScreenUIRequested(false));
+            _loadingScreenRequestor.Raise(
+                new EventRaiserArgs_OnLoadingScreenRequested(false));
         }
     }
 }
