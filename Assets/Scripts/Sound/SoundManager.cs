@@ -1,36 +1,77 @@
 ﻿using System;
+using System.Collections.Generic;
+using BLUE.PoolingSystem;
+using BLUE.SoundSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Sound
 {
     public class SoundManager : MonoBehaviour
     {
-        [SerializeField] private Transform _soundProviderObj = null;
+        #region Singleton
 
-        private ISoundSettingProvider _soundSettingProvider;
-        private ISoundSettingProvider SoundSettingProvider
+        private static SoundManager _instance;
+        public static SoundManager Instance
         {
             get
             {
-                if (_soundSettingProvider == null)
+                if (_instance == null)
                 {
-                    _soundSettingProvider = _soundProviderObj
-                        .GetComponent<ISoundSettingProvider>();
+                    _instance = FindObjectOfType<SoundManager>();
                 }
 
-                return _soundSettingProvider;
+                return _instance;
             }
         }
-        
-        public bool GetSoundClip(
-            ESound sound,
-            Action<AudioClip> setter)
-        {
-            bool result = SoundSettingProvider.TryGetSoundSettings(sound, out SoundSetting setting);
-            
-            setter?.Invoke(setting.SoundClip);
 
-            return result;
+        #endregion
+        
+        private Dictionary<ESound, Pool_Sound> _soundPools = null;
+
+        private Dictionary<ESound, Pool_Sound> _SoundPools
+        {
+            get
+            {
+                if (_soundPools == null)
+                {
+                    InitPools();
+                }
+
+                return _soundPools;
+            }
+        } 
+        
+        public bool GetSoundPlayer(
+            ESound sound,
+            Action<SoundPlayerBase> setter)
+        {
+            if(!_soundPools.TryGetValue(sound, out Pool_Sound pool))
+            {
+                return false;
+            }
+
+            PoolObject poolObject = pool.AllocatePoolObject();
+
+            if (!poolObject.TryGetComponent(out SoundPlayerBase soundPlayer))
+            {
+                return false;
+            }
+            
+            setter?.Invoke(soundPlayer);
+            
+            return true;
+        }
+
+        private void InitPools()
+        {
+            _soundPools = new Dictionary<ESound, Pool_Sound>();
+                    
+            Pool_Sound[] pools = GetComponentsInChildren<Pool_Sound>();
+
+            foreach (Pool_Sound pool in pools)
+            {
+                _soundPools[pool.SoundType] = pool;
+            }
         }
     }
 }
