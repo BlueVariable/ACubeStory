@@ -7,7 +7,7 @@ namespace BLUE.ACubeStory.LevelEditor
     {
         #region Constants
 
-        private const float COOLDOWN = 0.25f;
+        private const float COOLDOWN = 0.1f;
 
         #endregion
         
