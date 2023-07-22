@@ -2,15 +2,20 @@
 
 namespace BLUE.ACubeStory.Sound
 {
-    public class SoundGenerator_SoundMaker_Simple : SoundGenerator_SoundMakerBased<ESound, SoundMaker_Simple, ESoundMaker>
+    public class SoundGenerator_SoundMaker_Simple : SoundGenerator_SoundMakerBased<ESound, SoundMaker_TypeBased, ESoundMaker>
     {
         public override void GenerateSound(ESound soundType)
         {
-            SoundManager.Instance.GetSoundPlayer(soundType, onSet);
+            SoundManager.Instance.AllocateSoundPlayer(soundType, onSet);
 
             void onSet(SoundPlayerBase soundPlayer)
             {
-                soundPlayer.Play();
+                void onPlayed()
+                {
+                    SoundManager.Instance.DeallocateSoundPlayer(soundPlayer);
+                }
+                
+                soundPlayer.Play(onPlayed);
             }
         }
     }
