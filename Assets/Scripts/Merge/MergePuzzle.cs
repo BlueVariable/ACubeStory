@@ -11,6 +11,9 @@ namespace BLUE.ACubeStory.Merge
         {
             get
             {
+                // TODO: Merge
+                return null;
+                
                 if (_instance == null)
                 {
                     _instance = FindObjectOfType<MergePuzzle>();

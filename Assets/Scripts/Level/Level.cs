@@ -11,6 +11,10 @@ namespace BLUE.ACubeStory.Level
         {
             get
             {
+                // TODO: Level
+
+                return null;
+                
                 if (_instance == null)
                 {
                     _instance = FindObjectOfType<Level>();
