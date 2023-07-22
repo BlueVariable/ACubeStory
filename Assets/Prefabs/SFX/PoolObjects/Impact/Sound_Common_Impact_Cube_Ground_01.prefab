@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5770789958922829142}
   - component: {fileID: 5770789958922829143}
   - component: {fileID: 2505321159714365623}
+  - component: {fileID: 1862988585546744532}
   m_Layer: 0
   m_Name: Sound_Common_Impact_Cube_Ground_01
   m_TagString: Untagged
@@ -145,3 +146,16 @@ MonoBehaviour:
     _actionCarrier: {fileID: 0}
   _deallocatedActionExecutor:
     _actionCarrier: {fileID: 0}
+--- !u!114 &1862988585546744532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5770789958922829137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc1225627524f288898096dd30692c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AudioSource>k__BackingField: {fileID: 5770789958922829143}

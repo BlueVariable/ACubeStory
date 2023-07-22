@@ -25,6 +25,8 @@ namespace BLUE.ACubeStory.Sound
         }
 
         #endregion
+
+        private bool _isInited = false;
         
         private Dictionary<ESound, Pool_Sound> _soundPools = null;
 
@@ -32,20 +34,23 @@ namespace BLUE.ACubeStory.Sound
         {
             get
             {
-                if (_soundPools == null)
+                if (!_isInited)
                 {
                     InitPools();
                 }
 
                 return _soundPools;
             }
-        } 
-        
-        public bool GetSoundPlayer(
+        }
+
+        private Dictionary<SoundPlayerBase, PoolObject> _allocatedSoundPlayerMap =
+            new Dictionary<SoundPlayerBase, PoolObject>();
+
+        public bool AllocateSoundPlayer(
             ESound sound,
             Action<SoundPlayerBase> setter)
         {
-            if(!_soundPools.TryGetValue(sound, out Pool_Sound pool))
+            if(!_SoundPools.TryGetValue(sound, out Pool_Sound pool))
             {
                 return false;
             }
@@ -57,9 +62,24 @@ namespace BLUE.ACubeStory.Sound
                 return false;
             }
             
+            _allocatedSoundPlayerMap.Add(soundPlayer, poolObject);
+            
             setter?.Invoke(soundPlayer);
             
             return true;
+        }
+        
+        public void DeallocateSoundPlayer(
+            SoundPlayerBase soundPlayer)
+        {
+            if (!_allocatedSoundPlayerMap.TryGetValue(soundPlayer, out PoolObject poolObject))
+            {
+                return;
+            }
+
+            _allocatedSoundPlayerMap.Remove(soundPlayer);
+            
+            poolObject.Deallocate();
         }
 
         private void InitPools()
@@ -72,6 +92,9 @@ namespace BLUE.ACubeStory.Sound
             {
                 _soundPools[pool.SoundType] = pool;
             }
+
+            _isInited = true;
         }
+
     }
 }
