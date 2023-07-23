@@ -42,8 +42,7 @@ namespace BLUE.ACubeStory.Sound
             }
         }
 
-        private readonly Dictionary<SoundPlayerBase, PoolObject> _allocatedSoundPlayerMap =
-            new Dictionary<SoundPlayerBase, PoolObject>();
+        private readonly Dictionary<SoundPlayerBase, PoolObject> _allocatedSoundPlayerMap = new();
 
         public bool AllocateSoundPlayer(
             ESound sound,
