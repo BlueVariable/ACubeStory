@@ -37,9 +37,9 @@ namespace BLUE.ACubeStory.LevelEditor
         public EditorLevelRef EditorLevelRef => FindObjectOfType<EditorLevelRef>();
         
         public int SelectedTileID => TileIDProvider.GetTileID();
-        
+
         public TileGroupEditorContainer SelectedTileGroupEditorContainer => EditorLevelRef.transform
-            .GetChild(SelectedTileGroupIndex).transform.GetComponent<TileGroupEditorContainer>();
+            .GetComponentsInChildren<TileGroupEditorContainer>()[SelectedTileGroupIndex];
         
         private ITileIDProvider _tileIDProvider;
         private ITileIDProvider TileIDProvider
