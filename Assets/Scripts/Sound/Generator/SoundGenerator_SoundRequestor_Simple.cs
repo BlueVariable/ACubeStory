@@ -2,7 +2,7 @@
 
 namespace BLUE.ACubeStory.Sound
 {
-    public class SoundGenerator_SoundMaker_Simple : SoundGenerator_SoundMakerBased<ESound, SoundMaker_TypeBased, ESoundMaker>
+    public class SoundGenerator_SoundRequestor_Simple : SoundGenerator_SoundRequestorBased<ESound, SoundRequestor_TypeBased, ESoundRequestor>
     {
         public override void GenerateSound(ESound soundType)
         {
