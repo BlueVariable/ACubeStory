@@ -52,6 +52,8 @@ namespace BLUE.ACubeStory.Sound
         {
             if(!_SoundPools.TryGetValue(sound, out Pool_Sound pool))
             {
+                Debug.Log($"<color=orange> Couldn't find a pool for: </color>{sound}");
+                
                 return false;
             }
 
