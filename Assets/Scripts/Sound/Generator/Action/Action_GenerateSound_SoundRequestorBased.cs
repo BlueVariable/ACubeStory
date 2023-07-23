@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Sound
 {
-    public class Action_GenerateSound_SoundMakerBased : ActionBase
+    public class Action_GenerateSound_SoundRequestorBased : ActionBase
     {
-        [SerializeField] private SoundMaker_TypeBased _soundMaker = null;
+        [SerializeField] private SoundRequestor_TypeBased _soundRequestor = null;
         [SerializeField] private Trigger_LayerBase _trigger = null;
             
         public override void Execute()
@@ -18,12 +18,12 @@ namespace BLUE.ACubeStory.Sound
 
             if (!_trigger
                 .LastCandidateObject
-                .TryGetComponent(out SoundGenerator_SoundMaker_Simple soundGenerator))
+                .TryGetComponent(out SoundGenerator_SoundRequestor_Simple soundGenerator))
             {
                 return;
             }
 
-            soundGenerator.GenerateSound(_soundMaker);
+            soundGenerator.GenerateSound(_soundRequestor);
         }
     }
 }

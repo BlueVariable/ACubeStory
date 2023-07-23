@@ -1,6 +1,6 @@
 ﻿namespace BLUE.ACubeStory.Sound
 {
-    public enum ESoundMaker
+    public enum ESoundRequestor
     {
         None = 0,
         

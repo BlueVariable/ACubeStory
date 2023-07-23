@@ -1043,7 +1043,7 @@ GameObject:
   - component: {fileID: 1088270235812800827}
   - component: {fileID: 6762007693641365330}
   m_Layer: 8
-  m_Name: Action_GenerateSound_SoundMakerBased
+  m_Name: Action_GenerateSound_SoundRequestorBased
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c54655d844401d9c2d8818b3dfe73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundMaker: {fileID: 1703679244401902958}
+  _soundRequestor: {fileID: 1703679244401902958}
   _trigger: {fileID: 7050491941003771039}
 --- !u!1 &5782554140175497370
 GameObject:
@@ -1574,7 +1574,7 @@ GameObject:
   - component: {fileID: 8368005500809662555}
   - component: {fileID: 1703679244401902958}
   m_Layer: 8
-  m_Name: SoundMaker
+  m_Name: SoundRequestor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1607,7 +1607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f36537a772f4903935cb7bcdd2885d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SoundMakerType>k__BackingField: 100
+  <SoundRequestorType>k__BackingField: 100
 --- !u!1 &8579579253924158186
 GameObject:
   m_ObjectHideFlags: 0
