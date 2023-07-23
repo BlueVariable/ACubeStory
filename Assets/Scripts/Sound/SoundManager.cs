@@ -29,7 +29,6 @@ namespace BLUE.ACubeStory.Sound
         private bool _isInited = false;
         
         private Dictionary<ESound, Pool_Sound> _soundPools = null;
-
         private Dictionary<ESound, Pool_Sound> _SoundPools
         {
             get
@@ -43,7 +42,7 @@ namespace BLUE.ACubeStory.Sound
             }
         }
 
-        private Dictionary<SoundPlayerBase, PoolObject> _allocatedSoundPlayerMap =
+        private readonly Dictionary<SoundPlayerBase, PoolObject> _allocatedSoundPlayerMap =
             new Dictionary<SoundPlayerBase, PoolObject>();
 
         public bool AllocateSoundPlayer(
@@ -97,6 +96,5 @@ namespace BLUE.ACubeStory.Sound
 
             _isInited = true;
         }
-
     }
 }
