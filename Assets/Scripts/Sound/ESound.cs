@@ -5,19 +5,18 @@
         None = 0,
         
         Ground_Impact_01 = 100,
-        Ground_Impact_06 = 105,
-        Ground_Impact_07 = 106,
+        
         Ground_Cobblestone_Impact_01_01 = 101,
         Ground_Cobblestone_Impact_01_02 = 102,
+        
         Ground_Glowy_Impact_01_01 = 103,
         Ground_Glowy_Impact_01_02 = 104,
         Ground_Glowy_Impact_01_03 = 107,
         Ground_Glowy_Impact_01_04 = 108,
-        Ground_Impact_08 = 107,
-        Ground_Impact_09 = 108,
+
         
-        Ground_Water_Impact_01_01 = 200,
-        Ground_Water_Impact_01_02 = 201,
-        Ground_Water_Impact_01_03 = 202,
+        Ground_Water_Impact_01_01 = 150,
+        Ground_Water_Impact_01_02 = 151,
+        Ground_Water_Impact_01_03 = 152,
     }
 }
