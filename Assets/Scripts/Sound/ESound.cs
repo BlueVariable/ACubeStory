@@ -13,5 +13,9 @@
         Ground_Impact_07 = 106,
         Ground_Impact_08 = 107,
         Ground_Impact_09 = 108,
+        
+        Ground_Water_Impact_01_01 = 200,
+        Ground_Water_Impact_01_02 = 201,
+        Ground_Water_Impact_01_03 = 202,
     }
 }
