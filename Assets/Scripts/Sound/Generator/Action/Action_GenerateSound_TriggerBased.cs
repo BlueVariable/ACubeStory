@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Sound
 {
-    public class Action_GenerateSound_SoundRequestorBased : ActionBase
+    public class Action_GenerateSound_TriggerBased : ActionBase
     {
         [SerializeField] private SoundRequestor_TypeBased _soundRequestor = null;
         [SerializeField] private Trigger_LayerBase _trigger = null;

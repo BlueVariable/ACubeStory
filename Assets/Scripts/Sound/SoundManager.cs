@@ -77,6 +77,11 @@ namespace BLUE.ACubeStory.Sound
                 return;
             }
 
+            if (soundPlayer.IsPlaying)
+            {
+                soundPlayer.Stop();
+            }
+
             _allocatedSoundPlayerMap.Remove(soundPlayer);
             
             poolObject.Deallocate();

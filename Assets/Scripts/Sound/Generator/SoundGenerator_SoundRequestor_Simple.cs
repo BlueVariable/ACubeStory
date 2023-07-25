@@ -1,10 +1,11 @@
-﻿using BLUE.SoundSystem;
+﻿using System;
+using BLUE.SoundSystem;
 
 namespace BLUE.ACubeStory.Sound
 {
     public class SoundGenerator_SoundRequestor_Simple : SoundGenerator_SoundRequestorBased<ESound, SoundRequestor_TypeBased, ESoundRequestor>
     {
-        public override void GenerateSound(ESound soundType)
+        public override void GenerateSound(ESound soundType, Action<SoundPlayerBase> onSetCallback)
         {
             SoundManager.Instance.AllocateSoundPlayer(soundType, onSet);
 
@@ -16,7 +17,14 @@ namespace BLUE.ACubeStory.Sound
                 }
                 
                 soundPlayer.Play(onPlayed);
+                
+                onSetCallback?.Invoke(soundPlayer);
             }
+        }
+
+        public override void StopSound(SoundPlayerBase soundPlayer)
+        {
+            SoundManager.Instance.DeallocateSoundPlayer(soundPlayer);
         }
     }
 }
