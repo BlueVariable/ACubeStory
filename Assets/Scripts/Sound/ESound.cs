@@ -11,8 +11,8 @@
         
         Ground_Glowy_Impact_01_01 = 103,
         Ground_Glowy_Impact_01_02 = 104,
-        Ground_Glowy_Impact_01_03 = 107,
-        Ground_Glowy_Impact_01_04 = 108,
+        Ground_Glowy_CubeImpact_01_01 = 107,
+        Ground_Glowy_CubeImpact_01_02 = 108,
         
         Ground_Water_Impact_01_01 = 150,
         Ground_Water_Impact_01_02 = 151,
