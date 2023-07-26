@@ -9,10 +9,10 @@
         Ground_Cobblestone_Impact_01_01 = 101,
         Ground_Cobblestone_Impact_01_02 = 102,
         
-        Ground_Glowy_Impact_01_01 = 103,
-        Ground_Glowy_Impact_01_02 = 104,
-        Ground_Glowy_CubeImpact_01_01 = 107,
-        Ground_Glowy_CubeImpact_01_02 = 108,
+        Ground_Glowy_CubeImpact_01_01 = 103,
+        Ground_Glowy_CubeImpact_01_02 = 104,
+        Ground_Glowy_MothImpact_01_01 = 107,
+        Ground_Glowy_MothImpact_01_02 = 108,
         
         Ground_Water_Impact_01_01 = 150,
         Ground_Water_Impact_01_02 = 151,
