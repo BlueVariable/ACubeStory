@@ -21,5 +21,6 @@
         PortalPiece_Impact_01_01 = 200,
         PortalPiece_Impact_01_02 = 201,
 
+        Moth_Fly_01 = 220,
     }
 }

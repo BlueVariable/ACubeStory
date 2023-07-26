@@ -31,7 +31,14 @@ namespace BLUE.ACubeStory.Sound
 
         public override void DeallocateSoundPlayer()
         {
+            if (_cachedPlayer == null)
+            {
+                return;
+            }
+            
             SoundManager.Instance.DeallocateSoundPlayer(_cachedPlayer);
+
+            _cachedPlayer = null;
         }
 
         private void AllocatePlayer(Action<SoundPlayerBase> onSet)
