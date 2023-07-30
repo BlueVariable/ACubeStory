@@ -4,6 +4,8 @@
     {
         None = 0,
         
+        Transition_01 = 10,
+        
         Ground_Impact_01 = 100,
         
         Ground_Cobblestone_Impact_01_01 = 101,
