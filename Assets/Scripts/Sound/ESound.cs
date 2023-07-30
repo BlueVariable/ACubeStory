@@ -4,7 +4,9 @@
     {
         None = 0,
         
-        Transition_01 = 10,
+        Transition_01_01 = 10,
+        Transition_01_02 = 11,
+        Transition_01_03 = 12,
         
         Ground_Impact_01 = 100,
         
