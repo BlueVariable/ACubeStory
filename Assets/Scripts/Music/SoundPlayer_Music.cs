@@ -92,7 +92,13 @@ namespace BLUE.ACubeStory.Music
 
         public void FadeOut(float fadeDuration, Action onFaded = null)
         {
-            FadeAudio(CurrentMusic.GetAudioSource(), fadeDuration, true, onFaded = null);
+            FadeAudio(CurrentMusic.GetAudioSource(), fadeDuration, true, onFaded);
+        }
+        
+        private void OnDestroy()
+        {
+            _fadeInTween?.Kill();
+            _fadeOutTween?.Kill();
         }
 
         private void PlayAudioSource(AudioSource audioSource, SoundPlayData_Music playData)
@@ -147,12 +153,6 @@ namespace BLUE.ACubeStory.Music
                         onFaded?.Invoke();
                     });
             }
-        }
-
-        private void OnDestroy()
-        {
-            _fadeInTween?.Kill();
-            _fadeOutTween?.Kill();
         }
     }
 }
