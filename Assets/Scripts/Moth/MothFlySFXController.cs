@@ -1,17 +1,40 @@
+using BLUE.Common;
 using BLUE.SoundSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Moth
 {
-    public class MothFlySFXController : MonoBehaviour
+    public class MothFlySFXController : ActivatableBehaviourBase
     {
+        [SerializeField] private bool _activeOnAwake = true;
+        
         [SerializeField] private AnimationController_Moth _mothAnimController = null;
 
         [SerializeField] private SoundPlayerControllerBase _soundPlayerController = null;
         
-        private void Awake()
+        public override void Activate()
         {
             RegisterToMothAnimController();
+
+            if (_mothAnimController.IsCurPlayingAnim(EMothAnimation.Fly))
+            {
+                PlayFlySFX();
+            }
+        }
+
+        public override void Deactivate()
+        {
+            UnregisterFromMothAnimController();
+
+            StopFlySFX();
+        }
+        
+        private void Awake()
+        {
+            if (_activeOnAwake)
+            {
+                Activate();
+            }
         }
 
         private void OnDestroy()
