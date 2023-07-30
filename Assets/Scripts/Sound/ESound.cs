@@ -22,8 +22,13 @@
         Ground_Water_Impact_01_02 = 151,
         Ground_Water_Impact_01_03 = 152,
         
+        Ground_Wireframe_Impact_01_01 = 160,
+        Ground_Wireframe_Impact_01_02 = 161,
+        
         PortalPiece_Impact_01_01 = 200,
         PortalPiece_Impact_01_02 = 201,
+        
+        Portal_Activation_01 = 210,
 
         Moth_Fly_01 = 220,
         
