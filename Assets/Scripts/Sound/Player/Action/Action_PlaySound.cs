@@ -10,7 +10,9 @@ namespace BLUE.ACubeStory.Sound
         [SerializeField] private SoundPlayerControllerBase _soundPlayerController = null;
 
         #region Events
+        
         public override Action<InterruptableActionBase> OnCompleted { get; set; }
+        
         #endregion
         
         public override void Execute()

@@ -8,6 +8,12 @@
         Transition_01_02 = 11,
         Transition_01_03 = 12,
         
+        Cube_Activation_01_01 = 50,
+        Cube_Activation_01_02 = 51,
+        Cube_Activation_01_03 = 52,
+        
+        Cube_Deactivation_01 = 80,
+
         Ground_Impact_01 = 100,
         
         Ground_Cobblestone_Impact_01_01 = 101,
