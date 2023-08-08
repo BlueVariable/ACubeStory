@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.Fail;
@@ -28,9 +29,15 @@ namespace BLUE.ACubeStory.Cube
         #endregion
 
         [SerializeField] private ActionExecutor _failTriggeredActionExecutor = null;
+
+        [SerializeField] private TriggerBase[] _triggersToBlockOnFail = default;
+
+        [SerializeField] private float _triggerBlockDuration = 0.25f;
         
         public Trigger_CubeFailBase LastCubeFailTrigger { get; private set; }
 
+        private IEnumerator _triggerReactivationRoutine;
+        
         private readonly List<Trigger_CubeFailBase> _cubeFailTriggers = new();
         
         #region Events
@@ -64,7 +71,9 @@ namespace BLUE.ACubeStory.Cube
         private void OnFailTriggerStarted(Trigger_CubeFailBase cubeFailTrigger)
         {
             LastCubeFailTrigger = cubeFailTrigger;
-            
+
+            Array.ForEach(_triggersToBlockOnFail, val => val.TryDeactivate());
+
             OnFailStarted?.Invoke(this);
         }
 
@@ -79,6 +88,8 @@ namespace BLUE.ACubeStory.Cube
             {
                 FailManager.Instance.UnregisterFailController(this);
             }
+
+            StopTriggerReactivationRoutine();
         }
 
         private void OnTriggered(TriggerBase failTrigger)
@@ -86,6 +97,32 @@ namespace BLUE.ACubeStory.Cube
             _failTriggeredActionExecutor.Execute();
 
             OnFailed?.Invoke(this);
+
+            StartTriggerReactivationRoutine();
+        }
+
+        private void StartTriggerReactivationRoutine()
+        {
+            StopTriggerReactivationRoutine();
+
+            _triggerReactivationRoutine = TriggerReactivationProgress();
+
+            StartCoroutine(_triggerReactivationRoutine);
+        }
+
+        private void StopTriggerReactivationRoutine()
+        {
+            if (_triggerReactivationRoutine != null)
+            {
+                StopCoroutine(_triggerReactivationRoutine);
+            }
+        }
+
+        private IEnumerator TriggerReactivationProgress()
+        {
+            yield return new WaitForSeconds(_triggerBlockDuration);
+            
+            Array.ForEach(_triggersToBlockOnFail, val => val.TryActivate());
         }
     }
 }
