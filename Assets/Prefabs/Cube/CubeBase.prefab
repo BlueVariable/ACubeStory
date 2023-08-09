@@ -482,6 +482,51 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _reverseTrigger: 1
+--- !u!1 &2465914058977094498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5443522145162698578}
+  - component: {fileID: 3045778862113409581}
+  m_Layer: 8
+  m_Name: Condition_DurationCompleted_SFXRequestor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5443522145162698578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465914058977094498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9008904505958011209}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3045778862113409581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465914058977094498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ad9402f7a010446b5b476e723410fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.25
 --- !u!1 &2659179068321017653
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +689,7 @@ MonoBehaviour:
     _actionCarrier: {fileID: 3935871948099875438}
   _triggersToBlockOnFail:
   - {fileID: 7050491941003771039}
+  _triggerBlockDuration: 0.25
 --- !u!114 &1312471616716033490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,7 +1365,8 @@ MonoBehaviour:
   _debugEnabled: 0
   _activateOnAwake: 1
   _once: 0
-  _triggerConditions: []
+  _triggerConditions:
+  - {fileID: 3045778862113409581}
   _triggeredActions:
     _actionCarrier: {fileID: 1088270235812800827}
   _layerMask:
@@ -1400,6 +1447,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5120314424362254886}
+  - {fileID: 5443522145162698578}
   m_Father: {fileID: 7075618033240990871}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
