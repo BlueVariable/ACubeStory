@@ -8,6 +8,10 @@
         Transition_01_02 = 11,
         Transition_01_03 = 12,
         
+        Cube_Roll_01_01 = 20,
+        Cube_Roll_01_02 = 21,
+        Cube_Roll_01_03 = 22,
+        
         Cube_Activation_01_01 = 50,
         Cube_Activation_01_02 = 51,
         Cube_Activation_01_03 = 52,
