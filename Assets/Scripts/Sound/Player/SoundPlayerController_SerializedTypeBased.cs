@@ -8,6 +8,8 @@ namespace BLUE.ACubeStory.Sound
     {
         [SerializeField] private ESound _soundType = ESound.None;
 
+        [SerializeField] private Transform _parentTransform = null;
+        
         private SoundPlayerBase _cachedPlayer = null;
         
         public override void AllocateSoundPlayer(Action<SoundPlayerBase> onSet)
@@ -24,6 +26,11 @@ namespace BLUE.ACubeStory.Sound
             void onPlayerSet(SoundPlayerBase player)
             {
                 _cachedPlayer = player;
+
+                if (_parentTransform!= null)
+                {
+                    player.gameObject.transform.SetParent(_parentTransform, false);
+                }
                 
                 onSet?.Invoke(_cachedPlayer);
             }

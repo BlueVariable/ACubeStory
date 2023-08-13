@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9e0c89a0abe3c47b74c36de9a41f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeOnAwake: 1
   _mothAnimController: {fileID: 3715245537404794738}
   _soundPlayerController: {fileID: 7562399403448034301}
 --- !u!114 &7562399403448034301
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundType: 220
+  _parentTransform: {fileID: 2921105513958039205}
 --- !u!1 &195906958758904753
 GameObject:
   m_ObjectHideFlags: 0
@@ -4426,8 +4428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actions:
   - {fileID: 7137490277333661145}
-  - {fileID: 6528185498417683844}
-  - {fileID: 6283144906155911770}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6364263628921034546
 GameObject:
   m_ObjectHideFlags: 0
