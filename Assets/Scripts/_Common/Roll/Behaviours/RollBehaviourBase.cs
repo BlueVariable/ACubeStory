@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using BLUE.ActionSystem;
-using BLUE.ACubeStory.Sound;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Common
@@ -16,8 +14,6 @@ namespace BLUE.ACubeStory.Common
         #endregion
         
         [SerializeField] private RollConditionBase[] _rollConditions = null;
-
-        [SerializeField] private ActionExecutor _rollStartedActionExecutor = null;
 
         public bool IsRolling { get; private set; }
         
@@ -66,9 +62,7 @@ namespace BLUE.ACubeStory.Common
             IsRolling = true;
             
             OnRollStarted?.Invoke();
-            
-            _rollStartedActionExecutor.Execute();
-            
+
             StartRoll(direction, angle, speed, rollPointOffset, rollCurve, onRollEnded);
 
             void onRollEnded()
