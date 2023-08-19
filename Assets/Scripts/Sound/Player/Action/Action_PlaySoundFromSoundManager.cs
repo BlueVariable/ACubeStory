@@ -20,7 +20,12 @@ namespace BLUE.ACubeStory.Sound
         {
             ESound randSound = _soundTypes.GetRandomElement();
 
-            SoundManager.Instance.PlaySound(randSound);
+            SoundManager.Instance.PlaySound(randSound, onPlayed);
+
+            void onPlayed()
+            {
+                OnCompleted?.Invoke(this);
+            }
         }
         
         public override void Interrupt()
