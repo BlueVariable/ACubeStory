@@ -12,6 +12,9 @@
         Cube_Roll_01_02 = 21,
         Cube_Roll_01_03 = 22,
         
+        Title_Impact_01_01 = 30,
+        Title_Impact_01_02 = 31,
+        
         Cube_Activation_01_01 = 50,
         Cube_Activation_01_02 = 51,
         Cube_Activation_01_03 = 52,

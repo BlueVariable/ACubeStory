@@ -38,6 +38,8 @@ GameObject:
   - component: {fileID: 6178015648433187247}
   - component: {fileID: 5543242083498746647}
   - component: {fileID: 774438226363739359}
+  - component: {fileID: 6470137962184767895}
+  - component: {fileID: 5353993412214809247}
   m_Layer: 0
   m_Name: SoundPool_Night
   m_TagString: Untagged
@@ -546,5 +548,39 @@ MonoBehaviour:
   <SoundType>k__BackingField: 22
   _poolSettings:
     _referenceObject: {fileID: 2505321159714365623, guid: f08472bf38a54cc4bb84e00c28d45d2a, type: 3}
+    _poolObjectFactory: {fileID: 4387643284022859152}
+  _initOnAwake: 1
+--- !u!114 &6470137962184767895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4387643284022859159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30546ef9bdbf41dea7ef82602a273ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <SoundType>k__BackingField: 30
+  _poolSettings:
+    _referenceObject: {fileID: 2505321159714365623, guid: 0ded91a60c99053448a52aac0cb6148c, type: 3}
+    _poolObjectFactory: {fileID: 4387643284022859152}
+  _initOnAwake: 1
+--- !u!114 &5353993412214809247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4387643284022859159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30546ef9bdbf41dea7ef82602a273ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <SoundType>k__BackingField: 31
+  _poolSettings:
+    _referenceObject: {fileID: 2505321159714365623, guid: ab787528cdb0dd2469a3108637281206, type: 3}
     _poolObjectFactory: {fileID: 4387643284022859152}
   _initOnAwake: 1
