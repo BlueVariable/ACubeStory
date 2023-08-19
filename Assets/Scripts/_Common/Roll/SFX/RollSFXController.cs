@@ -1,6 +1,5 @@
 ﻿using BLUE.ACubeStory.Sound;
 using BLUE.Extensions;
-using BLUE.SoundSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Common
@@ -26,17 +25,7 @@ namespace BLUE.ACubeStory.Common
         {
             ESound randSound = _soundTypes.GetRandomElement();
 
-            void onSet(SoundPlayerBase soundPlayer)
-            {
-                void onPlayed()
-                {
-                    SoundManager.Instance.DeallocateSoundPlayer(soundPlayer);
-                }
-                
-                soundPlayer.Play(onPlayed);
-            }
-            
-            SoundManager.Instance.AllocateSoundPlayer(randSound, onSet);
+            SoundManager.Instance.PlaySound(randSound);
         }
     }
 }

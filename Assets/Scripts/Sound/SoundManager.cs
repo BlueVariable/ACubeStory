@@ -44,6 +44,23 @@ namespace BLUE.ACubeStory.Sound
 
         private readonly Dictionary<SoundPlayerBase, PoolObject> _allocatedSoundPlayerMap = new();
 
+        public bool PlaySound(ESound sound, Action playedCallback = null)
+        {
+            void onSet(SoundPlayerBase soundPlayer)
+            {
+                void onPlayed()
+                {
+                    DeallocateSoundPlayer(soundPlayer);
+                    
+                    playedCallback?.Invoke();
+                }
+                
+                soundPlayer.Play(onPlayed);
+            }
+            
+            return AllocateSoundPlayer(sound, onSet);
+        }
+        
         public bool AllocateSoundPlayer(
             ESound sound,
             Action<SoundPlayerBase> setter)
