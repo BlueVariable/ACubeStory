@@ -22,12 +22,6 @@ namespace BLUE.ACubeStory.Music
         
         public override void Interrupt()
         {
-            if (SoundPlayer_Music.Instance == null)
-            {
-                return;
-            }
-            
-            SoundPlayer_Music.Instance.Stop();
         }
     }
 }

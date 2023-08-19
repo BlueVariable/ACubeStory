@@ -42,6 +42,11 @@ namespace BLUE.ACubeStory.Sound
             {
                 return;
             }
+
+            if (!SoundManager.Instance)
+            {
+                return;
+            }
             
             SoundManager.Instance.DeallocateSoundPlayer(_cachedPlayer);
 
