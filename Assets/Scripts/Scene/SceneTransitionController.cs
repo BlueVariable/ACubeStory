@@ -18,6 +18,11 @@ namespace BLUE.ACubeStory.Scene
         
         private readonly EventRaiser_OnLoadingScreenRequested _loadingScreenRequestor = new();
         
+        public void ForceTransition()
+        {
+            OnTriggered(null);
+        }
+        
         private void Awake()
         {
             RegisterToTrigger();
@@ -43,7 +48,8 @@ namespace BLUE.ACubeStory.Scene
             UnregisterFromTrigger();
 
             _loadingScreenRequestor.Raise(
-                new EventRaiserArgs_OnLoadingScreenRequested(true, OnLoadingScreenResulted));
+                new EventRaiserArgs_OnLoadingScreenRequested(true, true,
+                    OnLoadingScreenResulted));
         }
         
         private void OnLoadingScreenResulted(bool result)
@@ -102,7 +108,7 @@ namespace BLUE.ACubeStory.Scene
             }
             
             _loadingScreenRequestor.Raise(
-                new EventRaiserArgs_OnLoadingScreenRequested(false));
+                new EventRaiserArgs_OnLoadingScreenRequested(false, true));
         }
     }
 }

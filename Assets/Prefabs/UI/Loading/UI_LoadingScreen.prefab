@@ -362,9 +362,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3678070709390529297}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -219.83565}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8897818417363286400}
@@ -372,7 +372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -37.98722, y: -12.0669365}
+  m_AnchoredPosition: {x: -37.98721, y: -12.066919}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4070673845502074502
@@ -600,6 +600,8 @@ MonoBehaviour:
   - {fileID: 1729394521432386684}
   - {fileID: 6062894774560004746}
   - {fileID: 8593673890936783179}
+  _idleAnimObjects:
+  - {fileID: 9104554607211153580}
 --- !u!1 &4070673847106136364
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 197941801607006425}
   m_Layer: 5
-  m_Name: LoadingAnimation
+  m_Name: CubeObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -56,14 +56,14 @@ namespace BLUE.ACubeStory.Scene
             void onPreFailActionsCompleted()
             {
                 _loadingScreenRequestor.Raise(
-                    new EventRaiserArgs_OnLoadingScreenRequested(true));
+                    new EventRaiserArgs_OnLoadingScreenRequested(true, false));
             }
         }
         
         private void OnFailed(IFailController failController)
         {
             _loadingScreenRequestor.Raise(
-                new EventRaiserArgs_OnLoadingScreenRequested(false));
+                new EventRaiserArgs_OnLoadingScreenRequested(false, false));
         }
     }
 }
