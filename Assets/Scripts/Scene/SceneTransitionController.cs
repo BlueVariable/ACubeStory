@@ -1,4 +1,6 @@
+using System.Collections;
 using BLUE.ACubeStory.LoadingScreen;
+using BLUE.Helpers;
 using BLUE.TriggerSystem;
 using UnityEngine;
 
@@ -8,6 +10,12 @@ namespace BLUE.ACubeStory.Scene
     {
         [SerializeField] private TriggerBase _transitionTrigger = null;
 
+        [SerializeField] private float _forcedDuration = 4f;
+
+        private IEnumerator _transitionRoutine;
+
+        private bool _sceneLoadCompleted = false;
+        
         private readonly EventRaiser_OnLoadingScreenRequested _loadingScreenRequestor = new();
         
         private void Awake()
@@ -40,9 +48,7 @@ namespace BLUE.ACubeStory.Scene
         
         private void OnLoadingScreenResulted(bool result)
         {
-            RegisterToSceneLoad();
-            
-            SceneManager.Instance.TryLoadNextScene(true);
+            StartTransitionRoutine();
         }
         
         private void RegisterToSceneLoad()
@@ -58,6 +64,42 @@ namespace BLUE.ACubeStory.Scene
         private void OnPostSceneLoad(EScene sceneType)
         {
             UnregisterFromSceneLoad();
+
+            _sceneLoadCompleted = true;
+        }
+
+        private void StartTransitionRoutine()
+        {
+            StopTransitionRoutine();
+
+            _transitionRoutine = TransitionProgress();
+
+            CoroutineHelper.Instance.StartCoroutine(_transitionRoutine);
+
+        }
+
+        private void StopTransitionRoutine()
+        {
+            if (_transitionRoutine != null)
+            {
+                CoroutineHelper.Instance.StopCoroutine(_transitionRoutine);
+            }
+        }
+
+        private IEnumerator TransitionProgress()
+        {
+            _sceneLoadCompleted = false;
+            
+            RegisterToSceneLoad();
+            
+            SceneManager.Instance.TryLoadNextScene(true);
+
+            yield return new WaitForSeconds(_forcedDuration);
+
+            while (!_sceneLoadCompleted)
+            {
+                yield return null;
+            }
             
             _loadingScreenRequestor.Raise(
                 new EventRaiserArgs_OnLoadingScreenRequested(false));
