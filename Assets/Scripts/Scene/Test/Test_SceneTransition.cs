@@ -12,7 +12,7 @@ namespace BLUE.ACubeStory.Scene
             {
                 SceneTransitionController sceneTransitionController = FindObjectOfType<SceneTransitionController>();
 
-                sceneTransitionController.ForceTransition();
+                sceneTransitionController.TriggerSceneTransition();
             }
         }
     }

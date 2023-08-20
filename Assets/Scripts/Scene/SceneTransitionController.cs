@@ -2,19 +2,12 @@ using System;
 using System.Collections;
 using BLUE.ACubeStory.LoadingScreen;
 using BLUE.Helpers;
-using BLUE.TriggerSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Scene
 {
     public class SceneTransitionController : MonoBehaviour
     {
-        [SerializeField] private TriggerBase _transitionTrigger = null;
-
-        [SerializeField] private float _forcedDuration = 4f;
-
-        public bool IsTransitioning { get; private set; } = false;
-        
         #region Singleton
 
         private static SceneTransitionController _instance;
@@ -32,7 +25,10 @@ namespace BLUE.ACubeStory.Scene
         }
 
         #endregion
+        
+        [SerializeField] private float _forcedDuration = 4f;
 
+        public bool IsTransitioning { get; private set; } = false;
         
         private IEnumerator _transitionRoutine;
 
@@ -46,36 +42,14 @@ namespace BLUE.ACubeStory.Scene
 
         #endregion
         
-        public void ForceTransition()
+        public void TriggerSceneTransition()
         {
-            OnTriggered(null);
+            OnTriggered();
         }
         
-        private void Awake()
-        {
-            RegisterToTrigger();
-        }
-
-        private void OnDestroy()
-        {
-            UnregisterFromTrigger();
-        }
-
-        private void RegisterToTrigger()
-        {
-            _transitionTrigger.OnTriggered += OnTriggered;
-        }
-
-        private void UnregisterFromTrigger()
-        {
-            _transitionTrigger.OnTriggered -= OnTriggered;
-        }
-
-        private void OnTriggered(TriggerBase trigger)
+        private void OnTriggered()
         {
             IsTransitioning = true;
-
-            UnregisterFromTrigger();
 
             _loadingScreenRequestor.Raise(
                 new EventRaiserArgs_OnLoadingScreenRequested(true, true,

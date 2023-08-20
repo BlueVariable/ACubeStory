@@ -244,6 +244,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lockedSceneTypes: 01000000
+--- !u!1001 &213371343
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2182671527732169826, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_Name
+      value: SceneTransitionController
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182671527732169829, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 320c9ff26f1429d4d9bbd6f97c1cb2a8, type: 3}
 --- !u!1 &221733122
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &261302374
 Transform:
   m_ObjectHideFlags: 0
@@ -788,48 +845,10 @@ MonoBehaviour:
     _buildIndex: 0
   - _sceneType: 4
     _buildIndex: 1
-  - _sceneType: 5
-    _buildIndex: 2
   - _sceneType: 10
-    _buildIndex: 3
+    _buildIndex: 2
   - _sceneType: 11
     _buildIndex: 4
-  - _sceneType: 12
-    _buildIndex: 5
-  - _sceneType: 13
-    _buildIndex: 6
-  - _sceneType: 14
-    _buildIndex: 7
-  - _sceneType: 15
-    _buildIndex: 8
-  - _sceneType: 16
-    _buildIndex: 9
-  - _sceneType: 17
-    _buildIndex: 10
-  - _sceneType: 18
-    _buildIndex: 11
-  - _sceneType: 19
-    _buildIndex: 12
-  - _sceneType: 20
-    _buildIndex: 13
-  - _sceneType: 21
-    _buildIndex: 14
-  - _sceneType: 22
-    _buildIndex: 15
-  - _sceneType: 23
-    _buildIndex: 16
-  - _sceneType: 24
-    _buildIndex: 17
-  - _sceneType: 25
-    _buildIndex: 18
-  - _sceneType: 26
-    _buildIndex: 19
-  - _sceneType: 27
-    _buildIndex: 20
-  - _sceneType: 28
-    _buildIndex: 21
-  - _sceneType: 29
-    _buildIndex: 22
   _sceneLoadConditions:
   - {fileID: 38513492}
   _sceneUnloadConditions:
@@ -864,7 +883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveEnabled: 1
   _loadEnabled: 0
-  _fallbackSceneType: 28
+  _fallbackSceneType: 4
   _unsavedSceneTypes: 00000000010000000400000005000000
 --- !u!1 &863343122
 GameObject:

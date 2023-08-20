@@ -21,7 +21,10 @@ namespace BLUE.ActionSystem
 
         private void OnDestroy()
         {
-            SceneTransitionController.Instance.OnSceneTransitionCompleted -= OnSceneTransitionCompleted;
+            if (SceneTransitionController.Instance != null)
+            {
+                SceneTransitionController.Instance.OnSceneTransitionCompleted -= OnSceneTransitionCompleted;
+            }
 
             _actionExecutor.Interrupt();
         }
