@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using BLUE.ACubeStory.LoadingScreen;
 using BLUE.Helpers;
@@ -12,11 +13,38 @@ namespace BLUE.ACubeStory.Scene
 
         [SerializeField] private float _forcedDuration = 4f;
 
+        public bool IsTransitioning { get; private set; } = false;
+        
+        #region Singleton
+
+        private static SceneTransitionController _instance;
+        public static SceneTransitionController Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<SceneTransitionController>();
+                }
+
+                return _instance;
+            }
+        }
+
+        #endregion
+
+        
         private IEnumerator _transitionRoutine;
 
         private bool _sceneLoadCompleted = false;
         
         private readonly EventRaiser_OnLoadingScreenRequested _loadingScreenRequestor = new();
+
+        #region Events
+
+        public Action OnSceneTransitionCompleted { get; set; }
+
+        #endregion
         
         public void ForceTransition()
         {
@@ -45,6 +73,8 @@ namespace BLUE.ACubeStory.Scene
 
         private void OnTriggered(TriggerBase trigger)
         {
+            IsTransitioning = true;
+
             UnregisterFromTrigger();
 
             _loadingScreenRequestor.Raise(
@@ -77,6 +107,8 @@ namespace BLUE.ACubeStory.Scene
         private void StartTransitionRoutine()
         {
             StopTransitionRoutine();
+            
+            IsTransitioning = true;
 
             _transitionRoutine = TransitionProgress();
 
@@ -90,6 +122,8 @@ namespace BLUE.ACubeStory.Scene
             {
                 CoroutineHelper.Instance.StopCoroutine(_transitionRoutine);
             }
+            
+            IsTransitioning = false;
         }
 
         private IEnumerator TransitionProgress()
@@ -108,9 +142,17 @@ namespace BLUE.ACubeStory.Scene
             {
                 yield return null;
             }
-            
+
+            void onLoadingScreenResulted(bool result)
+            {
+                IsTransitioning = false;
+
+                OnSceneTransitionCompleted?.Invoke();
+            }
+                        
             _loadingScreenRequestor.Raise(
-                new EventRaiserArgs_OnLoadingScreenRequested(false, true));
+                new EventRaiserArgs_OnLoadingScreenRequested(false, true, onLoadingScreenResulted));
+
         }
     }
 }
