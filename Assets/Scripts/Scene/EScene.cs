@@ -10,7 +10,10 @@ namespace BLUE.ACubeStory.Scene
         
         MainMenu = 5,
         
-        Level_1 = 10,
+        Night_Intro = 10,
+        Night_MothVillage_01 = 11
+        
+        /*Level_1 = 10,
         Level_2 = 11,
         Level_3 = 12,
         Level_4 = 13,
@@ -29,6 +32,6 @@ namespace BLUE.ACubeStory.Scene
         Level_17 = 26,
         Level_18 = 27,
         Level_19 = 28,
-        Level_20 = 29,
+        Level_20 = 29,*/
     }
 }

@@ -106,10 +106,8 @@ namespace BLUE.ACubeStory.Scene
             
             RegisterToSceneLoad();
             
-            //SceneManager.Instance.TryLoadNextScene(true);
-            
-            SceneManager.Instance.TryReloadCurScene();
-            
+            SceneManager.Instance.TryLoadNextScene(true);
+
             yield return new WaitForSeconds(_forcedDuration);
 
             while (!_sceneLoadCompleted)
