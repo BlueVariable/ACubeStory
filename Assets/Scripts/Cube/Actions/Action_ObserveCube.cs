@@ -18,13 +18,15 @@ namespace BLUE.ACubeStory.Cube
             [field: SerializeField] public float PreObserveDuration { get; private set; }
             
             [field: SerializeField] public float ObserveDuration { get; private set; }
+
+            [field: SerializeField] public bool RestoreOldRotation { get; private set; } = true;
         }
 
         [SerializeField] private ObserveInfo[] _observeInfoColl = null;
 
-        private List<IEnumerator> _observeRoutines = new List<IEnumerator>();
+        private List<IEnumerator> _observeRoutines = new();
 
-        private List<GameObject> _previousTargetObjects = new List<GameObject>();
+        private List<GameObject> _previousTargetObjects = new();
 
         private int _traversedObserverCount = 0;
         
@@ -101,6 +103,15 @@ namespace BLUE.ACubeStory.Cube
             yield return new WaitUntil(() => isRotatedTowardsCube);
 
             yield return new WaitForSeconds(observeInfo.ObserveDuration);
+
+            if (!observeInfo.RestoreOldRotation)
+            {
+                _traversedObserverCount++;
+                
+                CheckCompletion();
+
+                yield break;
+            }
 
             bool isRotationRestored = false;
             
