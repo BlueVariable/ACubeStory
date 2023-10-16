@@ -35,7 +35,7 @@ namespace BLUE.ACubeStory.LevelEditor
                 return mergePuzzle.GetComponentInChildren<MergeableSlotContainer>().transform;
             }
 
-            return null;
+            return LevelEditorContainer.Instance.SelectedTileGroupEditorContainer.transform;
         }
     }
 }
