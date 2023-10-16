@@ -9,6 +9,7 @@ namespace BLUE.ACubeStory.TileSystem
         Mergeable = 20,
         MergeableSlot = 30,
         Checkpoint = 40,
+        Wall = 50,
     }
 
     public class Tile : MonoBehaviour
