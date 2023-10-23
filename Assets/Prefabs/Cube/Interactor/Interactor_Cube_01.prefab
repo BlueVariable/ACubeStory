@@ -154,7 +154,11 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
-  _rayDistance: 1
+  - {x: 1, y: 0, z: -1}
+  - {x: -1, y: 0, z: -1}
+  - {x: 1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 1}
+  _rayDistance: 1.5
   _targetMask:
     serializedVersion: 2
     m_Bits: 524288
@@ -288,7 +292,7 @@ PrefabInstance:
       objectReference: {fileID: 8690903023415276453}
     - target: {fileID: 7299530802616357787, guid: 88e25fe687fd773439b9b3fa18c3c955, type: 3}
       propertyPath: m_Name
-      value: Interactor
+      value: Interactor_Cube_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88e25fe687fd773439b9b3fa18c3c955, type: 3}
