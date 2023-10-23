@@ -23,6 +23,11 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnDestroy()
         {
+            if (Cube.Instance == null)
+            {
+                return;
+            }
+            
             Cube.Instance.CubeFSM.OnStateEntered -= OnCubeStateEntered;
         }
 
