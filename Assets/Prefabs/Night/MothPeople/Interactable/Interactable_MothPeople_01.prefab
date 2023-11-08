@@ -530,6 +530,7 @@ MonoBehaviour:
   _interactable: {fileID: 1722927030790397566}
   _canBeFocusedConditions:
   - {fileID: 1484495060}
+  - {fileID: 1776575700166111511}
   _focusedActionExecutor:
     _actionCarrier: {fileID: 1334131176}
   _unfocusedActionExecutor:
@@ -1127,6 +1128,53 @@ MonoBehaviour:
   _canTriggerSequenceConditions: []
   _executeOnce: 0
   _animationSequencerController: {fileID: 494117779}
+--- !u!1 &54550243646197490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4625669019268123978}
+  - component: {fileID: 1776575700166111511}
+  m_Layer: 19
+  m_Name: Condition_InteractedCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4625669019268123978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54550243646197490}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5097496528884904746}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776575700166111511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54550243646197490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24522bb14c1a4244382be7075ce2ec95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 1722927030790397566}
+  _satisfyCount: 0
+  _invert: 0
 --- !u!1 &270472723330830282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,7 +2426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 509839555559538605, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
       propertyPath: _canBeInteractedConditions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 509839555559538605, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
       propertyPath: _interactableProperties.Array.data[0]
@@ -2388,6 +2436,10 @@ PrefabInstance:
       propertyPath: _canBeInteractedConditions.Array.data[0]
       value: 
       objectReference: {fileID: 1484495060}
+    - target: {fileID: 509839555559538605, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
+      propertyPath: _canBeInteractedConditions.Array.data[1]
+      value: 
+      objectReference: {fileID: 1776575700166111511}
     - target: {fileID: 1113350674021000250, guid: 85fa93694f3a3fa48a8e41ecf6580cb3, type: 3}
       propertyPath: m_RootOrder
       value: 0
