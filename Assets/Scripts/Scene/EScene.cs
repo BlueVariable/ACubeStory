@@ -10,8 +10,9 @@ namespace BLUE.ACubeStory.Scene
         
         MainMenu = 5,
         
-        Night_Intro = 10,
-        Night_MothVillage_01 = 11
+        Prologue = 10,
+        
+        Village_01 = 11
         
         /*Level_1 = 10,
         Level_2 = 11,

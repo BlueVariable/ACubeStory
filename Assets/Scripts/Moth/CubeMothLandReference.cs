@@ -1,30 +1,33 @@
-using BLUE.ACubeStory.Cube;
 using UnityEngine;
 
-public class CubeMothLandReference : MonoBehaviour
+namespace BLUE.ACubeStory.Moth
 {
-    #region Singleton
-
-    private static CubeMothLandReference _instance;
-    public static CubeMothLandReference Instance
+    public class CubeMothLandReference : MonoBehaviour
     {
-        get
+        #region Singleton
+
+        private static CubeMothLandReference _instance;
+
+        public static CubeMothLandReference Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindObjectOfType<CubeMothLandReference>();
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<CubeMothLandReference>();
+                }
+
+                return _instance;
             }
-
-            return _instance;
         }
-    }
 
-    #endregion
+        #endregion
 
-    private readonly Vector3 _offset = new Vector3(-0.35f, 0.55f, 0.45f);
-    
-    private void Update()
-    {
-        transform.position = Cube.Instance.GetPosition() + _offset;
+        private readonly Vector3 _offset = new Vector3(-0.35f, 0.55f, 0.45f);
+
+        private void Update()
+        {
+            transform.position = Cube.Cube.Instance.GetPosition() + _offset;
+        }
     }
 }
