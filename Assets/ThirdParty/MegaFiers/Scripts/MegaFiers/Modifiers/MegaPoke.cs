@@ -63,7 +63,7 @@ namespace MegaFiers
 		[ContextMenu("Init")]
 		public virtual void Init()
 		{
-			MegaModifyObject mod = (MegaModifyObject)GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = (MegaModifyObject)GetComponentInParent<MegaModifyObject>();
 		}
 
 		public override void MeshChanged()

@@ -40,7 +40,7 @@ namespace MegaFiers
 				{
 					currentLOD = selectedLOD;
 					MegaModifyObject modifyObject;
-					modifyObject = meshContainer.GetComponent<MegaModifyObject>();
+					modifyObject = meshContainer.GetComponentInParent<MegaModifyObject>();
 					if ( modifyObject != null )
 					{
 						// Change meshFilter to use new mesh

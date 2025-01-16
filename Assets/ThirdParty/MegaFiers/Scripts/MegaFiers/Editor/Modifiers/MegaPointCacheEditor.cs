@@ -55,7 +55,7 @@ namespace MegaFiers
 				am.cacheFile = CreateCacheFile(filename);
 
 			oldverts = am.cacheFile.Verts;
-			mods = am.gameObject.GetComponent<MegaModifyObject>();
+			mods = am.gameObject.GetComponentInParent<MegaModifyObject>();
 
 			if ( mods == null )
 			{
@@ -302,7 +302,7 @@ namespace MegaFiers
 				am.cacheFile = CreateCacheFile(filename);
 
 			oldverts = am.cacheFile.Verts;
-			mods = am.gameObject.GetComponent<MegaModifyObject>();
+			mods = am.gameObject.GetComponentInParent<MegaModifyObject>();
 
 			if ( mods == null)
 			{
@@ -513,7 +513,7 @@ namespace MegaFiers
 				am.cacheFile = CreateCacheFile(filename);
 
 			oldverts = am.cacheFile.Verts;
-			mods = am.gameObject.GetComponent<MegaModifyObject>();
+			mods = am.gameObject.GetComponentInParent<MegaModifyObject>();
 
 			if ( mods == null )
 			{
@@ -928,7 +928,7 @@ namespace MegaFiers
 					Handles.color = Color.green;
 
 					if ( mo == null )
-						mo = mod.gameObject.GetComponent<MegaModifyObject>();
+						mo = mod.gameObject.GetComponentInParent<MegaModifyObject>();
 
 					if ( mo )
 					{

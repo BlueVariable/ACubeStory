@@ -115,7 +115,7 @@ namespace MegaFiers
 						{
 							if ( name.IsSubclassOf(typeof(MegaModifier)) )
 							{
-								MegaModifyObject mod = go.GetComponent<MegaModifyObject>();
+								MegaModifyObject mod = go.GetComponentInParent<MegaModifyObject>();
 
 								if ( mod == null )
 								{

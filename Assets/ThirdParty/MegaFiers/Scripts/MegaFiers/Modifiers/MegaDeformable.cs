@@ -66,7 +66,7 @@ namespace MegaFiers
 
 		public void LoadMap()
 		{
-			MegaModifyObject mc = GetComponent<MegaModifyObject>();
+			MegaModifyObject mc = GetComponentInParent<MegaModifyObject>();
 			if ( mc )
 			{
 				LoadMap(mc);
@@ -210,7 +210,7 @@ namespace MegaFiers
 		void OnCollisionEnter(Collision collision)
 		{
 			if ( modobj == null )
-				modobj = GetComponent<MegaModifyObject>();
+				modobj = GetComponentInParent<MegaModifyObject>();
 
 			if ( modobj )
 				modobj.Enabled = true;

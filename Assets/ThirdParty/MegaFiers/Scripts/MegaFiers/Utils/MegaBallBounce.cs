@@ -35,7 +35,7 @@ namespace MegaFiers
 			if ( !mod )
 			{
 				mod = GetComponent<MegaStretch>();
-				modobj = GetComponent<MegaModifyObject>();
+				modobj = GetComponentInParent<MegaModifyObject>();
 			}
 
 			if ( mod )

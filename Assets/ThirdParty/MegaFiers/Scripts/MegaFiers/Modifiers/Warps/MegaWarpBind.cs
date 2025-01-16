@@ -20,7 +20,7 @@ namespace MegaFiers
 		{
 			Transform parent = transform.parent;
 
-			MegaModifyObject thismod = GetComponent<MegaModifyObject>();
+			MegaModifyObject thismod = GetComponentInParent<MegaModifyObject>();
 
 			for ( int i = 0; i < parent.childCount; i++ )
 			{
@@ -32,7 +32,7 @@ namespace MegaFiers
 				{
 					bind = child.gameObject.AddComponent<MegaWarpBind>();
 
-					MegaModifyObject mod = child.gameObject.GetComponent<MegaModifyObject>();
+					MegaModifyObject mod = child.gameObject.GetComponentInParent<MegaModifyObject>();
 
 					mod.NormalMethod = thismod.NormalMethod;
 

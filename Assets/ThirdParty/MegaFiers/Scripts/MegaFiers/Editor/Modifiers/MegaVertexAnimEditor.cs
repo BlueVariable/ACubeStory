@@ -20,7 +20,7 @@ namespace MegaFiers
 		void LoadVertexAnim()
 		{
 			MegaVertexAnim am = (MegaVertexAnim)target;
-			mods = am.gameObject.GetComponent<MegaModifyObject>();
+			mods = am.gameObject.GetComponentInParent<MegaModifyObject>();
 
 			string filename = EditorUtility.OpenFilePanel("Vertex Animation File", lastpath, "mpc");
 

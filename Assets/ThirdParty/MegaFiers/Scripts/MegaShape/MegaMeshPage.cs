@@ -48,7 +48,7 @@ namespace MegaFiers
 				if ( mesh != null )
 				{
 					BuildMesh(mesh);
-					MegaModifyObject mo = GetComponent<MegaModifyObject>();
+					MegaModifyObject mo = GetComponentInParent<MegaModifyObject>();
 					if ( mo != null )
 					{
 						mo.dynamicMesh = true;

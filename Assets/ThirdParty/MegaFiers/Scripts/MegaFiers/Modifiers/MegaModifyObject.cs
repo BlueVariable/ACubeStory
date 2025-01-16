@@ -365,7 +365,7 @@ namespace MegaFiers
 			}
 
 			if ( !Application.isPlaying )
-				mods = GetComponents<MegaModifier>();
+				mods = GetComponentsInChildren<MegaModifier>();
 
 #if UNITY_EDITOR
 			if ( EditorApplication.isCompiling )
@@ -726,7 +726,7 @@ namespace MegaFiers
 
 		public void BuildList()
 		{
-			mods = GetComponents<MegaModifier>();
+			mods = GetComponentsInChildren<MegaModifier>();
 		}
 
 		public void InitVertSource()
@@ -1302,7 +1302,7 @@ namespace MegaFiers
 		[ContextMenu("Remove Modify Object (Keep deformed mesh)")]
 		public virtual void RemoveKeep()
 		{
-			MegaModifier[] mods = GetComponents<MegaModifier>();
+			MegaModifier[] mods = GetComponentsInChildren<MegaModifier>();
 
 			for ( int i = 0; i < mods.Length; i++ )
 			{
@@ -1322,7 +1322,7 @@ namespace MegaFiers
 		[ContextMenu("Remove Modify Object (Restore Mesh)")]
 		public virtual void RemoveRestore()
 		{
-			MegaModifier[] mods = GetComponents<MegaModifier>();
+			MegaModifier[] mods = GetComponentsInChildren<MegaModifier>();
 
 			for ( int i = 0; i < mods.Length; i++ )
 			{
@@ -1478,7 +1478,7 @@ namespace MegaFiers
 					tmpMeshInfo = tmproObj.textInfo.CopyMeshInfoVertexData();
 
 					bbox = tmproObj.textInfo.meshInfo[0].mesh.bounds;
-					mods = GetComponents<MegaModifier>();
+					mods = GetComponentsInChildren<MegaModifier>();
 
 					for ( int i = 0; i < mods.Length; i++ )
 					{
@@ -1541,7 +1541,7 @@ namespace MegaFiers
 					//bbox = MegaUtils.AddBounds(transform, bbox, group[i].transform, group[i].bbox);
 			//}
 
-			mods = GetComponents<MegaModifier>();
+			mods = GetComponentsInChildren<MegaModifier>();
 
 			for ( int i = 0; i < mods.Length; i++ )
 			{
@@ -1627,7 +1627,7 @@ namespace MegaFiers
 				tobj.inGroup = true;
 
 				// Not ideal as may have added extras?
-				MegaModifier[] mods = tobj.GetComponents<MegaModifier>();
+				MegaModifier[] mods = tobj.GetComponentsInChildren<MegaModifier>();
 				for ( int i = 0; i < mods.Length; i++ )
 					DestroyImmediate(mods[i]);
 

@@ -29,19 +29,19 @@ namespace MegaFiers
 		{
 			if ( source != null )
 			{
-				context = (MegaModifyObject)source.GetComponent<MegaModifyObject>();
+				context = (MegaModifyObject)source.GetComponentInParent<MegaModifyObject>();
 
 				if ( context != null )
 				{
-					mods = source.GetComponents<MegaModifier>();
+					mods = source.GetComponentsInChildren<MegaModifier>();
 					showmod = new bool[mods.Length];
 				}
 
-				gcontext = (MegaModifyObject)ground.GetComponent<MegaModifyObject>();
+				gcontext = (MegaModifyObject)ground.GetComponentInParent<MegaModifyObject>();
 
 				if ( gcontext != null )
 				{
-					gmods = ground.GetComponents<MegaModifier>();
+					gmods = ground.GetComponentsInChildren<MegaModifier>();
 					showgmod = new bool[gmods.Length];
 				}
 			}

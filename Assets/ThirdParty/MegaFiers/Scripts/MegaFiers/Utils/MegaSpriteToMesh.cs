@@ -127,7 +127,7 @@ namespace MegaFiers
 						MeshFilter mf = meshobj.GetComponent<MeshFilter>();
 						mf.sharedMesh = mesh;
 
-						MegaModifyObject modobj = meshobj.GetComponent<MegaModifyObject>();
+						MegaModifyObject modobj = meshobj.GetComponentInParent<MegaModifyObject>();
 						if ( modobj )
 							modobj.dynamicMesh = true;
 

@@ -53,7 +53,7 @@ namespace MegaFiers
 
 				mr.sharedMaterials = mats;
 
-				MegaModifyObject mo = GetComponent<MegaModifyObject>();
+				MegaModifyObject mo = GetComponentInParent<MegaModifyObject>();
 
 				if ( !mo )
 				{
@@ -79,7 +79,7 @@ namespace MegaFiers
 
 		public void CalcWeights()
 		{
-			MegaModifyObject mo = GetComponent<MegaModifyObject>();
+			MegaModifyObject mo = GetComponentInParent<MegaModifyObject>();
 			if ( mo )
 			{
 				mo.CalcBoneWeigths();

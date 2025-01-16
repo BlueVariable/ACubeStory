@@ -407,7 +407,7 @@ namespace MegaFiers
 						{
 							if ( newgobj )
 							{
-								MegaModifyObject newobj = (MegaModifyObject)newgobj.GetComponent<MegaModifyObject>();
+								MegaModifyObject newobj = (MegaModifyObject)newgobj.GetComponentInParent<MegaModifyObject>();
 
 								if ( !newobj )
 									newobj = newgobj.AddComponent<MegaModifyObject>();
@@ -432,7 +432,7 @@ namespace MegaFiers
 							{
 								if ( oldgobj )
 								{
-									MegaModifyObject mo = oldgobj.GetComponent<MegaModifyObject>();
+									MegaModifyObject mo = oldgobj.GetComponentInParent<MegaModifyObject>();
 									if ( mo )
 									{
 										mo.hideFlags = HideFlags.None;
@@ -482,7 +482,7 @@ namespace MegaFiers
 					{
 						if ( newcolobj )
 						{
-							MegaModifyObject newobj = (MegaModifyObject)newcolobj.GetComponent<MegaModifyObject>();
+							MegaModifyObject newobj = (MegaModifyObject)newcolobj.GetComponentInParent<MegaModifyObject>();
 
 							if ( !newobj )
 							{
@@ -503,7 +503,7 @@ namespace MegaFiers
 						{
 							if ( oldcolobj )
 							{
-								MegaModifyObject mo = oldcolobj.GetComponent<MegaModifyObject>();
+								MegaModifyObject mo = oldcolobj.GetComponentInParent<MegaModifyObject>();
 								if ( mo )
 								{
 									mo.hideFlags = HideFlags.None;
@@ -676,7 +676,7 @@ namespace MegaFiers
 
 			for ( int i = 0; i < objs.Length; i++ )
 			{
-				MegaModifyObject modobj = objs[i].GetComponent<MegaModifyObject>();
+				MegaModifyObject modobj = objs[i].GetComponentInParent<MegaModifyObject>();
 
 				if ( !modobj )
 				{
@@ -714,7 +714,7 @@ namespace MegaFiers
 						{
 							DestroyImmediate(promesh);
 							mf.sharedMesh = m;
-							MegaModifyObject modobj = objs[i].GetComponent<MegaModifyObject>();
+							MegaModifyObject modobj = objs[i].GetComponentInParent<MegaModifyObject>();
 							if ( modobj )
 								modobj.dynamicMesh = true;
 
@@ -763,7 +763,7 @@ namespace MegaFiers
 					if ( !InGroup(modobj, rends[i].gameObject) )
 					{
 						// Add obj
-						MegaModifyObject newobj = (MegaModifyObject)rends[i].GetComponent<MegaModifyObject>();
+						MegaModifyObject newobj = (MegaModifyObject)rends[i].GetComponentInParent<MegaModifyObject>();
 
 						if ( !newobj )
 						{
@@ -814,7 +814,7 @@ namespace MegaFiers
 				tobj.inGroup = true;
 
 				// Not ideal as may have added extras?
-				MegaModifier[] mods = tobj.GetComponents<MegaModifier>();
+				MegaModifier[] mods = tobj.GetComponentsInChildren<MegaModifier>();
 				for ( int i = 0; i < mods.Length; i++ )
 					DestroyImmediate(mods[i]);
 
@@ -872,7 +872,7 @@ namespace MegaFiers
 
 			for ( int i = 0; i < modobjs.Length; i++ )
 			{
-				MegaModifier[] mods = modobjs[i].GetComponents<MegaModifier>();
+				MegaModifier[] mods = modobjs[i].GetComponentsInChildren<MegaModifier>();
 
 				for ( int j = 0; j < mods.Length; j++ )
 				{

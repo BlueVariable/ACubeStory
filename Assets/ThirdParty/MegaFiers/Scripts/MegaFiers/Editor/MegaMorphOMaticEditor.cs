@@ -483,7 +483,7 @@ namespace MegaFiers
 
 		bool TryMapping1(MegaTargetMesh tm, MegaMorphOMatic morph)
 		{
-			MegaModifyObject mod = morph.GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = morph.GetComponentInParent<MegaModifyObject>();
 
 			if ( mod == null )
 			{

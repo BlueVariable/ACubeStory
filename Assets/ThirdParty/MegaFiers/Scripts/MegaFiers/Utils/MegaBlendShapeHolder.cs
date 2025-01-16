@@ -66,7 +66,7 @@ namespace MegaFiers
 
 		void Start()
 		{
-			MegaModifyObject mod = GetComponent<MegaModifyObject>();	
+			MegaModifyObject mod = GetComponentInParent<MegaModifyObject>();	
 			if ( mod )
 			{
 				if ( mod.mesh.blendShapeCount != channels.Count )

@@ -105,7 +105,7 @@ namespace MegaFiers
 
 			if ( ffd && ffd.DisplayGizmo && ffd.ModEnabled )
 			{
-				MegaModifyObject context = ffd.GetComponent<MegaModifyObject>();
+				MegaModifyObject context = ffd.GetComponentInParent<MegaModifyObject>();
 
 				if ( context && context.DrawGizmos )
 				{

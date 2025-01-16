@@ -43,7 +43,7 @@ namespace MegaFiers
 		[ContextMenu("Init")]
 		public virtual void Init()
 		{
-			MegaModifyObject mod = (MegaModifyObject)GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = (MegaModifyObject)GetComponentInParent<MegaModifyObject>();
 			uvs = mod.cachedMesh.uv;
 			normals = mod.cachedMesh.normals;
 		}
@@ -224,7 +224,7 @@ namespace MegaFiers
 
 			if ( normals == null || normals.Length == 0 )
 			{
-				MegaModifyObject mobj = (MegaModifyObject)GetComponent<MegaModifyObject>();
+				MegaModifyObject mobj = (MegaModifyObject)GetComponentInParent<MegaModifyObject>();
 				if ( mobj )
 					normals = mobj.cachedMesh.normals;
 				else

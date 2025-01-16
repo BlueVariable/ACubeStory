@@ -27,7 +27,6 @@ namespace MegaFiers
 		All			= 32767,
 	}
 
-	[RequireComponent(typeof(MegaModifyObject))]
 	public class MegaModifier : MonoBehaviour
 	{
 		public bool						ModEnabled			= true;
@@ -171,7 +170,7 @@ namespace MegaFiers
 
 		void Awake()
 		{
-			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponent<MegaModifyObject>();
+			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponentInParent<MegaModifyObject>();
 
 			if ( modobj != null )
 				modobj.ModReset(this);
@@ -179,7 +178,7 @@ namespace MegaFiers
 
 		void Reset()
 		{
-			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponent<MegaModifyObject>();
+			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponentInParent<MegaModifyObject>();
 
 			if ( modobj != null )
 				modobj.ModReset(this);
@@ -199,7 +198,7 @@ namespace MegaFiers
 
 		Vector3 GetCentre()
 		{
-			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponent<MegaModifyObject>();
+			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponentInParent<MegaModifyObject>();
 
 			if ( modobj != null && modobj.cachedMesh != null )
 				return modobj.cachedMesh.bounds.center;

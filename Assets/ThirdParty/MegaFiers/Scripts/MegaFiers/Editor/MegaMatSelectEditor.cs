@@ -34,7 +34,7 @@ namespace MegaFiers
 		{
 			MegaMatSelect mod = (MegaMatSelect)target;
 
-			MegaModifyObject mc = mod.gameObject.GetComponent<MegaModifyObject>();
+			MegaModifyObject mc = mod.gameObject.GetComponentInParent<MegaModifyObject>();
 
 			float[] sel = mod.GetSel();
 

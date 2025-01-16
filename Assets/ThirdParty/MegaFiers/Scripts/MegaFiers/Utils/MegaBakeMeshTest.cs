@@ -110,9 +110,9 @@ namespace MegaFiers
 			if ( !System.IO.Directory.Exists("Assets/MegaPrefabs") )
 				AssetDatabase.CreateFolder("Assets", "MegaPrefabs");
 
-			MegaModifyObject mod = newobj.GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = newobj.GetComponentInParent<MegaModifyObject>();
 
-			MegaModifier[] mods = newobj.GetComponents<MegaModifier>();
+			MegaModifier[] mods = newobj.GetComponentsInChildren<MegaModifier>();
 
 			for ( int i = 0; i < mods.Length; i++ )
 			{
