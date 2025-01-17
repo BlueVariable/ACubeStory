@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.MegaFiers;
+using BLUE.Common;
 using MegaFiers;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
-    public class Action_WarpCube : InterruptableActionBase
+    public class Action_BendCube : InterruptableActionBase
     {
         [SerializeField] private float _duration = 0.2f;
         
@@ -18,22 +19,27 @@ namespace BLUE.ACubeStory.Cube
 
         [SerializeField] private MegaModifierProviderBase _modifierProvider = null;
         
+        [SerializeField] private DirectionProviderBase _bendDirectionProvider = null;
+
         private IEnumerator _warpRoutine;
 
-        private delegate void _warpModifierDel(MegaModifier modifier, float value);
-
-        private Dictionary<Type, _warpModifierDel> _warpModifierDelMap = new()
-        {
-            { typeof(MegaBend), (modifier, value) => { ((MegaBend)modifier).angle = value; } },
-        };
-        
         #region Events
 
         public override Action<InterruptableActionBase> OnCompleted { get; set; }
 
         #endregion
 
-        private MegaModifier _curModifier;
+        private MegaBend _curModifier;
+        
+        private Dictionary<EDirection, float> _directionMap = new Dictionary<EDirection, float>
+        {
+            { EDirection.Up, 0 },
+            { EDirection.Down, 180 },
+            { EDirection.Left, 90 },
+            { EDirection.Right, -90 },
+            { EDirection.Forward, 0 },
+            { EDirection.Backward, 180 }
+        };
         
         public override void Execute()
         {
@@ -63,7 +69,9 @@ namespace BLUE.ACubeStory.Cube
         {
             //TODO
             
-            _curModifier = _modifierProvider.GetModifier();
+            _curModifier = (MegaBend)_modifierProvider.GetModifier();
+
+            _curModifier.dir = _directionMap[_bendDirectionProvider.GetDirection()];
             
             float elapsedTime = 0f;
 
@@ -71,7 +79,7 @@ namespace BLUE.ACubeStory.Cube
             {
                 float value = _curve.Evaluate(elapsedTime/_duration) * _multiplier;
                 
-                _warpModifierDelMap[_curModifier.GetType()].Invoke(_curModifier, value);
+                _curModifier.angle = value;
                 
                 elapsedTime += Time.deltaTime;
                 
@@ -80,7 +88,7 @@ namespace BLUE.ACubeStory.Cube
             
             float finalValue = _curve.Evaluate(1) * _multiplier;
 
-            _warpModifierDelMap[_curModifier.GetType()].Invoke(_curModifier, finalValue);
+            _curModifier.angle = finalValue;
 
             OnCompleted?.Invoke(this);
         }
@@ -93,7 +101,7 @@ namespace BLUE.ACubeStory.Cube
                 
                 float finalValue = _curve.Evaluate(1) * _multiplier;
 
-                _warpModifierDelMap[_curModifier.GetType()].Invoke(_curModifier, finalValue);
+                _curModifier.angle = finalValue;
 
                 _warpRoutine = null;
             }
