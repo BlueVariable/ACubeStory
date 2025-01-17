@@ -33,6 +33,8 @@ namespace BLUE.ACubeStory.Cube
 
         #endregion
 
+        private MegaModifier _curModifier;
+        
         public override void Execute()
         {
             Interrupt();
@@ -61,7 +63,7 @@ namespace BLUE.ACubeStory.Cube
         {
             //TODO
             
-            MegaModifier modifier = _modifierProvider.GetModifier();
+            _curModifier = _modifierProvider.GetModifier();
             
             float elapsedTime = 0f;
 
@@ -69,12 +71,16 @@ namespace BLUE.ACubeStory.Cube
             {
                 float value = _curve.Evaluate(elapsedTime/_duration) * _multiplier;
                 
-                _warpModifierDelMap[modifier.GetType()].Invoke(modifier, value);
+                _warpModifierDelMap[_curModifier.GetType()].Invoke(_curModifier, value);
                 
                 elapsedTime += Time.deltaTime;
                 
                 yield return null;
             }
+            
+            float finalValue = _curve.Evaluate(1) * _multiplier;
+
+            _warpModifierDelMap[_curModifier.GetType()].Invoke(_curModifier, finalValue);
 
             OnCompleted?.Invoke(this);
         }
@@ -84,6 +90,11 @@ namespace BLUE.ACubeStory.Cube
             if (_warpRoutine != null)
             {
                 StopCoroutine(_warpRoutine);
+                
+                float finalValue = _curve.Evaluate(1) * _multiplier;
+
+                _warpModifierDelMap[_curModifier.GetType()].Invoke(_curModifier, finalValue);
+
                 _warpRoutine = null;
             }
         }
