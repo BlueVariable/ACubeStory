@@ -26,7 +26,7 @@ namespace MegaFiers
 
 			if ( mod.ModEnabled && mod.DisplayGizmo && MegaModifyObject.GlobalDisplay )
 			{
-				MegaModifyObject context = mod.GetComponent<MegaModifyObject>();
+				MegaModifyObject context = mod.GetComponentInParent<MegaModifyObject>();
 
 				if ( context != null && context.Enabled && context.DrawGizmos )
 				{

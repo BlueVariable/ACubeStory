@@ -112,7 +112,7 @@ namespace MegaFiers
 		[ContextMenu("Reset Physics")]
 		public void ResetPhysics()
 		{
-			MegaModifyObject mod = GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = GetComponentInParent<MegaModifyObject>();
 			if ( mod )
 				Init(mod);
 		}
@@ -345,7 +345,7 @@ namespace MegaFiers
 
 		public void ChangeChannel()
 		{
-			MegaModifyObject mod = GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = GetComponentInParent<MegaModifyObject>();
 			if ( mod )
 				Init(mod);
 		}
@@ -392,7 +392,7 @@ namespace MegaFiers
 		MegaModifyObject GetMod()
 		{
 			if ( mods == null )
-				mods = GetComponent<MegaModifyObject>();
+				mods = GetComponentInParent<MegaModifyObject>();
 
 			return mods;
 		}

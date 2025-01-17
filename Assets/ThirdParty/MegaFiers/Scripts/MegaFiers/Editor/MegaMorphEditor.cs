@@ -293,7 +293,7 @@ namespace MegaFiers
 
 		bool TryMapping(List<MegaTargetMesh> targets, MegaMorph morph)
 		{
-			MegaModifyObject mod = morph.GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = morph.GetComponentInParent<MegaModifyObject>();
 
 			if ( mod == null )
 			{
@@ -1235,7 +1235,7 @@ namespace MegaFiers
 
 		bool TryMapping1(MegaTargetMesh tm, MegaMorph morph)
 		{
-			MegaModifyObject mod = morph.GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = morph.GetComponentInParent<MegaModifyObject>();
 
 			if ( mod == null )
 			{
@@ -1324,7 +1324,7 @@ namespace MegaFiers
 					Handles.color = Color.green;
 
 					if ( mo == null )
-						mo = mod.gameObject.GetComponent<MegaModifyObject>();
+						mo = mod.gameObject.GetComponentInParent<MegaModifyObject>();
 
 					if ( mo )
 					{

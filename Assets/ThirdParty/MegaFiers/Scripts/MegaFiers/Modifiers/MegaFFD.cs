@@ -278,7 +278,7 @@ namespace MegaFiers
 
 		void Reset()
 		{
-			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponent<MegaModifyObject>();
+			MegaModifyObject modobj = (MegaModifyObject)gameObject.GetComponentInParent<MegaModifyObject>();
 
 			if ( modobj != null )
 				modobj.ModReset(this);
@@ -350,7 +350,7 @@ namespace MegaFiers
 		[ContextMenu("Fit FFD to Group")]
 		public void FitFFDToGroup()
 		{
-			MegaModifyObject mobj = GetComponent<MegaModifyObject>();
+			MegaModifyObject mobj = GetComponentInParent<MegaModifyObject>();
 
 			if ( mobj )
 			{

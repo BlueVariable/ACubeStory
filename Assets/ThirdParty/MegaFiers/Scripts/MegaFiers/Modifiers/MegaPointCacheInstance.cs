@@ -32,7 +32,7 @@ namespace MegaFiers
 				{
 					obj		= srcobj;
 					mod		= (MegaPointCache)srcobj.GetComponent<MegaPointCache>();
-					modobj	= (MegaModifyObject)srcobj.GetComponent<MegaModifyObject>();
+					modobj	= (MegaModifyObject)srcobj.GetComponentInParent<MegaModifyObject>();
 					mesh	= MegaUtils.GetMesh(gameObject);
 				}
 			}

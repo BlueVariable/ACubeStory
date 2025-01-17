@@ -79,7 +79,7 @@ namespace MegaFiers
 			if ( !mod.ModEnabled )
 				return;
 
-			MegaModifyObject mc = mod.gameObject.GetComponent<MegaModifyObject>();
+			MegaModifyObject mc = mod.gameObject.GetComponentInParent<MegaModifyObject>();
 
 			float[] sel = mod.GetSel();
 

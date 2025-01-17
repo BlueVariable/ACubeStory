@@ -107,7 +107,7 @@ namespace MegaFiers
 		public virtual void DrawGUI()
 		{
 			MegaModifier mod = (MegaModifier)target;
-			MegaModifyObject context = mod.GetComponent<MegaModifyObject>();
+			MegaModifyObject context = mod.GetComponentInParent<MegaModifyObject>();
 			if ( context == null )
 			{
 				EditorGUILayout.LabelField("You need to Add a Mega Modify Object Component");
@@ -139,7 +139,7 @@ namespace MegaFiers
 
 			if ( mod.ModEnabled && mod.DisplayGizmo && MegaModifyObject.GlobalDisplay && mod.showModParams )
 			{
-				MegaModifyObject context = mod.GetComponent<MegaModifyObject>();
+				MegaModifyObject context = mod.GetComponentInParent<MegaModifyObject>();
 
 				if ( context != null && context.Enabled && context.DrawGizmos )
 				{

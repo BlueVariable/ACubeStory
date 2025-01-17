@@ -10,7 +10,7 @@ namespace MegaFiers
 
 		void Start()
 		{
-			NativeArray<Vector3> v = GetComponent<MegaModifyObject>().jsverts;
+			NativeArray<Vector3> v = GetComponentInParent<MegaModifyObject>().jsverts;
 			for ( int i = 0; i < v.Length; i++ )
 			{
 				GameObject mag = new GameObject();
@@ -20,7 +20,7 @@ namespace MegaFiers
 				mag.transform.position = transform.localToWorldMatrix.MultiplyPoint3x4(v[i]);
 
 				MegaAttach ma = mag.AddComponent<MegaAttach>();
-				ma.target = gameObject.GetComponent<MegaModifyObject>();
+				ma.target = gameObject.GetComponentInParent<MegaModifyObject>();
 				ma.radius = 0.1f;
 
 				mag.transform.position = transform.localToWorldMatrix.MultiplyPoint3x4(v[i]);

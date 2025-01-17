@@ -22,7 +22,7 @@ namespace MegaFiers
 				mod.UpdateSprite();
 				if ( mod.spriteMeshObj )
 				{
-					MegaModifyObject modobj = mod.spriteMeshObj.GetComponent<MegaModifyObject>();
+					MegaModifyObject modobj = mod.spriteMeshObj.GetComponentInParent<MegaModifyObject>();
 					if ( modobj )
 					{
 						for ( int i = 0; i < modobj.mods.Length; i++ )

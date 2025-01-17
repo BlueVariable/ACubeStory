@@ -387,7 +387,7 @@ namespace MegaFiers
 
 		public void ChangeAxis()
 		{
-			MegaModifyObject mod = GetComponent<MegaModifyObject>();
+			MegaModifyObject mod = GetComponentInParent<MegaModifyObject>();
 
 			if ( mod )
 			{

@@ -33,7 +33,7 @@ namespace MegaFiers
 			MegaDeformableSkin mod = (MegaDeformableSkin)target;
 			MegaEditorGUILayout.Toggle(mod, "Use Bone Weights", ref mod.useBoneWeights);
 
-			MegaModifyObject mo = mod.GetComponent<MegaModifyObject>();
+			MegaModifyObject mo = mod.GetComponentInParent<MegaModifyObject>();
 			if ( mo )
 			{
 				MegaEditorGUILayout.Slider(mo, "Selection Weight", ref mo.selectionWeight, 0.0f, 1.0f);

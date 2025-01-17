@@ -73,13 +73,13 @@ namespace MegaFiers
 				return;
 
 			if ( pobj1 == null )
-				pobj1 = page1.GetComponent<MegaModifyObject>();
+				pobj1 = page1.GetComponentInParent<MegaModifyObject>();
 
 			if ( pobj2 == null )
-				pobj2 = page2.GetComponent<MegaModifyObject>();
+				pobj2 = page2.GetComponentInParent<MegaModifyObject>();
 
 			if ( pobj3 == null )
-				pobj3 = page3.GetComponent<MegaModifyObject>();
+				pobj3 = page3.GetComponentInParent<MegaModifyObject>();
 
 			int pagecount = (pages.Count / 2) + 2;
 

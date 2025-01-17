@@ -153,7 +153,7 @@ namespace MegaFiers
 
 				if ( ms != null )
 				{
-					CalcNormals(ms, GetComponent<MegaModifyObject>());
+					CalcNormals(ms, GetComponentInParent<MegaModifyObject>());
 
 					Bounds b = ms.bounds;
 					Offset = -b.center;

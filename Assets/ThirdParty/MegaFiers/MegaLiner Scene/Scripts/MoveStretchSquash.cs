@@ -20,7 +20,7 @@ namespace MegaFiers
 
 		void Start()
 		{
-			modobj = GetComponent<MegaModifyObject>();
+			modobj = GetComponentInParent<MegaModifyObject>();
 			if ( modobj )
 				stretch = modobj.FindMod<MegaStretch>();
 
