@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.MegaFiers;
 using BLUE.Common;
@@ -30,16 +29,6 @@ namespace BLUE.ACubeStory.Cube
         #endregion
 
         private MegaBend _curModifier;
-        
-        private Dictionary<EDirection, float> _directionMap = new Dictionary<EDirection, float>
-        {
-            { EDirection.Up, 0 },
-            { EDirection.Down, 180 },
-            { EDirection.Left, 90 },
-            { EDirection.Right, -90 },
-            { EDirection.Forward, 0 },
-            { EDirection.Backward, 180 }
-        };
         
         public override void Execute()
         {
@@ -71,7 +60,32 @@ namespace BLUE.ACubeStory.Cube
             
             _curModifier = (MegaBend)_modifierProvider.GetModifier();
 
-            _curModifier.dir = _directionMap[_bendDirectionProvider.GetDirection()];
+            EDirection bendDirection = _bendDirectionProvider.GetDirection();
+
+            Vector3 bendVector = DirectionUtility.DirectionMap[bendDirection];
+
+            Vector3 cubeComparisonVector = _curModifier.axis == MegaAxis.X || _curModifier.axis == MegaAxis.Z
+                ? Cube.Instance.transform.forward
+                : Cube.Instance.transform.up;
+            
+            float dot = Vector3.Dot(cubeComparisonVector, bendVector);
+            
+            if (dot > 0.9f)
+            {
+                _curModifier.dir = 90;
+            }
+            else if (dot < -0.09f)
+            {
+                _curModifier.dir = -90;
+            }
+            else if (dot < 0)
+            {
+                _curModifier.dir = 180;
+            }
+            else
+            {
+                _curModifier.dir = 0;
+            }
             
             float elapsedTime = 0f;
 

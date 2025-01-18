@@ -10,7 +10,7 @@ namespace BLUE.ACubeStory.Cube
         
         public override EDirection GetDirection()
         {
-            foreach (KeyValuePair<EDirection, Vector3> directionMap in DirectionMap)
+            foreach (KeyValuePair<EDirection, Vector3> directionMap in DirectionUtility.DirectionMap)
             {
                 if (directionMap.Value == _rollState.LastCandidateTransitionMessage.Direction)
                 {
