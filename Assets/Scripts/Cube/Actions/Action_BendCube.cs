@@ -69,6 +69,11 @@ namespace BLUE.ACubeStory.Cube
                 : Cube.Instance.transform.up;
             
             float dot = Vector3.Dot(cubeComparisonVector, bendVector);
+
+            if (dot < 0.1f && dot > -0.1f)
+            {
+                dot = DirectionUtility.DirectionMap[bendDirection].magnitude * 0.1f;
+            }
             
             if (dot > 0.9f)
             {
@@ -80,11 +85,11 @@ namespace BLUE.ACubeStory.Cube
             }
             else if (dot < 0)
             {
-                _curModifier.dir = 180;
+                _curModifier.dir = 0;
             }
             else
             {
-                _curModifier.dir = 0;
+                _curModifier.dir = 180;
             }
             
             float elapsedTime = 0f;
