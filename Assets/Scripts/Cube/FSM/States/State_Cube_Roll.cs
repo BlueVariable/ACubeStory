@@ -34,6 +34,7 @@ namespace BLUE.ACubeStory.Cube
 
         [Header("Action Executors")] 
         [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
+        [SerializeField] private ActionExecutor _rollStartedActionExecutor = null;
         [SerializeField] private UndoReasonActionExecutorInfo[] _undoReasonActionExecutorMap = default;
 
         [Header("Triggers")]
@@ -80,6 +81,8 @@ namespace BLUE.ACubeStory.Cube
                     transitionMessage.Direction, 
                     onRolledCallback: OnRollCompleted);
             }
+            
+            _rollStartedActionExecutor.Execute();
         }
 
         protected override void ExitStateCustomActions()
