@@ -70,26 +70,18 @@ namespace BLUE.ACubeStory.Cube
             
             float dot = Vector3.Dot(cubeComparisonVector, bendVector);
 
-            if (dot < 0.1f && dot > -0.1f)
-            {
-                dot = DirectionUtility.DirectionMap[bendDirection].magnitude * 0.1f;
-            }
-            
+
             if (dot > 0.9f)
-            {
+            { 
                 _curModifier.dir = 90;
             }
-            else if (dot < -0.09f)
+            else if (dot < -0.9f)
             {
                 _curModifier.dir = -90;
             }
-            else if (dot < 0)
-            {
-                _curModifier.dir = 0;
-            }
             else
-            {
-                _curModifier.dir = 180;
+            { 
+                _curModifier.dir = 0; //180?
             }
             
             float elapsedTime = 0f;
