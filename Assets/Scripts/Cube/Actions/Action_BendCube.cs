@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.MegaFiers;
 using BLUE.Common;
@@ -29,7 +30,7 @@ namespace BLUE.ACubeStory.Cube
         #endregion
 
         private MegaBend _curModifier;
-        
+
         public override void Execute()
         {
             Interrupt();
@@ -69,7 +70,7 @@ namespace BLUE.ACubeStory.Cube
                 : Cube.Instance.transform.up;
             
             float dot = Vector3.Dot(cubeComparisonVector, bendVector);
-
+            
 
             if (dot > 0.9f)
             { 
@@ -81,7 +82,34 @@ namespace BLUE.ACubeStory.Cube
             }
             else
             { 
-                _curModifier.dir = 0; //180?
+                Debug.Log("angle" + Vector3.Angle(cubeComparisonVector, bendVector));
+                Debug.Log("signed up" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Vector3.up));
+                Debug.Log("signed right" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Vector3.right));
+                Debug.Log("signed forward" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Vector3.forward));
+
+                Debug.Log("signed cube up" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Cube.Instance.transform.up));
+
+
+
+                if (_curModifier.axis == MegaAxis.X)
+                {
+                    float signedAngle = Vector3.SignedAngle(cubeComparisonVector, bendVector, Cube.Instance.transform.up);
+                
+                    _curModifier.dir = signedAngle > 0 ? 180 : 0;
+                }
+                else if(_curModifier.axis == MegaAxis.Y)
+                {
+                    float signedAngle = Vector3.SignedAngle(cubeComparisonVector, bendVector, Cube.Instance.transform.right);
+                
+                    _curModifier.dir = signedAngle > 0 ? 180 : 0;
+                }
+                else if(_curModifier.axis == MegaAxis.Z)
+                {
+                    float signedAngle = Vector3.SignedAngle(cubeComparisonVector, bendVector, Cube.Instance.transform.up);
+                
+                    _curModifier.dir = signedAngle > 0 ? 180 : 0;
+                }
+
             }
             
             float elapsedTime = 0f;
