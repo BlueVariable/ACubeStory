@@ -58,11 +58,6 @@ namespace BLUE.ACubeStory.Cube
             
             StopCoroutine(routineData.Routine);
             
-            float finalValue = routineData.BendData.Curve.Evaluate(1) * 
-                               routineData.BendData.CurveMultiplier;
-
-            ((MegaBend)bend).angle = finalValue;
-
             _bendRoutines.Remove(bend);
         }
         
