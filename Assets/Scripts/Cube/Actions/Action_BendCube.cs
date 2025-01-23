@@ -82,15 +82,6 @@ namespace BLUE.ACubeStory.Cube
             }
             else
             { 
-                Debug.Log("angle" + Vector3.Angle(cubeComparisonVector, bendVector));
-                Debug.Log("signed up" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Vector3.up));
-                Debug.Log("signed right" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Vector3.right));
-                Debug.Log("signed forward" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Vector3.forward));
-
-                Debug.Log("signed cube up" + Vector3.SignedAngle(cubeComparisonVector, bendVector, Cube.Instance.transform.up));
-
-
-
                 if (_curModifier.axis == MegaAxis.X)
                 {
                     float signedAngle = Vector3.SignedAngle(cubeComparisonVector, bendVector, Cube.Instance.transform.up);
