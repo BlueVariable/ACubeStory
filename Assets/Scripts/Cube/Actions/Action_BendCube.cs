@@ -95,7 +95,7 @@ namespace BLUE.ACubeStory.Cube
                 {
                     float signedAngle = Vector3.SignedAngle(cubeComparisonVector, bendVector, Cube.Instance.transform.up);
                 
-                    _curModifier.dir = signedAngle > 0 ? 180 : 0;
+                    _curModifier.dir = signedAngle > 0 ? 0 : 180;
                 }
                 else if(_curModifier.axis == MegaAxis.Y)
                 {
