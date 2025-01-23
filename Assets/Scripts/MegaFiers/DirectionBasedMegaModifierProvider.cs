@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.MegaFiers
 {
-    public class MegaModifierProvider_DirectionBased : MegaModifierProviderBase
+    public class DirectionBasedMegaModifierProvider : MonoBehaviour
     {
-        [SerializeField] private DirectionProviderBase _directionProvider = null;
-        
         [SerializeField] private DirectionModifierInfo[] _directionModifierMap = null;
         
         [Serializable]
@@ -18,10 +16,8 @@ namespace BLUE.ACubeStory.MegaFiers
             [field: SerializeField] public MegaModifier Modifier { get; private set; }
         }
         
-        public override MegaModifier GetModifier()
+        public MegaModifier GetModifier(EDirection direction)
         {
-            EDirection direction = _directionProvider.GetDirection();
-
             foreach (DirectionModifierInfo info in _directionModifierMap)
             {
                 if (info.Direction == direction)

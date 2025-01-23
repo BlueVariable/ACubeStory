@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using BLUE.ActionSystem;
 using BLUE.ACubeStory.MegaFiers;
 using BLUE.Common;
@@ -17,8 +16,10 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private float _multiplier = 1f;
 
-        [SerializeField] private MegaModifierProviderBase _modifierProvider = null;
-        
+        [SerializeField] private DirectionBasedMegaModifierProvider _modifierProvider = null;
+
+        [SerializeField] private DirectionProviderBase _bendFaceDirectionProvider = null;
+
         [SerializeField] private DirectionProviderBase _bendDirectionProvider = null;
 
         private IEnumerator _warpRoutine;
@@ -59,7 +60,7 @@ namespace BLUE.ACubeStory.Cube
         {
             //TODO
             
-            _curModifier = (MegaBend)_modifierProvider.GetModifier();
+            _curModifier = (MegaBend)_modifierProvider.GetModifier(_bendFaceDirectionProvider.GetDirection());
 
             EDirection bendDirection = _bendDirectionProvider.GetDirection();
 
