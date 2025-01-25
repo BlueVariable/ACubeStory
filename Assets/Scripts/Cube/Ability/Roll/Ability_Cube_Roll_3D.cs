@@ -32,6 +32,9 @@ namespace BLUE.ACubeStory.Cube
             
             InputManager.Instance.TryRegisterToInputListener<InputData_Axis>
                 (EInputEvent.VerticalAxis, OnVerticalInputPerformed);
+            
+            InputManager.Instance.TryRegisterToInputListener<InputData_Touch>
+                (EInputEvent.Touch, OnTouchInputPerformed);
         }
 
         private void UnregisterFromInputManager()
@@ -46,6 +49,9 @@ namespace BLUE.ACubeStory.Cube
             
             InputManager.Instance.TryUnregisterFromInputListener<InputData_Axis>
                 (EInputEvent.VerticalAxis, OnVerticalInputPerformed);
+            
+            InputManager.Instance.TryUnregisterFromInputListener<InputData_Touch>
+                (EInputEvent.Touch, OnTouchInputPerformed);
         }
 
         private void OnHorizontalInputPerformed(InputData_Axis axisInputData)
@@ -80,6 +86,39 @@ namespace BLUE.ACubeStory.Cube
                 verticalAxisInputData.Amount < 0
                     ? Vector3.right
                     : Vector3.left;
+
+            foreach (ECubeState state in _states)
+            {
+                if(_cubeFSM.TryChangeState(state, new FSMTransitionMessage_Cube_Roll(direction)))
+                {
+                    return;
+                }
+            }
+        }
+        
+        private void OnTouchInputPerformed(InputData_Touch touchInputData)
+        {
+            if (touchInputData.InputState == ETouchInputState.Finished)
+            {
+                return;
+            }
+
+            Vector3 horizontalDirection = 
+                touchInputData.DeltaPosition.x < 0
+                    ? Vector3.back
+                    : Vector3.forward;
+            
+            Vector3 verticalDirection = 
+                touchInputData.DeltaPosition.y < 0
+                    ? Vector3.right
+                    : Vector3.left;
+
+            Vector3 direction = horizontalDirection;
+            
+            if(Mathf.Abs(touchInputData.DeltaPosition.y) > Mathf.Abs(touchInputData.DeltaPosition.x))
+            {
+                direction = verticalDirection;
+            }
 
             foreach (ECubeState state in _states)
             {
