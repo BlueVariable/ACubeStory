@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BLUE.ACubeStory.MegaFiers;
 using BLUE.Common;
 using MegaFiers;
@@ -17,7 +18,7 @@ namespace BLUE.ACubeStory.Cube
         public class BendData
         {
             [field:SerializeField] public float Duration = 0.2f;
-        
+
             [field:SerializeField] public AnimationCurve Curve = AnimationCurve.EaseInOut(0, -30, 1, 30);
         
             [field:SerializeField] public float CurveMultiplier = 1f;
@@ -116,9 +117,15 @@ namespace BLUE.ACubeStory.Cube
             
             float elapsedTime = 0f;
 
+            AnimationCurve newCurve = new AnimationCurve(bendData.Curve.keys.ToArray());
+
+            newCurve.keys[0].value = bendModifier.angle;
+            
             while (elapsedTime < bendData.Duration)
             {
-                float value =  bendData.Curve.Evaluate(elapsedTime/bendData.Duration) * bendData.CurveMultiplier;
+                float normProgress = elapsedTime / bendData.Duration;
+                
+                float value =  newCurve.Evaluate(normProgress) * bendData.CurveMultiplier;
                 
                 bendModifier.angle = value;
                 
