@@ -16,17 +16,20 @@ namespace BLUE.ACubeStory.MegaFiers
             [field: SerializeField] public MegaModifier Modifier { get; private set; }
         }
         
-        public MegaModifier GetModifier(EDirection direction)
+        public bool TryGetModifier(EDirection direction, out MegaModifier modifier)
         {
+            modifier = null;
+            
             foreach (DirectionModifierInfo info in _directionModifierMap)
             {
                 if (info.Direction == direction)
                 {
-                    return info.Modifier;
+                    modifier = info.Modifier;
+                    return true;
                 }
             }
 
-            return null;
+            return false;
         }
     }
 }

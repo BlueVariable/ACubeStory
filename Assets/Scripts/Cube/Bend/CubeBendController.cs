@@ -33,7 +33,11 @@ namespace BLUE.ACubeStory.Cube
         {
             EDirection targetCubeFaceDirection = bendData.TargetCubeFaceDirectionProvider.GetDirection();
 
-            MegaModifier bendModifier = bendData.ModifierProvider.GetModifier(targetCubeFaceDirection);
+            if (!bendData.ModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier bendModifier))
+            {
+                Debug.Log("CubeBendController: No modifier found for direction: " + targetCubeFaceDirection);
+                return;
+            }
             
             StopBend(bendModifier);
             
@@ -65,7 +69,9 @@ namespace BLUE.ACubeStory.Cube
         {
             EDirection targetCubeFaceDirection = bendData.TargetCubeFaceDirectionProvider.GetDirection();
 
-            MegaBend bendModifier = (MegaBend)bendData.ModifierProvider.GetModifier(targetCubeFaceDirection);
+            bendData.ModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier modifier);
+
+            MegaBend bendModifier = (MegaBend)modifier;
 
             EDirection bendDirection = bendData.BendDirectionProvider.GetDirection();
 

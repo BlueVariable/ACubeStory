@@ -1,6 +1,7 @@
 using System;
 using BLUE.ActionSystem;
 using BLUE.Common;
+using MegaFiers;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
@@ -27,8 +28,14 @@ namespace BLUE.ACubeStory.Cube
         public override void Interrupt()
         {
             EDirection direction = _bendData.TargetCubeFaceDirectionProvider.GetDirection();
+
+            if (!_bendData.ModifierProvider.TryGetModifier(direction, out MegaModifier modifier))
+            {
+                Debug.Log("Action_BendCube: No modifier found for direction: " + direction);
+                return;
+            }
             
-            _bendController.StopBend(_bendData.ModifierProvider.GetModifier(direction));
+            _bendController.StopBend(modifier);
         }
 
         private void OnDestroy()
