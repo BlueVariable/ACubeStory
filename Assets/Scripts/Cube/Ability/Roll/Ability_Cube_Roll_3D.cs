@@ -9,6 +9,10 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private FSM_Cube _cubeFSM = null;
 
         [SerializeField] private ECubeState[] _states = new ECubeState[0];
+
+        [SerializeField] private float _validTouchDelta = 0.2f;
+
+        private Vector3 _lastRollDirection = Vector3.zero;
         
         public override void Attached()
         {
@@ -66,13 +70,7 @@ namespace BLUE.ACubeStory.Cube
                 ? Vector3.back
                 : Vector3.forward;
 
-            foreach (ECubeState state in _states)
-            {
-                if(_cubeFSM.TryChangeState(state, new FSMTransitionMessage_Cube_Roll(direction)))
-                {
-                    return;
-                }
-            }
+            ChangeToRollState(direction);
         }
         
         private void OnVerticalInputPerformed(InputData_Axis verticalAxisInputData)
@@ -87,6 +85,57 @@ namespace BLUE.ACubeStory.Cube
                     ? Vector3.right
                     : Vector3.left;
 
+            ChangeToRollState(direction);
+        }
+        
+        private void OnTouchInputPerformed(InputData_Touch touchInputData)
+        {
+            if (touchInputData.InputState == ETouchInputState.Finished)
+            {
+                _lastRollDirection = Vector3.zero;
+                
+                return;
+            }
+
+            Vector2 dragDistanceUnscaled = touchInputData.DeltaPosition;
+            Vector3 dragDistance = new Vector2(
+                dragDistanceUnscaled.x / Screen.width,
+                dragDistanceUnscaled.y / Screen.height);
+            
+            float absDeltaX = Mathf.Abs(dragDistance.x);
+            float absDeltaY = Mathf.Abs(dragDistance.y);
+            
+            if (absDeltaX > _validTouchDelta ||
+                absDeltaY > _validTouchDelta)
+            {
+                Vector3 horizontalDirection = 
+                    dragDistance.x < 0
+                        ? Vector3.back
+                        : Vector3.forward;
+            
+                Vector3 verticalDirection = 
+                    dragDistance.y < 0
+                        ? Vector3.right
+                        : Vector3.left;
+
+                Vector3 direction = horizontalDirection;
+            
+                if(absDeltaY > absDeltaX)
+                {
+                    direction = verticalDirection;
+                }
+
+                _lastRollDirection = direction;
+            }
+
+            if (_lastRollDirection.magnitude > 0)
+            {
+                ChangeToRollState(_lastRollDirection);
+            }
+        }
+
+        private void ChangeToRollState(Vector3 direction)
+        {
             foreach (ECubeState state in _states)
             {
                 if(_cubeFSM.TryChangeState(state, new FSMTransitionMessage_Cube_Roll(direction)))
@@ -96,37 +145,5 @@ namespace BLUE.ACubeStory.Cube
             }
         }
         
-        private void OnTouchInputPerformed(InputData_Touch touchInputData)
-        {
-            if (touchInputData.InputState == ETouchInputState.Finished)
-            {
-                return;
-            }
-
-            Vector3 horizontalDirection = 
-                touchInputData.DeltaPosition.x < 0
-                    ? Vector3.back
-                    : Vector3.forward;
-            
-            Vector3 verticalDirection = 
-                touchInputData.DeltaPosition.y < 0
-                    ? Vector3.right
-                    : Vector3.left;
-
-            Vector3 direction = horizontalDirection;
-            
-            if(Mathf.Abs(touchInputData.DeltaPosition.y) > Mathf.Abs(touchInputData.DeltaPosition.x))
-            {
-                direction = verticalDirection;
-            }
-
-            foreach (ECubeState state in _states)
-            {
-                if(_cubeFSM.TryChangeState(state, new FSMTransitionMessage_Cube_Roll(direction)))
-                {
-                    return;
-                }
-            }
-        }
     }
 }
