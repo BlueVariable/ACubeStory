@@ -70,7 +70,7 @@ namespace BLUE.ACubeStory.Cube
                 ? Vector3.back
                 : Vector3.forward;
 
-            ChangeToRollState(direction);
+            TryChangeToRollState(direction);
         }
         
         private void OnVerticalInputPerformed(InputData_Axis verticalAxisInputData)
@@ -85,7 +85,7 @@ namespace BLUE.ACubeStory.Cube
                     ? Vector3.right
                     : Vector3.left;
 
-            ChangeToRollState(direction);
+            TryChangeToRollState(direction);
         }
         
         private void OnTouchInputPerformed(InputData_Touch touchInputData)
@@ -130,11 +130,11 @@ namespace BLUE.ACubeStory.Cube
 
             if (_lastRollDirection.magnitude > 0)
             {
-                ChangeToRollState(_lastRollDirection);
+                TryChangeToRollState(_lastRollDirection);
             }
         }
 
-        private void ChangeToRollState(Vector3 direction)
+        private void TryChangeToRollState(Vector3 direction)
         {
             foreach (ECubeState state in _states)
             {

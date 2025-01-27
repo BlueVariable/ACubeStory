@@ -22,7 +22,7 @@ namespace BLUE.ACubeStory.Cube
         {
             Interrupt();
             
-            _bendController.StartBend(_bendData);
+            _bendController.StartBendRoutine(_bendData);
         }
         
         public override void Interrupt()
@@ -31,11 +31,12 @@ namespace BLUE.ACubeStory.Cube
 
             if (!_bendData.ModifierProvider.TryGetModifier(direction, out MegaModifier modifier))
             {
-                Debug.Log("Action_BendCube: No modifier found for direction: " + direction);
+                Debug.LogError("Action_BendCube => No modifier found for direction: " + direction + ".");
+                
                 return;
             }
             
-            _bendController.StopBend(modifier);
+            _bendController.StopBendRoutine(modifier);
         }
 
         private void OnDestroy()

@@ -7,14 +7,14 @@ namespace BLUE.ACubeStory.MegaFiers
 {
     public class DirectionBasedMegaModifierProvider : MonoBehaviour
     {
-        [SerializeField] private DirectionModifierInfo[] _directionModifierMap = null;
-        
         [Serializable]
         public class DirectionModifierInfo
         {
             [field: SerializeField] public EDirection Direction { get; private set; }
             [field: SerializeField] public MegaModifier Modifier { get; private set; }
         }
+        
+        [SerializeField] private DirectionModifierInfo[] _directionModifierMap = null;
         
         public bool TryGetModifier(EDirection direction, out MegaModifier modifier)
         {
@@ -25,6 +25,7 @@ namespace BLUE.ACubeStory.MegaFiers
                 if (info.Direction == direction)
                 {
                     modifier = info.Modifier;
+                    
                     return true;
                 }
             }

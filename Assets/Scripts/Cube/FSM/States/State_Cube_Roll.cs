@@ -33,8 +33,8 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
 
         [Header("Action Executors")] 
-        [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
         [SerializeField] private ActionExecutor _rollStartedActionExecutor = null;
+        [SerializeField] private ActionExecutor _rollCompletedActionExecutor = null;
         [SerializeField] private UndoReasonActionExecutorInfo[] _undoReasonActionExecutorMap = default;
 
         [Header("Triggers")]
@@ -68,21 +68,26 @@ namespace BLUE.ACubeStory.Cube
         {
             RegisterToUndoRequestors();
 
+            bool canRoll = false;
+            
             if (transitionMessage.Speed != 0f)
             {
-                _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
+                canRoll = _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
                     transitionMessage.Direction,
                     speed: transitionMessage.Speed,
                     onRolledCallback: OnRollCompleted);
             }
             else
             {
-                _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
+                canRoll = _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
                     transitionMessage.Direction, 
                     onRolledCallback: OnRollCompleted);
             }
-            
-            _rollStartedActionExecutor.Execute();
+
+            if (canRoll)
+            {
+                _rollStartedActionExecutor.Execute();
+            }
         }
 
         protected override void ExitStateCustomActions()

@@ -9,7 +9,7 @@ namespace BLUE.ACubeStory.Cube
 
         public override EDirection GetDirection()
         {
-            return CubeDirectionUtility.ConvertToCubesLocalDirection(_worldDirection);
+            return CubeDirectionHelper.ConvertToCubesLocalDirection(_worldDirection);
         }
     }
 }
