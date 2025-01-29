@@ -29,6 +29,7 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private SimpleConditionBase[] _dontStopMoveOnExitConditions = null;
         
         [Header("Action Executors")] 
+        [SerializeField] private ActionExecutor _fallStartedActionExecutor = null;
         [SerializeField] private ActionExecutor _fallCompletedActionExecutor = null;
         
         #region Events
@@ -80,6 +81,8 @@ namespace BLUE.ACubeStory.Cube
 
                 OnFallStartedTowardsHitObject?.Invoke(hit);
                 
+                _fallStartedActionExecutor?.Execute();
+                
                 _moveBehaviour.StartMovementTowards(_moveSettings, hit.point + _objectPivotOffset, 
                     onFallFinished);
             }
@@ -99,6 +102,8 @@ namespace BLUE.ACubeStory.Cube
                     onFallFinished);
                 
                 OnFallStartedTowardsVoid?.Invoke();
+                
+                _fallStartedActionExecutor?.Execute();
             }
         }
 
