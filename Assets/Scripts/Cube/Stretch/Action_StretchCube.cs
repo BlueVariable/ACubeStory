@@ -23,6 +23,8 @@ namespace BLUE.ACubeStory.Cube
             Interrupt();
             
             _stretchController.StartStretchRoutine(_stretchData);
+            
+            OnCompleted?.Invoke(this);
         }
         
         public override void Interrupt()

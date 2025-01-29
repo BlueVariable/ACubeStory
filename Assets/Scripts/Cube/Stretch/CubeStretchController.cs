@@ -16,7 +16,7 @@ namespace BLUE.ACubeStory.Cube
         {
             [field: SerializeField] public float Duration = 0.2f;
 
-            [field: SerializeField] public AnimationCurve Curve = AnimationCurve.EaseInOut(0, -30, 1, 30);
+            [field: SerializeField] public AnimationCurve Curve = AnimationCurve.EaseInOut(0, -0.6f, 1, 0.7f);
         
             [field: SerializeField] public float CurveMultiplier = 1f;
 
