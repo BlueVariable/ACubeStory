@@ -25,13 +25,7 @@ namespace BLUE.ACubeStory.Cube
             [field: SerializeField] public DirectionProviderBase TargetCubeFaceDirectionProvider = null;
         }
         
-        #region Constants
-
-        private const float COMPARISON_VALUE = 0.9f;
-        
-        #endregion
-        
-        private Dictionary<MegaModifier, (IEnumerator Routine, StretchData StretchData)> _bendRoutines = new();
+        private Dictionary<MegaModifier, (IEnumerator Routine, StretchData StretchData)> _stretchRoutines = new();
         
         public void StartStretchRoutine(StretchData StretchData)
         {
@@ -39,23 +33,23 @@ namespace BLUE.ACubeStory.Cube
 
             if (!StretchData.ModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier bendModifier))
             {
-                Debug.Log("CubeBendController: No modifier found for direction: " + targetCubeFaceDirection);
+                Debug.Log("CubeStretchController: No modifier found for direction: " + targetCubeFaceDirection);
                 
                 return;
             }
             
             StopStretchRoutine(bendModifier);
             
-            IEnumerator routine = BendProgress(StretchData);
+            IEnumerator routine = StretchProgress(StretchData);
             
-            _bendRoutines.Add(bendModifier, (routine, StretchData));
+            _stretchRoutines.Add(bendModifier, (routine, StretchData));
             
             StartCoroutine(routine);
         }
 
         public void StopStretchRoutine(MegaModifier bend)
         {
-            if (!_bendRoutines.TryGetValue(bend, out (IEnumerator Routine, StretchData StretchData) routineData))
+            if (!_stretchRoutines.TryGetValue(bend, out (IEnumerator Routine, StretchData StretchData) routineData))
             {
                 return;
             }
@@ -67,10 +61,10 @@ namespace BLUE.ACubeStory.Cube
             
             StopCoroutine(routineData.Routine);
             
-            _bendRoutines.Remove(bend);
+            _stretchRoutines.Remove(bend);
         }
         
-        private IEnumerator BendProgress(StretchData StretchData)
+        private IEnumerator StretchProgress(StretchData StretchData)
         {
             EDirection targetCubeFaceDirection = StretchData.TargetCubeFaceDirectionProvider.GetDirection();
 
