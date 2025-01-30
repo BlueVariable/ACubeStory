@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using BLUE.ActionSystem;
 using BLUE.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
@@ -26,6 +27,10 @@ namespace BLUE.ACubeStory.Cube
         [Header("Misc")] 
         [SerializeField] private SimpleConditionBase[] _fallSkipConditions = null;
         [SerializeField] private SimpleConditionBase[] _dontStopMoveOnExitConditions = null;
+        
+        [Header("Action Executors")] 
+        [SerializeField] private ActionExecutor _fallStartedActionExecutor = null;
+        [SerializeField] private ActionExecutor _fallCompletedActionExecutor = null;
         
         #region Events
 
@@ -68,11 +73,15 @@ namespace BLUE.ACubeStory.Cube
                 void onFallFinished()
                 {
                     OnFallFinished?.Invoke();
-                    
+
+                    _fallCompletedActionExecutor?.Execute();
+
                     _cubeFSM.TryChangeState(ECubeState.Idle);
                 }
 
                 OnFallStartedTowardsHitObject?.Invoke(hit);
+                
+                _fallStartedActionExecutor?.Execute();
                 
                 _moveBehaviour.StartMovementTowards(_moveSettings, hit.point + _objectPivotOffset, 
                     onFallFinished);
@@ -82,6 +91,8 @@ namespace BLUE.ACubeStory.Cube
                 void onFallFinished()
                 {
                     OnFallFinished?.Invoke();
+
+                    _fallCompletedActionExecutor?.Execute();
                     
                     _cubeFSM.TryChangeState(ECubeState.Idle);
                 }
@@ -91,6 +102,8 @@ namespace BLUE.ACubeStory.Cube
                     onFallFinished);
                 
                 OnFallStartedTowardsVoid?.Invoke();
+                
+                _fallStartedActionExecutor?.Execute();
             }
         }
 

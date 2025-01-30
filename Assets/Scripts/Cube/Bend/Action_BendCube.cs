@@ -23,6 +23,8 @@ namespace BLUE.ACubeStory.Cube
             Interrupt();
             
             _bendController.StartBendRoutine(_bendData);
+            
+            OnCompleted?.Invoke(this);
         }
         
         public override void Interrupt()

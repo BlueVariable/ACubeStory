@@ -358,8 +358,6 @@ namespace MegaFiers
 					mod.quickEditSize = EditorGUILayout.IntField("Quick Edit Size", mod.quickEditSize);
 					if ( mod.quickEditSize < 100 )
 						mod.quickEditSize = 100;
-					if ( mod.quickEditSize > 400 )
-						mod.quickEditSize = 400;
 
 					MegaEditorGUILayout.Toggle(target, "Draw Gizmos", ref mod.DrawGizmos);
 					EditorGUILayout.EndVertical();
