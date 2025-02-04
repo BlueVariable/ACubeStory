@@ -73,7 +73,7 @@ namespace BLUE.ACubeStory.Cube
             MegaStretch stretchModifier = (MegaStretch)modifier;
 
             float elapsedTime = 0f;
-
+            
             AnimationCurve newCurve = new AnimationCurve(StretchData.Curve.keys.ToArray());
 
             newCurve.keys[0].value = stretchModifier.amount;

@@ -74,6 +74,8 @@ namespace BLUE.ACubeStory.Cube
                 {
                     OnFallFinished?.Invoke();
 
+                    _fallStartedActionExecutor.Interrupt();
+                    
                     _fallCompletedActionExecutor?.Execute();
 
                     _cubeFSM.TryChangeState(ECubeState.Idle);
@@ -81,6 +83,8 @@ namespace BLUE.ACubeStory.Cube
 
                 OnFallStartedTowardsHitObject?.Invoke(hit);
                 
+                _fallCompletedActionExecutor?.Interrupt();
+
                 _fallStartedActionExecutor?.Execute();
                 
                 _moveBehaviour.StartMovementTowards(_moveSettings, hit.point + _objectPivotOffset, 
@@ -91,6 +95,8 @@ namespace BLUE.ACubeStory.Cube
                 void onFallFinished()
                 {
                     OnFallFinished?.Invoke();
+
+                    _fallStartedActionExecutor.Interrupt();
 
                     _fallCompletedActionExecutor?.Execute();
                     
@@ -103,12 +109,18 @@ namespace BLUE.ACubeStory.Cube
                 
                 OnFallStartedTowardsVoid?.Invoke();
                 
+                _fallCompletedActionExecutor?.Interrupt();
+
                 _fallStartedActionExecutor?.Execute();
             }
         }
 
         protected override void ExitStateCustomActions()
         {
+            _fallStartedActionExecutor.Interrupt();
+
+            _fallCompletedActionExecutor.Interrupt();
+
             if (!_dontStopMoveOnExitConditions.Any(val => val.IsConditionSatisfied()))
             {
                 _moveBehaviour.StopMovement();
