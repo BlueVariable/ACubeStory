@@ -1,3 +1,4 @@
+using BLUE.ActionSystem;
 using BLUE.ACubeStory.Common;
 using BLUE.FSMSystem;
 using UnityEngine;
@@ -19,7 +20,13 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private float _rollSpeed = 2f;
         [SerializeField] private AnimationCurve _rollCurve = null;
         [SerializeField] private RollBehaviourProviderBase _rollBehaviourProvider = null;
-        
+
+        [Header("Action Executors")] 
+        [SerializeField] private ActionExecutor _climbStartedActionExecutor = null;
+        [SerializeField] private ActionExecutor _climbCompletedActionExecutor = null;
+
+        public FSMTransitionMessage_Cube_Roll LastCandidateTransitionMessage { get; private set; }
+
         public override ECubeState GetStateType()
         {
             return ECubeState.Climb;
@@ -28,7 +35,7 @@ namespace BLUE.ACubeStory.Cube
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube_Roll transitionMessage)
         {
-            _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
+            bool canRoll = _rollBehaviourProvider.GetRollBehaviour().TryRollTo(
                 transitionMessage.Direction,
                 180f,
                 _rollSpeed,
@@ -36,14 +43,23 @@ namespace BLUE.ACubeStory.Cube
                 _rollCurve,
                 onCompleted);
 
+            if (canRoll)
+            {
+                _climbStartedActionExecutor.Execute();
+            }
+            
             void onCompleted()
             {
+                _climbCompletedActionExecutor.Execute();
+                
                 _cubeFSM.TryChangeState(ECubeState.Idle);
             }
         }
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Roll transitionMessage)
         {
+            LastCandidateTransitionMessage = transitionMessage;
+
             return !CanRoll(transitionMessage.Direction) && CanClimb(transitionMessage.Direction);
         }
         
