@@ -16,6 +16,8 @@ namespace BLUE.ACubeStory.Cube
         {
             [field: SerializeField] public float Duration = 0.2f;
 
+            [field: SerializeField] public FloatProviderBase DurationCoefProvider = null;
+            
             [field: SerializeField] public AnimationCurve Curve = AnimationCurve.EaseInOut(0, -0.6f, 1, 0.7f);
         
             [field: SerializeField] public float CurveMultiplier = 1f;
@@ -77,10 +79,14 @@ namespace BLUE.ACubeStory.Cube
             AnimationCurve newCurve = new AnimationCurve(StretchData.Curve.keys.ToArray());
 
             newCurve.keys[0].value = stretchModifier.amount;
+
+            float duration = StretchData.DurationCoefProvider ? 
+                StretchData.Duration * StretchData.DurationCoefProvider.GetValue() : 
+                StretchData.Duration;
             
-            while (elapsedTime < StretchData.Duration)
+            while (elapsedTime < duration)
             {
-                float normProgress = elapsedTime / StretchData.Duration;
+                float normProgress = elapsedTime / duration;
                 
                 float value =  newCurve.Evaluate(normProgress) * StretchData.CurveMultiplier;
                 

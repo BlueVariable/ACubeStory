@@ -32,6 +32,8 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private ActionExecutor _fallStartedActionExecutor = null;
         [SerializeField] private ActionExecutor _fallCompletedActionExecutor = null;
         
+        public float LastFallDistance { get; private set; }
+        
         #region Events
 
         public Action<RaycastHit> OnFallStartedTowardsHitObject { get; set; }
@@ -80,6 +82,10 @@ namespace BLUE.ACubeStory.Cube
 
                     _cubeFSM.TryChangeState(ECubeState.Idle);
                 }
+                
+                Vector3 targetPosition = hit.point + _objectPivotOffset;
+
+                LastFallDistance = Vector3.Distance(targetPosition, _objectToFall.position); 
 
                 OnFallStartedTowardsHitObject?.Invoke(hit);
                 
@@ -87,7 +93,7 @@ namespace BLUE.ACubeStory.Cube
 
                 _fallStartedActionExecutor?.Execute();
                 
-                _moveBehaviour.StartMovementTowards(_moveSettings, hit.point + _objectPivotOffset, 
+                _moveBehaviour.StartMovementTowards(_moveSettings, targetPosition, 
                     onFallFinished);
             }
             else
