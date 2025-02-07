@@ -58,9 +58,8 @@ namespace BLUE.ACubeStory.Cube
             {
                 return true;
             }
-            
-            return !Physics.Raycast(_objectToRoll.position, transitionMessage.Direction,
-                out RaycastHit hit, _rollRayDistance, _layerMask);
+
+            return CanRoll(transitionMessage.Direction);
         }
         
         protected override void EnterStateCustomActions(
@@ -95,6 +94,12 @@ namespace BLUE.ACubeStory.Cube
             _rollBehaviourProvider.GetRollBehaviour().TryPauseRoll();
             
             base.ExitStateCustomActions();
+        }
+
+        public bool CanRoll(Vector3 direction)
+        {
+            return !Physics.Raycast(_objectToRoll.position, direction,
+                out RaycastHit hit, _rollRayDistance, _layerMask);
         }
 
         private void RegisterToUndoRequestors()

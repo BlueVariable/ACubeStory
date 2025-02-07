@@ -11,6 +11,8 @@ namespace BLUE.ACubeStory.Cube
 {
     public class CubeBendController : MonoBehaviour
     {
+        [SerializeField] private State_Cube_Roll _rollState = null;
+        
         [Serializable]
         public class BendData
         {
@@ -25,6 +27,11 @@ namespace BLUE.ACubeStory.Cube
             [field: SerializeField] public DirectionProviderBase TargetCubeFaceDirectionProvider = null;
 
             [field: SerializeField] public DirectionProviderBase BendDirectionProvider = null;
+            
+            [field: SerializeField] public bool PreventGroundCollision = true;
+            
+            [field: SerializeField] public AnimationCurve GroundCollisionCurve = AnimationCurve.EaseInOut(0, -30, 1, 30);
+
         }
         
         #region Constants
@@ -84,6 +91,18 @@ namespace BLUE.ACubeStory.Cube
 
             Vector3 bendVector = DirectionHelper.DirectionVectorMapping[bendDirection];
 
+            AnimationCurve curve = bendData.Curve;
+            
+            if (bendData.PreventGroundCollision)
+            {
+                bool canRollInDirection = _rollState.CanRoll(bendVector);
+
+                if (!canRollInDirection)
+                {
+                    curve = bendData.GroundCollisionCurve;
+                }
+            }
+            
             Vector3 cubeComparisonVector = bendModifier.axis == MegaAxis.X || bendModifier.axis == MegaAxis.Z
                 ? Cube.Instance.transform.forward
                 : Cube.Instance.transform.up;
@@ -123,7 +142,7 @@ namespace BLUE.ACubeStory.Cube
             
             float elapsedTime = 0f;
 
-            AnimationCurve newCurve = new AnimationCurve(bendData.Curve.keys.ToArray());
+            AnimationCurve newCurve = new AnimationCurve(curve.keys.ToArray());
 
             newCurve.keys[0].value = bendModifier.angle;
             
