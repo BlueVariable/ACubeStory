@@ -11,6 +11,8 @@ namespace BLUE.ACubeStory.Cube
 {
     public class CubeStretchController : MonoBehaviour
     {
+        [SerializeField] private DirectionBasedMegaModifierProvider _directionBasedMegaModifierProvider = null;
+        
         [Serializable]
         public class StretchData
         {
@@ -22,36 +24,39 @@ namespace BLUE.ACubeStory.Cube
         
             [field: SerializeField] public float CurveMultiplier = 1f;
 
-            [field: SerializeField] public DirectionBasedMegaModifierProvider ModifierProvider = null;
-
             [field: SerializeField] public DirectionProviderBase TargetCubeFaceDirectionProvider = null;
         }
         
-        private Dictionary<MegaModifier, (IEnumerator Routine, StretchData StretchData)> _stretchRoutines = new();
+        private Dictionary<EDirection, (IEnumerator Routine, StretchData StretchData)> _stretchRoutines = new();
+
+        public void ResetStretch()
+        {
+            foreach (DirectionBasedMegaModifierProvider.DirectionModifierInfo info in _directionBasedMegaModifierProvider.DirectionModifierMapColl)
+            {
+                MegaStretch stretchModifier = (MegaStretch)info.Modifier;
+
+                stretchModifier.amount = 0;
+                
+                StopStretchRoutine(info.Direction);
+            }
+        }
         
         public void StartStretchRoutine(StretchData StretchData)
         {
             EDirection targetCubeFaceDirection = StretchData.TargetCubeFaceDirectionProvider.GetDirection();
-
-            if (!StretchData.ModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier bendModifier))
-            {
-                Debug.Log("CubeStretchController: No modifier found for direction: " + targetCubeFaceDirection);
-                
-                return;
-            }
             
-            StopStretchRoutine(bendModifier);
+            StopStretchRoutine(targetCubeFaceDirection);
             
             IEnumerator routine = StretchProgress(StretchData);
             
-            _stretchRoutines.Add(bendModifier, (routine, StretchData));
+            _stretchRoutines.Add(targetCubeFaceDirection, (routine, StretchData));
             
             StartCoroutine(routine);
         }
 
-        public void StopStretchRoutine(MegaModifier bend)
+        public void StopStretchRoutine(EDirection direction)
         {
-            if (!_stretchRoutines.TryGetValue(bend, out (IEnumerator Routine, StretchData StretchData) routineData))
+            if (!_stretchRoutines.TryGetValue(direction, out (IEnumerator Routine, StretchData StretchData) routineData))
             {
                 return;
             }
@@ -63,14 +68,14 @@ namespace BLUE.ACubeStory.Cube
             
             StopCoroutine(routineData.Routine);
             
-            _stretchRoutines.Remove(bend);
+            _stretchRoutines.Remove(direction);
         }
         
         private IEnumerator StretchProgress(StretchData StretchData)
         {
             EDirection targetCubeFaceDirection = StretchData.TargetCubeFaceDirectionProvider.GetDirection();
 
-            StretchData.ModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier modifier);
+            _directionBasedMegaModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier modifier);
 
             MegaStretch stretchModifier = (MegaStretch)modifier;
 

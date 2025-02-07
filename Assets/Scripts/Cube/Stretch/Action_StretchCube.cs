@@ -30,15 +30,8 @@ namespace BLUE.ACubeStory.Cube
         public override void Interrupt()
         {
             EDirection direction = _stretchData.TargetCubeFaceDirectionProvider.GetDirection();
-
-            if (!_stretchData.ModifierProvider.TryGetModifier(direction, out MegaModifier modifier))
-            {
-                Debug.LogError("Action_StretchCube => No modifier found for direction: " + direction + ".");
-                
-                return;
-            }
             
-            _stretchController.StopStretchRoutine(modifier);
+            _stretchController.StopStretchRoutine(direction);
         }
 
         private void OnDestroy()

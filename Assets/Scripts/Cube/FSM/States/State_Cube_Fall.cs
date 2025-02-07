@@ -109,8 +109,12 @@ namespace BLUE.ACubeStory.Cube
                     _cubeFSM.TryChangeState(ECubeState.Idle);
                 }
 
+                Vector3 targetPosition = _objectToFall.position + new Vector3(0, -_fallbackFallAmount, 0);
+
+                LastFallDistance = Vector3.Distance(targetPosition, _objectToFall.position); 
+                
                 _moveBehaviour.StartMovementTowards(_moveSettings, 
-            _objectToFall.position + new Vector3(0, -_fallbackFallAmount, 0), 
+                    targetPosition, 
                     onFallFinished);
                 
                 OnFallStartedTowardsVoid?.Invoke();

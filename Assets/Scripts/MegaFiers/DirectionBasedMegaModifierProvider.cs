@@ -15,6 +15,7 @@ namespace BLUE.ACubeStory.MegaFiers
         }
         
         [SerializeField] private DirectionModifierInfo[] _directionModifierMap = null;
+        public DirectionModifierInfo[] DirectionModifierMapColl => _directionModifierMap;
         
         public bool TryGetModifier(EDirection direction, out MegaModifier modifier)
         {

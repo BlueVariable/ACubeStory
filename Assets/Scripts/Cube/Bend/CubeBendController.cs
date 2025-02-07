@@ -12,7 +12,9 @@ namespace BLUE.ACubeStory.Cube
     public class CubeBendController : MonoBehaviour
     {
         [SerializeField] private State_Cube_Roll _rollState = null;
-        
+     
+        [SerializeField] private DirectionBasedMegaModifierProvider _directionBasedMegaModifierProvider = null;
+
         [Serializable]
         public class BendData
         {
@@ -21,8 +23,6 @@ namespace BLUE.ACubeStory.Cube
             [field: SerializeField] public AnimationCurve Curve = AnimationCurve.EaseInOut(0, -30, 1, 30);
         
             [field: SerializeField] public float CurveMultiplier = 1f;
-
-            [field: SerializeField] public DirectionBasedMegaModifierProvider ModifierProvider = null;
 
             [field: SerializeField] public DirectionProviderBase TargetCubeFaceDirectionProvider = null;
 
@@ -40,31 +40,36 @@ namespace BLUE.ACubeStory.Cube
         
         #endregion
         
-        private Dictionary<MegaModifier, (IEnumerator Routine, BendData BendData)> _bendRoutines = new();
+        private Dictionary<EDirection, (IEnumerator Routine, BendData BendData)> _bendRoutines = new();
+
+        public void ResetBend()
+        {
+            foreach (DirectionBasedMegaModifierProvider.DirectionModifierInfo info in _directionBasedMegaModifierProvider.DirectionModifierMapColl)
+            {
+                MegaBend bendModifier = (MegaBend)info.Modifier;
+
+                bendModifier.angle = 0;
+                
+                StopBendRoutine(info.Direction);
+            }
+        }
         
         public void StartBendRoutine(BendData bendData)
         {
             EDirection targetCubeFaceDirection = bendData.TargetCubeFaceDirectionProvider.GetDirection();
 
-            if (!bendData.ModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier bendModifier))
-            {
-                Debug.Log("CubeBendController: No modifier found for direction: " + targetCubeFaceDirection);
-                
-                return;
-            }
-            
-            StopBendRoutine(bendModifier);
+            StopBendRoutine(targetCubeFaceDirection);
             
             IEnumerator routine = BendProgress(bendData);
             
-            _bendRoutines.Add(bendModifier, (routine, bendData));
+            _bendRoutines.Add(targetCubeFaceDirection, (routine, bendData));
             
             StartCoroutine(routine);
         }
 
-        public void StopBendRoutine(MegaModifier bend)
+        public void StopBendRoutine(EDirection direction)
         {
-            if (!_bendRoutines.TryGetValue(bend, out (IEnumerator Routine, BendData BendData) routineData))
+            if (!_bendRoutines.TryGetValue(direction, out (IEnumerator Routine, BendData BendData) routineData))
             {
                 return;
             }
@@ -76,14 +81,14 @@ namespace BLUE.ACubeStory.Cube
             
             StopCoroutine(routineData.Routine);
             
-            _bendRoutines.Remove(bend);
+            _bendRoutines.Remove(direction);
         }
         
         private IEnumerator BendProgress(BendData bendData)
         {
             EDirection targetCubeFaceDirection = bendData.TargetCubeFaceDirectionProvider.GetDirection();
 
-            bendData.ModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier modifier);
+            _directionBasedMegaModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier modifier);
 
             MegaBend bendModifier = (MegaBend)modifier;
 
