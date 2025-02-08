@@ -1,7 +1,6 @@
 using System;
 using BLUE.ActionSystem;
 using BLUE.Common;
-using MegaFiers;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube

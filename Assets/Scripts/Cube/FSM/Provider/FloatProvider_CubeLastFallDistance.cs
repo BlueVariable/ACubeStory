@@ -1,5 +1,4 @@
-﻿using System;
-using BLUE.Common;
+﻿using BLUE.Common;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube

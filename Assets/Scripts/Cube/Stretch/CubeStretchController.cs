@@ -11,8 +11,6 @@ namespace BLUE.ACubeStory.Cube
 {
     public class CubeStretchController : MonoBehaviour
     {
-        [SerializeField] private DirectionBasedMegaModifierProvider _directionBasedMegaModifierProvider = null;
-        
         [Serializable]
         public class StretchData
         {
@@ -26,6 +24,8 @@ namespace BLUE.ACubeStory.Cube
 
             [field: SerializeField] public DirectionProviderBase TargetCubeFaceDirectionProvider = null;
         }
+        
+        [SerializeField] private DirectionBasedMegaModifierProvider _directionBasedMegaModifierProvider = null;
         
         private Dictionary<EDirection, (IEnumerator Routine, StretchData StretchData)> _stretchRoutines = new();
 
