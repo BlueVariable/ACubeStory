@@ -81,10 +81,16 @@ namespace BLUE.ACubeStory.Cube
 
             float elapsedTime = 0f;
             
-            AnimationCurve newCurve = new AnimationCurve(StretchData.Curve.keys.ToArray());
+            Keyframe[] newKeys = StretchData.Curve.keys.ToArray();
+            
+            Keyframe clonedKey = newKeys[0];
 
-            newCurve.keys[0].value = stretchModifier.amount;
+            clonedKey.value = stretchModifier.amount;
 
+            newKeys[0] = clonedKey;
+            
+            AnimationCurve newCurve = new AnimationCurve(newKeys);
+            
             float duration = StretchData.DurationCoefProvider ? 
                 StretchData.Duration * StretchData.DurationCoefProvider.GetValue() : 
                 StretchData.Duration;
