@@ -147,9 +147,15 @@ namespace BLUE.ACubeStory.Cube
             
             float elapsedTime = 0f;
 
-            AnimationCurve newCurve = new AnimationCurve(curve.keys.ToArray());
+            Keyframe[] newKeys = curve.keys.ToArray();
+            
+            Keyframe clonedKey = newKeys[0];
 
-            newCurve.keys[0].value = bendModifier.angle;
+            clonedKey.value = bendModifier.angle;
+
+            newKeys[0] = clonedKey;
+            
+            AnimationCurve newCurve = new AnimationCurve(newKeys);
             
             while (elapsedTime < bendData.Duration)
             {
