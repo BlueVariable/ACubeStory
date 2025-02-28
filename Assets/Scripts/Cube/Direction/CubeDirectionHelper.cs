@@ -13,6 +13,11 @@ namespace BLUE.ACubeStory.Cube
         
         public static EDirection ConvertToCubesLocalDirection(EDirection worldDirection)
         {
+            if (Cube.Instance == null)
+            {
+                return EDirection.None;
+            }
+
             Vector3 direction = DirectionHelper.DirectionVectorMapping[worldDirection];
             
             if (Vector3.Dot(direction, Cube.Instance.transform.up) > COMPARISON_VALUE)
