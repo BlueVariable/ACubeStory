@@ -11,7 +11,7 @@ namespace BLUE.ACubeStory.Scene
     {
         private readonly Dictionary<ECubeFail, float> _failTypeDelayMapping = new()
         {
-            {ECubeFail.Fall_Void, 0.5f}
+            {ECubeFail.Fall_Void, 0.35f}
         };
         
         private readonly EventRaiser_OnLoadingScreenRequested _loadingScreenRequestor = new();
