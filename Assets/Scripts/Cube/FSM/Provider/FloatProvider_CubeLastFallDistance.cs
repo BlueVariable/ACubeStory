@@ -1,12 +1,11 @@
 ﻿using BLUE.Common;
+using BLUE.FSMSystem;
 using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
     public class FloatProvider_CubeLastFallDistance : FloatProviderBase
     {
-        [SerializeField] private State_Cube_Fall _fallState = null;
-
         [SerializeField] private float _coef = 1;
 
         [SerializeField] private float _minValue = int.MinValue;
@@ -14,7 +13,9 @@ namespace BLUE.ACubeStory.Cube
         
         public override float GetValue()
         {
-            float value = _fallState.LastFallDistance * _coef;
+            Cube.Instance.CubeFSM.TryGetState(ECubeState.Fall, out IState<ECubeState> fallState);
+
+            float value = ((State_Cube_Fall)fallState).LastFallDistance * _coef;
             
             value = Mathf.Clamp(value, _minValue, _maxValue);
 

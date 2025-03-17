@@ -32,6 +32,10 @@ namespace BLUE.ACubeStory.Cube
         [SerializeField] private ActionExecutor _fallStartedActionExecutor = null;
         [SerializeField] private ActionExecutor _fallCompletedActionExecutor = null;
         
+        private bool _useExternalMoveSettings = false;
+        
+        private MoveBehaviour_Tween.TweenMoveSettings _externalMoveSettings = null;
+        
         public float LastFallDistance { get; private set; }
         
         #region Events
@@ -47,7 +51,7 @@ namespace BLUE.ACubeStory.Cube
         {
             return ECubeState.Fall;
         }
-
+        
         protected override void EnterStateCustomActions(
             FSMTransitionMessage_Cube transitionMessage)
         {
@@ -137,6 +141,18 @@ namespace BLUE.ACubeStory.Cube
             }
             
             base.ExitStateCustomActions();
+        }
+
+        public void UseExternalMoveSettings(MoveBehaviour_Tween.TweenMoveSettings moveSettings)
+        {
+            _externalMoveSettings = moveSettings;
+
+            _useExternalMoveSettings = true;
+        }
+
+        public void UseDefaultMoveSettings()
+        {
+            _useExternalMoveSettings = false;
         }
     }
 }
