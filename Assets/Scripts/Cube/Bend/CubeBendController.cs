@@ -11,10 +11,6 @@ namespace BLUE.ACubeStory.Cube
 {
     public class CubeBendController : MonoBehaviour
     {
-        [SerializeField] private State_Cube_Roll _rollState = null;
-     
-        [SerializeField] private DirectionBasedMegaModifierProvider _directionBasedMegaModifierProvider = null;
-
         [Serializable]
         public class BendData
         {
@@ -34,6 +30,10 @@ namespace BLUE.ACubeStory.Cube
 
         }
         
+        [SerializeField] private State_Cube_Roll _rollState = null;
+     
+        [SerializeField] private DirectionBasedMegaModifierProvider _directionBasedMegaModifierProvider = null;
+        
         #region Constants
 
         private const float COMPARISON_VALUE = 0.9f;
@@ -41,6 +41,11 @@ namespace BLUE.ACubeStory.Cube
         #endregion
         
         private Dictionary<EDirection, (IEnumerator Routine, BendData BendData)> _bendRoutines = new();
+
+        private void OnDestroy()
+        {
+            StopBendRoutines();
+        }
 
         public void ResetBend()
         {
@@ -83,13 +88,28 @@ namespace BLUE.ACubeStory.Cube
             
             _bendRoutines.Remove(direction);
         }
+
+        private void StopBendRoutines()
+        {
+            for (int i = _bendRoutines.Count - 1; i >=0 ; i--)
+            {
+                StopCoroutine(_bendRoutines.ElementAt(i).Value.Routine);
+
+                _bendRoutines.Remove(_bendRoutines.ElementAt(i).Key);
+            }
+        }
         
         private IEnumerator BendProgress(BendData bendData)
         {
             EDirection targetCubeFaceDirection = bendData.TargetCubeFaceDirectionProvider.GetDirection();
 
-            _directionBasedMegaModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier modifier);
+            bool hasModifier = _directionBasedMegaModifierProvider.TryGetModifier(targetCubeFaceDirection, out MegaModifier modifier);
 
+            if (!hasModifier)
+            {
+                yield break;
+            }
+            
             MegaBend bendModifier = (MegaBend)modifier;
 
             EDirection bendDirection = bendData.BendDirectionProvider.GetDirection();
