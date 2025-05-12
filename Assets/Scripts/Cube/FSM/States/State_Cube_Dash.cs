@@ -1,4 +1,5 @@
 ﻿using System;
+using BLUE.ActionSystem;
 using UnityEngine;
 using BLUE.Common;
 using BLUE.FSMSystem;
@@ -19,6 +20,12 @@ namespace BLUE.ACubeStory.Cube
         
         [SerializeField] private int _dashDistance = 2;
 
+        [Header("Action Executors")] 
+        [SerializeField] private ActionExecutor _dashStartedActionExecutor = null;
+        [SerializeField] private ActionExecutor _dashCompletedActionExecutor = null;
+
+        public FSMTransitionMessage_Cube_Dash LastCandidateTransitionMessage { get; private set; }
+        
         #region Events
 
         public Action<Vector3> OnEnteringDashState { get; set; }
@@ -35,6 +42,8 @@ namespace BLUE.ACubeStory.Cube
 
         protected override bool CanEnterStateCustomActions(FSMTransitionMessage_Cube_Dash transitionMessage)
         {
+            LastCandidateTransitionMessage = transitionMessage;
+            
             return CheckIfDashDirectionIsClear(transitionMessage.DashDirection, 1);
         }
 
@@ -58,8 +67,16 @@ namespace BLUE.ACubeStory.Cube
                 return;
             }
             
+            _dashCompletedActionExecutor?.Interrupt();
+            
+            _dashStartedActionExecutor?.Execute();
+            
             void onDashCompleted()
             {
+                _dashStartedActionExecutor?.Interrupt();
+            
+                _dashCompletedActionExecutor?.Execute();
+                
                 OnDashCompleted?.Invoke();
                 
                 _cubeFSM.TryChangeState(ECubeState.Fall);
