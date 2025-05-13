@@ -1,10 +1,14 @@
 using System;
+using System.Linq;
 using BLUE.ActionSystem;
+using UnityEngine;
 
 namespace BLUE.ACubeStory.Cube
 {
     public class Action_WaitForCubeStateUpdate : InterruptableActionBase
     {
+        [SerializeField] private ECubeState[] _restrictedStates = new ECubeState[]{};
+        
         #region Events
 
         public override Action<InterruptableActionBase> OnCompleted { get; set; }
@@ -46,6 +50,14 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnCubeStateEntered(ECubeState cubeState)
         {
+            if (_restrictedStates.Length > 0)
+            {
+                if (!_restrictedStates.Contains(cubeState))
+                {
+                    return;
+                }
+            }
+            
             OnCompleted?.Invoke(this);
         }
     }
