@@ -3,17 +3,19 @@ using UnityEngine;
 
 namespace BLUE.ACubeStory.Helper
 {
-    public class SceneViewAligner : EditorWindow
+    public class SceneViewAlignmentHelper : EditorWindow
     {
-        [MenuItem("CUBE/Align Scene View #r")]
+        [MenuItem("BLUE/Scene/Align Scene View #r")]
         private static void AlignView()
         {
             Vector3 rotationEuler = new Vector3(35, -135, 0);
             
             SceneView sceneView = SceneView.lastActiveSceneView;
+            
             if (sceneView == null)
             {
-                Debug.LogWarning("No active Scene View found.");
+                Debug.LogWarning("No active scene view found.");
+                
                 return;
             }
 
