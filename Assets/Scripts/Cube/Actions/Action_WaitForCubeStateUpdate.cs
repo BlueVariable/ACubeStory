@@ -7,7 +7,7 @@ namespace BLUE.ACubeStory.Cube
 {
     public class Action_WaitForCubeStateUpdate : InterruptableActionBase
     {
-        [SerializeField] private ECubeState[] _restrictedStates = new ECubeState[]{};
+        [SerializeField] private ECubeState[] _validStates = new ECubeState[]{};
         
         #region Events
 
@@ -50,9 +50,9 @@ namespace BLUE.ACubeStory.Cube
 
         private void OnCubeStateEntered(ECubeState cubeState)
         {
-            if (_restrictedStates.Length > 0)
+            if (_validStates.Length > 0)
             {
-                if (!_restrictedStates.Contains(cubeState))
+                if (!_validStates.Contains(cubeState))
                 {
                     return;
                 }
