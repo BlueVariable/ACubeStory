@@ -14,7 +14,8 @@ namespace BLUE.ACubeStory.Cube
         [Header("Raycast Settings")]
         [SerializeField] private float _rollRayDistance = 1f;
         [SerializeField] private float _descendRayDistance = 2f;
-        [SerializeField] private LayerMask _layerMask = default;
+        [SerializeField] private LayerMask _rollLayerMask = default;
+        [SerializeField] private LayerMask _descendLayerMask = default;
         
         [Header("Roll Settings")]
         [SerializeField] private float _rollSpeed = 2f;
@@ -65,7 +66,7 @@ namespace BLUE.ACubeStory.Cube
         public bool CanRoll(Vector3 direction)
         {
             return !Physics.Raycast(_objectToDescend.position, direction,
-                out RaycastHit hit, _rollRayDistance, _layerMask);
+                out RaycastHit hit, _rollRayDistance, _rollLayerMask);
         }
         
         public bool CanDescend(Vector3 direction)
@@ -78,13 +79,13 @@ namespace BLUE.ACubeStory.Cube
             }
             
             return Physics.Raycast(rayFrom, Vector3.down,
-                out RaycastHit hit, _descendRayDistance, _layerMask);
+                out RaycastHit hit, _descendRayDistance, _descendLayerMask);
         }
 
         public bool IsBelowVoid(Vector3 position)
         {
             return !Physics.Raycast(position, Vector3.down,
-                out RaycastHit hit, _rollRayDistance, _layerMask);
+                out RaycastHit hit, _rollRayDistance, _rollLayerMask);
         }
     }
 }
