@@ -4,16 +4,36 @@ using UnityEditor;
 namespace BLUE.ACubeStory.Helper
 {
     [InitializeOnLoad]
-    public class SceneViewCameraFollower
+    public class SceneViewCameraFollowHelper
     {
         private static Transform _targetCameraTransform;
         
         private static bool _isFollowing = false;
 
-        static SceneViewCameraFollower()
+        static SceneViewCameraFollowHelper()
         {
             EditorApplication.update -= CameraUpdate;
             EditorApplication.update += CameraUpdate;
+        }
+        
+        [MenuItem("BLUE/Scene/Toggle Camera Follower #t")]
+        private static void ToggleCameraFollower()
+        {
+            _isFollowing = !_isFollowing;
+
+            if (_isFollowing)
+            {
+                GameObject cameraGameObject = GameObject.Find("SceneViewCameraFollowHelper");
+
+                if (cameraGameObject == null)
+                {
+                    Debug.Log("Couldn't find \\\"SceneViewCameraFollowHelper\\\" object.");
+
+                    return;
+                }
+                
+                _targetCameraTransform = cameraGameObject.transform;
+            }
         }
 
         private static void CameraUpdate()
@@ -41,26 +61,6 @@ namespace BLUE.ACubeStory.Helper
             Vector3 direction = (sceneCam.transform.position - sceneView.pivot).normalized;
 
             _targetCameraTransform.transform.position = sceneView.pivot + (direction * sceneView.cameraDistance);
-        }
-
-        [MenuItem("BLUE/Scene/Toggle Camera Follower #t")]
-        static void ToggleCameraFollower()
-        {
-            _isFollowing = !_isFollowing;
-
-            if (_isFollowing)
-            {
-                GameObject cameraGameObject = GameObject.Find("SceneViewCameraFollower");
-
-                if (cameraGameObject == null)
-                {
-                    Debug.Log("Couldn't find SceneViewCameraFollower gameObject.");
-
-                    return;
-                }
-                
-                _targetCameraTransform = cameraGameObject.transform;
-            }
         }
     }
 }
