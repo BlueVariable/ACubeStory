@@ -12,7 +12,8 @@ namespace BLUE.ACubeStory.Scene
         
         Prologue = 10,
         
-        Game_01_01 = 11
+        Game_01_01 = 11,
+        Game_01_02 = 12,
         
         /*Level_1 = 10,
         Level_2 = 11,
